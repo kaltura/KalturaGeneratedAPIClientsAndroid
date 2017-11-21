@@ -1,0 +1,359 @@
+// ===================================================================================================
+//                           _  __     _ _
+//                          | |/ /__ _| | |_ _  _ _ _ __ _
+//                          | ' </ _` | |  _| || | '_/ _` |
+//                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
+//
+// This file is part of the Kaltura Collaborative Media Suite which allows users
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// text.
+//
+// Copyright (C) 2006-2017  Kaltura Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// @ignore
+// ===================================================================================================
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.enums.EmailNotificationFormat;
+import com.kaltura.client.enums.EmailNotificationTemplatePriority;
+import com.kaltura.client.types.EmailNotificationRecipientProvider;
+import com.kaltura.client.utils.GsonParser;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class was generated using generate.php
+ * against an XML schema provided by Kaltura.
+ * 
+ * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
+ */
+
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(EmailNotificationTemplate.Tokenizer.class)
+public class EmailNotificationTemplate extends EventNotificationTemplate {
+	
+	public interface Tokenizer extends EventNotificationTemplate.Tokenizer {
+		String format();
+		String subject();
+		String body();
+		String fromEmail();
+		String fromName();
+		EmailNotificationRecipientProvider.Tokenizer to();
+		EmailNotificationRecipientProvider.Tokenizer cc();
+		EmailNotificationRecipientProvider.Tokenizer bcc();
+		EmailNotificationRecipientProvider.Tokenizer replyTo();
+		String priority();
+		String confirmReadingTo();
+		String hostname();
+		String messageID();
+		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> customHeaders();
+	}
+
+	/**  Define the email body format  */
+	private EmailNotificationFormat format;
+	/**  Define the email subject  */
+	private String subject;
+	/**  Define the email body content  */
+	private String body;
+	/**  Define the email sender email  */
+	private String fromEmail;
+	/**  Define the email sender name  */
+	private String fromName;
+	/**  Email recipient emails and names  */
+	private EmailNotificationRecipientProvider to;
+	/**  Email recipient emails and names  */
+	private EmailNotificationRecipientProvider cc;
+	/**  Email recipient emails and names  */
+	private EmailNotificationRecipientProvider bcc;
+	/**  Default email addresses to whom the reply should be sent.  */
+	private EmailNotificationRecipientProvider replyTo;
+	/**  Define the email priority  */
+	private EmailNotificationTemplatePriority priority;
+	/**  Email address that a reading confirmation will be sent  */
+	private String confirmReadingTo;
+	/**  Hostname to use in Message-Id and Received headers and as default HELLO string. 
+	    If empty, the value returned by SERVER_NAME is used or
+	  'localhost.localdomain'.  */
+	private String hostname;
+	/**  Sets the message ID to be used in the Message-Id header.   If empty, a unique id
+	  will be generated.  */
+	private String messageID;
+	/**  Adds a e-mail custom header  */
+	private List<KeyValue> customHeaders;
+
+	// format:
+	public EmailNotificationFormat getFormat(){
+		return this.format;
+	}
+	public void setFormat(EmailNotificationFormat format){
+		this.format = format;
+	}
+
+	public void format(String multirequestToken){
+		setToken("format", multirequestToken);
+	}
+
+	// subject:
+	public String getSubject(){
+		return this.subject;
+	}
+	public void setSubject(String subject){
+		this.subject = subject;
+	}
+
+	public void subject(String multirequestToken){
+		setToken("subject", multirequestToken);
+	}
+
+	// body:
+	public String getBody(){
+		return this.body;
+	}
+	public void setBody(String body){
+		this.body = body;
+	}
+
+	public void body(String multirequestToken){
+		setToken("body", multirequestToken);
+	}
+
+	// fromEmail:
+	public String getFromEmail(){
+		return this.fromEmail;
+	}
+	public void setFromEmail(String fromEmail){
+		this.fromEmail = fromEmail;
+	}
+
+	public void fromEmail(String multirequestToken){
+		setToken("fromEmail", multirequestToken);
+	}
+
+	// fromName:
+	public String getFromName(){
+		return this.fromName;
+	}
+	public void setFromName(String fromName){
+		this.fromName = fromName;
+	}
+
+	public void fromName(String multirequestToken){
+		setToken("fromName", multirequestToken);
+	}
+
+	// to:
+	public EmailNotificationRecipientProvider getTo(){
+		return this.to;
+	}
+	public void setTo(EmailNotificationRecipientProvider to){
+		this.to = to;
+	}
+
+	// cc:
+	public EmailNotificationRecipientProvider getCc(){
+		return this.cc;
+	}
+	public void setCc(EmailNotificationRecipientProvider cc){
+		this.cc = cc;
+	}
+
+	// bcc:
+	public EmailNotificationRecipientProvider getBcc(){
+		return this.bcc;
+	}
+	public void setBcc(EmailNotificationRecipientProvider bcc){
+		this.bcc = bcc;
+	}
+
+	// replyTo:
+	public EmailNotificationRecipientProvider getReplyTo(){
+		return this.replyTo;
+	}
+	public void setReplyTo(EmailNotificationRecipientProvider replyTo){
+		this.replyTo = replyTo;
+	}
+
+	// priority:
+	public EmailNotificationTemplatePriority getPriority(){
+		return this.priority;
+	}
+	public void setPriority(EmailNotificationTemplatePriority priority){
+		this.priority = priority;
+	}
+
+	public void priority(String multirequestToken){
+		setToken("priority", multirequestToken);
+	}
+
+	// confirmReadingTo:
+	public String getConfirmReadingTo(){
+		return this.confirmReadingTo;
+	}
+	public void setConfirmReadingTo(String confirmReadingTo){
+		this.confirmReadingTo = confirmReadingTo;
+	}
+
+	public void confirmReadingTo(String multirequestToken){
+		setToken("confirmReadingTo", multirequestToken);
+	}
+
+	// hostname:
+	public String getHostname(){
+		return this.hostname;
+	}
+	public void setHostname(String hostname){
+		this.hostname = hostname;
+	}
+
+	public void hostname(String multirequestToken){
+		setToken("hostname", multirequestToken);
+	}
+
+	// messageID:
+	public String getMessageID(){
+		return this.messageID;
+	}
+	public void setMessageID(String messageID){
+		this.messageID = messageID;
+	}
+
+	public void messageID(String multirequestToken){
+		setToken("messageID", multirequestToken);
+	}
+
+	// customHeaders:
+	public List<KeyValue> getCustomHeaders(){
+		return this.customHeaders;
+	}
+	public void setCustomHeaders(List<KeyValue> customHeaders){
+		this.customHeaders = customHeaders;
+	}
+
+
+	public EmailNotificationTemplate() {
+		super();
+	}
+
+	public EmailNotificationTemplate(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		format = EmailNotificationFormat.get(GsonParser.parseString(jsonObject.get("format")));
+		subject = GsonParser.parseString(jsonObject.get("subject"));
+		body = GsonParser.parseString(jsonObject.get("body"));
+		fromEmail = GsonParser.parseString(jsonObject.get("fromEmail"));
+		fromName = GsonParser.parseString(jsonObject.get("fromName"));
+		to = GsonParser.parseObject(jsonObject.getAsJsonObject("to"), EmailNotificationRecipientProvider.class);
+		cc = GsonParser.parseObject(jsonObject.getAsJsonObject("cc"), EmailNotificationRecipientProvider.class);
+		bcc = GsonParser.parseObject(jsonObject.getAsJsonObject("bcc"), EmailNotificationRecipientProvider.class);
+		replyTo = GsonParser.parseObject(jsonObject.getAsJsonObject("replyTo"), EmailNotificationRecipientProvider.class);
+		priority = EmailNotificationTemplatePriority.get(GsonParser.parseInt(jsonObject.get("priority")));
+		confirmReadingTo = GsonParser.parseString(jsonObject.get("confirmReadingTo"));
+		hostname = GsonParser.parseString(jsonObject.get("hostname"));
+		messageID = GsonParser.parseString(jsonObject.get("messageID"));
+		customHeaders = GsonParser.parseArray(jsonObject.getAsJsonArray("customHeaders"), KeyValue.class);
+
+	}
+
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaEmailNotificationTemplate");
+		kparams.add("format", this.format);
+		kparams.add("subject", this.subject);
+		kparams.add("body", this.body);
+		kparams.add("fromEmail", this.fromEmail);
+		kparams.add("fromName", this.fromName);
+		kparams.add("to", this.to);
+		kparams.add("cc", this.cc);
+		kparams.add("bcc", this.bcc);
+		kparams.add("replyTo", this.replyTo);
+		kparams.add("priority", this.priority);
+		kparams.add("confirmReadingTo", this.confirmReadingTo);
+		kparams.add("hostname", this.hostname);
+		kparams.add("messageID", this.messageID);
+		kparams.add("customHeaders", this.customHeaders);
+		return kparams;
+	}
+
+
+    public static final Creator<EmailNotificationTemplate> CREATOR = new Creator<EmailNotificationTemplate>() {
+        @Override
+        public EmailNotificationTemplate createFromParcel(Parcel source) {
+            return new EmailNotificationTemplate(source);
+        }
+
+        @Override
+        public EmailNotificationTemplate[] newArray(int size) {
+            return new EmailNotificationTemplate[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(this.format == null ? -1 : this.format.ordinal());
+        dest.writeString(this.subject);
+        dest.writeString(this.body);
+        dest.writeString(this.fromEmail);
+        dest.writeString(this.fromName);
+        dest.writeParcelable(this.to, flags);
+        dest.writeParcelable(this.cc, flags);
+        dest.writeParcelable(this.bcc, flags);
+        dest.writeParcelable(this.replyTo, flags);
+        dest.writeInt(this.priority == null ? -1 : this.priority.ordinal());
+        dest.writeString(this.confirmReadingTo);
+        dest.writeString(this.hostname);
+        dest.writeString(this.messageID);
+        if(this.customHeaders != null) {
+            dest.writeInt(this.customHeaders.size());
+            dest.writeList(this.customHeaders);
+        } else {
+            dest.writeInt(-1);
+        }
+    }
+
+    public EmailNotificationTemplate(Parcel in) {
+        super(in);
+        int tmpFormat = in.readInt();
+        this.format = tmpFormat == -1 ? null : EmailNotificationFormat.values()[tmpFormat];
+        this.subject = in.readString();
+        this.body = in.readString();
+        this.fromEmail = in.readString();
+        this.fromName = in.readString();
+        this.to = in.readParcelable(EmailNotificationRecipientProvider.class.getClassLoader());
+        this.cc = in.readParcelable(EmailNotificationRecipientProvider.class.getClassLoader());
+        this.bcc = in.readParcelable(EmailNotificationRecipientProvider.class.getClassLoader());
+        this.replyTo = in.readParcelable(EmailNotificationRecipientProvider.class.getClassLoader());
+        int tmpPriority = in.readInt();
+        this.priority = tmpPriority == -1 ? null : EmailNotificationTemplatePriority.values()[tmpPriority];
+        this.confirmReadingTo = in.readString();
+        this.hostname = in.readString();
+        this.messageID = in.readString();
+        int customHeadersSize = in.readInt();
+        if( customHeadersSize > -1) {
+            this.customHeaders = new ArrayList<>();
+            in.readList(this.customHeaders, KeyValue.class.getClassLoader());
+        }
+    }
+}
+

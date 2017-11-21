@@ -1,0 +1,141 @@
+// ===================================================================================================
+//                           _  __     _ _
+//                          | |/ /__ _| | |_ _  _ _ _ __ _
+//                          | ' </ _` | |  _| || | '_/ _` |
+//                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
+//
+// This file is part of the Kaltura Collaborative Media Suite which allows users
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// text.
+//
+// Copyright (C) 2006-2017  Kaltura Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// @ignore
+// ===================================================================================================
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.enums.ScheduledTaskAddOrRemoveType;
+import com.kaltura.client.utils.GsonParser;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class was generated using generate.php
+ * against an XML schema provided by Kaltura.
+ * 
+ * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
+ */
+
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(ModifyCategoriesObjectTask.Tokenizer.class)
+public class ModifyCategoriesObjectTask extends ObjectTask {
+	
+	public interface Tokenizer extends ObjectTask.Tokenizer {
+		String addRemoveType();
+		RequestBuilder.ListTokenizer<IntegerValue.Tokenizer> categoryIds();
+	}
+
+	/**  Should the object task add or remove categories?  */
+	private ScheduledTaskAddOrRemoveType addRemoveType;
+	/**  The list of category ids to add or remove  */
+	private List<IntegerValue> categoryIds;
+
+	// addRemoveType:
+	public ScheduledTaskAddOrRemoveType getAddRemoveType(){
+		return this.addRemoveType;
+	}
+	public void setAddRemoveType(ScheduledTaskAddOrRemoveType addRemoveType){
+		this.addRemoveType = addRemoveType;
+	}
+
+	public void addRemoveType(String multirequestToken){
+		setToken("addRemoveType", multirequestToken);
+	}
+
+	// categoryIds:
+	public List<IntegerValue> getCategoryIds(){
+		return this.categoryIds;
+	}
+	public void setCategoryIds(List<IntegerValue> categoryIds){
+		this.categoryIds = categoryIds;
+	}
+
+
+	public ModifyCategoriesObjectTask() {
+		super();
+	}
+
+	public ModifyCategoriesObjectTask(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		addRemoveType = ScheduledTaskAddOrRemoveType.get(GsonParser.parseInt(jsonObject.get("addRemoveType")));
+		categoryIds = GsonParser.parseArray(jsonObject.getAsJsonArray("categoryIds"), IntegerValue.class);
+
+	}
+
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaModifyCategoriesObjectTask");
+		kparams.add("addRemoveType", this.addRemoveType);
+		kparams.add("categoryIds", this.categoryIds);
+		return kparams;
+	}
+
+
+    public static final Creator<ModifyCategoriesObjectTask> CREATOR = new Creator<ModifyCategoriesObjectTask>() {
+        @Override
+        public ModifyCategoriesObjectTask createFromParcel(Parcel source) {
+            return new ModifyCategoriesObjectTask(source);
+        }
+
+        @Override
+        public ModifyCategoriesObjectTask[] newArray(int size) {
+            return new ModifyCategoriesObjectTask[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(this.addRemoveType == null ? -1 : this.addRemoveType.ordinal());
+        if(this.categoryIds != null) {
+            dest.writeInt(this.categoryIds.size());
+            dest.writeList(this.categoryIds);
+        } else {
+            dest.writeInt(-1);
+        }
+    }
+
+    public ModifyCategoriesObjectTask(Parcel in) {
+        super(in);
+        int tmpAddRemoveType = in.readInt();
+        this.addRemoveType = tmpAddRemoveType == -1 ? null : ScheduledTaskAddOrRemoveType.values()[tmpAddRemoveType];
+        int categoryIdsSize = in.readInt();
+        if( categoryIdsSize > -1) {
+            this.categoryIds = new ArrayList<>();
+            in.readList(this.categoryIds, IntegerValue.class.getClassLoader());
+        }
+    }
+}
+

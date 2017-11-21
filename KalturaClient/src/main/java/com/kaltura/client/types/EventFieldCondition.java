@@ -1,0 +1,109 @@
+// ===================================================================================================
+//                           _  __     _ _
+//                          | |/ /__ _| | |_ _  _ _ _ __ _
+//                          | ' </ _` | |  _| || | '_/ _` |
+//                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
+//
+// This file is part of the Kaltura Collaborative Media Suite which allows users
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// text.
+//
+// Copyright (C) 2006-2017  Kaltura Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// @ignore
+// ===================================================================================================
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.types.BooleanField;
+import com.kaltura.client.utils.GsonParser;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
+
+/**
+ * This class was generated using generate.php
+ * against an XML schema provided by Kaltura.
+ * 
+ * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
+ */
+
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(EventFieldCondition.Tokenizer.class)
+public class EventFieldCondition extends Condition {
+	
+	public interface Tokenizer extends Condition.Tokenizer {
+		BooleanField.Tokenizer field();
+	}
+
+	/**  The field to be evaluated at runtime  */
+	private BooleanField field;
+
+	// field:
+	public BooleanField getField(){
+		return this.field;
+	}
+	public void setField(BooleanField field){
+		this.field = field;
+	}
+
+
+	public EventFieldCondition() {
+		super();
+	}
+
+	public EventFieldCondition(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		field = GsonParser.parseObject(jsonObject.getAsJsonObject("field"), BooleanField.class);
+
+	}
+
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaEventFieldCondition");
+		kparams.add("field", this.field);
+		return kparams;
+	}
+
+
+    public static final Creator<EventFieldCondition> CREATOR = new Creator<EventFieldCondition>() {
+        @Override
+        public EventFieldCondition createFromParcel(Parcel source) {
+            return new EventFieldCondition(source);
+        }
+
+        @Override
+        public EventFieldCondition[] newArray(int size) {
+            return new EventFieldCondition[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeParcelable(this.field, flags);
+    }
+
+    public EventFieldCondition(Parcel in) {
+        super(in);
+        this.field = in.readParcelable(BooleanField.class.getClassLoader());
+    }
+}
+

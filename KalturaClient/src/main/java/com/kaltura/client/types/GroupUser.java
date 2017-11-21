@@ -1,0 +1,202 @@
+// ===================================================================================================
+//                           _  __     _ _
+//                          | |/ /__ _| | |_ _  _ _ _ __ _
+//                          | ' </ _` | |  _| || | '_/ _` |
+//                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
+//
+// This file is part of the Kaltura Collaborative Media Suite which allows users
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// text.
+//
+// Copyright (C) 2006-2017  Kaltura Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// @ignore
+// ===================================================================================================
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.enums.GroupUserStatus;
+import com.kaltura.client.types.ObjectBase;
+import com.kaltura.client.utils.GsonParser;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
+
+/**
+ * This class was generated using generate.php
+ * against an XML schema provided by Kaltura.
+ * 
+ * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
+ */
+
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(GroupUser.Tokenizer.class)
+public class GroupUser extends ObjectBase {
+	
+	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String userId();
+		String groupId();
+		String status();
+		String partnerId();
+		String createdAt();
+		String updatedAt();
+	}
+
+	private String userId;
+	private String groupId;
+	private GroupUserStatus status;
+	private Integer partnerId;
+	/**  Creation date as Unix timestamp (In seconds)  */
+	private Integer createdAt;
+	/**  Last update date as Unix timestamp (In seconds)  */
+	private Integer updatedAt;
+
+	// userId:
+	public String getUserId(){
+		return this.userId;
+	}
+	public void setUserId(String userId){
+		this.userId = userId;
+	}
+
+	public void userId(String multirequestToken){
+		setToken("userId", multirequestToken);
+	}
+
+	// groupId:
+	public String getGroupId(){
+		return this.groupId;
+	}
+	public void setGroupId(String groupId){
+		this.groupId = groupId;
+	}
+
+	public void groupId(String multirequestToken){
+		setToken("groupId", multirequestToken);
+	}
+
+	// status:
+	public GroupUserStatus getStatus(){
+		return this.status;
+	}
+	public void setStatus(GroupUserStatus status){
+		this.status = status;
+	}
+
+	public void status(String multirequestToken){
+		setToken("status", multirequestToken);
+	}
+
+	// partnerId:
+	public Integer getPartnerId(){
+		return this.partnerId;
+	}
+	public void setPartnerId(Integer partnerId){
+		this.partnerId = partnerId;
+	}
+
+	public void partnerId(String multirequestToken){
+		setToken("partnerId", multirequestToken);
+	}
+
+	// createdAt:
+	public Integer getCreatedAt(){
+		return this.createdAt;
+	}
+	public void setCreatedAt(Integer createdAt){
+		this.createdAt = createdAt;
+	}
+
+	public void createdAt(String multirequestToken){
+		setToken("createdAt", multirequestToken);
+	}
+
+	// updatedAt:
+	public Integer getUpdatedAt(){
+		return this.updatedAt;
+	}
+	public void setUpdatedAt(Integer updatedAt){
+		this.updatedAt = updatedAt;
+	}
+
+	public void updatedAt(String multirequestToken){
+		setToken("updatedAt", multirequestToken);
+	}
+
+
+	public GroupUser() {
+		super();
+	}
+
+	public GroupUser(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		userId = GsonParser.parseString(jsonObject.get("userId"));
+		groupId = GsonParser.parseString(jsonObject.get("groupId"));
+		status = GroupUserStatus.get(GsonParser.parseInt(jsonObject.get("status")));
+		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
+		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+
+	}
+
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaGroupUser");
+		kparams.add("userId", this.userId);
+		kparams.add("groupId", this.groupId);
+		return kparams;
+	}
+
+
+    public static final Creator<GroupUser> CREATOR = new Creator<GroupUser>() {
+        @Override
+        public GroupUser createFromParcel(Parcel source) {
+            return new GroupUser(source);
+        }
+
+        @Override
+        public GroupUser[] newArray(int size) {
+            return new GroupUser[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(this.userId);
+        dest.writeString(this.groupId);
+        dest.writeInt(this.status == null ? -1 : this.status.ordinal());
+        dest.writeValue(this.partnerId);
+        dest.writeValue(this.createdAt);
+        dest.writeValue(this.updatedAt);
+    }
+
+    public GroupUser(Parcel in) {
+        super(in);
+        this.userId = in.readString();
+        this.groupId = in.readString();
+        int tmpStatus = in.readInt();
+        this.status = tmpStatus == -1 ? null : GroupUserStatus.values()[tmpStatus];
+        this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+    }
+}
+

@@ -1,0 +1,295 @@
+// ===================================================================================================
+//                           _  __     _ _
+//                          | |/ /__ _| | |_ _  _ _ _ __ _
+//                          | ' </ _` | |  _| || | '_/ _` |
+//                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
+//
+// This file is part of the Kaltura Collaborative Media Suite which allows users
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// text.
+//
+// Copyright (C) 2006-2017  Kaltura Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// @ignore
+// ===================================================================================================
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.types.ObjectBase;
+import com.kaltura.client.utils.GsonParser;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class was generated using generate.php
+ * against an XML schema provided by Kaltura.
+ * 
+ * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
+ */
+
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(Scheduler.Tokenizer.class)
+public class Scheduler extends ObjectBase {
+	
+	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
+		String configuredId();
+		String name();
+		String host();
+		RequestBuilder.ListTokenizer<SchedulerStatus.Tokenizer> statuses();
+		RequestBuilder.ListTokenizer<SchedulerConfig.Tokenizer> configs();
+		RequestBuilder.ListTokenizer<SchedulerWorker.Tokenizer> workers();
+		String createdAt();
+		String lastStatus();
+		String lastStatusStr();
+	}
+
+	/**  The id of the Scheduler  */
+	private Integer id;
+	/**  The id as configured in the batch config  */
+	private Integer configuredId;
+	/**  The scheduler name  */
+	private String name;
+	/**  The host name  */
+	private String host;
+	/**  Array of the last statuses  */
+	private List<SchedulerStatus> statuses;
+	/**  Array of the last configs  */
+	private List<SchedulerConfig> configs;
+	/**  Array of the workers  */
+	private List<SchedulerWorker> workers;
+	/**  creation time  */
+	private Integer createdAt;
+	/**  last status time  */
+	private Integer lastStatus;
+	/**  last status formated  */
+	private String lastStatusStr;
+
+	// id:
+	public Integer getId(){
+		return this.id;
+	}
+	public void setId(Integer id){
+		this.id = id;
+	}
+
+	public void id(String multirequestToken){
+		setToken("id", multirequestToken);
+	}
+
+	// configuredId:
+	public Integer getConfiguredId(){
+		return this.configuredId;
+	}
+	public void setConfiguredId(Integer configuredId){
+		this.configuredId = configuredId;
+	}
+
+	public void configuredId(String multirequestToken){
+		setToken("configuredId", multirequestToken);
+	}
+
+	// name:
+	public String getName(){
+		return this.name;
+	}
+	public void setName(String name){
+		this.name = name;
+	}
+
+	public void name(String multirequestToken){
+		setToken("name", multirequestToken);
+	}
+
+	// host:
+	public String getHost(){
+		return this.host;
+	}
+	public void setHost(String host){
+		this.host = host;
+	}
+
+	public void host(String multirequestToken){
+		setToken("host", multirequestToken);
+	}
+
+	// statuses:
+	public List<SchedulerStatus> getStatuses(){
+		return this.statuses;
+	}
+	public void setStatuses(List<SchedulerStatus> statuses){
+		this.statuses = statuses;
+	}
+
+	// configs:
+	public List<SchedulerConfig> getConfigs(){
+		return this.configs;
+	}
+	public void setConfigs(List<SchedulerConfig> configs){
+		this.configs = configs;
+	}
+
+	// workers:
+	public List<SchedulerWorker> getWorkers(){
+		return this.workers;
+	}
+	public void setWorkers(List<SchedulerWorker> workers){
+		this.workers = workers;
+	}
+
+	// createdAt:
+	public Integer getCreatedAt(){
+		return this.createdAt;
+	}
+	public void setCreatedAt(Integer createdAt){
+		this.createdAt = createdAt;
+	}
+
+	public void createdAt(String multirequestToken){
+		setToken("createdAt", multirequestToken);
+	}
+
+	// lastStatus:
+	public Integer getLastStatus(){
+		return this.lastStatus;
+	}
+	public void setLastStatus(Integer lastStatus){
+		this.lastStatus = lastStatus;
+	}
+
+	public void lastStatus(String multirequestToken){
+		setToken("lastStatus", multirequestToken);
+	}
+
+	// lastStatusStr:
+	public String getLastStatusStr(){
+		return this.lastStatusStr;
+	}
+	public void setLastStatusStr(String lastStatusStr){
+		this.lastStatusStr = lastStatusStr;
+	}
+
+	public void lastStatusStr(String multirequestToken){
+		setToken("lastStatusStr", multirequestToken);
+	}
+
+
+	public Scheduler() {
+		super();
+	}
+
+	public Scheduler(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		id = GsonParser.parseInt(jsonObject.get("id"));
+		configuredId = GsonParser.parseInt(jsonObject.get("configuredId"));
+		name = GsonParser.parseString(jsonObject.get("name"));
+		host = GsonParser.parseString(jsonObject.get("host"));
+		statuses = GsonParser.parseArray(jsonObject.getAsJsonArray("statuses"), SchedulerStatus.class);
+		configs = GsonParser.parseArray(jsonObject.getAsJsonArray("configs"), SchedulerConfig.class);
+		workers = GsonParser.parseArray(jsonObject.getAsJsonArray("workers"), SchedulerWorker.class);
+		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
+		lastStatus = GsonParser.parseInt(jsonObject.get("lastStatus"));
+		lastStatusStr = GsonParser.parseString(jsonObject.get("lastStatusStr"));
+
+	}
+
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaScheduler");
+		kparams.add("configuredId", this.configuredId);
+		kparams.add("name", this.name);
+		kparams.add("host", this.host);
+		return kparams;
+	}
+
+
+    public static final Creator<Scheduler> CREATOR = new Creator<Scheduler>() {
+        @Override
+        public Scheduler createFromParcel(Parcel source) {
+            return new Scheduler(source);
+        }
+
+        @Override
+        public Scheduler[] newArray(int size) {
+            return new Scheduler[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeValue(this.id);
+        dest.writeValue(this.configuredId);
+        dest.writeString(this.name);
+        dest.writeString(this.host);
+        if(this.statuses != null) {
+            dest.writeInt(this.statuses.size());
+            dest.writeList(this.statuses);
+        } else {
+            dest.writeInt(-1);
+        }
+        if(this.configs != null) {
+            dest.writeInt(this.configs.size());
+            dest.writeList(this.configs);
+        } else {
+            dest.writeInt(-1);
+        }
+        if(this.workers != null) {
+            dest.writeInt(this.workers.size());
+            dest.writeList(this.workers);
+        } else {
+            dest.writeInt(-1);
+        }
+        dest.writeValue(this.createdAt);
+        dest.writeValue(this.lastStatus);
+        dest.writeString(this.lastStatusStr);
+    }
+
+    public Scheduler(Parcel in) {
+        super(in);
+        this.id = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.configuredId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.name = in.readString();
+        this.host = in.readString();
+        int statusesSize = in.readInt();
+        if( statusesSize > -1) {
+            this.statuses = new ArrayList<>();
+            in.readList(this.statuses, SchedulerStatus.class.getClassLoader());
+        }
+        int configsSize = in.readInt();
+        if( configsSize > -1) {
+            this.configs = new ArrayList<>();
+            in.readList(this.configs, SchedulerConfig.class.getClassLoader());
+        }
+        int workersSize = in.readInt();
+        if( workersSize > -1) {
+            this.workers = new ArrayList<>();
+            in.readList(this.workers, SchedulerWorker.class.getClassLoader());
+        }
+        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.lastStatus = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.lastStatusStr = in.readString();
+    }
+}
+

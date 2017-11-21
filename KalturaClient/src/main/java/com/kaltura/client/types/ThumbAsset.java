@@ -1,0 +1,168 @@
+// ===================================================================================================
+//                           _  __     _ _
+//                          | |/ /__ _| | |_ _  _ _ _ __ _
+//                          | ' </ _` | |  _| || | '_/ _` |
+//                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
+//
+// This file is part of the Kaltura Collaborative Media Suite which allows users
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// text.
+//
+// Copyright (C) 2006-2017  Kaltura Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// @ignore
+// ===================================================================================================
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.enums.ThumbAssetStatus;
+import com.kaltura.client.utils.GsonParser;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
+
+/**
+ * This class was generated using generate.php
+ * against an XML schema provided by Kaltura.
+ * 
+ * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
+ */
+
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(ThumbAsset.Tokenizer.class)
+public class ThumbAsset extends Asset {
+	
+	public interface Tokenizer extends Asset.Tokenizer {
+		String thumbParamsId();
+		String width();
+		String height();
+		String status();
+	}
+
+	/**  The Flavor Params used to create this Flavor Asset  */
+	private Integer thumbParamsId;
+	/**  The width of the Flavor Asset  */
+	private Integer width;
+	/**  The height of the Flavor Asset  */
+	private Integer height;
+	/**  The status of the asset  */
+	private ThumbAssetStatus status;
+
+	// thumbParamsId:
+	public Integer getThumbParamsId(){
+		return this.thumbParamsId;
+	}
+	public void setThumbParamsId(Integer thumbParamsId){
+		this.thumbParamsId = thumbParamsId;
+	}
+
+	public void thumbParamsId(String multirequestToken){
+		setToken("thumbParamsId", multirequestToken);
+	}
+
+	// width:
+	public Integer getWidth(){
+		return this.width;
+	}
+	public void setWidth(Integer width){
+		this.width = width;
+	}
+
+	public void width(String multirequestToken){
+		setToken("width", multirequestToken);
+	}
+
+	// height:
+	public Integer getHeight(){
+		return this.height;
+	}
+	public void setHeight(Integer height){
+		this.height = height;
+	}
+
+	public void height(String multirequestToken){
+		setToken("height", multirequestToken);
+	}
+
+	// status:
+	public ThumbAssetStatus getStatus(){
+		return this.status;
+	}
+	public void setStatus(ThumbAssetStatus status){
+		this.status = status;
+	}
+
+	public void status(String multirequestToken){
+		setToken("status", multirequestToken);
+	}
+
+
+	public ThumbAsset() {
+		super();
+	}
+
+	public ThumbAsset(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		thumbParamsId = GsonParser.parseInt(jsonObject.get("thumbParamsId"));
+		width = GsonParser.parseInt(jsonObject.get("width"));
+		height = GsonParser.parseInt(jsonObject.get("height"));
+		status = ThumbAssetStatus.get(GsonParser.parseInt(jsonObject.get("status")));
+
+	}
+
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaThumbAsset");
+		kparams.add("thumbParamsId", this.thumbParamsId);
+		return kparams;
+	}
+
+
+    public static final Creator<ThumbAsset> CREATOR = new Creator<ThumbAsset>() {
+        @Override
+        public ThumbAsset createFromParcel(Parcel source) {
+            return new ThumbAsset(source);
+        }
+
+        @Override
+        public ThumbAsset[] newArray(int size) {
+            return new ThumbAsset[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeValue(this.thumbParamsId);
+        dest.writeValue(this.width);
+        dest.writeValue(this.height);
+        dest.writeInt(this.status == null ? -1 : this.status.ordinal());
+    }
+
+    public ThumbAsset(Parcel in) {
+        super(in);
+        this.thumbParamsId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.width = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.height = (Integer)in.readValue(Integer.class.getClassLoader());
+        int tmpStatus = in.readInt();
+        this.status = tmpStatus == -1 ? null : ThumbAssetStatus.values()[tmpStatus];
+    }
+}
+

@@ -1,0 +1,208 @@
+// ===================================================================================================
+//                           _  __     _ _
+//                          | |/ /__ _| | |_ _  _ _ _ __ _
+//                          | ' </ _` | |  _| || | '_/ _` |
+//                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
+//
+// This file is part of the Kaltura Collaborative Media Suite which allows users
+// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// text.
+//
+// Copyright (C) 2006-2017  Kaltura Inc.
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License as
+// published by the Free Software Foundation, either version 3 of the
+// License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Affero General Public License for more details.
+//
+// You should have received a copy of the GNU Affero General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+// @ignore
+// ===================================================================================================
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.utils.GsonParser;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * This class was generated using generate.php
+ * against an XML schema provided by Kaltura.
+ * 
+ * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
+ */
+
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(AnswerCuePoint.Tokenizer.class)
+public class AnswerCuePoint extends CuePoint {
+	
+	public interface Tokenizer extends CuePoint.Tokenizer {
+		String parentId();
+		String quizUserEntryId();
+		String answerKey();
+		String isCorrect();
+		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> correctAnswerKeys();
+		String explanation();
+	}
+
+	private String parentId;
+	private String quizUserEntryId;
+	private String answerKey;
+	private Boolean isCorrect;
+	/**  Array of string  */
+	private List<StringHolder> correctAnswerKeys;
+	private String explanation;
+
+	// parentId:
+	public String getParentId(){
+		return this.parentId;
+	}
+	public void setParentId(String parentId){
+		this.parentId = parentId;
+	}
+
+	public void parentId(String multirequestToken){
+		setToken("parentId", multirequestToken);
+	}
+
+	// quizUserEntryId:
+	public String getQuizUserEntryId(){
+		return this.quizUserEntryId;
+	}
+	public void setQuizUserEntryId(String quizUserEntryId){
+		this.quizUserEntryId = quizUserEntryId;
+	}
+
+	public void quizUserEntryId(String multirequestToken){
+		setToken("quizUserEntryId", multirequestToken);
+	}
+
+	// answerKey:
+	public String getAnswerKey(){
+		return this.answerKey;
+	}
+	public void setAnswerKey(String answerKey){
+		this.answerKey = answerKey;
+	}
+
+	public void answerKey(String multirequestToken){
+		setToken("answerKey", multirequestToken);
+	}
+
+	// isCorrect:
+	public Boolean getIsCorrect(){
+		return this.isCorrect;
+	}
+	public void setIsCorrect(Boolean isCorrect){
+		this.isCorrect = isCorrect;
+	}
+
+	public void isCorrect(String multirequestToken){
+		setToken("isCorrect", multirequestToken);
+	}
+
+	// correctAnswerKeys:
+	public List<StringHolder> getCorrectAnswerKeys(){
+		return this.correctAnswerKeys;
+	}
+	public void setCorrectAnswerKeys(List<StringHolder> correctAnswerKeys){
+		this.correctAnswerKeys = correctAnswerKeys;
+	}
+
+	// explanation:
+	public String getExplanation(){
+		return this.explanation;
+	}
+	public void setExplanation(String explanation){
+		this.explanation = explanation;
+	}
+
+	public void explanation(String multirequestToken){
+		setToken("explanation", multirequestToken);
+	}
+
+
+	public AnswerCuePoint() {
+		super();
+	}
+
+	public AnswerCuePoint(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		parentId = GsonParser.parseString(jsonObject.get("parentId"));
+		quizUserEntryId = GsonParser.parseString(jsonObject.get("quizUserEntryId"));
+		answerKey = GsonParser.parseString(jsonObject.get("answerKey"));
+		isCorrect = GsonParser.parseBoolean(jsonObject.get("isCorrect"));
+		correctAnswerKeys = GsonParser.parseArray(jsonObject.getAsJsonArray("correctAnswerKeys"), StringHolder.class);
+		explanation = GsonParser.parseString(jsonObject.get("explanation"));
+
+	}
+
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaAnswerCuePoint");
+		kparams.add("parentId", this.parentId);
+		kparams.add("quizUserEntryId", this.quizUserEntryId);
+		kparams.add("answerKey", this.answerKey);
+		return kparams;
+	}
+
+
+    public static final Creator<AnswerCuePoint> CREATOR = new Creator<AnswerCuePoint>() {
+        @Override
+        public AnswerCuePoint createFromParcel(Parcel source) {
+            return new AnswerCuePoint(source);
+        }
+
+        @Override
+        public AnswerCuePoint[] newArray(int size) {
+            return new AnswerCuePoint[size];
+        }
+    };
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(this.parentId);
+        dest.writeString(this.quizUserEntryId);
+        dest.writeString(this.answerKey);
+        dest.writeInt(this.isCorrect == null ? -1 : this.isCorrect.ordinal());
+        if(this.correctAnswerKeys != null) {
+            dest.writeInt(this.correctAnswerKeys.size());
+            dest.writeList(this.correctAnswerKeys);
+        } else {
+            dest.writeInt(-1);
+        }
+        dest.writeString(this.explanation);
+    }
+
+    public AnswerCuePoint(Parcel in) {
+        super(in);
+        this.parentId = in.readString();
+        this.quizUserEntryId = in.readString();
+        this.answerKey = in.readString();
+        int tmpIsCorrect = in.readInt();
+        this.isCorrect = tmpIsCorrect == -1 ? null : Boolean.values()[tmpIsCorrect];
+        int correctAnswerKeysSize = in.readInt();
+        if( correctAnswerKeysSize > -1) {
+            this.correctAnswerKeys = new ArrayList<>();
+            in.readList(this.correctAnswerKeys, StringHolder.class.getClassLoader());
+        }
+        this.explanation = in.readString();
+    }
+}
+
