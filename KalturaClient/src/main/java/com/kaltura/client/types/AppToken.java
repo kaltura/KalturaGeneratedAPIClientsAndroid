@@ -61,6 +61,7 @@ public class AppToken extends ObjectBase {
 		String sessionDuration();
 		String sessionPrivileges();
 		String hashType();
+		String description();
 	}
 
 	/**  The id of the application token  */
@@ -87,6 +88,7 @@ public class AppToken extends ObjectBase {
 	  using the current token  */
 	private String sessionPrivileges;
 	private AppTokenHashType hashType;
+	private String description;
 
 	// id:
 	public String getId(){
@@ -232,6 +234,18 @@ public class AppToken extends ObjectBase {
 		setToken("hashType", multirequestToken);
 	}
 
+	// description:
+	public String getDescription(){
+		return this.description;
+	}
+	public void setDescription(String description){
+		this.description = description;
+	}
+
+	public void description(String multirequestToken){
+		setToken("description", multirequestToken);
+	}
+
 
 	public AppToken() {
 		super();
@@ -255,6 +269,7 @@ public class AppToken extends ObjectBase {
 		sessionDuration = GsonParser.parseInt(jsonObject.get("sessionDuration"));
 		sessionPrivileges = GsonParser.parseString(jsonObject.get("sessionPrivileges"));
 		hashType = AppTokenHashType.get(GsonParser.parseString(jsonObject.get("hashType")));
+		description = GsonParser.parseString(jsonObject.get("description"));
 
 	}
 
@@ -267,6 +282,7 @@ public class AppToken extends ObjectBase {
 		kparams.add("sessionDuration", this.sessionDuration);
 		kparams.add("sessionPrivileges", this.sessionPrivileges);
 		kparams.add("hashType", this.hashType);
+		kparams.add("description", this.description);
 		return kparams;
 	}
 
@@ -298,6 +314,7 @@ public class AppToken extends ObjectBase {
         dest.writeValue(this.sessionDuration);
         dest.writeString(this.sessionPrivileges);
         dest.writeInt(this.hashType == null ? -1 : this.hashType.ordinal());
+        dest.writeString(this.description);
     }
 
     public AppToken(Parcel in) {
@@ -317,6 +334,7 @@ public class AppToken extends ObjectBase {
         this.sessionPrivileges = in.readString();
         int tmpHashType = in.readInt();
         this.hashType = tmpHashType == -1 ? null : AppTokenHashType.values()[tmpHashType];
+        this.description = in.readString();
     }
 }
 

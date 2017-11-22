@@ -32,6 +32,7 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.types.ESearchOperator;
 import com.kaltura.client.types.ESearchOrderBy;
+import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -44,16 +45,18 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(ESearchParams.Tokenizer.class)
-public class ESearchParams extends ESearchObject {
+public class ESearchParams extends ObjectBase {
 	
-	public interface Tokenizer extends ESearchObject.Tokenizer {
+	public interface Tokenizer extends ObjectBase.Tokenizer {
 		ESearchOperator.Tokenizer searchOperator();
 		String objectStatuses();
+		String objectId();
 		ESearchOrderBy.Tokenizer orderBy();
 	}
 
 	private ESearchOperator searchOperator;
 	private String objectStatuses;
+	private String objectId;
 	private ESearchOrderBy orderBy;
 
 	// searchOperator:
@@ -74,6 +77,18 @@ public class ESearchParams extends ESearchObject {
 
 	public void objectStatuses(String multirequestToken){
 		setToken("objectStatuses", multirequestToken);
+	}
+
+	// objectId:
+	public String getObjectId(){
+		return this.objectId;
+	}
+	public void setObjectId(String objectId){
+		this.objectId = objectId;
+	}
+
+	public void objectId(String multirequestToken){
+		setToken("objectId", multirequestToken);
 	}
 
 	// orderBy:
@@ -97,6 +112,7 @@ public class ESearchParams extends ESearchObject {
 		// set members values:
 		searchOperator = GsonParser.parseObject(jsonObject.getAsJsonObject("searchOperator"), ESearchOperator.class);
 		objectStatuses = GsonParser.parseString(jsonObject.get("objectStatuses"));
+		objectId = GsonParser.parseString(jsonObject.get("objectId"));
 		orderBy = GsonParser.parseObject(jsonObject.getAsJsonObject("orderBy"), ESearchOrderBy.class);
 
 	}
@@ -106,6 +122,7 @@ public class ESearchParams extends ESearchObject {
 		kparams.add("objectType", "KalturaESearchParams");
 		kparams.add("searchOperator", this.searchOperator);
 		kparams.add("objectStatuses", this.objectStatuses);
+		kparams.add("objectId", this.objectId);
 		kparams.add("orderBy", this.orderBy);
 		return kparams;
 	}
@@ -128,6 +145,7 @@ public class ESearchParams extends ESearchObject {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(this.searchOperator, flags);
         dest.writeString(this.objectStatuses);
+        dest.writeString(this.objectId);
         dest.writeParcelable(this.orderBy, flags);
     }
 
@@ -135,6 +153,7 @@ public class ESearchParams extends ESearchObject {
         super(in);
         this.searchOperator = in.readParcelable(ESearchOperator.class.getClassLoader());
         this.objectStatuses = in.readString();
+        this.objectId = in.readString();
         this.orderBy = in.readParcelable(ESearchOrderBy.class.getClassLoader());
     }
 }

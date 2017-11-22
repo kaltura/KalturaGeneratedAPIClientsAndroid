@@ -54,6 +54,7 @@ public abstract class AppTokenBaseFilter extends Filter {
 		String updatedAtLessThanOrEqual();
 		String statusEqual();
 		String statusIn();
+		String sessionUserIdEqual();
 	}
 
 	private String idEqual;
@@ -64,6 +65,7 @@ public abstract class AppTokenBaseFilter extends Filter {
 	private Integer updatedAtLessThanOrEqual;
 	private AppTokenStatus statusEqual;
 	private String statusIn;
+	private String sessionUserIdEqual;
 
 	// idEqual:
 	public String getIdEqual(){
@@ -161,6 +163,18 @@ public abstract class AppTokenBaseFilter extends Filter {
 		setToken("statusIn", multirequestToken);
 	}
 
+	// sessionUserIdEqual:
+	public String getSessionUserIdEqual(){
+		return this.sessionUserIdEqual;
+	}
+	public void setSessionUserIdEqual(String sessionUserIdEqual){
+		this.sessionUserIdEqual = sessionUserIdEqual;
+	}
+
+	public void sessionUserIdEqual(String multirequestToken){
+		setToken("sessionUserIdEqual", multirequestToken);
+	}
+
 
 	public AppTokenBaseFilter() {
 		super();
@@ -180,6 +194,7 @@ public abstract class AppTokenBaseFilter extends Filter {
 		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
 		statusEqual = AppTokenStatus.get(GsonParser.parseInt(jsonObject.get("statusEqual")));
 		statusIn = GsonParser.parseString(jsonObject.get("statusIn"));
+		sessionUserIdEqual = GsonParser.parseString(jsonObject.get("sessionUserIdEqual"));
 
 	}
 
@@ -194,6 +209,7 @@ public abstract class AppTokenBaseFilter extends Filter {
 		kparams.add("updatedAtLessThanOrEqual", this.updatedAtLessThanOrEqual);
 		kparams.add("statusEqual", this.statusEqual);
 		kparams.add("statusIn", this.statusIn);
+		kparams.add("sessionUserIdEqual", this.sessionUserIdEqual);
 		return kparams;
 	}
 
@@ -209,6 +225,7 @@ public abstract class AppTokenBaseFilter extends Filter {
         dest.writeValue(this.updatedAtLessThanOrEqual);
         dest.writeInt(this.statusEqual == null ? -1 : this.statusEqual.ordinal());
         dest.writeString(this.statusIn);
+        dest.writeString(this.sessionUserIdEqual);
     }
 
     public AppTokenBaseFilter(Parcel in) {
@@ -222,6 +239,7 @@ public abstract class AppTokenBaseFilter extends Filter {
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : AppTokenStatus.values()[tmpStatusEqual];
         this.statusIn = in.readString();
+        this.sessionUserIdEqual = in.readString();
     }
 }
 

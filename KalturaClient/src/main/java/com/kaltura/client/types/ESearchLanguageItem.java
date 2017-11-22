@@ -30,6 +30,8 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.ESearchLanguage;
+import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -41,71 +43,72 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchQuery.Tokenizer.class)
-public class ESearchQuery extends ESearchBaseItem {
+@MultiRequestBuilder.Tokenizer(ESearchLanguageItem.Tokenizer.class)
+public class ESearchLanguageItem extends ObjectBase {
 	
-	public interface Tokenizer extends ESearchBaseItem.Tokenizer {
-		String eSearchQuery();
+	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String eSerachLanguage();
 	}
 
-	private String eSearchQuery;
+	private ESearchLanguage eSerachLanguage;
 
-	// eSearchQuery:
-	public String getESearchQuery(){
-		return this.eSearchQuery;
+	// eSerachLanguage:
+	public ESearchLanguage getESerachLanguage(){
+		return this.eSerachLanguage;
 	}
-	public void setESearchQuery(String eSearchQuery){
-		this.eSearchQuery = eSearchQuery;
-	}
-
-	public void eSearchQuery(String multirequestToken){
-		setToken("eSearchQuery", multirequestToken);
+	public void setESerachLanguage(ESearchLanguage eSerachLanguage){
+		this.eSerachLanguage = eSerachLanguage;
 	}
 
+	public void eSerachLanguage(String multirequestToken){
+		setToken("eSerachLanguage", multirequestToken);
+	}
 
-	public ESearchQuery() {
+
+	public ESearchLanguageItem() {
 		super();
 	}
 
-	public ESearchQuery(JsonObject jsonObject) throws APIException {
+	public ESearchLanguageItem(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		eSearchQuery = GsonParser.parseString(jsonObject.get("eSearchQuery"));
+		eSerachLanguage = ESearchLanguage.get(GsonParser.parseString(jsonObject.get("eSerachLanguage")));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchQuery");
-		kparams.add("eSearchQuery", this.eSearchQuery);
+		kparams.add("objectType", "KalturaESearchLanguageItem");
+		kparams.add("eSerachLanguage", this.eSerachLanguage);
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchQuery> CREATOR = new Creator<ESearchQuery>() {
+    public static final Creator<ESearchLanguageItem> CREATOR = new Creator<ESearchLanguageItem>() {
         @Override
-        public ESearchQuery createFromParcel(Parcel source) {
-            return new ESearchQuery(source);
+        public ESearchLanguageItem createFromParcel(Parcel source) {
+            return new ESearchLanguageItem(source);
         }
 
         @Override
-        public ESearchQuery[] newArray(int size) {
-            return new ESearchQuery[size];
+        public ESearchLanguageItem[] newArray(int size) {
+            return new ESearchLanguageItem[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(this.eSearchQuery);
+        dest.writeInt(this.eSerachLanguage == null ? -1 : this.eSerachLanguage.ordinal());
     }
 
-    public ESearchQuery(Parcel in) {
+    public ESearchLanguageItem(Parcel in) {
         super(in);
-        this.eSearchQuery = in.readString();
+        int tmpESerachLanguage = in.readInt();
+        this.eSerachLanguage = tmpESerachLanguage == -1 ? null : ESearchLanguage.values()[tmpESerachLanguage];
     }
 }
 
