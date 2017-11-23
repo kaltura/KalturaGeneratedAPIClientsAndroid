@@ -50,10 +50,12 @@ public abstract class ESearchResult extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		ObjectBase.Tokenizer object();
+		String highlight();
 		RequestBuilder.ListTokenizer<ESearchItemDataResult.Tokenizer> itemsData();
 	}
 
 	private ObjectBase object;
+	private String highlight;
 	private List<ESearchItemDataResult> itemsData;
 
 	// object:
@@ -62,6 +64,18 @@ public abstract class ESearchResult extends ObjectBase {
 	}
 	public void setObject(ObjectBase object){
 		this.object = object;
+	}
+
+	// highlight:
+	public String getHighlight(){
+		return this.highlight;
+	}
+	public void setHighlight(String highlight){
+		this.highlight = highlight;
+	}
+
+	public void highlight(String multirequestToken){
+		setToken("highlight", multirequestToken);
 	}
 
 	// itemsData:
@@ -84,6 +98,7 @@ public abstract class ESearchResult extends ObjectBase {
 
 		// set members values:
 		object = GsonParser.parseObject(jsonObject.getAsJsonObject("object"), ObjectBase.class);
+		highlight = GsonParser.parseString(jsonObject.get("highlight"));
 		itemsData = GsonParser.parseArray(jsonObject.getAsJsonArray("itemsData"), ESearchItemDataResult.class);
 
 	}
@@ -92,6 +107,7 @@ public abstract class ESearchResult extends ObjectBase {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaESearchResult");
 		kparams.add("object", this.object);
+		kparams.add("highlight", this.highlight);
 		kparams.add("itemsData", this.itemsData);
 		return kparams;
 	}
@@ -101,6 +117,7 @@ public abstract class ESearchResult extends ObjectBase {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(this.object, flags);
+        dest.writeString(this.highlight);
         if(this.itemsData != null) {
             dest.writeInt(this.itemsData.size());
             dest.writeList(this.itemsData);
@@ -112,6 +129,7 @@ public abstract class ESearchResult extends ObjectBase {
     public ESearchResult(Parcel in) {
         super(in);
         this.object = in.readParcelable(ObjectBase.class.getClassLoader());
+        this.highlight = in.readString();
         int itemsDataSize = in.readInt();
         if( itemsDataSize > -1) {
             this.itemsData = new ArrayList<>();

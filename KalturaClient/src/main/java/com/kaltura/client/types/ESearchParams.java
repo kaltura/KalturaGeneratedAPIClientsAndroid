@@ -52,12 +52,14 @@ public class ESearchParams extends ObjectBase {
 		String objectStatuses();
 		String objectId();
 		ESearchOrderBy.Tokenizer orderBy();
+		String useHighlight();
 	}
 
 	private ESearchOperator searchOperator;
 	private String objectStatuses;
 	private String objectId;
 	private ESearchOrderBy orderBy;
+	private Boolean useHighlight;
 
 	// searchOperator:
 	public ESearchOperator getSearchOperator(){
@@ -99,6 +101,18 @@ public class ESearchParams extends ObjectBase {
 		this.orderBy = orderBy;
 	}
 
+	// useHighlight:
+	public Boolean getUseHighlight(){
+		return this.useHighlight;
+	}
+	public void setUseHighlight(Boolean useHighlight){
+		this.useHighlight = useHighlight;
+	}
+
+	public void useHighlight(String multirequestToken){
+		setToken("useHighlight", multirequestToken);
+	}
+
 
 	public ESearchParams() {
 		super();
@@ -114,6 +128,7 @@ public class ESearchParams extends ObjectBase {
 		objectStatuses = GsonParser.parseString(jsonObject.get("objectStatuses"));
 		objectId = GsonParser.parseString(jsonObject.get("objectId"));
 		orderBy = GsonParser.parseObject(jsonObject.getAsJsonObject("orderBy"), ESearchOrderBy.class);
+		useHighlight = GsonParser.parseBoolean(jsonObject.get("useHighlight"));
 
 	}
 
@@ -124,6 +139,7 @@ public class ESearchParams extends ObjectBase {
 		kparams.add("objectStatuses", this.objectStatuses);
 		kparams.add("objectId", this.objectId);
 		kparams.add("orderBy", this.orderBy);
+		kparams.add("useHighlight", this.useHighlight);
 		return kparams;
 	}
 
@@ -147,6 +163,7 @@ public class ESearchParams extends ObjectBase {
         dest.writeString(this.objectStatuses);
         dest.writeString(this.objectId);
         dest.writeParcelable(this.orderBy, flags);
+        dest.writeValue(this.useHighlight);
     }
 
     public ESearchParams(Parcel in) {
@@ -155,6 +172,7 @@ public class ESearchParams extends ObjectBase {
         this.objectStatuses = in.readString();
         this.objectId = in.readString();
         this.orderBy = in.readParcelable(ESearchOrderBy.class.getClassLoader());
+        this.useHighlight = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

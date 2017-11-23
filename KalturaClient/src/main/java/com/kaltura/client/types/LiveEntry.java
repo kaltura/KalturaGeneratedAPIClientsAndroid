@@ -396,7 +396,7 @@ public abstract class LiveEntry extends MediaEntry {
         dest.writeParcelable(this.recordingOptions, flags);
         dest.writeInt(this.liveStatus == null ? -1 : this.liveStatus.ordinal());
         dest.writeValue(this.segmentDuration);
-        dest.writeValue(this.explicitLive);
+        dest.writeInt(this.explicitLive == null ? -1 : this.explicitLive.ordinal());
         dest.writeInt(this.viewMode == null ? -1 : this.viewMode.ordinal());
         dest.writeInt(this.recordingStatus == null ? -1 : this.recordingStatus.ordinal());
     }
@@ -430,7 +430,8 @@ public abstract class LiveEntry extends MediaEntry {
         int tmpLiveStatus = in.readInt();
         this.liveStatus = tmpLiveStatus == -1 ? null : EntryServerNodeStatus.values()[tmpLiveStatus];
         this.segmentDuration = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.explicitLive = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        int tmpExplicitLive = in.readInt();
+        this.explicitLive = tmpExplicitLive == -1 ? null : Boolean.values()[tmpExplicitLive];
         int tmpViewMode = in.readInt();
         this.viewMode = tmpViewMode == -1 ? null : ViewMode.values()[tmpViewMode];
         int tmpRecordingStatus = in.readInt();

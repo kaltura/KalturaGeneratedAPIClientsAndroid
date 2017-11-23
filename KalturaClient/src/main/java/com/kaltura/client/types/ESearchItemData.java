@@ -31,6 +31,7 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.types.ObjectBase;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -45,8 +46,22 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public abstract class ESearchItemData extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String highlight();
 	}
 
+	private String highlight;
+
+	// highlight:
+	public String getHighlight(){
+		return this.highlight;
+	}
+	public void setHighlight(String highlight){
+		this.highlight = highlight;
+	}
+
+	public void highlight(String multirequestToken){
+		setToken("highlight", multirequestToken);
+	}
 
 
 	public ESearchItemData() {
@@ -55,17 +70,31 @@ public abstract class ESearchItemData extends ObjectBase {
 
 	public ESearchItemData(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		highlight = GsonParser.parseString(jsonObject.get("highlight"));
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaESearchItemData");
+		kparams.add("highlight", this.highlight);
 		return kparams;
 	}
 
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(this.highlight);
+    }
+
     public ESearchItemData(Parcel in) {
         super(in);
+        this.highlight = in.readString();
     }
 }
 

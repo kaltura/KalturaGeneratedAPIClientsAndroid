@@ -49,11 +49,15 @@ public class EmailNotificationCategoryRecipientProvider extends EmailNotificatio
 	
 	public interface Tokenizer extends EmailNotificationRecipientProvider.Tokenizer {
 		StringValue.Tokenizer categoryId();
+		StringValue.Tokenizer categoryIds();
 		CategoryUserProviderFilter.Tokenizer categoryUserFilter();
 	}
 
 	/**  The ID of the category whose subscribers should receive the email notification.  */
 	private StringValue categoryId;
+	/**  The IDs of the categories whose subscribers should receive the email
+	  notification.  */
+	private StringValue categoryIds;
 	private CategoryUserProviderFilter categoryUserFilter;
 
 	// categoryId:
@@ -62,6 +66,14 @@ public class EmailNotificationCategoryRecipientProvider extends EmailNotificatio
 	}
 	public void setCategoryId(StringValue categoryId){
 		this.categoryId = categoryId;
+	}
+
+	// categoryIds:
+	public StringValue getCategoryIds(){
+		return this.categoryIds;
+	}
+	public void setCategoryIds(StringValue categoryIds){
+		this.categoryIds = categoryIds;
 	}
 
 	// categoryUserFilter:
@@ -84,6 +96,7 @@ public class EmailNotificationCategoryRecipientProvider extends EmailNotificatio
 
 		// set members values:
 		categoryId = GsonParser.parseObject(jsonObject.getAsJsonObject("categoryId"), StringValue.class);
+		categoryIds = GsonParser.parseObject(jsonObject.getAsJsonObject("categoryIds"), StringValue.class);
 		categoryUserFilter = GsonParser.parseObject(jsonObject.getAsJsonObject("categoryUserFilter"), CategoryUserProviderFilter.class);
 
 	}
@@ -92,6 +105,7 @@ public class EmailNotificationCategoryRecipientProvider extends EmailNotificatio
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaEmailNotificationCategoryRecipientProvider");
 		kparams.add("categoryId", this.categoryId);
+		kparams.add("categoryIds", this.categoryIds);
 		kparams.add("categoryUserFilter", this.categoryUserFilter);
 		return kparams;
 	}
@@ -113,12 +127,14 @@ public class EmailNotificationCategoryRecipientProvider extends EmailNotificatio
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(this.categoryId, flags);
+        dest.writeParcelable(this.categoryIds, flags);
         dest.writeParcelable(this.categoryUserFilter, flags);
     }
 
     public EmailNotificationCategoryRecipientProvider(Parcel in) {
         super(in);
         this.categoryId = in.readParcelable(StringValue.class.getClassLoader());
+        this.categoryIds = in.readParcelable(StringValue.class.getClassLoader());
         this.categoryUserFilter = in.readParcelable(CategoryUserProviderFilter.class.getClassLoader());
     }
 }

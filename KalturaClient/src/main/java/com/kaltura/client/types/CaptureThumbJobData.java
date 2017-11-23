@@ -31,6 +31,7 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.AssetType;
+import com.kaltura.client.types.FileContainer;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -46,7 +47,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class CaptureThumbJobData extends JobData {
 	
 	public interface Tokenizer extends JobData.Tokenizer {
-		String srcFileSyncLocalPath();
+		FileContainer.Tokenizer fileContainer();
 		String actualSrcFileSyncLocalPath();
 		String srcFileSyncRemoteUrl();
 		String thumbParamsOutputId();
@@ -56,7 +57,7 @@ public class CaptureThumbJobData extends JobData {
 		String thumbPath();
 	}
 
-	private String srcFileSyncLocalPath;
+	private FileContainer fileContainer;
 	/**  The translated path as used by the scheduler  */
 	private String actualSrcFileSyncLocalPath;
 	private String srcFileSyncRemoteUrl;
@@ -66,16 +67,12 @@ public class CaptureThumbJobData extends JobData {
 	private AssetType srcAssetType;
 	private String thumbPath;
 
-	// srcFileSyncLocalPath:
-	public String getSrcFileSyncLocalPath(){
-		return this.srcFileSyncLocalPath;
+	// fileContainer:
+	public FileContainer getFileContainer(){
+		return this.fileContainer;
 	}
-	public void setSrcFileSyncLocalPath(String srcFileSyncLocalPath){
-		this.srcFileSyncLocalPath = srcFileSyncLocalPath;
-	}
-
-	public void srcFileSyncLocalPath(String multirequestToken){
-		setToken("srcFileSyncLocalPath", multirequestToken);
+	public void setFileContainer(FileContainer fileContainer){
+		this.fileContainer = fileContainer;
 	}
 
 	// actualSrcFileSyncLocalPath:
@@ -173,7 +170,7 @@ public class CaptureThumbJobData extends JobData {
 		if(jsonObject == null) return;
 
 		// set members values:
-		srcFileSyncLocalPath = GsonParser.parseString(jsonObject.get("srcFileSyncLocalPath"));
+		fileContainer = GsonParser.parseObject(jsonObject.getAsJsonObject("fileContainer"), FileContainer.class);
 		actualSrcFileSyncLocalPath = GsonParser.parseString(jsonObject.get("actualSrcFileSyncLocalPath"));
 		srcFileSyncRemoteUrl = GsonParser.parseString(jsonObject.get("srcFileSyncRemoteUrl"));
 		thumbParamsOutputId = GsonParser.parseInt(jsonObject.get("thumbParamsOutputId"));
@@ -187,7 +184,7 @@ public class CaptureThumbJobData extends JobData {
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaCaptureThumbJobData");
-		kparams.add("srcFileSyncLocalPath", this.srcFileSyncLocalPath);
+		kparams.add("fileContainer", this.fileContainer);
 		kparams.add("actualSrcFileSyncLocalPath", this.actualSrcFileSyncLocalPath);
 		kparams.add("srcFileSyncRemoteUrl", this.srcFileSyncRemoteUrl);
 		kparams.add("thumbParamsOutputId", this.thumbParamsOutputId);
@@ -214,7 +211,7 @@ public class CaptureThumbJobData extends JobData {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(this.srcFileSyncLocalPath);
+        dest.writeParcelable(this.fileContainer, flags);
         dest.writeString(this.actualSrcFileSyncLocalPath);
         dest.writeString(this.srcFileSyncRemoteUrl);
         dest.writeValue(this.thumbParamsOutputId);
@@ -226,7 +223,7 @@ public class CaptureThumbJobData extends JobData {
 
     public CaptureThumbJobData(Parcel in) {
         super(in);
-        this.srcFileSyncLocalPath = in.readString();
+        this.fileContainer = in.readParcelable(FileContainer.class.getClassLoader());
         this.actualSrcFileSyncLocalPath = in.readString();
         this.srcFileSyncRemoteUrl = in.readString();
         this.thumbParamsOutputId = (Integer)in.readValue(Integer.class.getClassLoader());
