@@ -33,6 +33,9 @@ import com.kaltura.client.Params;
 import com.kaltura.client.enums.ResponseType;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -51,6 +54,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 		String format();
 		String ignoreNull();
 		String code();
+		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> dataStringReplacements();
 	}
 
 	/**  Kaltura API object type  */
@@ -61,6 +65,8 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 	private Boolean ignoreNull;
 	/**  PHP code  */
 	private String code;
+	/**  An array of pattern-replacement pairs used for data string regex replacements  */
+	private List<KeyValue> dataStringReplacements;
 
 	// apiObjectType:
 	public String getApiObjectType(){
@@ -110,6 +116,14 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 		setToken("code", multirequestToken);
 	}
 
+	// dataStringReplacements:
+	public List<KeyValue> getDataStringReplacements(){
+		return this.dataStringReplacements;
+	}
+	public void setDataStringReplacements(List<KeyValue> dataStringReplacements){
+		this.dataStringReplacements = dataStringReplacements;
+	}
+
 
 	public HttpNotificationObjectData() {
 		super();
@@ -125,6 +139,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 		format = ResponseType.get(GsonParser.parseInt(jsonObject.get("format")));
 		ignoreNull = GsonParser.parseBoolean(jsonObject.get("ignoreNull"));
 		code = GsonParser.parseString(jsonObject.get("code"));
+		dataStringReplacements = GsonParser.parseArray(jsonObject.getAsJsonArray("dataStringReplacements"), KeyValue.class);
 
 	}
 
@@ -135,6 +150,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 		kparams.add("format", this.format);
 		kparams.add("ignoreNull", this.ignoreNull);
 		kparams.add("code", this.code);
+		kparams.add("dataStringReplacements", this.dataStringReplacements);
 		return kparams;
 	}
 
@@ -158,6 +174,12 @@ public class HttpNotificationObjectData extends HttpNotificationData {
         dest.writeInt(this.format == null ? -1 : this.format.ordinal());
         dest.writeValue(this.ignoreNull);
         dest.writeString(this.code);
+        if(this.dataStringReplacements != null) {
+            dest.writeInt(this.dataStringReplacements.size());
+            dest.writeList(this.dataStringReplacements);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public HttpNotificationObjectData(Parcel in) {
@@ -167,6 +189,11 @@ public class HttpNotificationObjectData extends HttpNotificationData {
         this.format = tmpFormat == -1 ? null : ResponseType.values()[tmpFormat];
         this.ignoreNull = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.code = in.readString();
+        int dataStringReplacementsSize = in.readInt();
+        if( dataStringReplacementsSize > -1) {
+            this.dataStringReplacements = new ArrayList<>();
+            in.readList(this.dataStringReplacements, KeyValue.class.getClassLoader());
+        }
     }
 }
 
