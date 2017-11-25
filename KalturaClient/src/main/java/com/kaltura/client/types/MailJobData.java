@@ -71,7 +71,9 @@ public class MailJobData extends JobData {
 	private MailJobStatus status;
 	private String recipientName;
 	private String recipientEmail;
-	/**  kuserId  */
+	/**
+	 * kuserId
+	 */
 	private Integer recipientId;
 	private String fromName;
 	private String fromEmail;

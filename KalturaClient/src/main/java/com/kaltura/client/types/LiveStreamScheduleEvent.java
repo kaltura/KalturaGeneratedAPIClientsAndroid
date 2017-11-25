@@ -48,7 +48,9 @@ public class LiveStreamScheduleEvent extends EntryScheduleEvent {
 		String projectedAudience();
 	}
 
-	/**  Defines the expected audience.  */
+	/**
+	 * Defines the expected audience.
+	 */
 	private Integer projectedAudience;
 
 	// projectedAudience:

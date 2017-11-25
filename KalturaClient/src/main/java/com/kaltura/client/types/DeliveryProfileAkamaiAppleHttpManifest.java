@@ -48,7 +48,9 @@ public class DeliveryProfileAkamaiAppleHttpManifest extends DeliveryProfile {
 		String supportClipping();
 	}
 
-	/**  Should we use timing parameters - clipTo / seekFrom  */
+	/**
+	 * Should we use timing parameters - clipTo / seekFrom
+	 */
 	private Boolean supportClipping;
 
 	// supportClipping:

@@ -49,7 +49,9 @@ public class UrlTokenizerAkamaiHttp extends UrlTokenizer {
 		String rootDir();
 	}
 
-	/**  param  */
+	/**
+	 * param
+	 */
 	private String paramName;
 	private String rootDir;
 

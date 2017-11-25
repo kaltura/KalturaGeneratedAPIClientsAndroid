@@ -51,9 +51,13 @@ public class UrlTokenizerAkamaiRtmp extends UrlTokenizer {
 		String usePrefix();
 	}
 
-	/**  profile  */
+	/**
+	 * profile
+	 */
 	private String profile;
-	/**  Type  */
+	/**
+	 * Type
+	 */
 	private String type;
 	private String aifp;
 	private Boolean usePrefix;

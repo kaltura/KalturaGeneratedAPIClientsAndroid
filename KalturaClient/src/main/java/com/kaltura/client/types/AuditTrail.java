@@ -79,7 +79,9 @@ public class AuditTrail extends ObjectBase {
 
 	private Integer id;
 	private Integer createdAt;
-	/**  Indicates when the data was parsed  */
+	/**
+	 * Indicates when the data was parsed
+	 */
 	private Integer parsedAt;
 	private AuditTrailStatus status;
 	private AuditTrailObjectType auditObjectType;
@@ -95,7 +97,9 @@ public class AuditTrail extends ObjectBase {
 	private AuditTrailInfo data;
 	private String ks;
 	private AuditTrailContext context;
-	/**  The API service and action that called and caused this audit  */
+	/**
+	 * The API service and action that called and caused this audit
+	 */
 	private String entryPoint;
 	private String serverName;
 	private String ipAddress;

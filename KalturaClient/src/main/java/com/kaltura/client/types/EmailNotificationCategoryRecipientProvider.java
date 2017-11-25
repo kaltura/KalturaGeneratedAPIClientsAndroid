@@ -42,7 +42,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  API object which provides the recipients of category related notifications.  */
+/**
+ * API object which provides the recipients of category related notifications.
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(EmailNotificationCategoryRecipientProvider.Tokenizer.class)
 public class EmailNotificationCategoryRecipientProvider extends EmailNotificationRecipientProvider {
@@ -53,10 +55,14 @@ public class EmailNotificationCategoryRecipientProvider extends EmailNotificatio
 		CategoryUserProviderFilter.Tokenizer categoryUserFilter();
 	}
 
-	/**  The ID of the category whose subscribers should receive the email notification.  */
+	/**
+	 * The ID of the category whose subscribers should receive the email notification.
+	 */
 	private StringValue categoryId;
-	/**  The IDs of the categories whose subscribers should receive the email
-	  notification.  */
+	/**
+	 * The IDs of the categories whose subscribers should receive the email
+	  notification.
+	 */
 	private StringValue categoryIds;
 	private CategoryUserProviderFilter categoryUserFilter;
 

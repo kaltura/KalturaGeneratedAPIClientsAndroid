@@ -52,7 +52,9 @@ public abstract class Condition extends ObjectBase {
 		String not();
 	}
 
-	/**  The type of the access control condition  */
+	/**
+	 * The type of the access control condition
+	 */
 	private ConditionType type;
 	private String description;
 	private Boolean not;

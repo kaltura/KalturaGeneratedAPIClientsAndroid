@@ -40,9 +40,11 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  Used to ingest media that is available on remote SSH server and accessible using
+/**
+ * Used to ingest media that is available on remote SSH server and accessible using
   the supplied URL, media file will be downloaded using import job in order to
-  make the asset ready.  */
+  make the asset ready.
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(SshUrlResource.Tokenizer.class)
 public class SshUrlResource extends UrlResource {
@@ -53,11 +55,17 @@ public class SshUrlResource extends UrlResource {
 		String keyPassphrase();
 	}
 
-	/**  SSH private key  */
+	/**
+	 * SSH private key
+	 */
 	private String privateKey;
-	/**  SSH public key  */
+	/**
+	 * SSH public key
+	 */
 	private String publicKey;
-	/**  Passphrase for SSH keys  */
+	/**
+	 * Passphrase for SSH keys
+	 */
 	private String keyPassphrase;
 
 	// privateKey:

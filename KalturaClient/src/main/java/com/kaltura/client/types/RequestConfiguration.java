@@ -42,7 +42,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  Define client request optional configurations  /  */
+/**
+ * Define client request optional configurations  /
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(RequestConfiguration.Tokenizer.class)
 public class RequestConfiguration extends ObjectBase {
@@ -53,12 +55,18 @@ public class RequestConfiguration extends ObjectBase {
 		BaseResponseProfile.Tokenizer responseProfile();
 	}
 
-	/**  Impersonated partner id  */
+	/**
+	 * Impersonated partner id
+	 */
 	private Integer partnerId;
-	/**  Kaltura API session  */
+	/**
+	 * Kaltura API session
+	 */
 	private String ks;
-	/**  Response profile - this attribute will be automatically unset after every API
-	  call.  */
+	/**
+	 * Response profile - this attribute will be automatically unset after every API
+	  call.
+	 */
 	private BaseResponseProfile responseProfile;
 
 	// partnerId:

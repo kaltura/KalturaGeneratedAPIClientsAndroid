@@ -42,7 +42,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  A representation of a live stream configuration  */
+/**
+ * A representation of a live stream configuration
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(LiveStreamConfiguration.Tokenizer.class)
 public class LiveStreamConfiguration extends ObjectBase {

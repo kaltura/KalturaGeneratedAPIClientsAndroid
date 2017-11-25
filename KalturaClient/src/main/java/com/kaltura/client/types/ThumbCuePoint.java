@@ -55,7 +55,9 @@ public class ThumbCuePoint extends CuePoint {
 	private String assetId;
 	private String description;
 	private String title;
-	/**  The sub type of the ThumbCuePoint  */
+	/**
+	 * The sub type of the ThumbCuePoint
+	 */
 	private ThumbCuePointSubType subType;
 
 	// assetId:

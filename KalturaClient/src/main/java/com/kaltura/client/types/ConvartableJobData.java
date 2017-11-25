@@ -63,7 +63,9 @@ public class ConvartableJobData extends JobData {
 	}
 
 	private String srcFileSyncLocalPath;
-	/**  The translated path as used by the scheduler  */
+	/**
+	 * The translated path as used by the scheduler
+	 */
 	private String actualSrcFileSyncLocalPath;
 	private String srcFileSyncRemoteUrl;
 	private List<SourceFileSyncDescriptor> srcFileSyncs;

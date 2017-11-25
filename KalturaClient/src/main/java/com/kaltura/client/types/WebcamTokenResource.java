@@ -40,8 +40,10 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  Used to ingest media that streamed to the system and represented by token that
-  returned from media server such as FMS or red5.  */
+/**
+ * Used to ingest media that streamed to the system and represented by token that
+  returned from media server such as FMS or red5.
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(WebcamTokenResource.Tokenizer.class)
 public class WebcamTokenResource extends DataCenterContentResource {
@@ -50,7 +52,9 @@ public class WebcamTokenResource extends DataCenterContentResource {
 		String token();
 	}
 
-	/**  Token that returned from media server such as FMS or red5.  */
+	/**
+	 * Token that returned from media server such as FMS or red5.
+	 */
 	private String token;
 
 	// token:

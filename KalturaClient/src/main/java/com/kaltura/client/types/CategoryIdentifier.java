@@ -49,7 +49,9 @@ public class CategoryIdentifier extends ObjectIdentifier {
 		String identifier();
 	}
 
-	/**  Identifier of the object  */
+	/**
+	 * Identifier of the object
+	 */
 	private CategoryIdentifierField identifier;
 
 	// identifier:

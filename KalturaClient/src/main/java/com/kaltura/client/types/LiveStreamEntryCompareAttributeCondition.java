@@ -41,8 +41,10 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  Auto-generated class.  Used to search KalturaLiveStreamEntry attributes. Use
-  KalturaLiveStreamEntryCompareAttribute enum to provide attribute name. /  */
+/**
+ * Auto-generated class.  Used to search KalturaLiveStreamEntry attributes. Use
+  KalturaLiveStreamEntryCompareAttribute enum to provide attribute name. /
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(LiveStreamEntryCompareAttributeCondition.Tokenizer.class)
 public class LiveStreamEntryCompareAttributeCondition extends SearchComparableAttributeCondition {

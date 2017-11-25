@@ -48,7 +48,9 @@ public class AccessControlDrmPolicyAction extends RuleAction {
 		String policyId();
 	}
 
-	/**  Drm policy id  */
+	/**
+	 * Drm policy id
+	 */
 	private Integer policyId;
 
 	// policyId:

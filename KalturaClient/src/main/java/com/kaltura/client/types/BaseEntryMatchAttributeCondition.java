@@ -41,8 +41,10 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  Auto-generated class.  Used to search KalturaBaseEntry attributes. Use
-  KalturaBaseEntryMatchAttribute enum to provide attribute name. /  */
+/**
+ * Auto-generated class.  Used to search KalturaBaseEntry attributes. Use
+  KalturaBaseEntryMatchAttribute enum to provide attribute name. /
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(BaseEntryMatchAttributeCondition.Tokenizer.class)
 public class BaseEntryMatchAttributeCondition extends SearchMatchAttributeCondition {

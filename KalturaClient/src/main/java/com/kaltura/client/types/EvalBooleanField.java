@@ -40,7 +40,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  Evaluates PHP statement, depends on the execution context  */
+/**
+ * Evaluates PHP statement, depends on the execution context
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(EvalBooleanField.Tokenizer.class)
 public class EvalBooleanField extends BooleanField {
@@ -49,7 +51,9 @@ public class EvalBooleanField extends BooleanField {
 		String code();
 	}
 
-	/**  PHP code  */
+	/**
+	 * PHP code
+	 */
 	private String code;
 
 	// code:

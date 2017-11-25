@@ -51,9 +51,13 @@ public class UrlTokenizer extends ObjectBase {
 		String limitIpAddress();
 	}
 
-	/**  Window  */
+	/**
+	 * Window
+	 */
 	private Integer window;
-	/**  key  */
+	/**
+	 * key
+	 */
 	private String key;
 	private Boolean limitIpAddress;
 

@@ -48,7 +48,9 @@ public class DispatchEventNotificationObjectTask extends ObjectTask {
 		String eventNotificationTemplateId();
 	}
 
-	/**  The event notification template id to dispatch  */
+	/**
+	 * The event notification template id to dispatch
+	 */
 	private Integer eventNotificationTemplateId;
 
 	// eventNotificationTemplateId:

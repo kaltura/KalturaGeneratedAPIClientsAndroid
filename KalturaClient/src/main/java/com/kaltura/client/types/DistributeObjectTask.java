@@ -48,7 +48,9 @@ public class DistributeObjectTask extends ObjectTask {
 		String distributionProfileId();
 	}
 
-	/**  Distribution profile id  */
+	/**
+	 * Distribution profile id
+	 */
 	private String distributionProfileId;
 
 	// distributionProfileId:

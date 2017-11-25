@@ -48,8 +48,10 @@ public class ScheduleEventResourceFilter extends ScheduleEventResourceBaseFilter
 		String eventIdOrItsParentIdEqual();
 	}
 
-	/**  Find event-resource objects that associated with the event, if none found, find
-	  by its parent event  */
+	/**
+	 * Find event-resource objects that associated with the event, if none found, find
+	  by its parent event
+	 */
 	private Integer eventIdOrItsParentIdEqual;
 
 	// eventIdOrItsParentIdEqual:

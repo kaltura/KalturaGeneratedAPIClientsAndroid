@@ -49,9 +49,13 @@ public class ResponseProfileHolder extends BaseResponseProfile {
 		String systemName();
 	}
 
-	/**  Auto generated numeric identifier  */
+	/**
+	 * Auto generated numeric identifier
+	 */
 	private Long id;
-	/**  Unique system name  */
+	/**
+	 * Unique system name
+	 */
 	private String systemName;
 
 	// id:

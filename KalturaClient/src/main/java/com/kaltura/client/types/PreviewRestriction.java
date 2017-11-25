@@ -48,7 +48,9 @@ public class PreviewRestriction extends SessionRestriction {
 		String previewLength();
 	}
 
-	/**  The preview restriction length  */
+	/**
+	 * The preview restriction length
+	 */
 	private Integer previewLength;
 
 	// previewLength:

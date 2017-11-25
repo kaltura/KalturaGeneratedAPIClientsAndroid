@@ -49,7 +49,9 @@ public class EventFieldCondition extends Condition {
 		BooleanField.Tokenizer field();
 	}
 
-	/**  The field to be evaluated at runtime  */
+	/**
+	 * The field to be evaluated at runtime
+	 */
 	private BooleanField field;
 
 	// field:

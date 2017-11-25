@@ -48,7 +48,9 @@ public class StorageExportObjectTask extends ObjectTask {
 		String storageId();
 	}
 
-	/**  Storage profile id  */
+	/**
+	 * Storage profile id
+	 */
 	private String storageId;
 
 	// storageId:

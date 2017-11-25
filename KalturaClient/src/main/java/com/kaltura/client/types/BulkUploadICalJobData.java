@@ -41,7 +41,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  Represents the Bulk upload job data for iCal bulk upload  */
+/**
+ * Represents the Bulk upload job data for iCal bulk upload
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(BulkUploadICalJobData.Tokenizer.class)
 public class BulkUploadICalJobData extends BulkUploadJobData {
@@ -50,7 +52,9 @@ public class BulkUploadICalJobData extends BulkUploadJobData {
 		String eventsType();
 	}
 
-	/**  The type of the events that ill be created by this upload  */
+	/**
+	 * The type of the events that ill be created by this upload
+	 */
 	private ScheduleEventType eventsType;
 
 	// eventsType:

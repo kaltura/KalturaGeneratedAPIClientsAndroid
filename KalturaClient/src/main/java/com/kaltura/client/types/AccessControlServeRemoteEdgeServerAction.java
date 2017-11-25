@@ -48,7 +48,9 @@ public class AccessControlServeRemoteEdgeServerAction extends RuleAction {
 		String edgeServerIds();
 	}
 
-	/**  Comma separated list of edge servers playBack should be done from  */
+	/**
+	 * Comma separated list of edge servers playBack should be done from
+	 */
 	private String edgeServerIds;
 
 	// edgeServerIds:

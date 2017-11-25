@@ -40,7 +40,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  Represents the current time context on Kaltura servers  */
+/**
+ * Represents the current time context on Kaltura servers
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(TimeContextField.Tokenizer.class)
 public class TimeContextField extends IntegerField {
@@ -49,7 +51,9 @@ public class TimeContextField extends IntegerField {
 		String offset();
 	}
 
-	/**  Time offset in seconds since current time  */
+	/**
+	 * Time offset in seconds since current time
+	 */
 	private Integer offset;
 
 	// offset:

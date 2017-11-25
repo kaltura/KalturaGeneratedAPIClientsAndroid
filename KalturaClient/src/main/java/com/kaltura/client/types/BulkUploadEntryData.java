@@ -40,7 +40,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**  This class represents object-specific data passed to the   bulk upload job.  */
+/**
+ * This class represents object-specific data passed to the   bulk upload job.
+ */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(BulkUploadEntryData.Tokenizer.class)
 public class BulkUploadEntryData extends BulkUploadObjectData {
@@ -49,7 +51,9 @@ public class BulkUploadEntryData extends BulkUploadObjectData {
 		String conversionProfileId();
 	}
 
-	/**  Selected profile id for all bulk entries  */
+	/**
+	 * Selected profile id for all bulk entries
+	 */
 	private Integer conversionProfileId;
 
 	// conversionProfileId:

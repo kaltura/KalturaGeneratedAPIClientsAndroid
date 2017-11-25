@@ -48,7 +48,9 @@ public class EventObjectChangedCondition extends Condition {
 		String modifiedColumns();
 	}
 
-	/**  Comma seperated column names to be tested  */
+	/**
+	 * Comma seperated column names to be tested
+	 */
 	private String modifiedColumns;
 
 	// modifiedColumns:

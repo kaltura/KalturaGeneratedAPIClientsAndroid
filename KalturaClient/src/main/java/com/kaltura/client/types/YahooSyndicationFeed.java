@@ -55,9 +55,13 @@ public class YahooSyndicationFeed extends BaseSyndicationFeed {
 
 	private YahooSyndicationFeedCategories category;
 	private YahooSyndicationFeedAdultValues adultContent;
-	/**  feed description  */
+	/**
+	 * feed description
+	 */
 	private String feedDescription;
-	/**  feed landing page (i.e publisher website)  */
+	/**
+	 * feed landing page (i.e publisher website)
+	 */
 	private String feedLandingPage;
 
 	// category:

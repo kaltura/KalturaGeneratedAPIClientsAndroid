@@ -55,9 +55,13 @@ public class ResponseProfileCacheRecalculateOptions extends ObjectBase {
 		String isFirstLoop();
 	}
 
-	/**  Maximum number of keys to recalculate  */
+	/**
+	 * Maximum number of keys to recalculate
+	 */
 	private Integer limit;
-	/**  Class name  */
+	/**
+	 * Class name
+	 */
 	private String cachedObjectType;
 	private String objectId;
 	private String startObjectKey;

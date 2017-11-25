@@ -51,7 +51,9 @@ public class AssetsParamsResourceContainers extends Resource {
 		RequestBuilder.ListTokenizer<AssetParamsResourceContainer.Tokenizer> resources();
 	}
 
-	/**  Array of resources associated with asset params ids  */
+	/**
+	 * Array of resources associated with asset params ids
+	 */
 	private List<AssetParamsResourceContainer> resources;
 
 	// resources:

@@ -48,7 +48,9 @@ public class DeliveryProfileAkamaiHttp extends DeliveryProfile {
 		String useIntelliseek();
 	}
 
-	/**  Should we use intelliseek  */
+	/**
+	 * Should we use intelliseek
+	 */
 	private Boolean useIntelliseek;
 
 	// useIntelliseek:

@@ -54,7 +54,9 @@ public class QuestionCuePoint extends CuePoint {
 		String explanation();
 	}
 
-	/**  Array of key value answerKey-&gt;optionAnswer objects  */
+	/**
+	 * Array of key value answerKey-&gt;optionAnswer objects
+	 */
 	private List<OptionalAnswer> optionalAnswers;
 	private String hint;
 	private String question;

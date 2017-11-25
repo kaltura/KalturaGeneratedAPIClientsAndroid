@@ -58,7 +58,9 @@ public abstract class EntryServerNode extends ObjectBase {
 		String serverType();
 	}
 
-	/**  unique auto-generated identifier  */
+	/**
+	 * unique auto-generated identifier
+	 */
 	private Integer id;
 	private String entryId;
 	private Integer serverNodeId;

@@ -50,7 +50,9 @@ public class PlayReadyDigitalAudioOPIdHolder extends ObjectBase {
 		String type();
 	}
 
-	/**  The type of the play enabler  */
+	/**
+	 * The type of the play enabler
+	 */
 	private PlayReadyDigitalAudioOPId type;
 
 	// type:
