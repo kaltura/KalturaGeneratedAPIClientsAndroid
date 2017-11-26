@@ -55,6 +55,7 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
 		String spokenLanguage();
 		String fileLocation();
 		String replaceMediaContent();
+		String additionalParameters();
 	}
 
 	/**
@@ -93,6 +94,10 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
 	 * should replace remote media content
 	 */
 	private Boolean replaceMediaContent;
+	/**
+	 * additional parameters to send to VoiceBase
+	 */
+	private String additionalParameters;
 
 	// entryId:
 	public String getEntryId(){
@@ -202,6 +207,18 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
 		setToken("replaceMediaContent", multirequestToken);
 	}
 
+	// additionalParameters:
+	public String getAdditionalParameters(){
+		return this.additionalParameters;
+	}
+	public void setAdditionalParameters(String additionalParameters){
+		this.additionalParameters = additionalParameters;
+	}
+
+	public void additionalParameters(String multirequestToken){
+		setToken("additionalParameters", multirequestToken);
+	}
+
 
 	public VoicebaseJobProviderData() {
 		super();
@@ -222,6 +239,7 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
 		spokenLanguage = Language.get(GsonParser.parseString(jsonObject.get("spokenLanguage")));
 		fileLocation = GsonParser.parseString(jsonObject.get("fileLocation"));
 		replaceMediaContent = GsonParser.parseBoolean(jsonObject.get("replaceMediaContent"));
+		additionalParameters = GsonParser.parseString(jsonObject.get("additionalParameters"));
 
 	}
 
@@ -262,6 +280,7 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
         dest.writeInt(this.spokenLanguage == null ? -1 : this.spokenLanguage.ordinal());
         dest.writeString(this.fileLocation);
         dest.writeValue(this.replaceMediaContent);
+        dest.writeString(this.additionalParameters);
     }
 
     public VoicebaseJobProviderData(Parcel in) {
@@ -276,6 +295,7 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
         this.spokenLanguage = tmpSpokenLanguage == -1 ? null : Language.values()[tmpSpokenLanguage];
         this.fileLocation = in.readString();
         this.replaceMediaContent = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.additionalParameters = in.readString();
     }
 }
 
