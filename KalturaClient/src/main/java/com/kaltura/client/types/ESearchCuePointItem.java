@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.CuePointType;
 import com.kaltura.client.enums.ESearchCuePointFieldName;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
@@ -47,9 +48,11 @@ public class ESearchCuePointItem extends ESearchItem {
 	
 	public interface Tokenizer extends ESearchItem.Tokenizer {
 		String fieldName();
+		String cuePointType();
 	}
 
 	private ESearchCuePointFieldName fieldName;
+	private CuePointType cuePointType;
 
 	// fieldName:
 	public ESearchCuePointFieldName getFieldName(){
@@ -61,6 +64,18 @@ public class ESearchCuePointItem extends ESearchItem {
 
 	public void fieldName(String multirequestToken){
 		setToken("fieldName", multirequestToken);
+	}
+
+	// cuePointType:
+	public CuePointType getCuePointType(){
+		return this.cuePointType;
+	}
+	public void setCuePointType(CuePointType cuePointType){
+		this.cuePointType = cuePointType;
+	}
+
+	public void cuePointType(String multirequestToken){
+		setToken("cuePointType", multirequestToken);
 	}
 
 
@@ -75,6 +90,7 @@ public class ESearchCuePointItem extends ESearchItem {
 
 		// set members values:
 		fieldName = ESearchCuePointFieldName.get(GsonParser.parseString(jsonObject.get("fieldName")));
+		cuePointType = CuePointType.get(GsonParser.parseString(jsonObject.get("cuePointType")));
 
 	}
 
@@ -82,6 +98,7 @@ public class ESearchCuePointItem extends ESearchItem {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaESearchCuePointItem");
 		kparams.add("fieldName", this.fieldName);
+		kparams.add("cuePointType", this.cuePointType);
 		return kparams;
 	}
 
@@ -102,12 +119,15 @@ public class ESearchCuePointItem extends ESearchItem {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.fieldName == null ? -1 : this.fieldName.ordinal());
+        dest.writeInt(this.cuePointType == null ? -1 : this.cuePointType.ordinal());
     }
 
     public ESearchCuePointItem(Parcel in) {
         super(in);
         int tmpFieldName = in.readInt();
         this.fieldName = tmpFieldName == -1 ? null : ESearchCuePointFieldName.values()[tmpFieldName];
+        int tmpCuePointType = in.readInt();
+        this.cuePointType = tmpCuePointType == -1 ? null : CuePointType.values()[tmpCuePointType];
     }
 }
 

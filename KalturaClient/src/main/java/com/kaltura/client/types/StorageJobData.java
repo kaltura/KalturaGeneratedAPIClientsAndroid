@@ -53,6 +53,7 @@ public class StorageJobData extends JobData {
 		String serverPassPhrase();
 		String ftpPassiveMode();
 		String srcFileSyncLocalPath();
+		String srcFileEncryptionKey();
 		String srcFileSyncId();
 		String destFileSyncStoredPath();
 	}
@@ -65,6 +66,7 @@ public class StorageJobData extends JobData {
 	private String serverPassPhrase;
 	private Boolean ftpPassiveMode;
 	private String srcFileSyncLocalPath;
+	private String srcFileEncryptionKey;
 	private String srcFileSyncId;
 	private String destFileSyncStoredPath;
 
@@ -164,6 +166,18 @@ public class StorageJobData extends JobData {
 		setToken("srcFileSyncLocalPath", multirequestToken);
 	}
 
+	// srcFileEncryptionKey:
+	public String getSrcFileEncryptionKey(){
+		return this.srcFileEncryptionKey;
+	}
+	public void setSrcFileEncryptionKey(String srcFileEncryptionKey){
+		this.srcFileEncryptionKey = srcFileEncryptionKey;
+	}
+
+	public void srcFileEncryptionKey(String multirequestToken){
+		setToken("srcFileEncryptionKey", multirequestToken);
+	}
+
 	// srcFileSyncId:
 	public String getSrcFileSyncId(){
 		return this.srcFileSyncId;
@@ -207,6 +221,7 @@ public class StorageJobData extends JobData {
 		serverPassPhrase = GsonParser.parseString(jsonObject.get("serverPassPhrase"));
 		ftpPassiveMode = GsonParser.parseBoolean(jsonObject.get("ftpPassiveMode"));
 		srcFileSyncLocalPath = GsonParser.parseString(jsonObject.get("srcFileSyncLocalPath"));
+		srcFileEncryptionKey = GsonParser.parseString(jsonObject.get("srcFileEncryptionKey"));
 		srcFileSyncId = GsonParser.parseString(jsonObject.get("srcFileSyncId"));
 		destFileSyncStoredPath = GsonParser.parseString(jsonObject.get("destFileSyncStoredPath"));
 
@@ -223,6 +238,7 @@ public class StorageJobData extends JobData {
 		kparams.add("serverPassPhrase", this.serverPassPhrase);
 		kparams.add("ftpPassiveMode", this.ftpPassiveMode);
 		kparams.add("srcFileSyncLocalPath", this.srcFileSyncLocalPath);
+		kparams.add("srcFileEncryptionKey", this.srcFileEncryptionKey);
 		kparams.add("srcFileSyncId", this.srcFileSyncId);
 		kparams.add("destFileSyncStoredPath", this.destFileSyncStoredPath);
 		return kparams;
@@ -252,6 +268,7 @@ public class StorageJobData extends JobData {
         dest.writeString(this.serverPassPhrase);
         dest.writeValue(this.ftpPassiveMode);
         dest.writeString(this.srcFileSyncLocalPath);
+        dest.writeString(this.srcFileEncryptionKey);
         dest.writeString(this.srcFileSyncId);
         dest.writeString(this.destFileSyncStoredPath);
     }
@@ -266,6 +283,7 @@ public class StorageJobData extends JobData {
         this.serverPassPhrase = in.readString();
         this.ftpPassiveMode = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.srcFileSyncLocalPath = in.readString();
+        this.srcFileEncryptionKey = in.readString();
         this.srcFileSyncId = in.readString();
         this.destFileSyncStoredPath = in.readString();
     }

@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.types.FileContainer;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -45,29 +46,25 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class TransformMetadataJobData extends JobData {
 	
 	public interface Tokenizer extends JobData.Tokenizer {
-		String srcXslPath();
+		FileContainer.Tokenizer srcXsl();
 		String srcVersion();
 		String destVersion();
 		String destXsdPath();
 		String metadataProfileId();
 	}
 
-	private String srcXslPath;
+	private FileContainer srcXsl;
 	private Integer srcVersion;
 	private Integer destVersion;
 	private String destXsdPath;
 	private Integer metadataProfileId;
 
-	// srcXslPath:
-	public String getSrcXslPath(){
-		return this.srcXslPath;
+	// srcXsl:
+	public FileContainer getSrcXsl(){
+		return this.srcXsl;
 	}
-	public void setSrcXslPath(String srcXslPath){
-		this.srcXslPath = srcXslPath;
-	}
-
-	public void srcXslPath(String multirequestToken){
-		setToken("srcXslPath", multirequestToken);
+	public void setSrcXsl(FileContainer srcXsl){
+		this.srcXsl = srcXsl;
 	}
 
 	// srcVersion:
@@ -129,7 +126,7 @@ public class TransformMetadataJobData extends JobData {
 		if(jsonObject == null) return;
 
 		// set members values:
-		srcXslPath = GsonParser.parseString(jsonObject.get("srcXslPath"));
+		srcXsl = GsonParser.parseObject(jsonObject.getAsJsonObject("srcXsl"), FileContainer.class);
 		srcVersion = GsonParser.parseInt(jsonObject.get("srcVersion"));
 		destVersion = GsonParser.parseInt(jsonObject.get("destVersion"));
 		destXsdPath = GsonParser.parseString(jsonObject.get("destXsdPath"));
@@ -140,7 +137,7 @@ public class TransformMetadataJobData extends JobData {
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaTransformMetadataJobData");
-		kparams.add("srcXslPath", this.srcXslPath);
+		kparams.add("srcXsl", this.srcXsl);
 		kparams.add("srcVersion", this.srcVersion);
 		kparams.add("destVersion", this.destVersion);
 		kparams.add("destXsdPath", this.destXsdPath);
@@ -164,7 +161,7 @@ public class TransformMetadataJobData extends JobData {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(this.srcXslPath);
+        dest.writeParcelable(this.srcXsl, flags);
         dest.writeValue(this.srcVersion);
         dest.writeValue(this.destVersion);
         dest.writeString(this.destXsdPath);
@@ -173,7 +170,7 @@ public class TransformMetadataJobData extends JobData {
 
     public TransformMetadataJobData(Parcel in) {
         super(in);
-        this.srcXslPath = in.readString();
+        this.srcXsl = in.readParcelable(FileContainer.class.getClassLoader());
         this.srcVersion = (Integer)in.readValue(Integer.class.getClassLoader());
         this.destVersion = (Integer)in.readValue(Integer.class.getClassLoader());
         this.destXsdPath = in.readString();
