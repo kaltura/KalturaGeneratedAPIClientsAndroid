@@ -45,63 +45,93 @@ import java.util.List;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchItemData.Tokenizer.class)
-public abstract class ESearchItemData extends ObjectBase {
+@MultiRequestBuilder.Tokenizer(ESearchHighlight.Tokenizer.class)
+public class ESearchHighlight extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
-		RequestBuilder.ListTokenizer<ESearchHighlight.Tokenizer> highlight();
+		String fieldName();
+		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> hits();
 	}
 
-	private List<ESearchHighlight> highlight;
+	private String fieldName;
+	private List<StringHolder> hits;
 
-	// highlight:
-	public List<ESearchHighlight> getHighlight(){
-		return this.highlight;
+	// fieldName:
+	public String getFieldName(){
+		return this.fieldName;
 	}
-	public void setHighlight(List<ESearchHighlight> highlight){
-		this.highlight = highlight;
+	public void setFieldName(String fieldName){
+		this.fieldName = fieldName;
+	}
+
+	public void fieldName(String multirequestToken){
+		setToken("fieldName", multirequestToken);
+	}
+
+	// hits:
+	public List<StringHolder> getHits(){
+		return this.hits;
+	}
+	public void setHits(List<StringHolder> hits){
+		this.hits = hits;
 	}
 
 
-	public ESearchItemData() {
+	public ESearchHighlight() {
 		super();
 	}
 
-	public ESearchItemData(JsonObject jsonObject) throws APIException {
+	public ESearchHighlight(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		highlight = GsonParser.parseArray(jsonObject.getAsJsonArray("highlight"), ESearchHighlight.class);
+		fieldName = GsonParser.parseString(jsonObject.get("fieldName"));
+		hits = GsonParser.parseArray(jsonObject.getAsJsonArray("hits"), StringHolder.class);
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchItemData");
-		kparams.add("highlight", this.highlight);
+		kparams.add("objectType", "KalturaESearchHighlight");
+		kparams.add("fieldName", this.fieldName);
+		kparams.add("hits", this.hits);
 		return kparams;
 	}
 
 
+    public static final Creator<ESearchHighlight> CREATOR = new Creator<ESearchHighlight>() {
+        @Override
+        public ESearchHighlight createFromParcel(Parcel source) {
+            return new ESearchHighlight(source);
+        }
+
+        @Override
+        public ESearchHighlight[] newArray(int size) {
+            return new ESearchHighlight[size];
+        }
+    };
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        if(this.highlight != null) {
-            dest.writeInt(this.highlight.size());
-            dest.writeList(this.highlight);
+        dest.writeString(this.fieldName);
+        if(this.hits != null) {
+            dest.writeInt(this.hits.size());
+            dest.writeList(this.hits);
         } else {
             dest.writeInt(-1);
         }
     }
 
-    public ESearchItemData(Parcel in) {
+    public ESearchHighlight(Parcel in) {
         super(in);
-        int highlightSize = in.readInt();
-        if( highlightSize > -1) {
-            this.highlight = new ArrayList<>();
-            in.readList(this.highlight, ESearchHighlight.class.getClassLoader());
+        this.fieldName = in.readString();
+        int hitsSize = in.readInt();
+        if( hitsSize > -1) {
+            this.hits = new ArrayList<>();
+            in.readList(this.hits, StringHolder.class.getClassLoader());
         }
     }
 }

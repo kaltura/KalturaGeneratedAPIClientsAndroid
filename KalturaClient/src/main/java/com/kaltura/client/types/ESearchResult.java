@@ -50,12 +50,12 @@ public abstract class ESearchResult extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		ObjectBase.Tokenizer object();
-		String highlight();
+		RequestBuilder.ListTokenizer<ESearchHighlight.Tokenizer> highlight();
 		RequestBuilder.ListTokenizer<ESearchItemDataResult.Tokenizer> itemsData();
 	}
 
 	private ObjectBase object;
-	private String highlight;
+	private List<ESearchHighlight> highlight;
 	private List<ESearchItemDataResult> itemsData;
 
 	// object:
@@ -67,15 +67,11 @@ public abstract class ESearchResult extends ObjectBase {
 	}
 
 	// highlight:
-	public String getHighlight(){
+	public List<ESearchHighlight> getHighlight(){
 		return this.highlight;
 	}
-	public void setHighlight(String highlight){
+	public void setHighlight(List<ESearchHighlight> highlight){
 		this.highlight = highlight;
-	}
-
-	public void highlight(String multirequestToken){
-		setToken("highlight", multirequestToken);
 	}
 
 	// itemsData:
@@ -98,7 +94,7 @@ public abstract class ESearchResult extends ObjectBase {
 
 		// set members values:
 		object = GsonParser.parseObject(jsonObject.getAsJsonObject("object"), ObjectBase.class);
-		highlight = GsonParser.parseString(jsonObject.get("highlight"));
+		highlight = GsonParser.parseArray(jsonObject.getAsJsonArray("highlight"), ESearchHighlight.class);
 		itemsData = GsonParser.parseArray(jsonObject.getAsJsonArray("itemsData"), ESearchItemDataResult.class);
 
 	}
@@ -117,7 +113,12 @@ public abstract class ESearchResult extends ObjectBase {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(this.object, flags);
-        dest.writeString(this.highlight);
+        if(this.highlight != null) {
+            dest.writeInt(this.highlight.size());
+            dest.writeList(this.highlight);
+        } else {
+            dest.writeInt(-1);
+        }
         if(this.itemsData != null) {
             dest.writeInt(this.itemsData.size());
             dest.writeList(this.itemsData);
@@ -129,7 +130,11 @@ public abstract class ESearchResult extends ObjectBase {
     public ESearchResult(Parcel in) {
         super(in);
         this.object = in.readParcelable(ObjectBase.class.getClassLoader());
-        this.highlight = in.readString();
+        int highlightSize = in.readInt();
+        if( highlightSize > -1) {
+            this.highlight = new ArrayList<>();
+            in.readList(this.highlight, ESearchHighlight.class.getClassLoader());
+        }
         int itemsDataSize = in.readInt();
         if( itemsDataSize > -1) {
             this.itemsData = new ArrayList<>();

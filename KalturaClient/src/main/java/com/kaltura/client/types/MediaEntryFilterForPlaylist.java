@@ -46,9 +46,11 @@ public class MediaEntryFilterForPlaylist extends MediaEntryFilter {
 	
 	public interface Tokenizer extends MediaEntryFilter.Tokenizer {
 		String limit();
+		String name();
 	}
 
 	private Integer limit;
+	private String name;
 
 	// limit:
 	public Integer getLimit(){
@@ -60,6 +62,18 @@ public class MediaEntryFilterForPlaylist extends MediaEntryFilter {
 
 	public void limit(String multirequestToken){
 		setToken("limit", multirequestToken);
+	}
+
+	// name:
+	public String getName(){
+		return this.name;
+	}
+	public void setName(String name){
+		this.name = name;
+	}
+
+	public void name(String multirequestToken){
+		setToken("name", multirequestToken);
 	}
 
 
@@ -74,6 +88,7 @@ public class MediaEntryFilterForPlaylist extends MediaEntryFilter {
 
 		// set members values:
 		limit = GsonParser.parseInt(jsonObject.get("limit"));
+		name = GsonParser.parseString(jsonObject.get("name"));
 
 	}
 
@@ -81,6 +96,7 @@ public class MediaEntryFilterForPlaylist extends MediaEntryFilter {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaMediaEntryFilterForPlaylist");
 		kparams.add("limit", this.limit);
+		kparams.add("name", this.name);
 		return kparams;
 	}
 
@@ -101,11 +117,13 @@ public class MediaEntryFilterForPlaylist extends MediaEntryFilter {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.limit);
+        dest.writeString(this.name);
     }
 
     public MediaEntryFilterForPlaylist(Parcel in) {
         super(in);
         this.limit = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.name = in.readString();
     }
 }
 
