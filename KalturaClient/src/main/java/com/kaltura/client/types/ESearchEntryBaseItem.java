@@ -40,42 +40,30 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchUnifiedItem.Tokenizer.class)
-public class ESearchUnifiedItem extends ESearchAbstractEntryItem {
+@MultiRequestBuilder.Tokenizer(ESearchEntryBaseItem.Tokenizer.class)
+public abstract class ESearchEntryBaseItem extends ESearchBaseItem {
 	
-	public interface Tokenizer extends ESearchAbstractEntryItem.Tokenizer {
+	public interface Tokenizer extends ESearchBaseItem.Tokenizer {
 	}
 
 
 
-	public ESearchUnifiedItem() {
+	public ESearchEntryBaseItem() {
 		super();
 	}
 
-	public ESearchUnifiedItem(JsonObject jsonObject) throws APIException {
+	public ESearchEntryBaseItem(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchUnifiedItem");
+		kparams.add("objectType", "KalturaESearchEntryBaseItem");
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchUnifiedItem> CREATOR = new Creator<ESearchUnifiedItem>() {
-        @Override
-        public ESearchUnifiedItem createFromParcel(Parcel source) {
-            return new ESearchUnifiedItem(source);
-        }
-
-        @Override
-        public ESearchUnifiedItem[] newArray(int size) {
-            return new ESearchUnifiedItem[size];
-        }
-    };
-
-    public ESearchUnifiedItem(Parcel in) {
+    public ESearchEntryBaseItem(Parcel in) {
         super(in);
     }
 }

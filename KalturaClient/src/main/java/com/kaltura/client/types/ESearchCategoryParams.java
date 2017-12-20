@@ -30,6 +30,8 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.types.ESearchCategoryOperator;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -40,43 +42,67 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchUnifiedItem.Tokenizer.class)
-public class ESearchUnifiedItem extends ESearchAbstractEntryItem {
+@MultiRequestBuilder.Tokenizer(ESearchCategoryParams.Tokenizer.class)
+public class ESearchCategoryParams extends ESearchParams {
 	
-	public interface Tokenizer extends ESearchAbstractEntryItem.Tokenizer {
+	public interface Tokenizer extends ESearchParams.Tokenizer {
+		ESearchCategoryOperator.Tokenizer searchOperator();
+	}
+
+	private ESearchCategoryOperator searchOperator;
+
+	// searchOperator:
+	public ESearchCategoryOperator getSearchOperator(){
+		return this.searchOperator;
+	}
+	public void setSearchOperator(ESearchCategoryOperator searchOperator){
+		this.searchOperator = searchOperator;
 	}
 
 
-
-	public ESearchUnifiedItem() {
+	public ESearchCategoryParams() {
 		super();
 	}
 
-	public ESearchUnifiedItem(JsonObject jsonObject) throws APIException {
+	public ESearchCategoryParams(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		searchOperator = GsonParser.parseObject(jsonObject.getAsJsonObject("searchOperator"), ESearchCategoryOperator.class);
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchUnifiedItem");
+		kparams.add("objectType", "KalturaESearchCategoryParams");
+		kparams.add("searchOperator", this.searchOperator);
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchUnifiedItem> CREATOR = new Creator<ESearchUnifiedItem>() {
+    public static final Creator<ESearchCategoryParams> CREATOR = new Creator<ESearchCategoryParams>() {
         @Override
-        public ESearchUnifiedItem createFromParcel(Parcel source) {
-            return new ESearchUnifiedItem(source);
+        public ESearchCategoryParams createFromParcel(Parcel source) {
+            return new ESearchCategoryParams(source);
         }
 
         @Override
-        public ESearchUnifiedItem[] newArray(int size) {
-            return new ESearchUnifiedItem[size];
+        public ESearchCategoryParams[] newArray(int size) {
+            return new ESearchCategoryParams[size];
         }
     };
 
-    public ESearchUnifiedItem(Parcel in) {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeParcelable(this.searchOperator, flags);
+    }
+
+    public ESearchCategoryParams(Parcel in) {
         super(in);
+        this.searchOperator = in.readParcelable(ESearchCategoryOperator.class.getClassLoader());
     }
 }
 

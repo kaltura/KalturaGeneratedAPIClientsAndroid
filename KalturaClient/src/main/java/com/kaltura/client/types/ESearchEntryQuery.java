@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -40,43 +41,71 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchUnifiedItem.Tokenizer.class)
-public class ESearchUnifiedItem extends ESearchAbstractEntryItem {
+@MultiRequestBuilder.Tokenizer(ESearchEntryQuery.Tokenizer.class)
+public class ESearchEntryQuery extends ESearchEntryBaseItem {
 	
-	public interface Tokenizer extends ESearchAbstractEntryItem.Tokenizer {
+	public interface Tokenizer extends ESearchEntryBaseItem.Tokenizer {
+		String eSearchQuery();
+	}
+
+	private String eSearchQuery;
+
+	// eSearchQuery:
+	public String getESearchQuery(){
+		return this.eSearchQuery;
+	}
+	public void setESearchQuery(String eSearchQuery){
+		this.eSearchQuery = eSearchQuery;
+	}
+
+	public void eSearchQuery(String multirequestToken){
+		setToken("eSearchQuery", multirequestToken);
 	}
 
 
-
-	public ESearchUnifiedItem() {
+	public ESearchEntryQuery() {
 		super();
 	}
 
-	public ESearchUnifiedItem(JsonObject jsonObject) throws APIException {
+	public ESearchEntryQuery(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		eSearchQuery = GsonParser.parseString(jsonObject.get("eSearchQuery"));
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchUnifiedItem");
+		kparams.add("objectType", "KalturaESearchEntryQuery");
+		kparams.add("eSearchQuery", this.eSearchQuery);
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchUnifiedItem> CREATOR = new Creator<ESearchUnifiedItem>() {
+    public static final Creator<ESearchEntryQuery> CREATOR = new Creator<ESearchEntryQuery>() {
         @Override
-        public ESearchUnifiedItem createFromParcel(Parcel source) {
-            return new ESearchUnifiedItem(source);
+        public ESearchEntryQuery createFromParcel(Parcel source) {
+            return new ESearchEntryQuery(source);
         }
 
         @Override
-        public ESearchUnifiedItem[] newArray(int size) {
-            return new ESearchUnifiedItem[size];
+        public ESearchEntryQuery[] newArray(int size) {
+            return new ESearchEntryQuery[size];
         }
     };
 
-    public ESearchUnifiedItem(Parcel in) {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(this.eSearchQuery);
+    }
+
+    public ESearchEntryQuery(Parcel in) {
         super(in);
+        this.eSearchQuery = in.readString();
     }
 }
 

@@ -30,6 +30,8 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.types.ESearchEntryOperator;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -40,43 +42,67 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchUnifiedItem.Tokenizer.class)
-public class ESearchUnifiedItem extends ESearchAbstractEntryItem {
+@MultiRequestBuilder.Tokenizer(ESearchEntryParams.Tokenizer.class)
+public class ESearchEntryParams extends ESearchParams {
 	
-	public interface Tokenizer extends ESearchAbstractEntryItem.Tokenizer {
+	public interface Tokenizer extends ESearchParams.Tokenizer {
+		ESearchEntryOperator.Tokenizer searchOperator();
+	}
+
+	private ESearchEntryOperator searchOperator;
+
+	// searchOperator:
+	public ESearchEntryOperator getSearchOperator(){
+		return this.searchOperator;
+	}
+	public void setSearchOperator(ESearchEntryOperator searchOperator){
+		this.searchOperator = searchOperator;
 	}
 
 
-
-	public ESearchUnifiedItem() {
+	public ESearchEntryParams() {
 		super();
 	}
 
-	public ESearchUnifiedItem(JsonObject jsonObject) throws APIException {
+	public ESearchEntryParams(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		searchOperator = GsonParser.parseObject(jsonObject.getAsJsonObject("searchOperator"), ESearchEntryOperator.class);
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchUnifiedItem");
+		kparams.add("objectType", "KalturaESearchEntryParams");
+		kparams.add("searchOperator", this.searchOperator);
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchUnifiedItem> CREATOR = new Creator<ESearchUnifiedItem>() {
+    public static final Creator<ESearchEntryParams> CREATOR = new Creator<ESearchEntryParams>() {
         @Override
-        public ESearchUnifiedItem createFromParcel(Parcel source) {
-            return new ESearchUnifiedItem(source);
+        public ESearchEntryParams createFromParcel(Parcel source) {
+            return new ESearchEntryParams(source);
         }
 
         @Override
-        public ESearchUnifiedItem[] newArray(int size) {
-            return new ESearchUnifiedItem[size];
+        public ESearchEntryParams[] newArray(int size) {
+            return new ESearchEntryParams[size];
         }
     };
 
-    public ESearchUnifiedItem(Parcel in) {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeParcelable(this.searchOperator, flags);
+    }
+
+    public ESearchEntryParams(Parcel in) {
         super(in);
+        this.searchOperator = in.readParcelable(ESearchEntryOperator.class.getClassLoader());
     }
 }
 

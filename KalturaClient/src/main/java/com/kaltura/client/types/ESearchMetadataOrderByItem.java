@@ -30,7 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.enums.ESearchCategoryFieldName;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -42,72 +41,89 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchCategoryItem.Tokenizer.class)
-public class ESearchCategoryItem extends ESearchAbstractCategoryItem {
+@MultiRequestBuilder.Tokenizer(ESearchMetadataOrderByItem.Tokenizer.class)
+public class ESearchMetadataOrderByItem extends ESearchOrderByItem {
 	
-	public interface Tokenizer extends ESearchAbstractCategoryItem.Tokenizer {
-		String fieldName();
+	public interface Tokenizer extends ESearchOrderByItem.Tokenizer {
+		String xpath();
+		String metadataProfileId();
 	}
 
-	private ESearchCategoryFieldName fieldName;
+	private String xpath;
+	private Integer metadataProfileId;
 
-	// fieldName:
-	public ESearchCategoryFieldName getFieldName(){
-		return this.fieldName;
+	// xpath:
+	public String getXpath(){
+		return this.xpath;
 	}
-	public void setFieldName(ESearchCategoryFieldName fieldName){
-		this.fieldName = fieldName;
-	}
-
-	public void fieldName(String multirequestToken){
-		setToken("fieldName", multirequestToken);
+	public void setXpath(String xpath){
+		this.xpath = xpath;
 	}
 
+	public void xpath(String multirequestToken){
+		setToken("xpath", multirequestToken);
+	}
 
-	public ESearchCategoryItem() {
+	// metadataProfileId:
+	public Integer getMetadataProfileId(){
+		return this.metadataProfileId;
+	}
+	public void setMetadataProfileId(Integer metadataProfileId){
+		this.metadataProfileId = metadataProfileId;
+	}
+
+	public void metadataProfileId(String multirequestToken){
+		setToken("metadataProfileId", multirequestToken);
+	}
+
+
+	public ESearchMetadataOrderByItem() {
 		super();
 	}
 
-	public ESearchCategoryItem(JsonObject jsonObject) throws APIException {
+	public ESearchMetadataOrderByItem(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		fieldName = ESearchCategoryFieldName.get(GsonParser.parseString(jsonObject.get("fieldName")));
+		xpath = GsonParser.parseString(jsonObject.get("xpath"));
+		metadataProfileId = GsonParser.parseInt(jsonObject.get("metadataProfileId"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchCategoryItem");
-		kparams.add("fieldName", this.fieldName);
+		kparams.add("objectType", "KalturaESearchMetadataOrderByItem");
+		kparams.add("xpath", this.xpath);
+		kparams.add("metadataProfileId", this.metadataProfileId);
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchCategoryItem> CREATOR = new Creator<ESearchCategoryItem>() {
+    public static final Creator<ESearchMetadataOrderByItem> CREATOR = new Creator<ESearchMetadataOrderByItem>() {
         @Override
-        public ESearchCategoryItem createFromParcel(Parcel source) {
-            return new ESearchCategoryItem(source);
+        public ESearchMetadataOrderByItem createFromParcel(Parcel source) {
+            return new ESearchMetadataOrderByItem(source);
         }
 
         @Override
-        public ESearchCategoryItem[] newArray(int size) {
-            return new ESearchCategoryItem[size];
+        public ESearchMetadataOrderByItem[] newArray(int size) {
+            return new ESearchMetadataOrderByItem[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.fieldName == null ? -1 : this.fieldName.ordinal());
+        dest.writeString(this.xpath);
+        dest.writeValue(this.metadataProfileId);
     }
 
-    public ESearchCategoryItem(Parcel in) {
+    public ESearchMetadataOrderByItem(Parcel in) {
         super(in);
-        int tmpFieldName = in.readInt();
-        this.fieldName = tmpFieldName == -1 ? null : ESearchCategoryFieldName.values()[tmpFieldName];
+        this.xpath = in.readString();
+        this.metadataProfileId = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 

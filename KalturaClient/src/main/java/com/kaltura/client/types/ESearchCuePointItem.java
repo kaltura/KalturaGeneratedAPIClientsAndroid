@@ -44,9 +44,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(ESearchCuePointItem.Tokenizer.class)
-public class ESearchCuePointItem extends ESearchItem {
+public class ESearchCuePointItem extends ESearchAbstractEntryItem {
 	
-	public interface Tokenizer extends ESearchItem.Tokenizer {
+	public interface Tokenizer extends ESearchAbstractEntryItem.Tokenizer {
 		String fieldName();
 		String cuePointType();
 	}
