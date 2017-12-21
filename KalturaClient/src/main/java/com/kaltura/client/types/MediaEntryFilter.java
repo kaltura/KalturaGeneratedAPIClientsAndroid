@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -44,8 +45,36 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class MediaEntryFilter extends MediaEntryBaseFilter {
 	
 	public interface Tokenizer extends MediaEntryBaseFilter.Tokenizer {
+		String isSequenceEntry();
+		String sequenceEntryIdsIn();
 	}
 
+	private Boolean isSequenceEntry;
+	private String sequenceEntryIdsIn;
+
+	// isSequenceEntry:
+	public Boolean getIsSequenceEntry(){
+		return this.isSequenceEntry;
+	}
+	public void setIsSequenceEntry(Boolean isSequenceEntry){
+		this.isSequenceEntry = isSequenceEntry;
+	}
+
+	public void isSequenceEntry(String multirequestToken){
+		setToken("isSequenceEntry", multirequestToken);
+	}
+
+	// sequenceEntryIdsIn:
+	public String getSequenceEntryIdsIn(){
+		return this.sequenceEntryIdsIn;
+	}
+	public void setSequenceEntryIdsIn(String sequenceEntryIdsIn){
+		this.sequenceEntryIdsIn = sequenceEntryIdsIn;
+	}
+
+	public void sequenceEntryIdsIn(String multirequestToken){
+		setToken("sequenceEntryIdsIn", multirequestToken);
+	}
 
 
 	public MediaEntryFilter() {
@@ -54,11 +83,20 @@ public class MediaEntryFilter extends MediaEntryBaseFilter {
 
 	public MediaEntryFilter(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		isSequenceEntry = GsonParser.parseBoolean(jsonObject.get("isSequenceEntry"));
+		sequenceEntryIdsIn = GsonParser.parseString(jsonObject.get("sequenceEntryIdsIn"));
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaMediaEntryFilter");
+		kparams.add("isSequenceEntry", this.isSequenceEntry);
+		kparams.add("sequenceEntryIdsIn", this.sequenceEntryIdsIn);
 		return kparams;
 	}
 
@@ -75,8 +113,18 @@ public class MediaEntryFilter extends MediaEntryBaseFilter {
         }
     };
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(this.isSequenceEntry == null ? -1 : this.isSequenceEntry.ordinal());
+        dest.writeString(this.sequenceEntryIdsIn);
+    }
+
     public MediaEntryFilter(Parcel in) {
         super(in);
+        int tmpIsSequenceEntry = in.readInt();
+        this.isSequenceEntry = tmpIsSequenceEntry == -1 ? null : Boolean.values()[tmpIsSequenceEntry];
+        this.sequenceEntryIdsIn = in.readString();
     }
 }
 
