@@ -163,7 +163,7 @@ public class TranscriptAsset extends AttachmentAsset {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.accuracy);
-        dest.writeInt(this.humanVerified == null ? -1 : this.humanVerified.ordinal());
+        dest.writeBoolean(this.humanVerified);
         dest.writeInt(this.language == null ? -1 : this.language.ordinal());
         dest.writeInt(this.providerType == null ? -1 : this.providerType.ordinal());
     }
@@ -171,8 +171,7 @@ public class TranscriptAsset extends AttachmentAsset {
     public TranscriptAsset(Parcel in) {
         super(in);
         this.accuracy = (Double)in.readValue(Double.class.getClassLoader());
-        int tmpHumanVerified = in.readInt();
-        this.humanVerified = tmpHumanVerified == -1 ? null : Boolean.values()[tmpHumanVerified];
+        this.humanVerified = in.readBoolean();
         int tmpLanguage = in.readInt();
         this.language = tmpLanguage == -1 ? null : Language.values()[tmpLanguage];
         int tmpProviderType = in.readInt();

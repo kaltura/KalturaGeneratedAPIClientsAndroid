@@ -255,7 +255,7 @@ public class AccessControl extends ObjectBase {
         dest.writeString(this.systemName);
         dest.writeString(this.description);
         dest.writeValue(this.createdAt);
-        dest.writeInt(this.isDefault == null ? -1 : this.isDefault.ordinal());
+        dest.writeBoolean(this.isDefault);
         if(this.restrictions != null) {
             dest.writeInt(this.restrictions.size());
             dest.writeList(this.restrictions);
@@ -273,8 +273,7 @@ public class AccessControl extends ObjectBase {
         this.systemName = in.readString();
         this.description = in.readString();
         this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        int tmpIsDefault = in.readInt();
-        this.isDefault = tmpIsDefault == -1 ? null : Boolean.values()[tmpIsDefault];
+        this.isDefault = in.readBoolean();
         int restrictionsSize = in.readInt();
         if( restrictionsSize > -1) {
             this.restrictions = new ArrayList<>();

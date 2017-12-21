@@ -171,7 +171,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.freeText);
-        dest.writeInt(this.isRoot == null ? -1 : this.isRoot.ordinal());
+        dest.writeBoolean(this.isRoot);
         dest.writeString(this.categoriesFullNameIn);
         dest.writeString(this.categoryAncestorIdIn);
         dest.writeString(this.redirectFromEntryId);
@@ -180,8 +180,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
     public BaseEntryFilter(Parcel in) {
         super(in);
         this.freeText = in.readString();
-        int tmpIsRoot = in.readInt();
-        this.isRoot = tmpIsRoot == -1 ? null : Boolean.values()[tmpIsRoot];
+        this.isRoot = in.readBoolean();
         this.categoriesFullNameIn = in.readString();
         this.categoryAncestorIdIn = in.readString();
         this.redirectFromEntryId = in.readString();

@@ -769,9 +769,9 @@ public class Category extends ObjectBase {
         dest.writeString(this.partnerData);
         dest.writeInt(this.defaultOrderBy == null ? -1 : this.defaultOrderBy.ordinal());
         dest.writeValue(this.directSubCategoriesCount);
-        dest.writeInt(this.moderation == null ? -1 : this.moderation.ordinal());
+        dest.writeBoolean(this.moderation);
         dest.writeValue(this.pendingEntriesCount);
-        dest.writeInt(this.isAggregationCategory == null ? -1 : this.isAggregationCategory.ordinal());
+        dest.writeBoolean(this.isAggregationCategory);
         dest.writeString(this.aggregationCategories);
     }
 
@@ -816,11 +816,9 @@ public class Category extends ObjectBase {
         int tmpDefaultOrderBy = in.readInt();
         this.defaultOrderBy = tmpDefaultOrderBy == -1 ? null : CategoryOrderBy.values()[tmpDefaultOrderBy];
         this.directSubCategoriesCount = (Integer)in.readValue(Integer.class.getClassLoader());
-        int tmpModeration = in.readInt();
-        this.moderation = tmpModeration == -1 ? null : Boolean.values()[tmpModeration];
+        this.moderation = in.readBoolean();
         this.pendingEntriesCount = (Integer)in.readValue(Integer.class.getClassLoader());
-        int tmpIsAggregationCategory = in.readInt();
-        this.isAggregationCategory = tmpIsAggregationCategory == -1 ? null : Boolean.values()[tmpIsAggregationCategory];
+        this.isAggregationCategory = in.readBoolean();
         this.aggregationCategories = in.readString();
     }
 }

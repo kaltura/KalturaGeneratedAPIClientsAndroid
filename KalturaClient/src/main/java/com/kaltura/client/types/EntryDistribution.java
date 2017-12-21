@@ -579,12 +579,12 @@ public class EntryDistribution extends ObjectBase {
         dest.writeInt(this.errorType == null ? -1 : this.errorType.ordinal());
         dest.writeValue(this.errorNumber);
         dest.writeString(this.errorDescription);
-        dest.writeInt(this.hasSubmitResultsLog == null ? -1 : this.hasSubmitResultsLog.ordinal());
-        dest.writeInt(this.hasSubmitSentDataLog == null ? -1 : this.hasSubmitSentDataLog.ordinal());
-        dest.writeInt(this.hasUpdateResultsLog == null ? -1 : this.hasUpdateResultsLog.ordinal());
-        dest.writeInt(this.hasUpdateSentDataLog == null ? -1 : this.hasUpdateSentDataLog.ordinal());
-        dest.writeInt(this.hasDeleteResultsLog == null ? -1 : this.hasDeleteResultsLog.ordinal());
-        dest.writeInt(this.hasDeleteSentDataLog == null ? -1 : this.hasDeleteSentDataLog.ordinal());
+        dest.writeBoolean(this.hasSubmitResultsLog);
+        dest.writeBoolean(this.hasSubmitSentDataLog);
+        dest.writeBoolean(this.hasUpdateResultsLog);
+        dest.writeBoolean(this.hasUpdateSentDataLog);
+        dest.writeBoolean(this.hasDeleteResultsLog);
+        dest.writeBoolean(this.hasDeleteSentDataLog);
     }
 
     public EntryDistribution(Parcel in) {
@@ -619,18 +619,12 @@ public class EntryDistribution extends ObjectBase {
         this.errorType = tmpErrorType == -1 ? null : BatchJobErrorTypes.values()[tmpErrorType];
         this.errorNumber = (Integer)in.readValue(Integer.class.getClassLoader());
         this.errorDescription = in.readString();
-        int tmpHasSubmitResultsLog = in.readInt();
-        this.hasSubmitResultsLog = tmpHasSubmitResultsLog == -1 ? null : Boolean.values()[tmpHasSubmitResultsLog];
-        int tmpHasSubmitSentDataLog = in.readInt();
-        this.hasSubmitSentDataLog = tmpHasSubmitSentDataLog == -1 ? null : Boolean.values()[tmpHasSubmitSentDataLog];
-        int tmpHasUpdateResultsLog = in.readInt();
-        this.hasUpdateResultsLog = tmpHasUpdateResultsLog == -1 ? null : Boolean.values()[tmpHasUpdateResultsLog];
-        int tmpHasUpdateSentDataLog = in.readInt();
-        this.hasUpdateSentDataLog = tmpHasUpdateSentDataLog == -1 ? null : Boolean.values()[tmpHasUpdateSentDataLog];
-        int tmpHasDeleteResultsLog = in.readInt();
-        this.hasDeleteResultsLog = tmpHasDeleteResultsLog == -1 ? null : Boolean.values()[tmpHasDeleteResultsLog];
-        int tmpHasDeleteSentDataLog = in.readInt();
-        this.hasDeleteSentDataLog = tmpHasDeleteSentDataLog == -1 ? null : Boolean.values()[tmpHasDeleteSentDataLog];
+        this.hasSubmitResultsLog = in.readBoolean();
+        this.hasSubmitSentDataLog = in.readBoolean();
+        this.hasUpdateResultsLog = in.readBoolean();
+        this.hasUpdateSentDataLog = in.readBoolean();
+        this.hasDeleteResultsLog = in.readBoolean();
+        this.hasDeleteSentDataLog = in.readBoolean();
     }
 }
 

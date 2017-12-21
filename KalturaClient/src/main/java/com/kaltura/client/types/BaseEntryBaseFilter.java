@@ -1498,7 +1498,7 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
         dest.writeString(this.categoriesIdsMatchAnd);
         dest.writeString(this.categoriesIdsMatchOr);
         dest.writeString(this.categoriesIdsNotContains);
-        dest.writeInt(this.categoriesIdsEmpty == null ? -1 : this.categoriesIdsEmpty.ordinal());
+        dest.writeBoolean(this.categoriesIdsEmpty);
         dest.writeInt(this.statusEqual == null ? -1 : this.statusEqual.ordinal());
         dest.writeInt(this.statusNotEqual == null ? -1 : this.statusNotEqual.ordinal());
         dest.writeString(this.statusIn);
@@ -1582,8 +1582,7 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
         this.categoriesIdsMatchAnd = in.readString();
         this.categoriesIdsMatchOr = in.readString();
         this.categoriesIdsNotContains = in.readString();
-        int tmpCategoriesIdsEmpty = in.readInt();
-        this.categoriesIdsEmpty = tmpCategoriesIdsEmpty == -1 ? null : Boolean.values()[tmpCategoriesIdsEmpty];
+        this.categoriesIdsEmpty = in.readBoolean();
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : EntryStatus.values()[tmpStatusEqual];
         int tmpStatusNotEqual = in.readInt();

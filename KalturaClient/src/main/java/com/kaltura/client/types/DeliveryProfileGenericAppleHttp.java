@@ -140,15 +140,14 @@ public class DeliveryProfileGenericAppleHttp extends DeliveryProfile {
         super.writeToParcel(dest, flags);
         dest.writeString(this.pattern);
         dest.writeString(this.rendererClass);
-        dest.writeInt(this.manifestRedirect == null ? -1 : this.manifestRedirect.ordinal());
+        dest.writeBoolean(this.manifestRedirect);
     }
 
     public DeliveryProfileGenericAppleHttp(Parcel in) {
         super(in);
         this.pattern = in.readString();
         this.rendererClass = in.readString();
-        int tmpManifestRedirect = in.readInt();
-        this.manifestRedirect = tmpManifestRedirect == -1 ? null : Boolean.values()[tmpManifestRedirect];
+        this.manifestRedirect = in.readBoolean();
     }
 }
 

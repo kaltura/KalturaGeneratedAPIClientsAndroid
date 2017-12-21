@@ -133,17 +133,15 @@ public class CuePointFilter extends CuePointBaseFilter {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.freeText);
-        dest.writeInt(this.userIdEqualCurrent == null ? -1 : this.userIdEqualCurrent.ordinal());
-        dest.writeInt(this.userIdCurrent == null ? -1 : this.userIdCurrent.ordinal());
+        dest.writeBoolean(this.userIdEqualCurrent);
+        dest.writeBoolean(this.userIdCurrent);
     }
 
     public CuePointFilter(Parcel in) {
         super(in);
         this.freeText = in.readString();
-        int tmpUserIdEqualCurrent = in.readInt();
-        this.userIdEqualCurrent = tmpUserIdEqualCurrent == -1 ? null : Boolean.values()[tmpUserIdEqualCurrent];
-        int tmpUserIdCurrent = in.readInt();
-        this.userIdCurrent = tmpUserIdCurrent == -1 ? null : Boolean.values()[tmpUserIdCurrent];
+        this.userIdEqualCurrent = in.readBoolean();
+        this.userIdCurrent = in.readBoolean();
     }
 }
 

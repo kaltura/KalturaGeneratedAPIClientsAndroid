@@ -172,7 +172,7 @@ public abstract class AssetParamsBaseFilter extends RelatedFilter {
         dest.writeString(this.idIn);
         dest.writeString(this.systemNameEqual);
         dest.writeString(this.systemNameIn);
-        dest.writeInt(this.isSystemDefaultEqual == null ? -1 : this.isSystemDefaultEqual.ordinal());
+        dest.writeBoolean(this.isSystemDefaultEqual);
         dest.writeString(this.tagsEqual);
     }
 
@@ -182,8 +182,7 @@ public abstract class AssetParamsBaseFilter extends RelatedFilter {
         this.idIn = in.readString();
         this.systemNameEqual = in.readString();
         this.systemNameIn = in.readString();
-        int tmpIsSystemDefaultEqual = in.readInt();
-        this.isSystemDefaultEqual = tmpIsSystemDefaultEqual == -1 ? null : Boolean.values()[tmpIsSystemDefaultEqual];
+        this.isSystemDefaultEqual = in.readBoolean();
         this.tagsEqual = in.readString();
     }
 }

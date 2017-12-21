@@ -359,14 +359,14 @@ public class MediaEntry extends PlayableEntry {
         dest.writeValue(this.mediaDate);
         dest.writeString(this.dataUrl);
         dest.writeString(this.flavorParamsIds);
-        dest.writeInt(this.isTrimDisabled == null ? -1 : this.isTrimDisabled.ordinal());
+        dest.writeBoolean(this.isTrimDisabled);
         if(this.streams != null) {
             dest.writeInt(this.streams.size());
             dest.writeList(this.streams);
         } else {
             dest.writeInt(-1);
         }
-        dest.writeInt(this.isSequenceEntry == null ? -1 : this.isSequenceEntry.ordinal());
+        dest.writeBoolean(this.isSequenceEntry);
         dest.writeString(this.sequenceEntryIds);
     }
 
@@ -385,15 +385,13 @@ public class MediaEntry extends PlayableEntry {
         this.mediaDate = (Integer)in.readValue(Integer.class.getClassLoader());
         this.dataUrl = in.readString();
         this.flavorParamsIds = in.readString();
-        int tmpIsTrimDisabled = in.readInt();
-        this.isTrimDisabled = tmpIsTrimDisabled == -1 ? null : Boolean.values()[tmpIsTrimDisabled];
+        this.isTrimDisabled = in.readBoolean();
         int streamsSize = in.readInt();
         if( streamsSize > -1) {
             this.streams = new ArrayList<>();
             in.readList(this.streams, StreamContainer.class.getClassLoader());
         }
-        int tmpIsSequenceEntry = in.readInt();
-        this.isSequenceEntry = tmpIsSequenceEntry == -1 ? null : Boolean.values()[tmpIsSequenceEntry];
+        this.isSequenceEntry = in.readBoolean();
         this.sequenceEntryIds = in.readString();
     }
 }

@@ -116,14 +116,13 @@ public class MediaEntryFilter extends MediaEntryBaseFilter {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.isSequenceEntry == null ? -1 : this.isSequenceEntry.ordinal());
+        dest.writeBoolean(this.isSequenceEntry);
         dest.writeString(this.sequenceEntryIdsIn);
     }
 
     public MediaEntryFilter(Parcel in) {
         super(in);
-        int tmpIsSequenceEntry = in.readInt();
-        this.isSequenceEntry = tmpIsSequenceEntry == -1 ? null : Boolean.values()[tmpIsSequenceEntry];
+        this.isSequenceEntry = in.readBoolean();
         this.sequenceEntryIdsIn = in.readString();
     }
 }

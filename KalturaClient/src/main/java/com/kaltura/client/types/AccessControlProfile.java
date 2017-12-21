@@ -255,7 +255,7 @@ public class AccessControlProfile extends ObjectBase {
         dest.writeString(this.description);
         dest.writeValue(this.createdAt);
         dest.writeValue(this.updatedAt);
-        dest.writeInt(this.isDefault == null ? -1 : this.isDefault.ordinal());
+        dest.writeBoolean(this.isDefault);
         if(this.rules != null) {
             dest.writeInt(this.rules.size());
             dest.writeList(this.rules);
@@ -273,8 +273,7 @@ public class AccessControlProfile extends ObjectBase {
         this.description = in.readString();
         this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
         this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        int tmpIsDefault = in.readInt();
-        this.isDefault = tmpIsDefault == -1 ? null : Boolean.values()[tmpIsDefault];
+        this.isDefault = in.readBoolean();
         int rulesSize = in.readInt();
         if( rulesSize > -1) {
             this.rules = new ArrayList<>();

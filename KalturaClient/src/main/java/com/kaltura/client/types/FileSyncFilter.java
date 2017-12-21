@@ -100,13 +100,12 @@ public class FileSyncFilter extends FileSyncBaseFilter {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.currentDc == null ? -1 : this.currentDc.ordinal());
+        dest.writeBoolean(this.currentDc);
     }
 
     public FileSyncFilter(Parcel in) {
         super(in);
-        int tmpCurrentDc = in.readInt();
-        this.currentDc = tmpCurrentDc == -1 ? null : Boolean.values()[tmpCurrentDc];
+        this.currentDc = in.readBoolean();
     }
 }
 

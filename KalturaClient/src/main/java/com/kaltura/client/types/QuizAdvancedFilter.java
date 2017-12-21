@@ -100,13 +100,12 @@ public class QuizAdvancedFilter extends SearchItem {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.isQuiz == null ? -1 : this.isQuiz.ordinal());
+        dest.writeBoolean(this.isQuiz);
     }
 
     public QuizAdvancedFilter(Parcel in) {
         super(in);
-        int tmpIsQuiz = in.readInt();
-        this.isQuiz = tmpIsQuiz == -1 ? null : Boolean.values()[tmpIsQuiz];
+        this.isQuiz = in.readBoolean();
     }
 }
 

@@ -123,14 +123,13 @@ public class LiveChannel extends LiveEntry {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.playlistId);
-        dest.writeInt(this.repeat == null ? -1 : this.repeat.ordinal());
+        dest.writeBoolean(this.repeat);
     }
 
     public LiveChannel(Parcel in) {
         super(in);
         this.playlistId = in.readString();
-        int tmpRepeat = in.readInt();
-        this.repeat = tmpRepeat == -1 ? null : Boolean.values()[tmpRepeat];
+        this.repeat = in.readBoolean();
     }
 }
 

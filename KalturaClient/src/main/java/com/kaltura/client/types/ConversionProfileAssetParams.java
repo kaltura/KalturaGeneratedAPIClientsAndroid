@@ -305,12 +305,12 @@ public class ConversionProfileAssetParams extends ObjectBase {
         dest.writeInt(this.readyBehavior == null ? -1 : this.readyBehavior.ordinal());
         dest.writeInt(this.origin == null ? -1 : this.origin.ordinal());
         dest.writeString(this.systemName);
-        dest.writeInt(this.forceNoneComplied == null ? -1 : this.forceNoneComplied.ordinal());
+        dest.writeBoolean(this.forceNoneComplied);
         dest.writeInt(this.deletePolicy == null ? -1 : this.deletePolicy.ordinal());
-        dest.writeInt(this.isEncrypted == null ? -1 : this.isEncrypted.ordinal());
+        dest.writeBoolean(this.isEncrypted);
         dest.writeValue(this.contentAwareness);
         dest.writeValue(this.chunkedEncodeMode);
-        dest.writeInt(this.twoPass == null ? -1 : this.twoPass.ordinal());
+        dest.writeBoolean(this.twoPass);
         dest.writeString(this.tags);
     }
 
@@ -323,16 +323,13 @@ public class ConversionProfileAssetParams extends ObjectBase {
         int tmpOrigin = in.readInt();
         this.origin = tmpOrigin == -1 ? null : AssetParamsOrigin.values()[tmpOrigin];
         this.systemName = in.readString();
-        int tmpForceNoneComplied = in.readInt();
-        this.forceNoneComplied = tmpForceNoneComplied == -1 ? null : Boolean.values()[tmpForceNoneComplied];
+        this.forceNoneComplied = in.readBoolean();
         int tmpDeletePolicy = in.readInt();
         this.deletePolicy = tmpDeletePolicy == -1 ? null : AssetParamsDeletePolicy.values()[tmpDeletePolicy];
-        int tmpIsEncrypted = in.readInt();
-        this.isEncrypted = tmpIsEncrypted == -1 ? null : Boolean.values()[tmpIsEncrypted];
+        this.isEncrypted = in.readBoolean();
         this.contentAwareness = (Double)in.readValue(Double.class.getClassLoader());
         this.chunkedEncodeMode = (Integer)in.readValue(Integer.class.getClassLoader());
-        int tmpTwoPass = in.readInt();
-        this.twoPass = tmpTwoPass == -1 ? null : Boolean.values()[tmpTwoPass];
+        this.twoPass = in.readBoolean();
         this.tags = in.readString();
     }
 }

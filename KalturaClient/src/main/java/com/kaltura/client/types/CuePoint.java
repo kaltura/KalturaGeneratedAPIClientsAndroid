@@ -340,7 +340,7 @@ public abstract class CuePoint extends ObjectBase {
         dest.writeString(this.userId);
         dest.writeString(this.partnerData);
         dest.writeValue(this.partnerSortValue);
-        dest.writeInt(this.forceStop == null ? -1 : this.forceStop.ordinal());
+        dest.writeBoolean(this.forceStop);
         dest.writeValue(this.thumbOffset);
         dest.writeString(this.systemName);
     }
@@ -362,8 +362,7 @@ public abstract class CuePoint extends ObjectBase {
         this.userId = in.readString();
         this.partnerData = in.readString();
         this.partnerSortValue = (Integer)in.readValue(Integer.class.getClassLoader());
-        int tmpForceStop = in.readInt();
-        this.forceStop = tmpForceStop == -1 ? null : Boolean.values()[tmpForceStop];
+        this.forceStop = in.readBoolean();
         this.thumbOffset = (Integer)in.readValue(Integer.class.getClassLoader());
         this.systemName = in.readString();
     }

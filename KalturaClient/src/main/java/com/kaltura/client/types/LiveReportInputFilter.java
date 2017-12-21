@@ -169,7 +169,7 @@ public class LiveReportInputFilter extends ObjectBase {
         dest.writeString(this.entryIds);
         dest.writeValue(this.fromTime);
         dest.writeValue(this.toTime);
-        dest.writeInt(this.live == null ? -1 : this.live.ordinal());
+        dest.writeBoolean(this.live);
         dest.writeInt(this.orderBy == null ? -1 : this.orderBy.ordinal());
     }
 
@@ -178,8 +178,7 @@ public class LiveReportInputFilter extends ObjectBase {
         this.entryIds = in.readString();
         this.fromTime = (Integer)in.readValue(Integer.class.getClassLoader());
         this.toTime = (Integer)in.readValue(Integer.class.getClassLoader());
-        int tmpLive = in.readInt();
-        this.live = tmpLive == -1 ? null : Boolean.values()[tmpLive];
+        this.live = in.readBoolean();
         int tmpOrderBy = in.readInt();
         this.orderBy = tmpOrderBy == -1 ? null : LiveReportOrderBy.values()[tmpOrderBy];
     }

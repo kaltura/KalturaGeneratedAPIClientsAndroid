@@ -116,16 +116,14 @@ public class BusinessProcessServerFilter extends BusinessProcessServerBaseFilter
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.currentDcOrExternal == null ? -1 : this.currentDcOrExternal.ordinal());
-        dest.writeInt(this.currentDc == null ? -1 : this.currentDc.ordinal());
+        dest.writeBoolean(this.currentDcOrExternal);
+        dest.writeBoolean(this.currentDc);
     }
 
     public BusinessProcessServerFilter(Parcel in) {
         super(in);
-        int tmpCurrentDcOrExternal = in.readInt();
-        this.currentDcOrExternal = tmpCurrentDcOrExternal == -1 ? null : Boolean.values()[tmpCurrentDcOrExternal];
-        int tmpCurrentDc = in.readInt();
-        this.currentDc = tmpCurrentDc == -1 ? null : Boolean.values()[tmpCurrentDc];
+        this.currentDcOrExternal = in.readBoolean();
+        this.currentDc = in.readBoolean();
     }
 }
 

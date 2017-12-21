@@ -152,22 +152,18 @@ public class LiveEntryRecordingOptions extends ObjectBase {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.shouldCopyEntitlement == null ? -1 : this.shouldCopyEntitlement.ordinal());
-        dest.writeInt(this.shouldCopyScheduling == null ? -1 : this.shouldCopyScheduling.ordinal());
-        dest.writeInt(this.shouldCopyThumbnail == null ? -1 : this.shouldCopyThumbnail.ordinal());
-        dest.writeInt(this.shouldMakeHidden == null ? -1 : this.shouldMakeHidden.ordinal());
+        dest.writeBoolean(this.shouldCopyEntitlement);
+        dest.writeBoolean(this.shouldCopyScheduling);
+        dest.writeBoolean(this.shouldCopyThumbnail);
+        dest.writeBoolean(this.shouldMakeHidden);
     }
 
     public LiveEntryRecordingOptions(Parcel in) {
         super(in);
-        int tmpShouldCopyEntitlement = in.readInt();
-        this.shouldCopyEntitlement = tmpShouldCopyEntitlement == -1 ? null : Boolean.values()[tmpShouldCopyEntitlement];
-        int tmpShouldCopyScheduling = in.readInt();
-        this.shouldCopyScheduling = tmpShouldCopyScheduling == -1 ? null : Boolean.values()[tmpShouldCopyScheduling];
-        int tmpShouldCopyThumbnail = in.readInt();
-        this.shouldCopyThumbnail = tmpShouldCopyThumbnail == -1 ? null : Boolean.values()[tmpShouldCopyThumbnail];
-        int tmpShouldMakeHidden = in.readInt();
-        this.shouldMakeHidden = tmpShouldMakeHidden == -1 ? null : Boolean.values()[tmpShouldMakeHidden];
+        this.shouldCopyEntitlement = in.readBoolean();
+        this.shouldCopyScheduling = in.readBoolean();
+        this.shouldCopyThumbnail = in.readBoolean();
+        this.shouldMakeHidden = in.readBoolean();
     }
 }
 

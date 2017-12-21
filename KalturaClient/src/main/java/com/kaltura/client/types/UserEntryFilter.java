@@ -148,18 +148,16 @@ public class UserEntryFilter extends UserEntryBaseFilter {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.userIdEqualCurrent == null ? -1 : this.userIdEqualCurrent.ordinal());
-        dest.writeInt(this.isAnonymous == null ? -1 : this.isAnonymous.ordinal());
+        dest.writeBoolean(this.userIdEqualCurrent);
+        dest.writeBoolean(this.isAnonymous);
         dest.writeString(this.privacyContextEqual);
         dest.writeString(this.privacyContextIn);
     }
 
     public UserEntryFilter(Parcel in) {
         super(in);
-        int tmpUserIdEqualCurrent = in.readInt();
-        this.userIdEqualCurrent = tmpUserIdEqualCurrent == -1 ? null : Boolean.values()[tmpUserIdEqualCurrent];
-        int tmpIsAnonymous = in.readInt();
-        this.isAnonymous = tmpIsAnonymous == -1 ? null : Boolean.values()[tmpIsAnonymous];
+        this.userIdEqualCurrent = in.readBoolean();
+        this.isAnonymous = in.readBoolean();
         this.privacyContextEqual = in.readString();
         this.privacyContextIn = in.readString();
     }

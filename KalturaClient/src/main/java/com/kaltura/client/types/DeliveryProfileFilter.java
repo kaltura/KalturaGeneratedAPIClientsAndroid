@@ -100,13 +100,12 @@ public class DeliveryProfileFilter extends DeliveryProfileBaseFilter {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.isLive == null ? -1 : this.isLive.ordinal());
+        dest.writeBoolean(this.isLive);
     }
 
     public DeliveryProfileFilter(Parcel in) {
         super(in);
-        int tmpIsLive = in.readInt();
-        this.isLive = tmpIsLive == -1 ? null : Boolean.values()[tmpIsLive];
+        this.isLive = in.readBoolean();
     }
 }
 

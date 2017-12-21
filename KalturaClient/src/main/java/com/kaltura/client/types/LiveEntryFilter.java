@@ -132,17 +132,15 @@ public class LiveEntryFilter extends LiveEntryBaseFilter {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.isLive == null ? -1 : this.isLive.ordinal());
-        dest.writeInt(this.isRecordedEntryIdEmpty == null ? -1 : this.isRecordedEntryIdEmpty.ordinal());
+        dest.writeBoolean(this.isLive);
+        dest.writeBoolean(this.isRecordedEntryIdEmpty);
         dest.writeString(this.hasMediaServerHostname);
     }
 
     public LiveEntryFilter(Parcel in) {
         super(in);
-        int tmpIsLive = in.readInt();
-        this.isLive = tmpIsLive == -1 ? null : Boolean.values()[tmpIsLive];
-        int tmpIsRecordedEntryIdEmpty = in.readInt();
-        this.isRecordedEntryIdEmpty = tmpIsRecordedEntryIdEmpty == -1 ? null : Boolean.values()[tmpIsRecordedEntryIdEmpty];
+        this.isLive = in.readBoolean();
+        this.isRecordedEntryIdEmpty = in.readBoolean();
         this.hasMediaServerHostname = in.readString();
     }
 }

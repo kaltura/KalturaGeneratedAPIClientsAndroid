@@ -557,7 +557,7 @@ public class ConversionProfile extends ObjectBase {
         dest.writeString(this.defaultEntryId);
         dest.writeValue(this.createdAt);
         dest.writeString(this.flavorParamsIds);
-        dest.writeInt(this.isDefault == null ? -1 : this.isDefault.ordinal());
+        dest.writeBoolean(this.isDefault);
         dest.writeValue(this.isPartnerDefault);
         dest.writeParcelable(this.cropDimensions, flags);
         dest.writeValue(this.clipStart);
@@ -565,7 +565,7 @@ public class ConversionProfile extends ObjectBase {
         dest.writeString(this.xslTransformation);
         dest.writeValue(this.storageProfileId);
         dest.writeInt(this.mediaParserType == null ? -1 : this.mediaParserType.ordinal());
-        dest.writeInt(this.calculateComplexity == null ? -1 : this.calculateComplexity.ordinal());
+        dest.writeBoolean(this.calculateComplexity);
         dest.writeString(this.collectionTags);
         dest.writeString(this.conditionalProfiles);
         dest.writeValue(this.detectGOP);
@@ -588,8 +588,7 @@ public class ConversionProfile extends ObjectBase {
         this.defaultEntryId = in.readString();
         this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
         this.flavorParamsIds = in.readString();
-        int tmpIsDefault = in.readInt();
-        this.isDefault = tmpIsDefault == -1 ? null : Boolean.values()[tmpIsDefault];
+        this.isDefault = in.readBoolean();
         this.isPartnerDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.cropDimensions = in.readParcelable(CropDimensions.class.getClassLoader());
         this.clipStart = (Integer)in.readValue(Integer.class.getClassLoader());
@@ -598,8 +597,7 @@ public class ConversionProfile extends ObjectBase {
         this.storageProfileId = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpMediaParserType = in.readInt();
         this.mediaParserType = tmpMediaParserType == -1 ? null : MediaParserType.values()[tmpMediaParserType];
-        int tmpCalculateComplexity = in.readInt();
-        this.calculateComplexity = tmpCalculateComplexity == -1 ? null : Boolean.values()[tmpCalculateComplexity];
+        this.calculateComplexity = in.readBoolean();
         this.collectionTags = in.readString();
         this.conditionalProfiles = in.readString();
         this.detectGOP = (Integer)in.readValue(Integer.class.getClassLoader());

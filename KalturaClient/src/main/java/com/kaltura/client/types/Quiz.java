@@ -221,12 +221,12 @@ public class Quiz extends ObjectBase {
         } else {
             dest.writeInt(-1);
         }
-        dest.writeInt(this.showResultOnAnswer == null ? -1 : this.showResultOnAnswer.ordinal());
-        dest.writeInt(this.showCorrectKeyOnAnswer == null ? -1 : this.showCorrectKeyOnAnswer.ordinal());
-        dest.writeInt(this.allowAnswerUpdate == null ? -1 : this.allowAnswerUpdate.ordinal());
-        dest.writeInt(this.showCorrectAfterSubmission == null ? -1 : this.showCorrectAfterSubmission.ordinal());
-        dest.writeInt(this.allowDownload == null ? -1 : this.allowDownload.ordinal());
-        dest.writeInt(this.showGradeAfterSubmission == null ? -1 : this.showGradeAfterSubmission.ordinal());
+        dest.writeBoolean(this.showResultOnAnswer);
+        dest.writeBoolean(this.showCorrectKeyOnAnswer);
+        dest.writeBoolean(this.allowAnswerUpdate);
+        dest.writeBoolean(this.showCorrectAfterSubmission);
+        dest.writeBoolean(this.allowDownload);
+        dest.writeBoolean(this.showGradeAfterSubmission);
     }
 
     public Quiz(Parcel in) {
@@ -237,18 +237,12 @@ public class Quiz extends ObjectBase {
             this.uiAttributes = new ArrayList<>();
             in.readList(this.uiAttributes, KeyValue.class.getClassLoader());
         }
-        int tmpShowResultOnAnswer = in.readInt();
-        this.showResultOnAnswer = tmpShowResultOnAnswer == -1 ? null : Boolean.values()[tmpShowResultOnAnswer];
-        int tmpShowCorrectKeyOnAnswer = in.readInt();
-        this.showCorrectKeyOnAnswer = tmpShowCorrectKeyOnAnswer == -1 ? null : Boolean.values()[tmpShowCorrectKeyOnAnswer];
-        int tmpAllowAnswerUpdate = in.readInt();
-        this.allowAnswerUpdate = tmpAllowAnswerUpdate == -1 ? null : Boolean.values()[tmpAllowAnswerUpdate];
-        int tmpShowCorrectAfterSubmission = in.readInt();
-        this.showCorrectAfterSubmission = tmpShowCorrectAfterSubmission == -1 ? null : Boolean.values()[tmpShowCorrectAfterSubmission];
-        int tmpAllowDownload = in.readInt();
-        this.allowDownload = tmpAllowDownload == -1 ? null : Boolean.values()[tmpAllowDownload];
-        int tmpShowGradeAfterSubmission = in.readInt();
-        this.showGradeAfterSubmission = tmpShowGradeAfterSubmission == -1 ? null : Boolean.values()[tmpShowGradeAfterSubmission];
+        this.showResultOnAnswer = in.readBoolean();
+        this.showCorrectKeyOnAnswer = in.readBoolean();
+        this.allowAnswerUpdate = in.readBoolean();
+        this.showCorrectAfterSubmission = in.readBoolean();
+        this.allowDownload = in.readBoolean();
+        this.showGradeAfterSubmission = in.readBoolean();
     }
 }
 
