@@ -107,6 +107,9 @@ public class Partner extends ObjectBase {
 		String referenceId();
 		String timeAlignedRenditions();
 		RequestBuilder.ListTokenizer<ESearchLanguageItem.Tokenizer> eSearchLanguages();
+		String publisherEnvironmentType();
+		String ovpEnvironmentUrl();
+		String ottEnvironmentUrl();
 	}
 
 	private Integer id;
@@ -178,6 +181,9 @@ public class Partner extends ObjectBase {
 	private String referenceId;
 	private Boolean timeAlignedRenditions;
 	private List<ESearchLanguageItem> eSearchLanguages;
+	private Integer publisherEnvironmentType;
+	private String ovpEnvironmentUrl;
+	private String ottEnvironmentUrl;
 
 	// id:
 	public Integer getId(){
@@ -811,6 +817,42 @@ public class Partner extends ObjectBase {
 		this.eSearchLanguages = eSearchLanguages;
 	}
 
+	// publisherEnvironmentType:
+	public Integer getPublisherEnvironmentType(){
+		return this.publisherEnvironmentType;
+	}
+	public void setPublisherEnvironmentType(Integer publisherEnvironmentType){
+		this.publisherEnvironmentType = publisherEnvironmentType;
+	}
+
+	public void publisherEnvironmentType(String multirequestToken){
+		setToken("publisherEnvironmentType", multirequestToken);
+	}
+
+	// ovpEnvironmentUrl:
+	public String getOvpEnvironmentUrl(){
+		return this.ovpEnvironmentUrl;
+	}
+	public void setOvpEnvironmentUrl(String ovpEnvironmentUrl){
+		this.ovpEnvironmentUrl = ovpEnvironmentUrl;
+	}
+
+	public void ovpEnvironmentUrl(String multirequestToken){
+		setToken("ovpEnvironmentUrl", multirequestToken);
+	}
+
+	// ottEnvironmentUrl:
+	public String getOttEnvironmentUrl(){
+		return this.ottEnvironmentUrl;
+	}
+	public void setOttEnvironmentUrl(String ottEnvironmentUrl){
+		this.ottEnvironmentUrl = ottEnvironmentUrl;
+	}
+
+	public void ottEnvironmentUrl(String multirequestToken){
+		setToken("ottEnvironmentUrl", multirequestToken);
+	}
+
 
 	public Partner() {
 		super();
@@ -876,6 +918,9 @@ public class Partner extends ObjectBase {
 		referenceId = GsonParser.parseString(jsonObject.get("referenceId"));
 		timeAlignedRenditions = GsonParser.parseBoolean(jsonObject.get("timeAlignedRenditions"));
 		eSearchLanguages = GsonParser.parseArray(jsonObject.getAsJsonArray("eSearchLanguages"), ESearchLanguageItem.class);
+		publisherEnvironmentType = GsonParser.parseInt(jsonObject.get("publisherEnvironmentType"));
+		ovpEnvironmentUrl = GsonParser.parseString(jsonObject.get("ovpEnvironmentUrl"));
+		ottEnvironmentUrl = GsonParser.parseString(jsonObject.get("ottEnvironmentUrl"));
 
 	}
 
@@ -1007,6 +1052,9 @@ public class Partner extends ObjectBase {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeValue(this.publisherEnvironmentType);
+        dest.writeString(this.ovpEnvironmentUrl);
+        dest.writeString(this.ottEnvironmentUrl);
     }
 
     public Partner(Parcel in) {
@@ -1085,6 +1133,9 @@ public class Partner extends ObjectBase {
             this.eSearchLanguages = new ArrayList<>();
             in.readList(this.eSearchLanguages, ESearchLanguageItem.class.getClassLoader());
         }
+        this.publisherEnvironmentType = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.ovpEnvironmentUrl = in.readString();
+        this.ottEnvironmentUrl = in.readString();
     }
 }
 
