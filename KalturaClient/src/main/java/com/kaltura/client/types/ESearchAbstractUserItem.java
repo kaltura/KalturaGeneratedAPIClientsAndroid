@@ -50,11 +50,13 @@ public abstract class ESearchAbstractUserItem extends ESearchUserBaseItem {
 		String searchTerm();
 		String itemType();
 		ESearchRange.Tokenizer range();
+		String addHighlight();
 	}
 
 	private String searchTerm;
 	private ESearchItemType itemType;
 	private ESearchRange range;
+	private Boolean addHighlight;
 
 	// searchTerm:
 	public String getSearchTerm(){
@@ -88,6 +90,18 @@ public abstract class ESearchAbstractUserItem extends ESearchUserBaseItem {
 		this.range = range;
 	}
 
+	// addHighlight:
+	public Boolean getAddHighlight(){
+		return this.addHighlight;
+	}
+	public void setAddHighlight(Boolean addHighlight){
+		this.addHighlight = addHighlight;
+	}
+
+	public void addHighlight(String multirequestToken){
+		setToken("addHighlight", multirequestToken);
+	}
+
 
 	public ESearchAbstractUserItem() {
 		super();
@@ -102,6 +116,7 @@ public abstract class ESearchAbstractUserItem extends ESearchUserBaseItem {
 		searchTerm = GsonParser.parseString(jsonObject.get("searchTerm"));
 		itemType = ESearchItemType.get(GsonParser.parseInt(jsonObject.get("itemType")));
 		range = GsonParser.parseObject(jsonObject.getAsJsonObject("range"), ESearchRange.class);
+		addHighlight = GsonParser.parseBoolean(jsonObject.get("addHighlight"));
 
 	}
 
@@ -111,6 +126,7 @@ public abstract class ESearchAbstractUserItem extends ESearchUserBaseItem {
 		kparams.add("searchTerm", this.searchTerm);
 		kparams.add("itemType", this.itemType);
 		kparams.add("range", this.range);
+		kparams.add("addHighlight", this.addHighlight);
 		return kparams;
 	}
 
@@ -121,6 +137,7 @@ public abstract class ESearchAbstractUserItem extends ESearchUserBaseItem {
         dest.writeString(this.searchTerm);
         dest.writeInt(this.itemType == null ? -1 : this.itemType.ordinal());
         dest.writeParcelable(this.range, flags);
+        dest.writeValue(this.addHighlight);
     }
 
     public ESearchAbstractUserItem(Parcel in) {
@@ -129,6 +146,7 @@ public abstract class ESearchAbstractUserItem extends ESearchUserBaseItem {
         int tmpItemType = in.readInt();
         this.itemType = tmpItemType == -1 ? null : ESearchItemType.values()[tmpItemType];
         this.range = in.readParcelable(ESearchRange.class.getClassLoader());
+        this.addHighlight = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
