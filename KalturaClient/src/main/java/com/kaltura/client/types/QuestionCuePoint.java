@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.QuestionType;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 import com.kaltura.client.utils.request.RequestBuilder;
@@ -52,6 +53,7 @@ public class QuestionCuePoint extends CuePoint {
 		String hint();
 		String question();
 		String explanation();
+		String questionType();
 	}
 
 	/**
@@ -61,6 +63,7 @@ public class QuestionCuePoint extends CuePoint {
 	private String hint;
 	private String question;
 	private String explanation;
+	private QuestionType questionType;
 
 	// optionalAnswers:
 	public List<OptionalAnswer> getOptionalAnswers(){
@@ -106,6 +109,18 @@ public class QuestionCuePoint extends CuePoint {
 		setToken("explanation", multirequestToken);
 	}
 
+	// questionType:
+	public QuestionType getQuestionType(){
+		return this.questionType;
+	}
+	public void setQuestionType(QuestionType questionType){
+		this.questionType = questionType;
+	}
+
+	public void questionType(String multirequestToken){
+		setToken("questionType", multirequestToken);
+	}
+
 
 	public QuestionCuePoint() {
 		super();
@@ -121,6 +136,7 @@ public class QuestionCuePoint extends CuePoint {
 		hint = GsonParser.parseString(jsonObject.get("hint"));
 		question = GsonParser.parseString(jsonObject.get("question"));
 		explanation = GsonParser.parseString(jsonObject.get("explanation"));
+		questionType = QuestionType.get(GsonParser.parseInt(jsonObject.get("questionType")));
 
 	}
 
@@ -131,6 +147,7 @@ public class QuestionCuePoint extends CuePoint {
 		kparams.add("hint", this.hint);
 		kparams.add("question", this.question);
 		kparams.add("explanation", this.explanation);
+		kparams.add("questionType", this.questionType);
 		return kparams;
 	}
 
@@ -159,6 +176,7 @@ public class QuestionCuePoint extends CuePoint {
         dest.writeString(this.hint);
         dest.writeString(this.question);
         dest.writeString(this.explanation);
+        dest.writeInt(this.questionType == null ? -1 : this.questionType.ordinal());
     }
 
     public QuestionCuePoint(Parcel in) {
@@ -171,6 +189,8 @@ public class QuestionCuePoint extends CuePoint {
         this.hint = in.readString();
         this.question = in.readString();
         this.explanation = in.readString();
+        int tmpQuestionType = in.readInt();
+        this.questionType = tmpQuestionType == -1 ? null : QuestionType.values()[tmpQuestionType];
     }
 }
 

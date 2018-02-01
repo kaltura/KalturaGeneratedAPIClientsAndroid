@@ -32,6 +32,9 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -49,12 +52,12 @@ public class ESearchCuePointItemData extends ESearchItemData {
 		String id();
 		String name();
 		String text();
-		String tags();
+		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> tags();
 		String startTime();
 		String endTime();
 		String subType();
 		String question();
-		String answers();
+		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> answers();
 		String hint();
 		String explanation();
 		String assetId();
@@ -64,12 +67,12 @@ public class ESearchCuePointItemData extends ESearchItemData {
 	private String id;
 	private String name;
 	private String text;
-	private String tags;
+	private List<StringHolder> tags;
 	private String startTime;
 	private String endTime;
 	private String subType;
 	private String question;
-	private String answers;
+	private List<StringHolder> answers;
 	private String hint;
 	private String explanation;
 	private String assetId;
@@ -123,15 +126,11 @@ public class ESearchCuePointItemData extends ESearchItemData {
 	}
 
 	// tags:
-	public String getTags(){
+	public List<StringHolder> getTags(){
 		return this.tags;
 	}
-	public void setTags(String tags){
+	public void setTags(List<StringHolder> tags){
 		this.tags = tags;
-	}
-
-	public void tags(String multirequestToken){
-		setToken("tags", multirequestToken);
 	}
 
 	// startTime:
@@ -183,15 +182,11 @@ public class ESearchCuePointItemData extends ESearchItemData {
 	}
 
 	// answers:
-	public String getAnswers(){
+	public List<StringHolder> getAnswers(){
 		return this.answers;
 	}
-	public void setAnswers(String answers){
+	public void setAnswers(List<StringHolder> answers){
 		this.answers = answers;
-	}
-
-	public void answers(String multirequestToken){
-		setToken("answers", multirequestToken);
 	}
 
 	// hint:
@@ -245,12 +240,12 @@ public class ESearchCuePointItemData extends ESearchItemData {
 		id = GsonParser.parseString(jsonObject.get("id"));
 		name = GsonParser.parseString(jsonObject.get("name"));
 		text = GsonParser.parseString(jsonObject.get("text"));
-		tags = GsonParser.parseString(jsonObject.get("tags"));
+		tags = GsonParser.parseArray(jsonObject.getAsJsonArray("tags"), StringHolder.class);
 		startTime = GsonParser.parseString(jsonObject.get("startTime"));
 		endTime = GsonParser.parseString(jsonObject.get("endTime"));
 		subType = GsonParser.parseString(jsonObject.get("subType"));
 		question = GsonParser.parseString(jsonObject.get("question"));
-		answers = GsonParser.parseString(jsonObject.get("answers"));
+		answers = GsonParser.parseArray(jsonObject.getAsJsonArray("answers"), StringHolder.class);
 		hint = GsonParser.parseString(jsonObject.get("hint"));
 		explanation = GsonParser.parseString(jsonObject.get("explanation"));
 		assetId = GsonParser.parseString(jsonObject.get("assetId"));
@@ -296,12 +291,22 @@ public class ESearchCuePointItemData extends ESearchItemData {
         dest.writeString(this.id);
         dest.writeString(this.name);
         dest.writeString(this.text);
-        dest.writeString(this.tags);
+        if(this.tags != null) {
+            dest.writeInt(this.tags.size());
+            dest.writeList(this.tags);
+        } else {
+            dest.writeInt(-1);
+        }
         dest.writeString(this.startTime);
         dest.writeString(this.endTime);
         dest.writeString(this.subType);
         dest.writeString(this.question);
-        dest.writeString(this.answers);
+        if(this.answers != null) {
+            dest.writeInt(this.answers.size());
+            dest.writeList(this.answers);
+        } else {
+            dest.writeInt(-1);
+        }
         dest.writeString(this.hint);
         dest.writeString(this.explanation);
         dest.writeString(this.assetId);
@@ -313,12 +318,20 @@ public class ESearchCuePointItemData extends ESearchItemData {
         this.id = in.readString();
         this.name = in.readString();
         this.text = in.readString();
-        this.tags = in.readString();
+        int tagsSize = in.readInt();
+        if( tagsSize > -1) {
+            this.tags = new ArrayList<>();
+            in.readList(this.tags, StringHolder.class.getClassLoader());
+        }
         this.startTime = in.readString();
         this.endTime = in.readString();
         this.subType = in.readString();
         this.question = in.readString();
-        this.answers = in.readString();
+        int answersSize = in.readInt();
+        if( answersSize > -1) {
+            this.answers = new ArrayList<>();
+            in.readList(this.answers, StringHolder.class.getClassLoader());
+        }
         this.hint = in.readString();
         this.explanation = in.readString();
         this.assetId = in.readString();
