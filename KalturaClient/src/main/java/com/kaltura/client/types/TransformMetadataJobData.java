@@ -49,14 +49,14 @@ public class TransformMetadataJobData extends JobData {
 		FileContainer.Tokenizer srcXsl();
 		String srcVersion();
 		String destVersion();
-		String destXsdPath();
+		FileContainer.Tokenizer destXsd();
 		String metadataProfileId();
 	}
 
 	private FileContainer srcXsl;
 	private Integer srcVersion;
 	private Integer destVersion;
-	private String destXsdPath;
+	private FileContainer destXsd;
 	private Integer metadataProfileId;
 
 	// srcXsl:
@@ -91,16 +91,12 @@ public class TransformMetadataJobData extends JobData {
 		setToken("destVersion", multirequestToken);
 	}
 
-	// destXsdPath:
-	public String getDestXsdPath(){
-		return this.destXsdPath;
+	// destXsd:
+	public FileContainer getDestXsd(){
+		return this.destXsd;
 	}
-	public void setDestXsdPath(String destXsdPath){
-		this.destXsdPath = destXsdPath;
-	}
-
-	public void destXsdPath(String multirequestToken){
-		setToken("destXsdPath", multirequestToken);
+	public void setDestXsd(FileContainer destXsd){
+		this.destXsd = destXsd;
 	}
 
 	// metadataProfileId:
@@ -129,7 +125,7 @@ public class TransformMetadataJobData extends JobData {
 		srcXsl = GsonParser.parseObject(jsonObject.getAsJsonObject("srcXsl"), FileContainer.class);
 		srcVersion = GsonParser.parseInt(jsonObject.get("srcVersion"));
 		destVersion = GsonParser.parseInt(jsonObject.get("destVersion"));
-		destXsdPath = GsonParser.parseString(jsonObject.get("destXsdPath"));
+		destXsd = GsonParser.parseObject(jsonObject.getAsJsonObject("destXsd"), FileContainer.class);
 		metadataProfileId = GsonParser.parseInt(jsonObject.get("metadataProfileId"));
 
 	}
@@ -140,7 +136,7 @@ public class TransformMetadataJobData extends JobData {
 		kparams.add("srcXsl", this.srcXsl);
 		kparams.add("srcVersion", this.srcVersion);
 		kparams.add("destVersion", this.destVersion);
-		kparams.add("destXsdPath", this.destXsdPath);
+		kparams.add("destXsd", this.destXsd);
 		kparams.add("metadataProfileId", this.metadataProfileId);
 		return kparams;
 	}
@@ -164,7 +160,7 @@ public class TransformMetadataJobData extends JobData {
         dest.writeParcelable(this.srcXsl, flags);
         dest.writeValue(this.srcVersion);
         dest.writeValue(this.destVersion);
-        dest.writeString(this.destXsdPath);
+        dest.writeParcelable(this.destXsd, flags);
         dest.writeValue(this.metadataProfileId);
     }
 
@@ -173,7 +169,7 @@ public class TransformMetadataJobData extends JobData {
         this.srcXsl = in.readParcelable(FileContainer.class.getClassLoader());
         this.srcVersion = (Integer)in.readValue(Integer.class.getClassLoader());
         this.destVersion = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.destXsdPath = in.readString();
+        this.destXsd = in.readParcelable(FileContainer.class.getClassLoader());
         this.metadataProfileId = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
