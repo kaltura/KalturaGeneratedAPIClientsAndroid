@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2017  Kaltura Inc.
+// Copyright (C) 2006-2018  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -50,6 +50,7 @@ public class LiveEntryServerNode extends EntryServerNode {
 	public interface Tokenizer extends EntryServerNode.Tokenizer {
 		RequestBuilder.ListTokenizer<LiveStreamParams.Tokenizer> streams();
 		RequestBuilder.ListTokenizer<LiveEntryServerNodeRecordingInfo.Tokenizer> recordingInfo();
+		String isPlayableUser();
 	}
 
 	/**
@@ -57,6 +58,7 @@ public class LiveEntryServerNode extends EntryServerNode {
 	 */
 	private List<LiveStreamParams> streams;
 	private List<LiveEntryServerNodeRecordingInfo> recordingInfo;
+	private Boolean isPlayableUser;
 
 	// streams:
 	public List<LiveStreamParams> getStreams(){
@@ -74,6 +76,18 @@ public class LiveEntryServerNode extends EntryServerNode {
 		this.recordingInfo = recordingInfo;
 	}
 
+	// isPlayableUser:
+	public Boolean getIsPlayableUser(){
+		return this.isPlayableUser;
+	}
+	public void setIsPlayableUser(Boolean isPlayableUser){
+		this.isPlayableUser = isPlayableUser;
+	}
+
+	public void isPlayableUser(String multirequestToken){
+		setToken("isPlayableUser", multirequestToken);
+	}
+
 
 	public LiveEntryServerNode() {
 		super();
@@ -87,6 +101,7 @@ public class LiveEntryServerNode extends EntryServerNode {
 		// set members values:
 		streams = GsonParser.parseArray(jsonObject.getAsJsonArray("streams"), LiveStreamParams.class);
 		recordingInfo = GsonParser.parseArray(jsonObject.getAsJsonArray("recordingInfo"), LiveEntryServerNodeRecordingInfo.class);
+		isPlayableUser = GsonParser.parseBoolean(jsonObject.get("isPlayableUser"));
 
 	}
 
@@ -95,6 +110,7 @@ public class LiveEntryServerNode extends EntryServerNode {
 		kparams.add("objectType", "KalturaLiveEntryServerNode");
 		kparams.add("streams", this.streams);
 		kparams.add("recordingInfo", this.recordingInfo);
+		kparams.add("isPlayableUser", this.isPlayableUser);
 		return kparams;
 	}
 
@@ -126,6 +142,7 @@ public class LiveEntryServerNode extends EntryServerNode {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeValue(this.isPlayableUser);
     }
 
     public LiveEntryServerNode(Parcel in) {
@@ -140,6 +157,7 @@ public class LiveEntryServerNode extends EntryServerNode {
             this.recordingInfo = new ArrayList<>();
             in.readList(this.recordingInfo, LiveEntryServerNodeRecordingInfo.class.getClassLoader());
         }
+        this.isPlayableUser = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
