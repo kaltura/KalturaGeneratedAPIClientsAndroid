@@ -49,12 +49,12 @@ public class FacebookDistributionJobProviderData extends ConfigurableDistributio
 	
 	public interface Tokenizer extends ConfigurableDistributionJobProviderData.Tokenizer {
 		String videoAssetFilePath();
-		String thumbAssetFilePath();
+		String thumbAssetId();
 		RequestBuilder.ListTokenizer<FacebookCaptionDistributionInfo.Tokenizer> captionsInfo();
 	}
 
 	private String videoAssetFilePath;
-	private String thumbAssetFilePath;
+	private String thumbAssetId;
 	private List<FacebookCaptionDistributionInfo> captionsInfo;
 
 	// videoAssetFilePath:
@@ -69,16 +69,16 @@ public class FacebookDistributionJobProviderData extends ConfigurableDistributio
 		setToken("videoAssetFilePath", multirequestToken);
 	}
 
-	// thumbAssetFilePath:
-	public String getThumbAssetFilePath(){
-		return this.thumbAssetFilePath;
+	// thumbAssetId:
+	public String getThumbAssetId(){
+		return this.thumbAssetId;
 	}
-	public void setThumbAssetFilePath(String thumbAssetFilePath){
-		this.thumbAssetFilePath = thumbAssetFilePath;
+	public void setThumbAssetId(String thumbAssetId){
+		this.thumbAssetId = thumbAssetId;
 	}
 
-	public void thumbAssetFilePath(String multirequestToken){
-		setToken("thumbAssetFilePath", multirequestToken);
+	public void thumbAssetId(String multirequestToken){
+		setToken("thumbAssetId", multirequestToken);
 	}
 
 	// captionsInfo:
@@ -101,7 +101,7 @@ public class FacebookDistributionJobProviderData extends ConfigurableDistributio
 
 		// set members values:
 		videoAssetFilePath = GsonParser.parseString(jsonObject.get("videoAssetFilePath"));
-		thumbAssetFilePath = GsonParser.parseString(jsonObject.get("thumbAssetFilePath"));
+		thumbAssetId = GsonParser.parseString(jsonObject.get("thumbAssetId"));
 		captionsInfo = GsonParser.parseArray(jsonObject.getAsJsonArray("captionsInfo"), FacebookCaptionDistributionInfo.class);
 
 	}
@@ -110,7 +110,7 @@ public class FacebookDistributionJobProviderData extends ConfigurableDistributio
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaFacebookDistributionJobProviderData");
 		kparams.add("videoAssetFilePath", this.videoAssetFilePath);
-		kparams.add("thumbAssetFilePath", this.thumbAssetFilePath);
+		kparams.add("thumbAssetId", this.thumbAssetId);
 		kparams.add("captionsInfo", this.captionsInfo);
 		return kparams;
 	}
@@ -132,7 +132,7 @@ public class FacebookDistributionJobProviderData extends ConfigurableDistributio
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.videoAssetFilePath);
-        dest.writeString(this.thumbAssetFilePath);
+        dest.writeString(this.thumbAssetId);
         if(this.captionsInfo != null) {
             dest.writeInt(this.captionsInfo.size());
             dest.writeList(this.captionsInfo);
@@ -144,7 +144,7 @@ public class FacebookDistributionJobProviderData extends ConfigurableDistributio
     public FacebookDistributionJobProviderData(Parcel in) {
         super(in);
         this.videoAssetFilePath = in.readString();
-        this.thumbAssetFilePath = in.readString();
+        this.thumbAssetId = in.readString();
         int captionsInfoSize = in.readInt();
         if( captionsInfoSize > -1) {
             this.captionsInfo = new ArrayList<>();

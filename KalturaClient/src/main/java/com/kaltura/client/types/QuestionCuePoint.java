@@ -54,6 +54,7 @@ public class QuestionCuePoint extends CuePoint {
 		String question();
 		String explanation();
 		String questionType();
+		String presentationOrder();
 	}
 
 	/**
@@ -64,6 +65,7 @@ public class QuestionCuePoint extends CuePoint {
 	private String question;
 	private String explanation;
 	private QuestionType questionType;
+	private Integer presentationOrder;
 
 	// optionalAnswers:
 	public List<OptionalAnswer> getOptionalAnswers(){
@@ -121,6 +123,18 @@ public class QuestionCuePoint extends CuePoint {
 		setToken("questionType", multirequestToken);
 	}
 
+	// presentationOrder:
+	public Integer getPresentationOrder(){
+		return this.presentationOrder;
+	}
+	public void setPresentationOrder(Integer presentationOrder){
+		this.presentationOrder = presentationOrder;
+	}
+
+	public void presentationOrder(String multirequestToken){
+		setToken("presentationOrder", multirequestToken);
+	}
+
 
 	public QuestionCuePoint() {
 		super();
@@ -137,6 +151,7 @@ public class QuestionCuePoint extends CuePoint {
 		question = GsonParser.parseString(jsonObject.get("question"));
 		explanation = GsonParser.parseString(jsonObject.get("explanation"));
 		questionType = QuestionType.get(GsonParser.parseInt(jsonObject.get("questionType")));
+		presentationOrder = GsonParser.parseInt(jsonObject.get("presentationOrder"));
 
 	}
 
@@ -148,6 +163,7 @@ public class QuestionCuePoint extends CuePoint {
 		kparams.add("question", this.question);
 		kparams.add("explanation", this.explanation);
 		kparams.add("questionType", this.questionType);
+		kparams.add("presentationOrder", this.presentationOrder);
 		return kparams;
 	}
 
@@ -177,6 +193,7 @@ public class QuestionCuePoint extends CuePoint {
         dest.writeString(this.question);
         dest.writeString(this.explanation);
         dest.writeInt(this.questionType == null ? -1 : this.questionType.ordinal());
+        dest.writeValue(this.presentationOrder);
     }
 
     public QuestionCuePoint(Parcel in) {
@@ -191,6 +208,7 @@ public class QuestionCuePoint extends CuePoint {
         this.explanation = in.readString();
         int tmpQuestionType = in.readInt();
         this.questionType = tmpQuestionType == -1 ? null : QuestionType.values()[tmpQuestionType];
+        this.presentationOrder = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
