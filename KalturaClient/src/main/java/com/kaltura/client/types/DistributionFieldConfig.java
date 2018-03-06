@@ -54,6 +54,7 @@ public class DistributionFieldConfig extends ObjectBase {
 		String userFriendlyFieldName();
 		String entryMrssXslt();
 		String isRequired();
+		String type();
 		String updateOnChange();
 		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> updateParams();
 		String isDefault();
@@ -81,6 +82,7 @@ public class DistributionFieldConfig extends ObjectBase {
 	 * Is the field required to have a value for submission ?
 	 */
 	private DistributionFieldRequiredStatus isRequired;
+	private String type;
 	/**
 	 * Trigger distribution update when this field changes or not ?
 	 */
@@ -146,6 +148,18 @@ public class DistributionFieldConfig extends ObjectBase {
 		setToken("isRequired", multirequestToken);
 	}
 
+	// type:
+	public String getType(){
+		return this.type;
+	}
+	public void setType(String type){
+		this.type = type;
+	}
+
+	public void type(String multirequestToken){
+		setToken("type", multirequestToken);
+	}
+
 	// updateOnChange:
 	public Boolean getUpdateOnChange(){
 		return this.updateOnChange;
@@ -205,6 +219,7 @@ public class DistributionFieldConfig extends ObjectBase {
 		userFriendlyFieldName = GsonParser.parseString(jsonObject.get("userFriendlyFieldName"));
 		entryMrssXslt = GsonParser.parseString(jsonObject.get("entryMrssXslt"));
 		isRequired = DistributionFieldRequiredStatus.get(GsonParser.parseInt(jsonObject.get("isRequired")));
+		type = GsonParser.parseString(jsonObject.get("type"));
 		updateOnChange = GsonParser.parseBoolean(jsonObject.get("updateOnChange"));
 		updateParams = GsonParser.parseArray(jsonObject.getAsJsonArray("updateParams"), StringHolder.class);
 		isDefault = GsonParser.parseBoolean(jsonObject.get("isDefault"));
@@ -219,6 +234,7 @@ public class DistributionFieldConfig extends ObjectBase {
 		kparams.add("userFriendlyFieldName", this.userFriendlyFieldName);
 		kparams.add("entryMrssXslt", this.entryMrssXslt);
 		kparams.add("isRequired", this.isRequired);
+		kparams.add("type", this.type);
 		kparams.add("updateOnChange", this.updateOnChange);
 		kparams.add("updateParams", this.updateParams);
 		kparams.add("triggerDeleteOnError", this.triggerDeleteOnError);
@@ -245,6 +261,7 @@ public class DistributionFieldConfig extends ObjectBase {
         dest.writeString(this.userFriendlyFieldName);
         dest.writeString(this.entryMrssXslt);
         dest.writeInt(this.isRequired == null ? -1 : this.isRequired.ordinal());
+        dest.writeString(this.type);
         dest.writeValue(this.updateOnChange);
         if(this.updateParams != null) {
             dest.writeInt(this.updateParams.size());
@@ -263,6 +280,7 @@ public class DistributionFieldConfig extends ObjectBase {
         this.entryMrssXslt = in.readString();
         int tmpIsRequired = in.readInt();
         this.isRequired = tmpIsRequired == -1 ? null : DistributionFieldRequiredStatus.values()[tmpIsRequired];
+        this.type = in.readString();
         this.updateOnChange = (Boolean)in.readValue(Boolean.class.getClassLoader());
         int updateParamsSize = in.readInt();
         if( updateParamsSize > -1) {
