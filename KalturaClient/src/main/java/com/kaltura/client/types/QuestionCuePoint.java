@@ -55,6 +55,7 @@ public class QuestionCuePoint extends CuePoint {
 		String explanation();
 		String questionType();
 		String presentationOrder();
+		String excludeFromScore();
 	}
 
 	/**
@@ -66,6 +67,7 @@ public class QuestionCuePoint extends CuePoint {
 	private String explanation;
 	private QuestionType questionType;
 	private Integer presentationOrder;
+	private Boolean excludeFromScore;
 
 	// optionalAnswers:
 	public List<OptionalAnswer> getOptionalAnswers(){
@@ -135,6 +137,18 @@ public class QuestionCuePoint extends CuePoint {
 		setToken("presentationOrder", multirequestToken);
 	}
 
+	// excludeFromScore:
+	public Boolean getExcludeFromScore(){
+		return this.excludeFromScore;
+	}
+	public void setExcludeFromScore(Boolean excludeFromScore){
+		this.excludeFromScore = excludeFromScore;
+	}
+
+	public void excludeFromScore(String multirequestToken){
+		setToken("excludeFromScore", multirequestToken);
+	}
+
 
 	public QuestionCuePoint() {
 		super();
@@ -152,6 +166,7 @@ public class QuestionCuePoint extends CuePoint {
 		explanation = GsonParser.parseString(jsonObject.get("explanation"));
 		questionType = QuestionType.get(GsonParser.parseInt(jsonObject.get("questionType")));
 		presentationOrder = GsonParser.parseInt(jsonObject.get("presentationOrder"));
+		excludeFromScore = GsonParser.parseBoolean(jsonObject.get("excludeFromScore"));
 
 	}
 
@@ -164,6 +179,7 @@ public class QuestionCuePoint extends CuePoint {
 		kparams.add("explanation", this.explanation);
 		kparams.add("questionType", this.questionType);
 		kparams.add("presentationOrder", this.presentationOrder);
+		kparams.add("excludeFromScore", this.excludeFromScore);
 		return kparams;
 	}
 
@@ -194,6 +210,7 @@ public class QuestionCuePoint extends CuePoint {
         dest.writeString(this.explanation);
         dest.writeInt(this.questionType == null ? -1 : this.questionType.ordinal());
         dest.writeValue(this.presentationOrder);
+        dest.writeBoolean(this.excludeFromScore);
     }
 
     public QuestionCuePoint(Parcel in) {
@@ -209,6 +226,7 @@ public class QuestionCuePoint extends CuePoint {
         int tmpQuestionType = in.readInt();
         this.questionType = tmpQuestionType == -1 ? null : QuestionType.values()[tmpQuestionType];
         this.presentationOrder = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.excludeFromScore = in.readBoolean();
     }
 }
 
