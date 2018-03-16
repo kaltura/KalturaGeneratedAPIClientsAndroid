@@ -32,6 +32,7 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.ConversionProfileStatus;
 import com.kaltura.client.enums.ConversionProfileType;
+import com.kaltura.client.enums.Language;
 import com.kaltura.client.enums.MediaParserType;
 import com.kaltura.client.types.CropDimensions;
 import com.kaltura.client.types.EntryReplacementOptions;
@@ -76,6 +77,7 @@ public class ConversionProfile extends ObjectBase {
 		String detectGOP();
 		String mediaInfoXslTransformation();
 		EntryReplacementOptions.Tokenizer defaultReplacementOptions();
+		String defaultAudioLang();
 	}
 
 	/**
@@ -171,6 +173,7 @@ public class ConversionProfile extends ObjectBase {
 	 * Default replacement options to be applied to entries
 	 */
 	private EntryReplacementOptions defaultReplacementOptions;
+	private Language defaultAudioLang;
 
 	// id:
 	public Integer getId(){
@@ -464,6 +467,18 @@ public class ConversionProfile extends ObjectBase {
 		this.defaultReplacementOptions = defaultReplacementOptions;
 	}
 
+	// defaultAudioLang:
+	public Language getDefaultAudioLang(){
+		return this.defaultAudioLang;
+	}
+	public void setDefaultAudioLang(Language defaultAudioLang){
+		this.defaultAudioLang = defaultAudioLang;
+	}
+
+	public void defaultAudioLang(String multirequestToken){
+		setToken("defaultAudioLang", multirequestToken);
+	}
+
 
 	public ConversionProfile() {
 		super();
@@ -500,6 +515,7 @@ public class ConversionProfile extends ObjectBase {
 		detectGOP = GsonParser.parseInt(jsonObject.get("detectGOP"));
 		mediaInfoXslTransformation = GsonParser.parseString(jsonObject.get("mediaInfoXslTransformation"));
 		defaultReplacementOptions = GsonParser.parseObject(jsonObject.getAsJsonObject("defaultReplacementOptions"), EntryReplacementOptions.class);
+		defaultAudioLang = Language.get(GsonParser.parseString(jsonObject.get("defaultAudioLang")));
 
 	}
 
@@ -527,6 +543,7 @@ public class ConversionProfile extends ObjectBase {
 		kparams.add("detectGOP", this.detectGOP);
 		kparams.add("mediaInfoXslTransformation", this.mediaInfoXslTransformation);
 		kparams.add("defaultReplacementOptions", this.defaultReplacementOptions);
+		kparams.add("defaultAudioLang", this.defaultAudioLang);
 		return kparams;
 	}
 
@@ -571,6 +588,7 @@ public class ConversionProfile extends ObjectBase {
         dest.writeValue(this.detectGOP);
         dest.writeString(this.mediaInfoXslTransformation);
         dest.writeParcelable(this.defaultReplacementOptions, flags);
+        dest.writeInt(this.defaultAudioLang == null ? -1 : this.defaultAudioLang.ordinal());
     }
 
     public ConversionProfile(Parcel in) {
@@ -603,6 +621,8 @@ public class ConversionProfile extends ObjectBase {
         this.detectGOP = (Integer)in.readValue(Integer.class.getClassLoader());
         this.mediaInfoXslTransformation = in.readString();
         this.defaultReplacementOptions = in.readParcelable(EntryReplacementOptions.class.getClassLoader());
+        int tmpDefaultAudioLang = in.readInt();
+        this.defaultAudioLang = tmpDefaultAudioLang == -1 ? null : Language.values()[tmpDefaultAudioLang];
     }
 }
 
