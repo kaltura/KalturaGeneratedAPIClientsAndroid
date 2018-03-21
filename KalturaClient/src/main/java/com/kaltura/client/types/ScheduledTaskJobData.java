@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.DryRunFileType;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -46,11 +47,15 @@ public class ScheduledTaskJobData extends JobData {
 	
 	public interface Tokenizer extends JobData.Tokenizer {
 		String maxResults();
+		String totalCount();
+		String fileFormat();
 		String resultsFilePath();
 		String referenceTime();
 	}
 
 	private Integer maxResults;
+	private Integer totalCount;
+	private DryRunFileType fileFormat;
 	private String resultsFilePath;
 	private Integer referenceTime;
 
@@ -64,6 +69,30 @@ public class ScheduledTaskJobData extends JobData {
 
 	public void maxResults(String multirequestToken){
 		setToken("maxResults", multirequestToken);
+	}
+
+	// totalCount:
+	public Integer getTotalCount(){
+		return this.totalCount;
+	}
+	public void setTotalCount(Integer totalCount){
+		this.totalCount = totalCount;
+	}
+
+	public void totalCount(String multirequestToken){
+		setToken("totalCount", multirequestToken);
+	}
+
+	// fileFormat:
+	public DryRunFileType getFileFormat(){
+		return this.fileFormat;
+	}
+	public void setFileFormat(DryRunFileType fileFormat){
+		this.fileFormat = fileFormat;
+	}
+
+	public void fileFormat(String multirequestToken){
+		setToken("fileFormat", multirequestToken);
 	}
 
 	// resultsFilePath:
@@ -102,6 +131,8 @@ public class ScheduledTaskJobData extends JobData {
 
 		// set members values:
 		maxResults = GsonParser.parseInt(jsonObject.get("maxResults"));
+		totalCount = GsonParser.parseInt(jsonObject.get("totalCount"));
+		fileFormat = DryRunFileType.get(GsonParser.parseInt(jsonObject.get("fileFormat")));
 		resultsFilePath = GsonParser.parseString(jsonObject.get("resultsFilePath"));
 		referenceTime = GsonParser.parseInt(jsonObject.get("referenceTime"));
 
@@ -111,6 +142,8 @@ public class ScheduledTaskJobData extends JobData {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaScheduledTaskJobData");
 		kparams.add("maxResults", this.maxResults);
+		kparams.add("totalCount", this.totalCount);
+		kparams.add("fileFormat", this.fileFormat);
 		kparams.add("resultsFilePath", this.resultsFilePath);
 		kparams.add("referenceTime", this.referenceTime);
 		return kparams;
@@ -133,6 +166,8 @@ public class ScheduledTaskJobData extends JobData {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.maxResults);
+        dest.writeValue(this.totalCount);
+        dest.writeInt(this.fileFormat == null ? -1 : this.fileFormat.ordinal());
         dest.writeString(this.resultsFilePath);
         dest.writeValue(this.referenceTime);
     }
@@ -140,6 +175,9 @@ public class ScheduledTaskJobData extends JobData {
     public ScheduledTaskJobData(Parcel in) {
         super(in);
         this.maxResults = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.totalCount = (Integer)in.readValue(Integer.class.getClassLoader());
+        int tmpFileFormat = in.readInt();
+        this.fileFormat = tmpFileFormat == -1 ? null : DryRunFileType.values()[tmpFileFormat];
         this.resultsFilePath = in.readString();
         this.referenceTime = (Integer)in.readValue(Integer.class.getClassLoader());
     }
