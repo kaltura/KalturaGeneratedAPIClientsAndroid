@@ -183,7 +183,7 @@ public class CaptionParams extends AssetParams {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.language == null ? -1 : this.language.ordinal());
-        dest.writeBoolean(this.isDefault);
+        dest.writeValue(this.isDefault);
         dest.writeString(this.label);
         dest.writeInt(this.format == null ? -1 : this.format.ordinal());
         dest.writeValue(this.sourceParamsId);
@@ -193,7 +193,7 @@ public class CaptionParams extends AssetParams {
         super(in);
         int tmpLanguage = in.readInt();
         this.language = tmpLanguage == -1 ? null : Language.values()[tmpLanguage];
-        this.isDefault = in.readBoolean();
+        this.isDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.label = in.readString();
         int tmpFormat = in.readInt();
         this.format = tmpFormat == -1 ? null : CaptionType.values()[tmpFormat];

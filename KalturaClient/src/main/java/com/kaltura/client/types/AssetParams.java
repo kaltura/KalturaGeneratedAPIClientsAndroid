@@ -335,7 +335,7 @@ public class AssetParams extends ObjectBase {
         dest.writeString(this.systemName);
         dest.writeString(this.description);
         dest.writeValue(this.createdAt);
-        dest.writeBoolean(this.isSystemDefault);
+        dest.writeValue(this.isSystemDefault);
         dest.writeString(this.tags);
         if(this.requiredPermissions != null) {
             dest.writeInt(this.requiredPermissions.size());
@@ -357,7 +357,7 @@ public class AssetParams extends ObjectBase {
         this.systemName = in.readString();
         this.description = in.readString();
         this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.isSystemDefault = in.readBoolean();
+        this.isSystemDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.tags = in.readString();
         int requiredPermissionsSize = in.readInt();
         if( requiredPermissionsSize > -1) {

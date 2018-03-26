@@ -253,7 +253,7 @@ public class UserFilter extends UserBaseFilter {
         dest.writeString(this.idOrScreenNameStartsWith);
         dest.writeString(this.idEqual);
         dest.writeString(this.idIn);
-        dest.writeBoolean(this.loginEnabledEqual);
+        dest.writeValue(this.loginEnabledEqual);
         dest.writeString(this.roleIdEqual);
         dest.writeString(this.roleIdsEqual);
         dest.writeString(this.roleIdsIn);
@@ -267,7 +267,7 @@ public class UserFilter extends UserBaseFilter {
         this.idOrScreenNameStartsWith = in.readString();
         this.idEqual = in.readString();
         this.idIn = in.readString();
-        this.loginEnabledEqual = in.readBoolean();
+        this.loginEnabledEqual = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.roleIdEqual = in.readString();
         this.roleIdsEqual = in.readString();
         this.roleIdsIn = in.readString();

@@ -241,7 +241,7 @@ public abstract class AnnotationBaseFilter extends CuePointFilter {
         dest.writeValue(this.endTimeLessThanOrEqual);
         dest.writeValue(this.durationGreaterThanOrEqual);
         dest.writeValue(this.durationLessThanOrEqual);
-        dest.writeBoolean(this.isPublicEqual);
+        dest.writeValue(this.isPublicEqual);
     }
 
     public AnnotationBaseFilter(Parcel in) {
@@ -255,7 +255,7 @@ public abstract class AnnotationBaseFilter extends CuePointFilter {
         this.endTimeLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.durationGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.durationLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.isPublicEqual = in.readBoolean();
+        this.isPublicEqual = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

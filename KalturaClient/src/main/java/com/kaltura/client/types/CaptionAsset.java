@@ -260,7 +260,7 @@ public class CaptionAsset extends Asset {
         dest.writeValue(this.captionParamsId);
         dest.writeInt(this.language == null ? -1 : this.language.ordinal());
         dest.writeInt(this.languageCode == null ? -1 : this.languageCode.ordinal());
-        dest.writeBoolean(this.isDefault);
+        dest.writeValue(this.isDefault);
         dest.writeString(this.label);
         dest.writeInt(this.format == null ? -1 : this.format.ordinal());
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
@@ -275,7 +275,7 @@ public class CaptionAsset extends Asset {
         this.language = tmpLanguage == -1 ? null : Language.values()[tmpLanguage];
         int tmpLanguageCode = in.readInt();
         this.languageCode = tmpLanguageCode == -1 ? null : LanguageCode.values()[tmpLanguageCode];
-        this.isDefault = in.readBoolean();
+        this.isDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.label = in.readString();
         int tmpFormat = in.readInt();
         this.format = tmpFormat == -1 ? null : CaptionType.values()[tmpFormat];

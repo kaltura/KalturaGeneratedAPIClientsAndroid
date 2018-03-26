@@ -337,7 +337,7 @@ public class FlavorAsset extends Asset {
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
         dest.writeInt(this.language == null ? -1 : this.language.ordinal());
         dest.writeString(this.label);
-        dest.writeBoolean(this.isDefault);
+        dest.writeValue(this.isDefault);
     }
 
     public FlavorAsset(Parcel in) {
@@ -356,7 +356,7 @@ public class FlavorAsset extends Asset {
         int tmpLanguage = in.readInt();
         this.language = tmpLanguage == -1 ? null : Language.values()[tmpLanguage];
         this.label = in.readString();
-        this.isDefault = in.readBoolean();
+        this.isDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

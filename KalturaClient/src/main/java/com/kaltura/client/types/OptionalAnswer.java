@@ -155,7 +155,7 @@ public class OptionalAnswer extends ObjectBase {
         dest.writeString(this.key);
         dest.writeString(this.text);
         dest.writeValue(this.weight);
-        dest.writeBoolean(this.isCorrect);
+        dest.writeValue(this.isCorrect);
     }
 
     public OptionalAnswer(Parcel in) {
@@ -163,7 +163,7 @@ public class OptionalAnswer extends ObjectBase {
         this.key = in.readString();
         this.text = in.readString();
         this.weight = (Double)in.readValue(Double.class.getClassLoader());
-        this.isCorrect = in.readBoolean();
+        this.isCorrect = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

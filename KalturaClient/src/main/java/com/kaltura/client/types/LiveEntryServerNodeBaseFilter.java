@@ -41,7 +41,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(LiveEntryServerNodeBaseFilter.Tokenizer.class)
-public abstract class LiveEntryServerNodeBaseFilter extends EntryServerNodeFilter {
+public class LiveEntryServerNodeBaseFilter extends EntryServerNodeFilter {
 	
 	public interface Tokenizer extends EntryServerNodeFilter.Tokenizer {
 	}
@@ -62,6 +62,18 @@ public abstract class LiveEntryServerNodeBaseFilter extends EntryServerNodeFilte
 		return kparams;
 	}
 
+
+    public static final Creator<LiveEntryServerNodeBaseFilter> CREATOR = new Creator<LiveEntryServerNodeBaseFilter>() {
+        @Override
+        public LiveEntryServerNodeBaseFilter createFromParcel(Parcel source) {
+            return new LiveEntryServerNodeBaseFilter(source);
+        }
+
+        @Override
+        public LiveEntryServerNodeBaseFilter[] newArray(int size) {
+            return new LiveEntryServerNodeBaseFilter[size];
+        }
+    };
 
     public LiveEntryServerNodeBaseFilter(Parcel in) {
         super(in);

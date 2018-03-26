@@ -547,7 +547,7 @@ public abstract class CuePointBaseFilter extends RelatedFilter {
         dest.writeString(this.partnerSortValueIn);
         dest.writeValue(this.partnerSortValueGreaterThanOrEqual);
         dest.writeValue(this.partnerSortValueLessThanOrEqual);
-        dest.writeBoolean(this.forceStopEqual);
+        dest.writeValue(this.forceStopEqual);
         dest.writeString(this.systemNameEqual);
         dest.writeString(this.systemNameIn);
     }
@@ -581,7 +581,7 @@ public abstract class CuePointBaseFilter extends RelatedFilter {
         this.partnerSortValueIn = in.readString();
         this.partnerSortValueGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.partnerSortValueLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.forceStopEqual = in.readBoolean();
+        this.forceStopEqual = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.systemNameEqual = in.readString();
         this.systemNameIn = in.readString();
     }

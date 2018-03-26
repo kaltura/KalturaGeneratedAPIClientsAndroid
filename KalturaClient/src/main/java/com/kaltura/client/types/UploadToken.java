@@ -302,7 +302,7 @@ public class UploadToken extends ObjectBase {
         dest.writeValue(this.createdAt);
         dest.writeValue(this.updatedAt);
         dest.writeString(this.uploadUrl);
-        dest.writeBoolean(this.autoFinalize);
+        dest.writeValue(this.autoFinalize);
     }
 
     public UploadToken(Parcel in) {
@@ -318,7 +318,7 @@ public class UploadToken extends ObjectBase {
         this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
         this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
         this.uploadUrl = in.readString();
-        this.autoFinalize = in.readBoolean();
+        this.autoFinalize = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

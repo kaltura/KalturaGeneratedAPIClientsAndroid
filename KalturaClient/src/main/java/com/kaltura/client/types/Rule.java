@@ -271,7 +271,7 @@ public class Rule extends ObjectBase {
             dest.writeInt(-1);
         }
         dest.writeValue(this.stopProcessing);
-        dest.writeBoolean(this.forceAdminValidation);
+        dest.writeValue(this.forceAdminValidation);
     }
 
     public Rule(Parcel in) {
@@ -296,7 +296,7 @@ public class Rule extends ObjectBase {
             in.readList(this.contexts, ContextTypeHolder.class.getClassLoader());
         }
         this.stopProcessing = (Boolean)in.readValue(Boolean.class.getClassLoader());
-        this.forceAdminValidation = in.readBoolean();
+        this.forceAdminValidation = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

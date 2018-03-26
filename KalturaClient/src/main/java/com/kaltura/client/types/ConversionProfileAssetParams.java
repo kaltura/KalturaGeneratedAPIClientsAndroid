@@ -305,12 +305,12 @@ public class ConversionProfileAssetParams extends ObjectBase {
         dest.writeInt(this.readyBehavior == null ? -1 : this.readyBehavior.ordinal());
         dest.writeInt(this.origin == null ? -1 : this.origin.ordinal());
         dest.writeString(this.systemName);
-        dest.writeBoolean(this.forceNoneComplied);
+        dest.writeValue(this.forceNoneComplied);
         dest.writeInt(this.deletePolicy == null ? -1 : this.deletePolicy.ordinal());
-        dest.writeBoolean(this.isEncrypted);
+        dest.writeValue(this.isEncrypted);
         dest.writeValue(this.contentAwareness);
         dest.writeValue(this.chunkedEncodeMode);
-        dest.writeBoolean(this.twoPass);
+        dest.writeValue(this.twoPass);
         dest.writeString(this.tags);
     }
 
@@ -323,13 +323,13 @@ public class ConversionProfileAssetParams extends ObjectBase {
         int tmpOrigin = in.readInt();
         this.origin = tmpOrigin == -1 ? null : AssetParamsOrigin.values()[tmpOrigin];
         this.systemName = in.readString();
-        this.forceNoneComplied = in.readBoolean();
+        this.forceNoneComplied = (Boolean)in.readValue(Boolean.class.getClassLoader());
         int tmpDeletePolicy = in.readInt();
         this.deletePolicy = tmpDeletePolicy == -1 ? null : AssetParamsDeletePolicy.values()[tmpDeletePolicy];
-        this.isEncrypted = in.readBoolean();
+        this.isEncrypted = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.contentAwareness = (Double)in.readValue(Double.class.getClassLoader());
         this.chunkedEncodeMode = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.twoPass = in.readBoolean();
+        this.twoPass = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.tags = in.readString();
     }
 }

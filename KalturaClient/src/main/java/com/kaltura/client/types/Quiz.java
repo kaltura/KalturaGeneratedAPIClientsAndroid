@@ -221,12 +221,12 @@ public class Quiz extends ObjectBase {
         } else {
             dest.writeInt(-1);
         }
-        dest.writeBoolean(this.showResultOnAnswer);
-        dest.writeBoolean(this.showCorrectKeyOnAnswer);
-        dest.writeBoolean(this.allowAnswerUpdate);
-        dest.writeBoolean(this.showCorrectAfterSubmission);
-        dest.writeBoolean(this.allowDownload);
-        dest.writeBoolean(this.showGradeAfterSubmission);
+        dest.writeValue(this.showResultOnAnswer);
+        dest.writeValue(this.showCorrectKeyOnAnswer);
+        dest.writeValue(this.allowAnswerUpdate);
+        dest.writeValue(this.showCorrectAfterSubmission);
+        dest.writeValue(this.allowDownload);
+        dest.writeValue(this.showGradeAfterSubmission);
     }
 
     public Quiz(Parcel in) {
@@ -237,12 +237,12 @@ public class Quiz extends ObjectBase {
             this.uiAttributes = new ArrayList<>();
             in.readList(this.uiAttributes, KeyValue.class.getClassLoader());
         }
-        this.showResultOnAnswer = in.readBoolean();
-        this.showCorrectKeyOnAnswer = in.readBoolean();
-        this.allowAnswerUpdate = in.readBoolean();
-        this.showCorrectAfterSubmission = in.readBoolean();
-        this.allowDownload = in.readBoolean();
-        this.showGradeAfterSubmission = in.readBoolean();
+        this.showResultOnAnswer = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.showCorrectKeyOnAnswer = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.allowAnswerUpdate = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.showCorrectAfterSubmission = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.allowDownload = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.showGradeAfterSubmission = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

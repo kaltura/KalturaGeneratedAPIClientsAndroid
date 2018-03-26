@@ -182,7 +182,7 @@ public class AnswerCuePoint extends CuePoint {
         dest.writeString(this.parentId);
         dest.writeString(this.quizUserEntryId);
         dest.writeString(this.answerKey);
-        dest.writeBoolean(this.isCorrect);
+        dest.writeValue(this.isCorrect);
         if(this.correctAnswerKeys != null) {
             dest.writeInt(this.correctAnswerKeys.size());
             dest.writeList(this.correctAnswerKeys);
@@ -197,7 +197,7 @@ public class AnswerCuePoint extends CuePoint {
         this.parentId = in.readString();
         this.quizUserEntryId = in.readString();
         this.answerKey = in.readString();
-        this.isCorrect = in.readBoolean();
+        this.isCorrect = (Boolean)in.readValue(Boolean.class.getClassLoader());
         int correctAnswerKeysSize = in.readInt();
         if( correctAnswerKeysSize > -1) {
             this.correctAnswerKeys = new ArrayList<>();

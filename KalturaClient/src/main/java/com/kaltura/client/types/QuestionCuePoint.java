@@ -210,7 +210,7 @@ public class QuestionCuePoint extends CuePoint {
         dest.writeString(this.explanation);
         dest.writeInt(this.questionType == null ? -1 : this.questionType.ordinal());
         dest.writeValue(this.presentationOrder);
-        dest.writeBoolean(this.excludeFromScore);
+        dest.writeValue(this.excludeFromScore);
     }
 
     public QuestionCuePoint(Parcel in) {
@@ -226,7 +226,7 @@ public class QuestionCuePoint extends CuePoint {
         int tmpQuestionType = in.readInt();
         this.questionType = tmpQuestionType == -1 ? null : QuestionType.values()[tmpQuestionType];
         this.presentationOrder = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.excludeFromScore = in.readBoolean();
+        this.excludeFromScore = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

@@ -321,7 +321,7 @@ public class MediaEntry extends PlayableEntry {
         dest.writeValue(this.mediaDate);
         dest.writeString(this.dataUrl);
         dest.writeString(this.flavorParamsIds);
-        dest.writeBoolean(this.isTrimDisabled);
+        dest.writeValue(this.isTrimDisabled);
         if(this.streams != null) {
             dest.writeInt(this.streams.size());
             dest.writeList(this.streams);
@@ -345,7 +345,7 @@ public class MediaEntry extends PlayableEntry {
         this.mediaDate = (Integer)in.readValue(Integer.class.getClassLoader());
         this.dataUrl = in.readString();
         this.flavorParamsIds = in.readString();
-        this.isTrimDisabled = in.readBoolean();
+        this.isTrimDisabled = (Boolean)in.readValue(Boolean.class.getClassLoader());
         int streamsSize = in.readInt();
         if( streamsSize > -1) {
             this.streams = new ArrayList<>();

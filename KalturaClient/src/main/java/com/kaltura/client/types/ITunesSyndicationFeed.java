@@ -275,7 +275,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
         dest.writeInt(this.category == null ? -1 : this.category.ordinal());
         dest.writeInt(this.adultContent == null ? -1 : this.adultContent.ordinal());
         dest.writeString(this.feedAuthor);
-        dest.writeBoolean(this.enforceOrder);
+        dest.writeValue(this.enforceOrder);
     }
 
     public ITunesSyndicationFeed(Parcel in) {
@@ -291,7 +291,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
         int tmpAdultContent = in.readInt();
         this.adultContent = tmpAdultContent == -1 ? null : ITunesSyndicationFeedAdultValues.values()[tmpAdultContent];
         this.feedAuthor = in.readString();
-        this.enforceOrder = in.readBoolean();
+        this.enforceOrder = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

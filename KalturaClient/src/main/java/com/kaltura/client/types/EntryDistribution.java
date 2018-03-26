@@ -579,12 +579,12 @@ public class EntryDistribution extends ObjectBase {
         dest.writeInt(this.errorType == null ? -1 : this.errorType.ordinal());
         dest.writeValue(this.errorNumber);
         dest.writeString(this.errorDescription);
-        dest.writeBoolean(this.hasSubmitResultsLog);
-        dest.writeBoolean(this.hasSubmitSentDataLog);
-        dest.writeBoolean(this.hasUpdateResultsLog);
-        dest.writeBoolean(this.hasUpdateSentDataLog);
-        dest.writeBoolean(this.hasDeleteResultsLog);
-        dest.writeBoolean(this.hasDeleteSentDataLog);
+        dest.writeValue(this.hasSubmitResultsLog);
+        dest.writeValue(this.hasSubmitSentDataLog);
+        dest.writeValue(this.hasUpdateResultsLog);
+        dest.writeValue(this.hasUpdateSentDataLog);
+        dest.writeValue(this.hasDeleteResultsLog);
+        dest.writeValue(this.hasDeleteSentDataLog);
     }
 
     public EntryDistribution(Parcel in) {
@@ -619,12 +619,12 @@ public class EntryDistribution extends ObjectBase {
         this.errorType = tmpErrorType == -1 ? null : BatchJobErrorTypes.values()[tmpErrorType];
         this.errorNumber = (Integer)in.readValue(Integer.class.getClassLoader());
         this.errorDescription = in.readString();
-        this.hasSubmitResultsLog = in.readBoolean();
-        this.hasSubmitSentDataLog = in.readBoolean();
-        this.hasUpdateResultsLog = in.readBoolean();
-        this.hasUpdateSentDataLog = in.readBoolean();
-        this.hasDeleteResultsLog = in.readBoolean();
-        this.hasDeleteSentDataLog = in.readBoolean();
+        this.hasSubmitResultsLog = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.hasSubmitSentDataLog = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.hasUpdateResultsLog = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.hasUpdateSentDataLog = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.hasDeleteResultsLog = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.hasDeleteSentDataLog = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

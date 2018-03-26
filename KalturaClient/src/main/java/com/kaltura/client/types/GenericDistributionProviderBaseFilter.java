@@ -273,7 +273,7 @@ public abstract class GenericDistributionProviderBaseFilter extends Distribution
         dest.writeValue(this.updatedAtLessThanOrEqual);
         dest.writeValue(this.partnerIdEqual);
         dest.writeString(this.partnerIdIn);
-        dest.writeBoolean(this.isDefaultEqual);
+        dest.writeValue(this.isDefaultEqual);
         dest.writeString(this.isDefaultIn);
         dest.writeInt(this.statusEqual == null ? -1 : this.statusEqual.ordinal());
         dest.writeString(this.statusIn);
@@ -289,7 +289,7 @@ public abstract class GenericDistributionProviderBaseFilter extends Distribution
         this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.partnerIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.partnerIdIn = in.readString();
-        this.isDefaultEqual = in.readBoolean();
+        this.isDefaultEqual = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.isDefaultIn = in.readString();
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : GenericDistributionProviderStatus.values()[tmpStatusEqual];

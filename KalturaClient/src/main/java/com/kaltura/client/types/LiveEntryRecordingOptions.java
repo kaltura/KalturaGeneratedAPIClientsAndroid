@@ -152,18 +152,18 @@ public class LiveEntryRecordingOptions extends ObjectBase {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeBoolean(this.shouldCopyEntitlement);
-        dest.writeBoolean(this.shouldCopyScheduling);
-        dest.writeBoolean(this.shouldCopyThumbnail);
-        dest.writeBoolean(this.shouldMakeHidden);
+        dest.writeValue(this.shouldCopyEntitlement);
+        dest.writeValue(this.shouldCopyScheduling);
+        dest.writeValue(this.shouldCopyThumbnail);
+        dest.writeValue(this.shouldMakeHidden);
     }
 
     public LiveEntryRecordingOptions(Parcel in) {
         super(in);
-        this.shouldCopyEntitlement = in.readBoolean();
-        this.shouldCopyScheduling = in.readBoolean();
-        this.shouldCopyThumbnail = in.readBoolean();
-        this.shouldMakeHidden = in.readBoolean();
+        this.shouldCopyEntitlement = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.shouldCopyScheduling = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.shouldCopyThumbnail = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.shouldMakeHidden = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

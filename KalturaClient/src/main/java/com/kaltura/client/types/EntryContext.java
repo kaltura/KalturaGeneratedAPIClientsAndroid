@@ -123,13 +123,13 @@ public class EntryContext extends Context {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.entryId);
-        dest.writeBoolean(this.followEntryRedirect);
+        dest.writeValue(this.followEntryRedirect);
     }
 
     public EntryContext(Parcel in) {
         super(in);
         this.entryId = in.readString();
-        this.followEntryRedirect = in.readBoolean();
+        this.followEntryRedirect = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

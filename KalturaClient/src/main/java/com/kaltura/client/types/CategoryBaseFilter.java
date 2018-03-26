@@ -742,7 +742,7 @@ public abstract class CategoryBaseFilter extends RelatedFilter {
         dest.writeInt(this.inheritanceTypeEqual == null ? -1 : this.inheritanceTypeEqual.ordinal());
         dest.writeString(this.inheritanceTypeIn);
         dest.writeString(this.referenceIdEqual);
-        dest.writeBoolean(this.referenceIdEmpty);
+        dest.writeValue(this.referenceIdEmpty);
         dest.writeInt(this.contributionPolicyEqual == null ? -1 : this.contributionPolicyEqual.ordinal());
         dest.writeValue(this.membersCountGreaterThanOrEqual);
         dest.writeValue(this.membersCountLessThanOrEqual);
@@ -789,7 +789,7 @@ public abstract class CategoryBaseFilter extends RelatedFilter {
         this.inheritanceTypeEqual = tmpInheritanceTypeEqual == -1 ? null : InheritanceType.values()[tmpInheritanceTypeEqual];
         this.inheritanceTypeIn = in.readString();
         this.referenceIdEqual = in.readString();
-        this.referenceIdEmpty = in.readBoolean();
+        this.referenceIdEmpty = (Boolean)in.readValue(Boolean.class.getClassLoader());
         int tmpContributionPolicyEqual = in.readInt();
         this.contributionPolicyEqual = tmpContributionPolicyEqual == -1 ? null : ContributionPolicyType.values()[tmpContributionPolicyEqual];
         this.membersCountGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());

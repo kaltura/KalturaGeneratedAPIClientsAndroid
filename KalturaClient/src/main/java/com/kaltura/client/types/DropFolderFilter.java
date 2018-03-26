@@ -100,12 +100,12 @@ public class DropFolderFilter extends DropFolderBaseFilter {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeBoolean(this.currentDc);
+        dest.writeValue(this.currentDc);
     }
 
     public DropFolderFilter(Parcel in) {
         super(in);
-        this.currentDc = in.readBoolean();
+        this.currentDc = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

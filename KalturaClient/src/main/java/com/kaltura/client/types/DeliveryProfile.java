@@ -449,7 +449,7 @@ public class DeliveryProfile extends ObjectBase {
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
         dest.writeParcelable(this.recognizer, flags);
         dest.writeParcelable(this.tokenizer, flags);
-        dest.writeBoolean(this.isDefault);
+        dest.writeValue(this.isDefault);
         dest.writeValue(this.parentId);
         dest.writeString(this.mediaProtocols);
         dest.writeValue(this.priority);
@@ -476,7 +476,7 @@ public class DeliveryProfile extends ObjectBase {
         this.status = tmpStatus == -1 ? null : DeliveryStatus.values()[tmpStatus];
         this.recognizer = in.readParcelable(UrlRecognizer.class.getClassLoader());
         this.tokenizer = in.readParcelable(UrlTokenizer.class.getClassLoader());
-        this.isDefault = in.readBoolean();
+        this.isDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.parentId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.mediaProtocols = in.readString();
         this.priority = (Integer)in.readValue(Integer.class.getClassLoader());

@@ -345,7 +345,7 @@ public abstract class UserBaseFilter extends RelatedFilter {
         dest.writeValue(this.createdAtLessThanOrEqual);
         dest.writeString(this.firstNameStartsWith);
         dest.writeString(this.lastNameStartsWith);
-        dest.writeBoolean(this.isAdminEqual);
+        dest.writeValue(this.isAdminEqual);
     }
 
     public UserBaseFilter(Parcel in) {
@@ -367,7 +367,7 @@ public abstract class UserBaseFilter extends RelatedFilter {
         this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.firstNameStartsWith = in.readString();
         this.lastNameStartsWith = in.readString();
-        this.isAdminEqual = in.readBoolean();
+        this.isAdminEqual = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

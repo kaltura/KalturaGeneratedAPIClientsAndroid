@@ -252,8 +252,8 @@ public class Annotation extends CuePoint {
         dest.writeValue(this.depth);
         dest.writeValue(this.childrenCount);
         dest.writeValue(this.directChildrenCount);
-        dest.writeBoolean(this.isPublic);
-        dest.writeBoolean(this.searchableOnEntry);
+        dest.writeValue(this.isPublic);
+        dest.writeValue(this.searchableOnEntry);
     }
 
     public Annotation(Parcel in) {
@@ -265,8 +265,8 @@ public class Annotation extends CuePoint {
         this.depth = (Integer)in.readValue(Integer.class.getClassLoader());
         this.childrenCount = (Integer)in.readValue(Integer.class.getClassLoader());
         this.directChildrenCount = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.isPublic = in.readBoolean();
-        this.searchableOnEntry = in.readBoolean();
+        this.isPublic = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.searchableOnEntry = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
