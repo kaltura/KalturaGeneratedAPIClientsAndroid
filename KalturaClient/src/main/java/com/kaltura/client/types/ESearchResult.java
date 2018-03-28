@@ -49,22 +49,12 @@ import java.util.List;
 public abstract class ESearchResult extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
-		ObjectBase.Tokenizer object();
 		RequestBuilder.ListTokenizer<ESearchHighlight.Tokenizer> highlight();
 		RequestBuilder.ListTokenizer<ESearchItemDataResult.Tokenizer> itemsData();
 	}
 
-	private ObjectBase object;
 	private List<ESearchHighlight> highlight;
 	private List<ESearchItemDataResult> itemsData;
-
-	// object:
-	public ObjectBase getObject(){
-		return this.object;
-	}
-	public void setObject(ObjectBase object){
-		this.object = object;
-	}
 
 	// highlight:
 	public List<ESearchHighlight> getHighlight(){
@@ -93,7 +83,6 @@ public abstract class ESearchResult extends ObjectBase {
 		if(jsonObject == null) return;
 
 		// set members values:
-		object = GsonParser.parseObject(jsonObject.getAsJsonObject("object"), ObjectBase.class);
 		highlight = GsonParser.parseArray(jsonObject.getAsJsonArray("highlight"), ESearchHighlight.class);
 		itemsData = GsonParser.parseArray(jsonObject.getAsJsonArray("itemsData"), ESearchItemDataResult.class);
 
@@ -102,7 +91,6 @@ public abstract class ESearchResult extends ObjectBase {
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaESearchResult");
-		kparams.add("object", this.object);
 		kparams.add("highlight", this.highlight);
 		kparams.add("itemsData", this.itemsData);
 		return kparams;
@@ -112,7 +100,6 @@ public abstract class ESearchResult extends ObjectBase {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeParcelable(this.object, flags);
         if(this.highlight != null) {
             dest.writeInt(this.highlight.size());
             dest.writeList(this.highlight);
@@ -129,7 +116,6 @@ public abstract class ESearchResult extends ObjectBase {
 
     public ESearchResult(Parcel in) {
         super(in);
-        this.object = in.readParcelable(ObjectBase.class.getClassLoader());
         int highlightSize = in.readInt();
         if( highlightSize > -1) {
             this.highlight = new ArrayList<>();

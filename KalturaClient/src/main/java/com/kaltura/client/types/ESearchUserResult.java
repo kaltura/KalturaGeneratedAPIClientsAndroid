@@ -30,6 +30,8 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.types.User;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -44,8 +46,18 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class ESearchUserResult extends ESearchResult {
 	
 	public interface Tokenizer extends ESearchResult.Tokenizer {
+		User.Tokenizer object();
 	}
 
+	private User object;
+
+	// object:
+	public User getObject(){
+		return this.object;
+	}
+	public void setObject(User object){
+		this.object = object;
+	}
 
 
 	public ESearchUserResult() {
@@ -54,11 +66,18 @@ public class ESearchUserResult extends ESearchResult {
 
 	public ESearchUserResult(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		object = GsonParser.parseObject(jsonObject.getAsJsonObject("object"), User.class);
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaESearchUserResult");
+		kparams.add("object", this.object);
 		return kparams;
 	}
 
@@ -75,8 +94,15 @@ public class ESearchUserResult extends ESearchResult {
         }
     };
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeParcelable(this.object, flags);
+    }
+
     public ESearchUserResult(Parcel in) {
         super(in);
+        this.object = in.readParcelable(User.class.getClassLoader());
     }
 }
 
