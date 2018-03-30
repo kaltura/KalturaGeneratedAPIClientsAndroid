@@ -73,6 +73,7 @@ public abstract class LiveEntry extends MediaEntry {
 		String explicitLive();
 		String viewMode();
 		String recordingStatus();
+		String lastBroadcastEndTime();
 	}
 
 	/**
@@ -137,6 +138,10 @@ public abstract class LiveEntry extends MediaEntry {
 	private Boolean explicitLive;
 	private ViewMode viewMode;
 	private RecordingStatus recordingStatus;
+	/**
+	 * The time the last broadcast finished.
+	 */
+	private Integer lastBroadcastEndTime;
 
 	// offlineMessage:
 	public String getOfflineMessage(){
@@ -342,6 +347,18 @@ public abstract class LiveEntry extends MediaEntry {
 		setToken("recordingStatus", multirequestToken);
 	}
 
+	// lastBroadcastEndTime:
+	public Integer getLastBroadcastEndTime(){
+		return this.lastBroadcastEndTime;
+	}
+	public void setLastBroadcastEndTime(Integer lastBroadcastEndTime){
+		this.lastBroadcastEndTime = lastBroadcastEndTime;
+	}
+
+	public void lastBroadcastEndTime(String multirequestToken){
+		setToken("lastBroadcastEndTime", multirequestToken);
+	}
+
 
 	public LiveEntry() {
 		super();
@@ -371,6 +388,7 @@ public abstract class LiveEntry extends MediaEntry {
 		explicitLive = GsonParser.parseBoolean(jsonObject.get("explicitLive"));
 		viewMode = ViewMode.get(GsonParser.parseInt(jsonObject.get("viewMode")));
 		recordingStatus = RecordingStatus.get(GsonParser.parseInt(jsonObject.get("recordingStatus")));
+		lastBroadcastEndTime = GsonParser.parseInt(jsonObject.get("lastBroadcastEndTime"));
 
 	}
 
@@ -427,6 +445,7 @@ public abstract class LiveEntry extends MediaEntry {
         dest.writeValue(this.explicitLive);
         dest.writeInt(this.viewMode == null ? -1 : this.viewMode.ordinal());
         dest.writeInt(this.recordingStatus == null ? -1 : this.recordingStatus.ordinal());
+        dest.writeValue(this.lastBroadcastEndTime);
     }
 
     public LiveEntry(Parcel in) {
@@ -463,6 +482,7 @@ public abstract class LiveEntry extends MediaEntry {
         this.viewMode = tmpViewMode == -1 ? null : ViewMode.values()[tmpViewMode];
         int tmpRecordingStatus = in.readInt();
         this.recordingStatus = tmpRecordingStatus == -1 ? null : RecordingStatus.values()[tmpRecordingStatus];
+        this.lastBroadcastEndTime = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
