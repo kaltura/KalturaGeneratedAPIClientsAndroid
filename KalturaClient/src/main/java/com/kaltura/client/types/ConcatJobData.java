@@ -54,6 +54,7 @@ public class ConcatJobData extends JobData {
 		String offset();
 		String duration();
 		String concatenatedDuration();
+		String shouldSort();
 	}
 
 	/**
@@ -80,6 +81,10 @@ public class ConcatJobData extends JobData {
 	 * duration of the concated video
 	 */
 	private Double concatenatedDuration;
+	/**
+	 * Should Sort the clip parts
+	 */
+	private Boolean shouldSort;
 
 	// srcFiles:
 	public List<StringHolder> getSrcFiles(){
@@ -149,6 +154,18 @@ public class ConcatJobData extends JobData {
 		setToken("concatenatedDuration", multirequestToken);
 	}
 
+	// shouldSort:
+	public Boolean getShouldSort(){
+		return this.shouldSort;
+	}
+	public void setShouldSort(Boolean shouldSort){
+		this.shouldSort = shouldSort;
+	}
+
+	public void shouldSort(String multirequestToken){
+		setToken("shouldSort", multirequestToken);
+	}
+
 
 	public ConcatJobData() {
 		super();
@@ -166,6 +183,7 @@ public class ConcatJobData extends JobData {
 		offset = GsonParser.parseDouble(jsonObject.get("offset"));
 		duration = GsonParser.parseDouble(jsonObject.get("duration"));
 		concatenatedDuration = GsonParser.parseDouble(jsonObject.get("concatenatedDuration"));
+		shouldSort = GsonParser.parseBoolean(jsonObject.get("shouldSort"));
 
 	}
 
@@ -178,6 +196,7 @@ public class ConcatJobData extends JobData {
 		kparams.add("offset", this.offset);
 		kparams.add("duration", this.duration);
 		kparams.add("concatenatedDuration", this.concatenatedDuration);
+		kparams.add("shouldSort", this.shouldSort);
 		return kparams;
 	}
 
@@ -208,6 +227,7 @@ public class ConcatJobData extends JobData {
         dest.writeValue(this.offset);
         dest.writeValue(this.duration);
         dest.writeValue(this.concatenatedDuration);
+        dest.writeValue(this.shouldSort);
     }
 
     public ConcatJobData(Parcel in) {
@@ -222,6 +242,7 @@ public class ConcatJobData extends JobData {
         this.offset = (Double)in.readValue(Double.class.getClassLoader());
         this.duration = (Double)in.readValue(Double.class.getClassLoader());
         this.concatenatedDuration = (Double)in.readValue(Double.class.getClassLoader());
+        this.shouldSort = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

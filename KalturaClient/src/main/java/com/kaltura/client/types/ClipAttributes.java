@@ -50,6 +50,7 @@ public class ClipAttributes extends OperationAttributes {
 	public interface Tokenizer extends OperationAttributes.Tokenizer {
 		String offset();
 		String duration();
+		String globalOffsetInDestination();
 	}
 
 	/**
@@ -60,6 +61,10 @@ public class ClipAttributes extends OperationAttributes {
 	 * Duration in milliseconds
 	 */
 	private Integer duration;
+	/**
+	 * global Offset In Destination in milliseconds
+	 */
+	private Integer globalOffsetInDestination;
 
 	// offset:
 	public Integer getOffset(){
@@ -85,6 +90,18 @@ public class ClipAttributes extends OperationAttributes {
 		setToken("duration", multirequestToken);
 	}
 
+	// globalOffsetInDestination:
+	public Integer getGlobalOffsetInDestination(){
+		return this.globalOffsetInDestination;
+	}
+	public void setGlobalOffsetInDestination(Integer globalOffsetInDestination){
+		this.globalOffsetInDestination = globalOffsetInDestination;
+	}
+
+	public void globalOffsetInDestination(String multirequestToken){
+		setToken("globalOffsetInDestination", multirequestToken);
+	}
+
 
 	public ClipAttributes() {
 		super();
@@ -98,6 +115,7 @@ public class ClipAttributes extends OperationAttributes {
 		// set members values:
 		offset = GsonParser.parseInt(jsonObject.get("offset"));
 		duration = GsonParser.parseInt(jsonObject.get("duration"));
+		globalOffsetInDestination = GsonParser.parseInt(jsonObject.get("globalOffsetInDestination"));
 
 	}
 
@@ -106,6 +124,7 @@ public class ClipAttributes extends OperationAttributes {
 		kparams.add("objectType", "KalturaClipAttributes");
 		kparams.add("offset", this.offset);
 		kparams.add("duration", this.duration);
+		kparams.add("globalOffsetInDestination", this.globalOffsetInDestination);
 		return kparams;
 	}
 
@@ -127,12 +146,14 @@ public class ClipAttributes extends OperationAttributes {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.offset);
         dest.writeValue(this.duration);
+        dest.writeValue(this.globalOffsetInDestination);
     }
 
     public ClipAttributes(Parcel in) {
         super(in);
         this.offset = (Integer)in.readValue(Integer.class.getClassLoader());
         this.duration = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.globalOffsetInDestination = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
