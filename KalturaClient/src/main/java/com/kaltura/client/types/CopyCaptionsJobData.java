@@ -32,6 +32,9 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -45,42 +48,20 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class CopyCaptionsJobData extends JobData {
 	
 	public interface Tokenizer extends JobData.Tokenizer {
-		String sourceEntryId();
 		String entryId();
-		String offset();
-		String duration();
+		RequestBuilder.ListTokenizer<ClipDescription.Tokenizer> clipsDescriptionArray();
 		String fullCopy();
 	}
 
-	/**
-	 * source entry Id
-	 */
-	private String sourceEntryId;
 	/**
 	 * entry Id
 	 */
 	private String entryId;
 	/**
-	 * clip offset
+	 * an array of source start time and duration
 	 */
-	private Integer offset;
-	/**
-	 * clip duration
-	 */
-	private Integer duration;
+	private List<ClipDescription> clipsDescriptionArray;
 	private Boolean fullCopy;
-
-	// sourceEntryId:
-	public String getSourceEntryId(){
-		return this.sourceEntryId;
-	}
-	public void setSourceEntryId(String sourceEntryId){
-		this.sourceEntryId = sourceEntryId;
-	}
-
-	public void sourceEntryId(String multirequestToken){
-		setToken("sourceEntryId", multirequestToken);
-	}
 
 	// entryId:
 	public String getEntryId(){
@@ -94,28 +75,12 @@ public class CopyCaptionsJobData extends JobData {
 		setToken("entryId", multirequestToken);
 	}
 
-	// offset:
-	public Integer getOffset(){
-		return this.offset;
+	// clipsDescriptionArray:
+	public List<ClipDescription> getClipsDescriptionArray(){
+		return this.clipsDescriptionArray;
 	}
-	public void setOffset(Integer offset){
-		this.offset = offset;
-	}
-
-	public void offset(String multirequestToken){
-		setToken("offset", multirequestToken);
-	}
-
-	// duration:
-	public Integer getDuration(){
-		return this.duration;
-	}
-	public void setDuration(Integer duration){
-		this.duration = duration;
-	}
-
-	public void duration(String multirequestToken){
-		setToken("duration", multirequestToken);
+	public void setClipsDescriptionArray(List<ClipDescription> clipsDescriptionArray){
+		this.clipsDescriptionArray = clipsDescriptionArray;
 	}
 
 	// fullCopy:
@@ -141,10 +106,8 @@ public class CopyCaptionsJobData extends JobData {
 		if(jsonObject == null) return;
 
 		// set members values:
-		sourceEntryId = GsonParser.parseString(jsonObject.get("sourceEntryId"));
 		entryId = GsonParser.parseString(jsonObject.get("entryId"));
-		offset = GsonParser.parseInt(jsonObject.get("offset"));
-		duration = GsonParser.parseInt(jsonObject.get("duration"));
+		clipsDescriptionArray = GsonParser.parseArray(jsonObject.getAsJsonArray("clipsDescriptionArray"), ClipDescription.class);
 		fullCopy = GsonParser.parseBoolean(jsonObject.get("fullCopy"));
 
 	}
@@ -152,10 +115,8 @@ public class CopyCaptionsJobData extends JobData {
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaCopyCaptionsJobData");
-		kparams.add("sourceEntryId", this.sourceEntryId);
 		kparams.add("entryId", this.entryId);
-		kparams.add("offset", this.offset);
-		kparams.add("duration", this.duration);
+		kparams.add("clipsDescriptionArray", this.clipsDescriptionArray);
 		kparams.add("fullCopy", this.fullCopy);
 		return kparams;
 	}
@@ -176,19 +137,24 @@ public class CopyCaptionsJobData extends JobData {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(this.sourceEntryId);
         dest.writeString(this.entryId);
-        dest.writeValue(this.offset);
-        dest.writeValue(this.duration);
+        if(this.clipsDescriptionArray != null) {
+            dest.writeInt(this.clipsDescriptionArray.size());
+            dest.writeList(this.clipsDescriptionArray);
+        } else {
+            dest.writeInt(-1);
+        }
         dest.writeValue(this.fullCopy);
     }
 
     public CopyCaptionsJobData(Parcel in) {
         super(in);
-        this.sourceEntryId = in.readString();
         this.entryId = in.readString();
-        this.offset = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.duration = (Integer)in.readValue(Integer.class.getClassLoader());
+        int clipsDescriptionArraySize = in.readInt();
+        if( clipsDescriptionArraySize > -1) {
+            this.clipsDescriptionArray = new ArrayList<>();
+            in.readList(this.clipsDescriptionArray, ClipDescription.class.getClassLoader());
+        }
         this.fullCopy = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
