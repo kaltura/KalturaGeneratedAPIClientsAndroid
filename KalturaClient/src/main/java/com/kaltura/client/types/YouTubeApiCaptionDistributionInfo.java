@@ -50,7 +50,6 @@ public class YouTubeApiCaptionDistributionInfo extends ObjectBase {
 		String language();
 		String label();
 		String filePath();
-		String encryptionKey();
 		String remoteId();
 		String action();
 		String version();
@@ -60,7 +59,6 @@ public class YouTubeApiCaptionDistributionInfo extends ObjectBase {
 	private String language;
 	private String label;
 	private String filePath;
-	private String encryptionKey;
 	private String remoteId;
 	private YouTubeApiDistributionCaptionAction action;
 	private String version;
@@ -100,18 +98,6 @@ public class YouTubeApiCaptionDistributionInfo extends ObjectBase {
 
 	public void filePath(String multirequestToken){
 		setToken("filePath", multirequestToken);
-	}
-
-	// encryptionKey:
-	public String getEncryptionKey(){
-		return this.encryptionKey;
-	}
-	public void setEncryptionKey(String encryptionKey){
-		this.encryptionKey = encryptionKey;
-	}
-
-	public void encryptionKey(String multirequestToken){
-		setToken("encryptionKey", multirequestToken);
 	}
 
 	// remoteId:
@@ -176,7 +162,6 @@ public class YouTubeApiCaptionDistributionInfo extends ObjectBase {
 		language = GsonParser.parseString(jsonObject.get("language"));
 		label = GsonParser.parseString(jsonObject.get("label"));
 		filePath = GsonParser.parseString(jsonObject.get("filePath"));
-		encryptionKey = GsonParser.parseString(jsonObject.get("encryptionKey"));
 		remoteId = GsonParser.parseString(jsonObject.get("remoteId"));
 		action = YouTubeApiDistributionCaptionAction.get(GsonParser.parseInt(jsonObject.get("action")));
 		version = GsonParser.parseString(jsonObject.get("version"));
@@ -190,7 +175,6 @@ public class YouTubeApiCaptionDistributionInfo extends ObjectBase {
 		kparams.add("language", this.language);
 		kparams.add("label", this.label);
 		kparams.add("filePath", this.filePath);
-		kparams.add("encryptionKey", this.encryptionKey);
 		kparams.add("remoteId", this.remoteId);
 		kparams.add("action", this.action);
 		kparams.add("version", this.version);
@@ -217,7 +201,6 @@ public class YouTubeApiCaptionDistributionInfo extends ObjectBase {
         dest.writeString(this.language);
         dest.writeString(this.label);
         dest.writeString(this.filePath);
-        dest.writeString(this.encryptionKey);
         dest.writeString(this.remoteId);
         dest.writeInt(this.action == null ? -1 : this.action.ordinal());
         dest.writeString(this.version);
@@ -229,7 +212,6 @@ public class YouTubeApiCaptionDistributionInfo extends ObjectBase {
         this.language = in.readString();
         this.label = in.readString();
         this.filePath = in.readString();
-        this.encryptionKey = in.readString();
         this.remoteId = in.readString();
         int tmpAction = in.readInt();
         this.action = tmpAction == -1 ? null : YouTubeApiDistributionCaptionAction.values()[tmpAction];
