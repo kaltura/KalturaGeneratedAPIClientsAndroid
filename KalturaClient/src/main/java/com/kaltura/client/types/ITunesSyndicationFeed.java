@@ -56,6 +56,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
 		String category();
 		String adultContent();
 		String feedAuthor();
+		String enforceFeedAuthor();
 		String enforceOrder();
 	}
 
@@ -86,6 +87,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
 	private ITunesSyndicationFeedCategories category;
 	private ITunesSyndicationFeedAdultValues adultContent;
 	private String feedAuthor;
+	private Boolean enforceFeedAuthor;
 	/**
 	 * true in case you want to enfore the palylist order on the
 	 */
@@ -199,6 +201,18 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
 		setToken("feedAuthor", multirequestToken);
 	}
 
+	// enforceFeedAuthor:
+	public Boolean getEnforceFeedAuthor(){
+		return this.enforceFeedAuthor;
+	}
+	public void setEnforceFeedAuthor(Boolean enforceFeedAuthor){
+		this.enforceFeedAuthor = enforceFeedAuthor;
+	}
+
+	public void enforceFeedAuthor(String multirequestToken){
+		setToken("enforceFeedAuthor", multirequestToken);
+	}
+
 	// enforceOrder:
 	public Boolean getEnforceOrder(){
 		return this.enforceOrder;
@@ -231,6 +245,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
 		category = ITunesSyndicationFeedCategories.get(GsonParser.parseString(jsonObject.get("category")));
 		adultContent = ITunesSyndicationFeedAdultValues.get(GsonParser.parseString(jsonObject.get("adultContent")));
 		feedAuthor = GsonParser.parseString(jsonObject.get("feedAuthor"));
+		enforceFeedAuthor = GsonParser.parseBoolean(jsonObject.get("enforceFeedAuthor"));
 		enforceOrder = GsonParser.parseBoolean(jsonObject.get("enforceOrder"));
 
 	}
@@ -246,6 +261,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
 		kparams.add("feedImageUrl", this.feedImageUrl);
 		kparams.add("adultContent", this.adultContent);
 		kparams.add("feedAuthor", this.feedAuthor);
+		kparams.add("enforceFeedAuthor", this.enforceFeedAuthor);
 		kparams.add("enforceOrder", this.enforceOrder);
 		return kparams;
 	}
@@ -275,6 +291,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
         dest.writeInt(this.category == null ? -1 : this.category.ordinal());
         dest.writeInt(this.adultContent == null ? -1 : this.adultContent.ordinal());
         dest.writeString(this.feedAuthor);
+        dest.writeValue(this.enforceFeedAuthor);
         dest.writeValue(this.enforceOrder);
     }
 
@@ -291,6 +308,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
         int tmpAdultContent = in.readInt();
         this.adultContent = tmpAdultContent == -1 ? null : ITunesSyndicationFeedAdultValues.values()[tmpAdultContent];
         this.feedAuthor = in.readString();
+        this.enforceFeedAuthor = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.enforceOrder = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
