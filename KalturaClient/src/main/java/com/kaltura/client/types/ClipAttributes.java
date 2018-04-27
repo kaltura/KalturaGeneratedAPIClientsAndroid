@@ -32,6 +32,9 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -51,6 +54,7 @@ public class ClipAttributes extends OperationAttributes {
 		String offset();
 		String duration();
 		String globalOffsetInDestination();
+		RequestBuilder.ListTokenizer<Effect.Tokenizer> effectArray();
 	}
 
 	/**
@@ -65,6 +69,10 @@ public class ClipAttributes extends OperationAttributes {
 	 * global Offset In Destination in milliseconds
 	 */
 	private Integer globalOffsetInDestination;
+	/**
+	 * global Offset In Destination in milliseconds
+	 */
+	private List<Effect> effectArray;
 
 	// offset:
 	public Integer getOffset(){
@@ -102,6 +110,14 @@ public class ClipAttributes extends OperationAttributes {
 		setToken("globalOffsetInDestination", multirequestToken);
 	}
 
+	// effectArray:
+	public List<Effect> getEffectArray(){
+		return this.effectArray;
+	}
+	public void setEffectArray(List<Effect> effectArray){
+		this.effectArray = effectArray;
+	}
+
 
 	public ClipAttributes() {
 		super();
@@ -116,6 +132,7 @@ public class ClipAttributes extends OperationAttributes {
 		offset = GsonParser.parseInt(jsonObject.get("offset"));
 		duration = GsonParser.parseInt(jsonObject.get("duration"));
 		globalOffsetInDestination = GsonParser.parseInt(jsonObject.get("globalOffsetInDestination"));
+		effectArray = GsonParser.parseArray(jsonObject.getAsJsonArray("effectArray"), Effect.class);
 
 	}
 
@@ -125,6 +142,7 @@ public class ClipAttributes extends OperationAttributes {
 		kparams.add("offset", this.offset);
 		kparams.add("duration", this.duration);
 		kparams.add("globalOffsetInDestination", this.globalOffsetInDestination);
+		kparams.add("effectArray", this.effectArray);
 		return kparams;
 	}
 
@@ -147,6 +165,12 @@ public class ClipAttributes extends OperationAttributes {
         dest.writeValue(this.offset);
         dest.writeValue(this.duration);
         dest.writeValue(this.globalOffsetInDestination);
+        if(this.effectArray != null) {
+            dest.writeInt(this.effectArray.size());
+            dest.writeList(this.effectArray);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public ClipAttributes(Parcel in) {
@@ -154,6 +178,11 @@ public class ClipAttributes extends OperationAttributes {
         this.offset = (Integer)in.readValue(Integer.class.getClassLoader());
         this.duration = (Integer)in.readValue(Integer.class.getClassLoader());
         this.globalOffsetInDestination = (Integer)in.readValue(Integer.class.getClassLoader());
+        int effectArraySize = in.readInt();
+        if( effectArraySize > -1) {
+            this.effectArray = new ArrayList<>();
+            in.readList(this.effectArray, Effect.class.getClassLoader());
+        }
     }
 }
 

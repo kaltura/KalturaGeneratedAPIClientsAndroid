@@ -43,9 +43,6 @@ import java.util.List;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**
- * Created by IntelliJ IDEA.  User: roie.beck  Date: 3/12/2018  Time: 11:20 AM  /
- */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(ClipConcatJobData.Tokenizer.class)
 public class ClipConcatJobData extends JobData {
