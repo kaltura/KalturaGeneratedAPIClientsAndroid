@@ -30,9 +30,11 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -42,58 +44,75 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchResponse.Tokenizer.class)
-public abstract class ESearchResponse extends ObjectBase {
+@MultiRequestBuilder.Tokenizer(ESearchUserResponse.Tokenizer.class)
+public class ESearchUserResponse extends ESearchResponse {
 	
-	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String totalCount();
+	public interface Tokenizer extends ESearchResponse.Tokenizer {
+		RequestBuilder.ListTokenizer<ESearchUserResult.Tokenizer> objects();
 	}
 
-	private Integer totalCount;
+	private List<ESearchUserResult> objects;
 
-	// totalCount:
-	public Integer getTotalCount(){
-		return this.totalCount;
+	// objects:
+	public List<ESearchUserResult> getObjects(){
+		return this.objects;
 	}
-	public void setTotalCount(Integer totalCount){
-		this.totalCount = totalCount;
-	}
-
-	public void totalCount(String multirequestToken){
-		setToken("totalCount", multirequestToken);
+	public void setObjects(List<ESearchUserResult> objects){
+		this.objects = objects;
 	}
 
 
-	public ESearchResponse() {
+	public ESearchUserResponse() {
 		super();
 	}
 
-	public ESearchResponse(JsonObject jsonObject) throws APIException {
+	public ESearchUserResponse(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		totalCount = GsonParser.parseInt(jsonObject.get("totalCount"));
+		objects = GsonParser.parseArray(jsonObject.getAsJsonArray("objects"), ESearchUserResult.class);
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchResponse");
+		kparams.add("objectType", "KalturaESearchUserResponse");
 		return kparams;
 	}
 
 
+    public static final Creator<ESearchUserResponse> CREATOR = new Creator<ESearchUserResponse>() {
+        @Override
+        public ESearchUserResponse createFromParcel(Parcel source) {
+            return new ESearchUserResponse(source);
+        }
+
+        @Override
+        public ESearchUserResponse[] newArray(int size) {
+            return new ESearchUserResponse[size];
+        }
+    };
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.totalCount);
+        if(this.objects != null) {
+            dest.writeInt(this.objects.size());
+            dest.writeList(this.objects);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
-    public ESearchResponse(Parcel in) {
+    public ESearchUserResponse(Parcel in) {
         super(in);
-        this.totalCount = (Integer)in.readValue(Integer.class.getClassLoader());
+        int objectsSize = in.readInt();
+        if( objectsSize > -1) {
+            this.objects = new ArrayList<>();
+            in.readList(this.objects, ESearchUserResult.class.getClassLoader());
+        }
     }
 }
 
