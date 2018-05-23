@@ -106,10 +106,9 @@ public class Partner extends ObjectBase {
 		String crmId();
 		String referenceId();
 		String timeAlignedRenditions();
-		RequestBuilder.ListTokenizer<ESearchLanguageItem.Tokenizer> eSearchLanguages();
-		String publisherEnvironmentType();
 		String ovpEnvironmentUrl();
 		String ottEnvironmentUrl();
+		RequestBuilder.ListTokenizer<ESearchLanguageItem.Tokenizer> eSearchLanguages();
 	}
 
 	private Integer id;
@@ -180,10 +179,9 @@ public class Partner extends ObjectBase {
 	private String crmId;
 	private String referenceId;
 	private Boolean timeAlignedRenditions;
-	private List<ESearchLanguageItem> eSearchLanguages;
-	private Integer publisherEnvironmentType;
 	private String ovpEnvironmentUrl;
 	private String ottEnvironmentUrl;
+	private List<ESearchLanguageItem> eSearchLanguages;
 
 	// id:
 	public Integer getId(){
@@ -809,26 +807,6 @@ public class Partner extends ObjectBase {
 		setToken("timeAlignedRenditions", multirequestToken);
 	}
 
-	// eSearchLanguages:
-	public List<ESearchLanguageItem> getESearchLanguages(){
-		return this.eSearchLanguages;
-	}
-	public void setESearchLanguages(List<ESearchLanguageItem> eSearchLanguages){
-		this.eSearchLanguages = eSearchLanguages;
-	}
-
-	// publisherEnvironmentType:
-	public Integer getPublisherEnvironmentType(){
-		return this.publisherEnvironmentType;
-	}
-	public void setPublisherEnvironmentType(Integer publisherEnvironmentType){
-		this.publisherEnvironmentType = publisherEnvironmentType;
-	}
-
-	public void publisherEnvironmentType(String multirequestToken){
-		setToken("publisherEnvironmentType", multirequestToken);
-	}
-
 	// ovpEnvironmentUrl:
 	public String getOvpEnvironmentUrl(){
 		return this.ovpEnvironmentUrl;
@@ -851,6 +829,14 @@ public class Partner extends ObjectBase {
 
 	public void ottEnvironmentUrl(String multirequestToken){
 		setToken("ottEnvironmentUrl", multirequestToken);
+	}
+
+	// eSearchLanguages:
+	public List<ESearchLanguageItem> getESearchLanguages(){
+		return this.eSearchLanguages;
+	}
+	public void setESearchLanguages(List<ESearchLanguageItem> eSearchLanguages){
+		this.eSearchLanguages = eSearchLanguages;
 	}
 
 
@@ -917,10 +903,9 @@ public class Partner extends ObjectBase {
 		crmId = GsonParser.parseString(jsonObject.get("crmId"));
 		referenceId = GsonParser.parseString(jsonObject.get("referenceId"));
 		timeAlignedRenditions = GsonParser.parseBoolean(jsonObject.get("timeAlignedRenditions"));
-		eSearchLanguages = GsonParser.parseArray(jsonObject.getAsJsonArray("eSearchLanguages"), ESearchLanguageItem.class);
-		publisherEnvironmentType = GsonParser.parseInt(jsonObject.get("publisherEnvironmentType"));
 		ovpEnvironmentUrl = GsonParser.parseString(jsonObject.get("ovpEnvironmentUrl"));
 		ottEnvironmentUrl = GsonParser.parseString(jsonObject.get("ottEnvironmentUrl"));
+		eSearchLanguages = GsonParser.parseArray(jsonObject.getAsJsonArray("eSearchLanguages"), ESearchLanguageItem.class);
 
 	}
 
@@ -1046,15 +1031,14 @@ public class Partner extends ObjectBase {
         dest.writeString(this.crmId);
         dest.writeString(this.referenceId);
         dest.writeValue(this.timeAlignedRenditions);
+        dest.writeString(this.ovpEnvironmentUrl);
+        dest.writeString(this.ottEnvironmentUrl);
         if(this.eSearchLanguages != null) {
             dest.writeInt(this.eSearchLanguages.size());
             dest.writeList(this.eSearchLanguages);
         } else {
             dest.writeInt(-1);
         }
-        dest.writeValue(this.publisherEnvironmentType);
-        dest.writeString(this.ovpEnvironmentUrl);
-        dest.writeString(this.ottEnvironmentUrl);
     }
 
     public Partner(Parcel in) {
@@ -1128,14 +1112,13 @@ public class Partner extends ObjectBase {
         this.crmId = in.readString();
         this.referenceId = in.readString();
         this.timeAlignedRenditions = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.ovpEnvironmentUrl = in.readString();
+        this.ottEnvironmentUrl = in.readString();
         int eSearchLanguagesSize = in.readInt();
         if( eSearchLanguagesSize > -1) {
             this.eSearchLanguages = new ArrayList<>();
             in.readList(this.eSearchLanguages, ESearchLanguageItem.class.getClassLoader());
         }
-        this.publisherEnvironmentType = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.ovpEnvironmentUrl = in.readString();
-        this.ottEnvironmentUrl = in.readString();
     }
 }
 

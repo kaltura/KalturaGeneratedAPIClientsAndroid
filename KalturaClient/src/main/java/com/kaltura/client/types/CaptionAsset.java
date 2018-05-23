@@ -58,6 +58,7 @@ public class CaptionAsset extends Asset {
 		String status();
 		String parentId();
 		String accuracy();
+		String displayOnPlayer();
 	}
 
 	/**
@@ -96,6 +97,10 @@ public class CaptionAsset extends Asset {
 	 * The Accuracy of the caption content
 	 */
 	private Integer accuracy;
+	/**
+	 * The Accuracy of the caption content
+	 */
+	private Boolean displayOnPlayer;
 
 	// captionParamsId:
 	public Integer getCaptionParamsId(){
@@ -205,6 +210,18 @@ public class CaptionAsset extends Asset {
 		setToken("accuracy", multirequestToken);
 	}
 
+	// displayOnPlayer:
+	public Boolean getDisplayOnPlayer(){
+		return this.displayOnPlayer;
+	}
+	public void setDisplayOnPlayer(Boolean displayOnPlayer){
+		this.displayOnPlayer = displayOnPlayer;
+	}
+
+	public void displayOnPlayer(String multirequestToken){
+		setToken("displayOnPlayer", multirequestToken);
+	}
+
 
 	public CaptionAsset() {
 		super();
@@ -225,6 +242,7 @@ public class CaptionAsset extends Asset {
 		status = CaptionAssetStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		parentId = GsonParser.parseString(jsonObject.get("parentId"));
 		accuracy = GsonParser.parseInt(jsonObject.get("accuracy"));
+		displayOnPlayer = GsonParser.parseBoolean(jsonObject.get("displayOnPlayer"));
 
 	}
 
@@ -238,6 +256,7 @@ public class CaptionAsset extends Asset {
 		kparams.add("format", this.format);
 		kparams.add("parentId", this.parentId);
 		kparams.add("accuracy", this.accuracy);
+		kparams.add("displayOnPlayer", this.displayOnPlayer);
 		return kparams;
 	}
 
@@ -266,6 +285,7 @@ public class CaptionAsset extends Asset {
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
         dest.writeString(this.parentId);
         dest.writeValue(this.accuracy);
+        dest.writeValue(this.displayOnPlayer);
     }
 
     public CaptionAsset(Parcel in) {
@@ -283,6 +303,7 @@ public class CaptionAsset extends Asset {
         this.status = tmpStatus == -1 ? null : CaptionAssetStatus.values()[tmpStatus];
         this.parentId = in.readString();
         this.accuracy = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.displayOnPlayer = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
