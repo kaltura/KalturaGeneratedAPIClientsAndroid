@@ -58,6 +58,10 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 		String googleClientId();
 		String googleClientSecret();
 		String googleTokenData();
+		String captionsCsvMap();
+		String submitCsvMap();
+		String updateCsvMap();
+		String deleteVideoIds();
 	}
 
 	private String videoAssetFilePath;
@@ -73,6 +77,10 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 	private String googleClientId;
 	private String googleClientSecret;
 	private String googleTokenData;
+	private String captionsCsvMap;
+	private String submitCsvMap;
+	private String updateCsvMap;
+	private String deleteVideoIds;
 
 	// videoAssetFilePath:
 	public String getVideoAssetFilePath(){
@@ -230,6 +238,54 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 		setToken("googleTokenData", multirequestToken);
 	}
 
+	// captionsCsvMap:
+	public String getCaptionsCsvMap(){
+		return this.captionsCsvMap;
+	}
+	public void setCaptionsCsvMap(String captionsCsvMap){
+		this.captionsCsvMap = captionsCsvMap;
+	}
+
+	public void captionsCsvMap(String multirequestToken){
+		setToken("captionsCsvMap", multirequestToken);
+	}
+
+	// submitCsvMap:
+	public String getSubmitCsvMap(){
+		return this.submitCsvMap;
+	}
+	public void setSubmitCsvMap(String submitCsvMap){
+		this.submitCsvMap = submitCsvMap;
+	}
+
+	public void submitCsvMap(String multirequestToken){
+		setToken("submitCsvMap", multirequestToken);
+	}
+
+	// updateCsvMap:
+	public String getUpdateCsvMap(){
+		return this.updateCsvMap;
+	}
+	public void setUpdateCsvMap(String updateCsvMap){
+		this.updateCsvMap = updateCsvMap;
+	}
+
+	public void updateCsvMap(String multirequestToken){
+		setToken("updateCsvMap", multirequestToken);
+	}
+
+	// deleteVideoIds:
+	public String getDeleteVideoIds(){
+		return this.deleteVideoIds;
+	}
+	public void setDeleteVideoIds(String deleteVideoIds){
+		this.deleteVideoIds = deleteVideoIds;
+	}
+
+	public void deleteVideoIds(String multirequestToken){
+		setToken("deleteVideoIds", multirequestToken);
+	}
+
 
 	public YouTubeDistributionJobProviderData() {
 		super();
@@ -254,6 +310,10 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 		googleClientId = GsonParser.parseString(jsonObject.get("googleClientId"));
 		googleClientSecret = GsonParser.parseString(jsonObject.get("googleClientSecret"));
 		googleTokenData = GsonParser.parseString(jsonObject.get("googleTokenData"));
+		captionsCsvMap = GsonParser.parseString(jsonObject.get("captionsCsvMap"));
+		submitCsvMap = GsonParser.parseString(jsonObject.get("submitCsvMap"));
+		updateCsvMap = GsonParser.parseString(jsonObject.get("updateCsvMap"));
+		deleteVideoIds = GsonParser.parseString(jsonObject.get("deleteVideoIds"));
 
 	}
 
@@ -273,6 +333,10 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 		kparams.add("googleClientId", this.googleClientId);
 		kparams.add("googleClientSecret", this.googleClientSecret);
 		kparams.add("googleTokenData", this.googleTokenData);
+		kparams.add("captionsCsvMap", this.captionsCsvMap);
+		kparams.add("submitCsvMap", this.submitCsvMap);
+		kparams.add("updateCsvMap", this.updateCsvMap);
+		kparams.add("deleteVideoIds", this.deleteVideoIds);
 		return kparams;
 	}
 
@@ -305,6 +369,10 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
         dest.writeString(this.googleClientId);
         dest.writeString(this.googleClientSecret);
         dest.writeString(this.googleTokenData);
+        dest.writeString(this.captionsCsvMap);
+        dest.writeString(this.submitCsvMap);
+        dest.writeString(this.updateCsvMap);
+        dest.writeString(this.deleteVideoIds);
     }
 
     public YouTubeDistributionJobProviderData(Parcel in) {
@@ -322,6 +390,10 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
         this.googleClientId = in.readString();
         this.googleClientSecret = in.readString();
         this.googleTokenData = in.readString();
+        this.captionsCsvMap = in.readString();
+        this.submitCsvMap = in.readString();
+        this.updateCsvMap = in.readString();
+        this.deleteVideoIds = in.readString();
     }
 }
 
