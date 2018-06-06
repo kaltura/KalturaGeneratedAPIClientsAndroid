@@ -31,7 +31,6 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.types.ObjectBase;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -46,9 +45,6 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class ReportTable extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String header();
-		String data();
-		String totalCount();
 	}
 
 	private String header;
@@ -59,38 +55,14 @@ public class ReportTable extends ObjectBase {
 	public String getHeader(){
 		return this.header;
 	}
-	public void setHeader(String header){
-		this.header = header;
-	}
-
-	public void header(String multirequestToken){
-		setToken("header", multirequestToken);
-	}
-
 	// data:
 	public String getData(){
 		return this.data;
 	}
-	public void setData(String data){
-		this.data = data;
-	}
-
-	public void data(String multirequestToken){
-		setToken("data", multirequestToken);
-	}
-
 	// totalCount:
 	public Integer getTotalCount(){
 		return this.totalCount;
 	}
-	public void setTotalCount(Integer totalCount){
-		this.totalCount = totalCount;
-	}
-
-	public void totalCount(String multirequestToken){
-		setToken("totalCount", multirequestToken);
-	}
-
 
 	public ReportTable() {
 		super();

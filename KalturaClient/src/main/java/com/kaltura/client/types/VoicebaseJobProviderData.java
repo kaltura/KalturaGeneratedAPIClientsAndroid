@@ -50,12 +50,8 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
 		String flavorAssetId();
 		String transcriptId();
 		String captionAssetFormats();
-		String apiKey();
-		String apiPassword();
 		String spokenLanguage();
-		String fileLocation();
 		String replaceMediaContent();
-		String additionalParameters();
 	}
 
 	/**
@@ -151,26 +147,10 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
 	public String getApiKey(){
 		return this.apiKey;
 	}
-	public void setApiKey(String apiKey){
-		this.apiKey = apiKey;
-	}
-
-	public void apiKey(String multirequestToken){
-		setToken("apiKey", multirequestToken);
-	}
-
 	// apiPassword:
 	public String getApiPassword(){
 		return this.apiPassword;
 	}
-	public void setApiPassword(String apiPassword){
-		this.apiPassword = apiPassword;
-	}
-
-	public void apiPassword(String multirequestToken){
-		setToken("apiPassword", multirequestToken);
-	}
-
 	// spokenLanguage:
 	public Language getSpokenLanguage(){
 		return this.spokenLanguage;
@@ -187,14 +167,6 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
 	public String getFileLocation(){
 		return this.fileLocation;
 	}
-	public void setFileLocation(String fileLocation){
-		this.fileLocation = fileLocation;
-	}
-
-	public void fileLocation(String multirequestToken){
-		setToken("fileLocation", multirequestToken);
-	}
-
 	// replaceMediaContent:
 	public Boolean getReplaceMediaContent(){
 		return this.replaceMediaContent;
@@ -211,14 +183,6 @@ public class VoicebaseJobProviderData extends IntegrationJobProviderData {
 	public String getAdditionalParameters(){
 		return this.additionalParameters;
 	}
-	public void setAdditionalParameters(String additionalParameters){
-		this.additionalParameters = additionalParameters;
-	}
-
-	public void additionalParameters(String multirequestToken){
-		setToken("additionalParameters", multirequestToken);
-	}
-
 
 	public VoicebaseJobProviderData() {
 		super();

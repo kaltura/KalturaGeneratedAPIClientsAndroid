@@ -46,7 +46,6 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class SchedulerConfig extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String id();
 		String createdBy();
 		String updatedBy();
 		String commandId();
@@ -123,14 +122,6 @@ public class SchedulerConfig extends ObjectBase {
 	public Integer getId(){
 		return this.id;
 	}
-	public void setId(Integer id){
-		this.id = id;
-	}
-
-	public void id(String multirequestToken){
-		setToken("id", multirequestToken);
-	}
-
 	// createdBy:
 	public String getCreatedBy(){
 		return this.createdBy;

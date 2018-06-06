@@ -31,7 +31,6 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.TubeMogulSyndicationFeedCategories;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -46,7 +45,6 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class TubeMogulSyndicationFeed extends BaseSyndicationFeed {
 	
 	public interface Tokenizer extends BaseSyndicationFeed.Tokenizer {
-		String category();
 	}
 
 	private TubeMogulSyndicationFeedCategories category;
@@ -55,14 +53,6 @@ public class TubeMogulSyndicationFeed extends BaseSyndicationFeed {
 	public TubeMogulSyndicationFeedCategories getCategory(){
 		return this.category;
 	}
-	public void setCategory(TubeMogulSyndicationFeedCategories category){
-		this.category = category;
-	}
-
-	public void category(String multirequestToken){
-		setToken("category", multirequestToken);
-	}
-
 
 	public TubeMogulSyndicationFeed() {
 		super();

@@ -32,7 +32,6 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.DropFolderFileHandlerType;
 import com.kaltura.client.types.ObjectBase;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -47,7 +46,6 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public abstract class DropFolderFileHandlerConfig extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String handlerType();
 	}
 
 	private DropFolderFileHandlerType handlerType;
@@ -56,14 +54,6 @@ public abstract class DropFolderFileHandlerConfig extends ObjectBase {
 	public DropFolderFileHandlerType getHandlerType(){
 		return this.handlerType;
 	}
-	public void setHandlerType(DropFolderFileHandlerType handlerType){
-		this.handlerType = handlerType;
-	}
-
-	public void handlerType(String multirequestToken){
-		setToken("handlerType", multirequestToken);
-	}
-
 
 	public DropFolderFileHandlerConfig() {
 		super();

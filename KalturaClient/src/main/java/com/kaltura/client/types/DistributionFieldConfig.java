@@ -57,7 +57,6 @@ public class DistributionFieldConfig extends ObjectBase {
 		String type();
 		String updateOnChange();
 		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> updateParams();
-		String isDefault();
 		String triggerDeleteOnError();
 	}
 
@@ -184,14 +183,6 @@ public class DistributionFieldConfig extends ObjectBase {
 	public Boolean getIsDefault(){
 		return this.isDefault;
 	}
-	public void setIsDefault(Boolean isDefault){
-		this.isDefault = isDefault;
-	}
-
-	public void isDefault(String multirequestToken){
-		setToken("isDefault", multirequestToken);
-	}
-
 	// triggerDeleteOnError:
 	public Boolean getTriggerDeleteOnError(){
 		return this.triggerDeleteOnError;

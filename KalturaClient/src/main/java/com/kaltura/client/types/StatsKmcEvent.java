@@ -61,7 +61,6 @@ public class StatsKmcEvent extends ObjectBase {
 		String widgetId();
 		String uiconfId();
 		String userId();
-		String userIp();
 	}
 
 	private String clientVer;
@@ -214,14 +213,6 @@ public class StatsKmcEvent extends ObjectBase {
 	public String getUserIp(){
 		return this.userIp;
 	}
-	public void setUserIp(String userIp){
-		this.userIp = userIp;
-	}
-
-	public void userIp(String multirequestToken){
-		setToken("userIp", multirequestToken);
-	}
-
 
 	public StatsKmcEvent() {
 		super();

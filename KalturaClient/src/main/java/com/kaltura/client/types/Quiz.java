@@ -49,7 +49,6 @@ import java.util.List;
 public class Quiz extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String version();
 		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> uiAttributes();
 		String showResultOnAnswer();
 		String showCorrectKeyOnAnswer();
@@ -75,14 +74,6 @@ public class Quiz extends ObjectBase {
 	public Integer getVersion(){
 		return this.version;
 	}
-	public void setVersion(Integer version){
-		this.version = version;
-	}
-
-	public void version(String multirequestToken){
-		setToken("version", multirequestToken);
-	}
-
 	// uiAttributes:
 	public List<KeyValue> getUiAttributes(){
 		return this.uiAttributes;

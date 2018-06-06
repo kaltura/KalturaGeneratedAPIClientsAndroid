@@ -48,7 +48,6 @@ public class DoubleClickDistributionProfile extends ConfigurableDistributionProf
 		String channelTitle();
 		String channelLink();
 		String channelDescription();
-		String feedUrl();
 		String cuePointsProvider();
 		String itemsPerPage();
 		String ignoreSchedulingInFeed();
@@ -102,14 +101,6 @@ public class DoubleClickDistributionProfile extends ConfigurableDistributionProf
 	public String getFeedUrl(){
 		return this.feedUrl;
 	}
-	public void setFeedUrl(String feedUrl){
-		this.feedUrl = feedUrl;
-	}
-
-	public void feedUrl(String multirequestToken){
-		setToken("feedUrl", multirequestToken);
-	}
-
 	// cuePointsProvider:
 	public String getCuePointsProvider(){
 		return this.cuePointsProvider;

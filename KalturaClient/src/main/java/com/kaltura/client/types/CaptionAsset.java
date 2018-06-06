@@ -51,11 +51,9 @@ public class CaptionAsset extends Asset {
 	public interface Tokenizer extends Asset.Tokenizer {
 		String captionParamsId();
 		String language();
-		String languageCode();
 		String isDefault();
 		String label();
 		String format();
-		String status();
 		String parentId();
 		String accuracy();
 		String displayOnPlayer();
@@ -130,14 +128,6 @@ public class CaptionAsset extends Asset {
 	public LanguageCode getLanguageCode(){
 		return this.languageCode;
 	}
-	public void setLanguageCode(LanguageCode languageCode){
-		this.languageCode = languageCode;
-	}
-
-	public void languageCode(String multirequestToken){
-		setToken("languageCode", multirequestToken);
-	}
-
 	// isDefault:
 	public Boolean getIsDefault(){
 		return this.isDefault;
@@ -178,14 +168,6 @@ public class CaptionAsset extends Asset {
 	public CaptionAssetStatus getStatus(){
 		return this.status;
 	}
-	public void setStatus(CaptionAssetStatus status){
-		this.status = status;
-	}
-
-	public void status(String multirequestToken){
-		setToken("status", multirequestToken);
-	}
-
 	// parentId:
 	public String getParentId(){
 		return this.parentId;

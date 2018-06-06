@@ -50,7 +50,6 @@ public class AttachmentAsset extends Asset {
 		String filename();
 		String title();
 		String format();
-		String status();
 	}
 
 	/**
@@ -110,14 +109,6 @@ public class AttachmentAsset extends Asset {
 	public AttachmentAssetStatus getStatus(){
 		return this.status;
 	}
-	public void setStatus(AttachmentAssetStatus status){
-		this.status = status;
-	}
-
-	public void status(String multirequestToken){
-		setToken("status", multirequestToken);
-	}
-
 
 	public AttachmentAsset() {
 		super();

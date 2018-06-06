@@ -31,7 +31,6 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.types.ObjectBase;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -46,9 +45,6 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class StartWidgetSessionResponse extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String partnerId();
-		String ks();
-		String userId();
 	}
 
 	private Integer partnerId;
@@ -59,38 +55,14 @@ public class StartWidgetSessionResponse extends ObjectBase {
 	public Integer getPartnerId(){
 		return this.partnerId;
 	}
-	public void setPartnerId(Integer partnerId){
-		this.partnerId = partnerId;
-	}
-
-	public void partnerId(String multirequestToken){
-		setToken("partnerId", multirequestToken);
-	}
-
 	// ks:
 	public String getKs(){
 		return this.ks;
 	}
-	public void setKs(String ks){
-		this.ks = ks;
-	}
-
-	public void ks(String multirequestToken){
-		setToken("ks", multirequestToken);
-	}
-
 	// userId:
 	public String getUserId(){
 		return this.userId;
 	}
-	public void setUserId(String userId){
-		this.userId = userId;
-	}
-
-	public void userId(String multirequestToken){
-		setToken("userId", multirequestToken);
-	}
-
 
 	public StartWidgetSessionResponse() {
 		super();

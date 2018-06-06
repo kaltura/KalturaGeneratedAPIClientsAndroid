@@ -52,7 +52,6 @@ public class User extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		String id();
-		String partnerId();
 		String type();
 		String screenName();
 		String fullName();
@@ -68,23 +67,16 @@ public class User extends ObjectBase {
 		String adminTags();
 		String gender();
 		String status();
-		String createdAt();
-		String updatedAt();
 		String partnerData();
 		String indexedPartnerDataInt();
 		String indexedPartnerDataString();
-		String storageSize();
 		String password();
 		String firstName();
 		String lastName();
 		String isAdmin();
 		String language();
-		String lastLoginTime();
-		String statusUpdatedAt();
-		String deletedAt();
 		String loginEnabled();
 		String roleIds();
-		String roleNames();
 		String isAccountOwner();
 		String allowedPartnerIds();
 		String allowedPartnerPackages();
@@ -158,14 +150,6 @@ public class User extends ObjectBase {
 	public Integer getPartnerId(){
 		return this.partnerId;
 	}
-	public void setPartnerId(Integer partnerId){
-		this.partnerId = partnerId;
-	}
-
-	public void partnerId(String multirequestToken){
-		setToken("partnerId", multirequestToken);
-	}
-
 	// type:
 	public UserType getType(){
 		return this.type;
@@ -350,26 +334,10 @@ public class User extends ObjectBase {
 	public Integer getCreatedAt(){
 		return this.createdAt;
 	}
-	public void setCreatedAt(Integer createdAt){
-		this.createdAt = createdAt;
-	}
-
-	public void createdAt(String multirequestToken){
-		setToken("createdAt", multirequestToken);
-	}
-
 	// updatedAt:
 	public Integer getUpdatedAt(){
 		return this.updatedAt;
 	}
-	public void setUpdatedAt(Integer updatedAt){
-		this.updatedAt = updatedAt;
-	}
-
-	public void updatedAt(String multirequestToken){
-		setToken("updatedAt", multirequestToken);
-	}
-
 	// partnerData:
 	public String getPartnerData(){
 		return this.partnerData;
@@ -410,14 +378,6 @@ public class User extends ObjectBase {
 	public Integer getStorageSize(){
 		return this.storageSize;
 	}
-	public void setStorageSize(Integer storageSize){
-		this.storageSize = storageSize;
-	}
-
-	public void storageSize(String multirequestToken){
-		setToken("storageSize", multirequestToken);
-	}
-
 	// password:
 	public String getPassword(){
 		return this.password;
@@ -482,38 +442,14 @@ public class User extends ObjectBase {
 	public Integer getLastLoginTime(){
 		return this.lastLoginTime;
 	}
-	public void setLastLoginTime(Integer lastLoginTime){
-		this.lastLoginTime = lastLoginTime;
-	}
-
-	public void lastLoginTime(String multirequestToken){
-		setToken("lastLoginTime", multirequestToken);
-	}
-
 	// statusUpdatedAt:
 	public Integer getStatusUpdatedAt(){
 		return this.statusUpdatedAt;
 	}
-	public void setStatusUpdatedAt(Integer statusUpdatedAt){
-		this.statusUpdatedAt = statusUpdatedAt;
-	}
-
-	public void statusUpdatedAt(String multirequestToken){
-		setToken("statusUpdatedAt", multirequestToken);
-	}
-
 	// deletedAt:
 	public Integer getDeletedAt(){
 		return this.deletedAt;
 	}
-	public void setDeletedAt(Integer deletedAt){
-		this.deletedAt = deletedAt;
-	}
-
-	public void deletedAt(String multirequestToken){
-		setToken("deletedAt", multirequestToken);
-	}
-
 	// loginEnabled:
 	public Boolean getLoginEnabled(){
 		return this.loginEnabled;
@@ -542,14 +478,6 @@ public class User extends ObjectBase {
 	public String getRoleNames(){
 		return this.roleNames;
 	}
-	public void setRoleNames(String roleNames){
-		this.roleNames = roleNames;
-	}
-
-	public void roleNames(String multirequestToken){
-		setToken("roleNames", multirequestToken);
-	}
-
 	// isAccountOwner:
 	public Boolean getIsAccountOwner(){
 		return this.isAccountOwner;

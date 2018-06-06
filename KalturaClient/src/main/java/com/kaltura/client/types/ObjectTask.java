@@ -47,7 +47,6 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public abstract class ObjectTask extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String type();
 		String stopProcessingOnError();
 	}
 
@@ -58,14 +57,6 @@ public abstract class ObjectTask extends ObjectBase {
 	public ObjectTaskType getType(){
 		return this.type;
 	}
-	public void setType(ObjectTaskType type){
-		this.type = type;
-	}
-
-	public void type(String multirequestToken){
-		setToken("type", multirequestToken);
-	}
-
 	// stopProcessingOnError:
 	public Boolean getStopProcessingOnError(){
 		return this.stopProcessingOnError;

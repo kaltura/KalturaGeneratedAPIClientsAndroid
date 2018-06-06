@@ -30,9 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
-import com.kaltura.client.utils.request.RequestBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +46,6 @@ import java.util.List;
 public class ESearchEntryResponse extends ESearchResponse {
 	
 	public interface Tokenizer extends ESearchResponse.Tokenizer {
-		RequestBuilder.ListTokenizer<ESearchEntryResult.Tokenizer> objects();
 	}
 
 	private List<ESearchEntryResult> objects;
@@ -57,10 +54,6 @@ public class ESearchEntryResponse extends ESearchResponse {
 	public List<ESearchEntryResult> getObjects(){
 		return this.objects;
 	}
-	public void setObjects(List<ESearchEntryResult> objects){
-		this.objects = objects;
-	}
-
 
 	public ESearchEntryResponse() {
 		super();

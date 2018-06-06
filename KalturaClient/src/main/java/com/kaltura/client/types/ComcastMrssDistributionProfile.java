@@ -49,7 +49,6 @@ public class ComcastMrssDistributionProfile extends ConfigurableDistributionProf
 	
 	public interface Tokenizer extends ConfigurableDistributionProfile.Tokenizer {
 		String metadataProfileId();
-		String feedUrl();
 		String feedTitle();
 		String feedLink();
 		String feedDescription();
@@ -91,14 +90,6 @@ public class ComcastMrssDistributionProfile extends ConfigurableDistributionProf
 	public String getFeedUrl(){
 		return this.feedUrl;
 	}
-	public void setFeedUrl(String feedUrl){
-		this.feedUrl = feedUrl;
-	}
-
-	public void feedUrl(String multirequestToken){
-		setToken("feedUrl", multirequestToken);
-	}
-
 	// feedTitle:
 	public String getFeedTitle(){
 		return this.feedTitle;
