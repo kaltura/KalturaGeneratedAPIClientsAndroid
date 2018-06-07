@@ -47,6 +47,7 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 	public interface Tokenizer extends ConfigurableDistributionJobProviderData.Tokenizer {
 		String videoAssetFilePath();
 		String thumbAssetFilePath();
+		String thumbAssetId();
 		String captionAssetIds();
 		String sftpDirectory();
 		String sftpMetadataFilename();
@@ -66,6 +67,7 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 
 	private String videoAssetFilePath;
 	private String thumbAssetFilePath;
+	private String thumbAssetId;
 	private String captionAssetIds;
 	private String sftpDirectory;
 	private String sftpMetadataFilename;
@@ -104,6 +106,18 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 
 	public void thumbAssetFilePath(String multirequestToken){
 		setToken("thumbAssetFilePath", multirequestToken);
+	}
+
+	// thumbAssetId:
+	public String getThumbAssetId(){
+		return this.thumbAssetId;
+	}
+	public void setThumbAssetId(String thumbAssetId){
+		this.thumbAssetId = thumbAssetId;
+	}
+
+	public void thumbAssetId(String multirequestToken){
+		setToken("thumbAssetId", multirequestToken);
 	}
 
 	// captionAssetIds:
@@ -299,6 +313,7 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 		// set members values:
 		videoAssetFilePath = GsonParser.parseString(jsonObject.get("videoAssetFilePath"));
 		thumbAssetFilePath = GsonParser.parseString(jsonObject.get("thumbAssetFilePath"));
+		thumbAssetId = GsonParser.parseString(jsonObject.get("thumbAssetId"));
 		captionAssetIds = GsonParser.parseString(jsonObject.get("captionAssetIds"));
 		sftpDirectory = GsonParser.parseString(jsonObject.get("sftpDirectory"));
 		sftpMetadataFilename = GsonParser.parseString(jsonObject.get("sftpMetadataFilename"));
@@ -322,6 +337,7 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
 		kparams.add("objectType", "KalturaYouTubeDistributionJobProviderData");
 		kparams.add("videoAssetFilePath", this.videoAssetFilePath);
 		kparams.add("thumbAssetFilePath", this.thumbAssetFilePath);
+		kparams.add("thumbAssetId", this.thumbAssetId);
 		kparams.add("captionAssetIds", this.captionAssetIds);
 		kparams.add("sftpDirectory", this.sftpDirectory);
 		kparams.add("sftpMetadataFilename", this.sftpMetadataFilename);
@@ -358,6 +374,7 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
         super.writeToParcel(dest, flags);
         dest.writeString(this.videoAssetFilePath);
         dest.writeString(this.thumbAssetFilePath);
+        dest.writeString(this.thumbAssetId);
         dest.writeString(this.captionAssetIds);
         dest.writeString(this.sftpDirectory);
         dest.writeString(this.sftpMetadataFilename);
@@ -379,6 +396,7 @@ public class YouTubeDistributionJobProviderData extends ConfigurableDistribution
         super(in);
         this.videoAssetFilePath = in.readString();
         this.thumbAssetFilePath = in.readString();
+        this.thumbAssetId = in.readString();
         this.captionAssetIds = in.readString();
         this.sftpDirectory = in.readString();
         this.sftpMetadataFilename = in.readString();
