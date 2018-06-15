@@ -53,10 +53,12 @@ import java.util.List;
 public class Partner extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
 		String name();
 		String website();
 		String notificationUrl();
 		String appearInSearch();
+		String createdAt();
 		String adminName();
 		String adminEmail();
 		String description();
@@ -70,20 +72,43 @@ public class Partner extends ObjectBase {
 		String adultContent();
 		String defConversionProfileType();
 		String notify_();
+		String status();
 		String allowQuickEdit();
 		String mergeEntryLists();
 		String notificationsConfig();
 		String maxUploadSize();
 		String partnerPackage();
+		String secret();
+		String adminSecret();
+		String cmsPassword();
 		String allowMultiNotification();
+		String adminLoginUsersQuota();
 		String adminUserId();
 		String firstName();
 		String lastName();
 		String country();
 		String state();
 		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> additionalParams();
+		String publishersQuota();
+		String partnerGroupType();
+		String defaultEntitlementEnforcement();
+		String defaultDeliveryType();
+		String defaultEmbedCodeType();
+		RequestBuilder.ListTokenizer<PlayerDeliveryType.Tokenizer> deliveryTypes();
+		RequestBuilder.ListTokenizer<PlayerEmbedCodeType.Tokenizer> embedCodeTypes();
+		String templatePartnerId();
+		String ignoreSeoLinks();
+		String host();
+		String cdnHost();
+		String isFirstLogin();
+		String logoutUrl();
 		String partnerParentId();
+		String crmId();
 		String referenceId();
+		String timeAlignedRenditions();
+		String publisherEnvironmentType();
+		String ovpEnvironmentUrl();
+		String ottEnvironmentUrl();
 		RequestBuilder.ListTokenizer<ESearchLanguageItem.Tokenizer> eSearchLanguages();
 	}
 

@@ -47,6 +47,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public abstract class DistributionProvider extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String type();
 		String name();
 		String scheduleUpdateEnabled();
 		String availabilityUpdateEnabled();

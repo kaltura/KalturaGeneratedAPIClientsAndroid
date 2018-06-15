@@ -52,6 +52,7 @@ public class User extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		String id();
+		String partnerId();
 		String type();
 		String screenName();
 		String fullName();
@@ -67,16 +68,23 @@ public class User extends ObjectBase {
 		String adminTags();
 		String gender();
 		String status();
+		String createdAt();
+		String updatedAt();
 		String partnerData();
 		String indexedPartnerDataInt();
 		String indexedPartnerDataString();
+		String storageSize();
 		String password();
 		String firstName();
 		String lastName();
 		String isAdmin();
 		String language();
+		String lastLoginTime();
+		String statusUpdatedAt();
+		String deletedAt();
 		String loginEnabled();
 		String roleIds();
+		String roleNames();
 		String isAccountOwner();
 		String allowedPartnerIds();
 		String allowedPartnerPackages();

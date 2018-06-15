@@ -47,6 +47,7 @@ public class ExternalMediaEntry extends MediaEntry {
 	
 	public interface Tokenizer extends MediaEntry.Tokenizer {
 		String externalSourceType();
+		String assetParamsIds();
 	}
 
 	/**

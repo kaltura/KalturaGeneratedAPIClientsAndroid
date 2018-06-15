@@ -51,9 +51,11 @@ public class CaptionAsset extends Asset {
 	public interface Tokenizer extends Asset.Tokenizer {
 		String captionParamsId();
 		String language();
+		String languageCode();
 		String isDefault();
 		String label();
 		String format();
+		String status();
 		String parentId();
 		String accuracy();
 		String displayOnPlayer();

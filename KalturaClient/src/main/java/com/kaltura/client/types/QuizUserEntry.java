@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -44,6 +45,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class QuizUserEntry extends UserEntry {
 	
 	public interface Tokenizer extends UserEntry.Tokenizer {
+		String score();
 	}
 
 	private Double score;

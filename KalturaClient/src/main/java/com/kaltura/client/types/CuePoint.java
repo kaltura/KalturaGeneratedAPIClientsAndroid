@@ -48,15 +48,23 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public abstract class CuePoint extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
+		String cuePointType();
+		String status();
 		String entryId();
+		String partnerId();
+		String createdAt();
+		String updatedAt();
 		String triggeredAt();
 		String tags();
 		String startTime();
+		String userId();
 		String partnerData();
 		String partnerSortValue();
 		String forceStop();
 		String thumbOffset();
 		String systemName();
+		String isMomentary();
 	}
 
 	private String id;

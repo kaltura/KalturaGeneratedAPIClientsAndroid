@@ -46,6 +46,7 @@ public class SyndicationDistributionProfile extends DistributionProfile {
 	
 	public interface Tokenizer extends DistributionProfile.Tokenizer {
 		String xsl();
+		String feedId();
 	}
 
 	private String xsl;

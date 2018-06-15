@@ -61,6 +61,7 @@ public class StatsKmcEvent extends ObjectBase {
 		String widgetId();
 		String uiconfId();
 		String userId();
+		String userIp();
 	}
 
 	private String clientVer;

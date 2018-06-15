@@ -46,6 +46,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class MixEntry extends PlayableEntry {
 	
 	public interface Tokenizer extends PlayableEntry.Tokenizer {
+		String hasRealThumbnail();
 		String editorType();
 		String dataContent();
 	}

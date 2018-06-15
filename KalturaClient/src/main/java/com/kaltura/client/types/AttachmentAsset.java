@@ -50,6 +50,7 @@ public class AttachmentAsset extends Asset {
 		String filename();
 		String title();
 		String format();
+		String status();
 	}
 
 	/**

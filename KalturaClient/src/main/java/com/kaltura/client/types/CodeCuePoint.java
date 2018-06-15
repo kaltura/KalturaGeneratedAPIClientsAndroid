@@ -48,6 +48,7 @@ public class CodeCuePoint extends CuePoint {
 		String code();
 		String description();
 		String endTime();
+		String duration();
 	}
 
 	private String code;

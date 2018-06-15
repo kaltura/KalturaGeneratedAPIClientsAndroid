@@ -50,6 +50,10 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class VirusScanProfile extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
+		String createdAt();
+		String updatedAt();
+		String partnerId();
 		String name();
 		String status();
 		String engineType();

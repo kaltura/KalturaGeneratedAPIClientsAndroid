@@ -64,6 +64,7 @@ public class StatsEvent extends ObjectBase {
 		String userId();
 		String currentPoint();
 		String duration();
+		String userIp();
 		String processDuration();
 		String controlId();
 		String seek();

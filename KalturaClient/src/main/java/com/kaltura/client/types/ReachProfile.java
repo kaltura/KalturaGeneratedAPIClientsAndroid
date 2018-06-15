@@ -55,7 +55,12 @@ import java.util.List;
 public class ReachProfile extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
 		String name();
+		String partnerId();
+		String createdAt();
+		String updatedAt();
+		String status();
 		String profileType();
 		String defaultSourceLanguage();
 		String defaultOutputFormat();
@@ -71,6 +76,7 @@ public class ReachProfile extends ObjectBase {
 		String contentDeletionPolicy();
 		RequestBuilder.ListTokenizer<Rule.Tokenizer> rules();
 		BaseVendorCredit.Tokenizer credit();
+		String usedCredit();
 		RequestBuilder.ListTokenizer<Dictionary.Tokenizer> dictionaries();
 	}
 

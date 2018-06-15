@@ -47,6 +47,7 @@ public class DocumentEntry extends BaseEntry {
 	
 	public interface Tokenizer extends BaseEntry.Tokenizer {
 		String documentType();
+		String assetParamsIds();
 	}
 
 	/**

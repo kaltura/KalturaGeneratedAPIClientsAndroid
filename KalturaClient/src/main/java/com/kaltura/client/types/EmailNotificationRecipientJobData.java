@@ -32,6 +32,7 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.EmailNotificationRecipientProviderType;
 import com.kaltura.client.types.ObjectBase;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -50,6 +51,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public abstract class EmailNotificationRecipientJobData extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String providerType();
 	}
 
 	/**

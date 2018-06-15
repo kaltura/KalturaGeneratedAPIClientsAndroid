@@ -57,6 +57,7 @@ public class DistributionFieldConfig extends ObjectBase {
 		String type();
 		String updateOnChange();
 		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> updateParams();
+		String isDefault();
 		String triggerDeleteOnError();
 	}
 

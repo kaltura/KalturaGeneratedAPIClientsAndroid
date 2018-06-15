@@ -47,6 +47,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class YahooSyndicationFeed extends BaseSyndicationFeed {
 	
 	public interface Tokenizer extends BaseSyndicationFeed.Tokenizer {
+		String category();
 		String adultContent();
 		String feedDescription();
 		String feedLandingPage();

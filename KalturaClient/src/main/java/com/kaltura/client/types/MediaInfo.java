@@ -47,6 +47,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class MediaInfo extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
 		String flavorAssetId();
 		String fileSize();
 		String containerFormat();

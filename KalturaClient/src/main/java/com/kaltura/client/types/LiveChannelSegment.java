@@ -49,10 +49,15 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class LiveChannelSegment extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
+		String partnerId();
+		String createdAt();
+		String updatedAt();
 		String name();
 		String description();
 		String tags();
 		String type();
+		String status();
 		String channelId();
 		String entryId();
 		String triggerType();

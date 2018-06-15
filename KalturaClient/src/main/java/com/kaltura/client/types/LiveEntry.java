@@ -64,12 +64,16 @@ public abstract class LiveEntry extends MediaEntry {
 		String recordedEntryId();
 		String pushPublishEnabled();
 		RequestBuilder.ListTokenizer<LiveStreamPushPublishConfiguration.Tokenizer> publishConfigurations();
+		String firstBroadcast();
+		String lastBroadcast();
 		String currentBroadcastStartTime();
 		LiveEntryRecordingOptions.Tokenizer recordingOptions();
+		String liveStatus();
 		String segmentDuration();
 		String explicitLive();
 		String viewMode();
 		String recordingStatus();
+		String lastBroadcastEndTime();
 	}
 
 	/**

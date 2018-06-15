@@ -48,6 +48,9 @@ public class ScheduleEventResource extends ObjectBase {
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		String eventId();
 		String resourceId();
+		String partnerId();
+		String createdAt();
+		String updatedAt();
 	}
 
 	private Integer eventId;

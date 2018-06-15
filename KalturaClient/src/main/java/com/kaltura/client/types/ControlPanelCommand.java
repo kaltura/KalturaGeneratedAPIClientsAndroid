@@ -49,7 +49,10 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class ControlPanelCommand extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
+		String createdAt();
 		String createdBy();
+		String updatedAt();
 		String updatedBy();
 		String createdById();
 		String schedulerId();

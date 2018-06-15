@@ -50,6 +50,7 @@ import java.util.List;
 public class SchedulerWorker extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
 		String configuredId();
 		String schedulerId();
 		String schedulerConfiguredId();

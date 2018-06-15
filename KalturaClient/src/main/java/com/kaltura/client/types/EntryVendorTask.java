@@ -48,16 +48,30 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class EntryVendorTask extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
+		String partnerId();
+		String vendorPartnerId();
+		String createdAt();
+		String updatedAt();
+		String queueTime();
+		String finishTime();
 		String entryId();
 		String status();
 		String reachProfileId();
 		String catalogItemId();
+		String price();
+		String userId();
+		String moderatingUser();
 		String errDescription();
+		String accessKey();
+		String version();
 		String notes();
+		String dictionary();
 		String context();
 		String accuracy();
 		String outputObjectId();
 		String partnerData();
+		String creationMode();
 	}
 
 	private Long id;

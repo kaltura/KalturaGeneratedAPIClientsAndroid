@@ -53,6 +53,7 @@ public class ITunesSyndicationFeed extends BaseSyndicationFeed {
 		String ownerName();
 		String ownerEmail();
 		String feedImageUrl();
+		String category();
 		String adultContent();
 		String feedAuthor();
 		String enforceFeedAuthor();

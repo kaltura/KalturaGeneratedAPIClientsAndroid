@@ -48,6 +48,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class DrmProfile extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
 		String partnerId();
 		String name();
 		String description();
@@ -55,6 +56,8 @@ public class DrmProfile extends ObjectBase {
 		String status();
 		String licenseServerUrl();
 		String defaultPolicy();
+		String createdAt();
+		String updatedAt();
 		String signingKey();
 	}
 

@@ -50,6 +50,10 @@ public class GroupUser extends ObjectBase {
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		String userId();
 		String groupId();
+		String status();
+		String partnerId();
+		String createdAt();
+		String updatedAt();
 		String creationMode();
 	}
 
