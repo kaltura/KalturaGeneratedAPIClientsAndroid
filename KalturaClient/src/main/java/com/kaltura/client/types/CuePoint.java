@@ -65,6 +65,7 @@ public abstract class CuePoint extends ObjectBase {
 		String thumbOffset();
 		String systemName();
 		String isMomentary();
+		String copiedFrom();
 	}
 
 	private String id;
@@ -87,6 +88,7 @@ public abstract class CuePoint extends ObjectBase {
 	private Integer thumbOffset;
 	private String systemName;
 	private Boolean isMomentary;
+	private String copiedFrom;
 
 	// id:
 	public String getId(){
@@ -228,6 +230,10 @@ public abstract class CuePoint extends ObjectBase {
 	public Boolean getIsMomentary(){
 		return this.isMomentary;
 	}
+	// copiedFrom:
+	public String getCopiedFrom(){
+		return this.copiedFrom;
+	}
 
 	public CuePoint() {
 		super();
@@ -256,6 +262,7 @@ public abstract class CuePoint extends ObjectBase {
 		thumbOffset = GsonParser.parseInt(jsonObject.get("thumbOffset"));
 		systemName = GsonParser.parseString(jsonObject.get("systemName"));
 		isMomentary = GsonParser.parseBoolean(jsonObject.get("isMomentary"));
+		copiedFrom = GsonParser.parseString(jsonObject.get("copiedFrom"));
 
 	}
 
@@ -295,6 +302,7 @@ public abstract class CuePoint extends ObjectBase {
         dest.writeValue(this.thumbOffset);
         dest.writeString(this.systemName);
         dest.writeValue(this.isMomentary);
+        dest.writeString(this.copiedFrom);
     }
 
     public CuePoint(Parcel in) {
@@ -318,6 +326,7 @@ public abstract class CuePoint extends ObjectBase {
         this.thumbOffset = (Integer)in.readValue(Integer.class.getClassLoader());
         this.systemName = in.readString();
         this.isMomentary = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.copiedFrom = in.readString();
     }
 }
 
