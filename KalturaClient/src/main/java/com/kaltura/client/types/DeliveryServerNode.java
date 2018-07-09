@@ -49,12 +49,17 @@ public abstract class DeliveryServerNode extends ServerNode {
 	
 	public interface Tokenizer extends ServerNode.Tokenizer {
 		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> deliveryProfileIds();
+		String config();
 	}
 
 	/**
 	 * Delivery profile ids
 	 */
 	private List<KeyValue> deliveryProfileIds;
+	/**
+	 * Override server node default configuration - json format
+	 */
+	private String config;
 
 	// deliveryProfileIds:
 	public List<KeyValue> getDeliveryProfileIds(){
@@ -62,6 +67,18 @@ public abstract class DeliveryServerNode extends ServerNode {
 	}
 	public void setDeliveryProfileIds(List<KeyValue> deliveryProfileIds){
 		this.deliveryProfileIds = deliveryProfileIds;
+	}
+
+	// config:
+	public String getConfig(){
+		return this.config;
+	}
+	public void setConfig(String config){
+		this.config = config;
+	}
+
+	public void config(String multirequestToken){
+		setToken("config", multirequestToken);
 	}
 
 
@@ -76,6 +93,7 @@ public abstract class DeliveryServerNode extends ServerNode {
 
 		// set members values:
 		deliveryProfileIds = GsonParser.parseArray(jsonObject.getAsJsonArray("deliveryProfileIds"), KeyValue.class);
+		config = GsonParser.parseString(jsonObject.get("config"));
 
 	}
 
@@ -83,6 +101,7 @@ public abstract class DeliveryServerNode extends ServerNode {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaDeliveryServerNode");
 		kparams.add("deliveryProfileIds", this.deliveryProfileIds);
+		kparams.add("config", this.config);
 		return kparams;
 	}
 
@@ -96,6 +115,7 @@ public abstract class DeliveryServerNode extends ServerNode {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeString(this.config);
     }
 
     public DeliveryServerNode(Parcel in) {
@@ -105,6 +125,7 @@ public abstract class DeliveryServerNode extends ServerNode {
             this.deliveryProfileIds = new ArrayList<>();
             in.readList(this.deliveryProfileIds, KeyValue.class.getClassLoader());
         }
+        this.config = in.readString();
     }
 }
 
