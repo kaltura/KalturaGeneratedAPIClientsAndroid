@@ -46,6 +46,7 @@ public class PostConvertJobData extends ConvartableJobData {
 	
 	public interface Tokenizer extends ConvartableJobData.Tokenizer {
 		String flavorAssetId();
+		String flavorAssetEncryptionKey();
 		String createThumb();
 		String thumbPath();
 		String thumbOffset();
@@ -55,6 +56,7 @@ public class PostConvertJobData extends ConvartableJobData {
 	}
 
 	private String flavorAssetId;
+	private String flavorAssetEncryptionKey;
 	/**
 	 * Indicates if a thumbnail should be created
 	 */
@@ -89,6 +91,18 @@ public class PostConvertJobData extends ConvartableJobData {
 
 	public void flavorAssetId(String multirequestToken){
 		setToken("flavorAssetId", multirequestToken);
+	}
+
+	// flavorAssetEncryptionKey:
+	public String getFlavorAssetEncryptionKey(){
+		return this.flavorAssetEncryptionKey;
+	}
+	public void setFlavorAssetEncryptionKey(String flavorAssetEncryptionKey){
+		this.flavorAssetEncryptionKey = flavorAssetEncryptionKey;
+	}
+
+	public void flavorAssetEncryptionKey(String multirequestToken){
+		setToken("flavorAssetEncryptionKey", multirequestToken);
 	}
 
 	// createThumb:
@@ -175,6 +189,7 @@ public class PostConvertJobData extends ConvartableJobData {
 
 		// set members values:
 		flavorAssetId = GsonParser.parseString(jsonObject.get("flavorAssetId"));
+		flavorAssetEncryptionKey = GsonParser.parseString(jsonObject.get("flavorAssetEncryptionKey"));
 		createThumb = GsonParser.parseBoolean(jsonObject.get("createThumb"));
 		thumbPath = GsonParser.parseString(jsonObject.get("thumbPath"));
 		thumbOffset = GsonParser.parseInt(jsonObject.get("thumbOffset"));
@@ -188,6 +203,7 @@ public class PostConvertJobData extends ConvartableJobData {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaPostConvertJobData");
 		kparams.add("flavorAssetId", this.flavorAssetId);
+		kparams.add("flavorAssetEncryptionKey", this.flavorAssetEncryptionKey);
 		kparams.add("createThumb", this.createThumb);
 		kparams.add("thumbPath", this.thumbPath);
 		kparams.add("thumbOffset", this.thumbOffset);
@@ -214,6 +230,7 @@ public class PostConvertJobData extends ConvartableJobData {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.flavorAssetId);
+        dest.writeString(this.flavorAssetEncryptionKey);
         dest.writeValue(this.createThumb);
         dest.writeString(this.thumbPath);
         dest.writeValue(this.thumbOffset);
@@ -225,6 +242,7 @@ public class PostConvertJobData extends ConvartableJobData {
     public PostConvertJobData(Parcel in) {
         super(in);
         this.flavorAssetId = in.readString();
+        this.flavorAssetEncryptionKey = in.readString();
         this.createThumb = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.thumbPath = in.readString();
         this.thumbOffset = (Integer)in.readValue(Integer.class.getClassLoader());
