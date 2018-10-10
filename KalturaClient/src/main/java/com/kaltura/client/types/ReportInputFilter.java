@@ -50,6 +50,9 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String searchInTags();
 		String searchInAdminTags();
 		String categories();
+		String customVar1In();
+		String customVar2In();
+		String customVar3In();
 		String timeZoneOffset();
 		String interval();
 	}
@@ -70,6 +73,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * Search onjects in specified categories
 	 */
 	private String categories;
+	/**
+	 * Filter by customVar1
+	 */
+	private String customVar1In;
+	/**
+	 * Filter by customVar2
+	 */
+	private String customVar2In;
+	/**
+	 * Filter by customVar3
+	 */
+	private String customVar3In;
 	/**
 	 * Time zone offset in minutes
 	 */
@@ -127,6 +142,42 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("categories", multirequestToken);
 	}
 
+	// customVar1In:
+	public String getCustomVar1In(){
+		return this.customVar1In;
+	}
+	public void setCustomVar1In(String customVar1In){
+		this.customVar1In = customVar1In;
+	}
+
+	public void customVar1In(String multirequestToken){
+		setToken("customVar1In", multirequestToken);
+	}
+
+	// customVar2In:
+	public String getCustomVar2In(){
+		return this.customVar2In;
+	}
+	public void setCustomVar2In(String customVar2In){
+		this.customVar2In = customVar2In;
+	}
+
+	public void customVar2In(String multirequestToken){
+		setToken("customVar2In", multirequestToken);
+	}
+
+	// customVar3In:
+	public String getCustomVar3In(){
+		return this.customVar3In;
+	}
+	public void setCustomVar3In(String customVar3In){
+		this.customVar3In = customVar3In;
+	}
+
+	public void customVar3In(String multirequestToken){
+		setToken("customVar3In", multirequestToken);
+	}
+
 	// timeZoneOffset:
 	public Integer getTimeZoneOffset(){
 		return this.timeZoneOffset;
@@ -166,6 +217,9 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		searchInTags = GsonParser.parseBoolean(jsonObject.get("searchInTags"));
 		searchInAdminTags = GsonParser.parseBoolean(jsonObject.get("searchInAdminTags"));
 		categories = GsonParser.parseString(jsonObject.get("categories"));
+		customVar1In = GsonParser.parseString(jsonObject.get("customVar1In"));
+		customVar2In = GsonParser.parseString(jsonObject.get("customVar2In"));
+		customVar3In = GsonParser.parseString(jsonObject.get("customVar3In"));
 		timeZoneOffset = GsonParser.parseInt(jsonObject.get("timeZoneOffset"));
 		interval = ReportInterval.get(GsonParser.parseString(jsonObject.get("interval")));
 
@@ -178,6 +232,9 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("searchInTags", this.searchInTags);
 		kparams.add("searchInAdminTags", this.searchInAdminTags);
 		kparams.add("categories", this.categories);
+		kparams.add("customVar1In", this.customVar1In);
+		kparams.add("customVar2In", this.customVar2In);
+		kparams.add("customVar3In", this.customVar3In);
 		kparams.add("timeZoneOffset", this.timeZoneOffset);
 		kparams.add("interval", this.interval);
 		return kparams;
@@ -203,6 +260,9 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeValue(this.searchInTags);
         dest.writeValue(this.searchInAdminTags);
         dest.writeString(this.categories);
+        dest.writeString(this.customVar1In);
+        dest.writeString(this.customVar2In);
+        dest.writeString(this.customVar3In);
         dest.writeValue(this.timeZoneOffset);
         dest.writeInt(this.interval == null ? -1 : this.interval.ordinal());
     }
@@ -213,6 +273,9 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.searchInTags = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.searchInAdminTags = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.categories = in.readString();
+        this.customVar1In = in.readString();
+        this.customVar2In = in.readString();
+        this.customVar3In = in.readString();
         this.timeZoneOffset = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpInterval = in.readInt();
         this.interval = tmpInterval == -1 ? null : ReportInterval.values()[tmpInterval];
