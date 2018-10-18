@@ -12,7 +12,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.kaltura</groupId>
 	<artifactId>KalturaAndroidClient</artifactId>
-	<version>14.6.0-SNAPSHOT</version>
+	<version>14.7.0-SNAPSHOT</version>
 
 	<!-- Project description -->
 	<name>Kaltura Android Client Library</name>

@@ -62,6 +62,7 @@ public class BulkUploadJobData extends JobData {
 		String type();
 		String emailRecipients();
 		String numOfErrorObjects();
+		String privileges();
 	}
 
 	private String userId;
@@ -117,6 +118,10 @@ public class BulkUploadJobData extends JobData {
 	 * Number of objects that finished on error status
 	 */
 	private Integer numOfErrorObjects;
+	/**
+	 * privileges for the job
+	 */
+	private String privileges;
 
 	// userId:
 	public String getUserId(){
@@ -198,6 +203,18 @@ public class BulkUploadJobData extends JobData {
 		setToken("numOfErrorObjects", multirequestToken);
 	}
 
+	// privileges:
+	public String getPrivileges(){
+		return this.privileges;
+	}
+	public void setPrivileges(String privileges){
+		this.privileges = privileges;
+	}
+
+	public void privileges(String multirequestToken){
+		setToken("privileges", multirequestToken);
+	}
+
 
 	public BulkUploadJobData() {
 		super();
@@ -223,6 +240,7 @@ public class BulkUploadJobData extends JobData {
 		type = BulkUploadType.get(GsonParser.parseString(jsonObject.get("type")));
 		emailRecipients = GsonParser.parseString(jsonObject.get("emailRecipients"));
 		numOfErrorObjects = GsonParser.parseInt(jsonObject.get("numOfErrorObjects"));
+		privileges = GsonParser.parseString(jsonObject.get("privileges"));
 
 	}
 
@@ -232,6 +250,7 @@ public class BulkUploadJobData extends JobData {
 		kparams.add("fileName", this.fileName);
 		kparams.add("emailRecipients", this.emailRecipients);
 		kparams.add("numOfErrorObjects", this.numOfErrorObjects);
+		kparams.add("privileges", this.privileges);
 		return kparams;
 	}
 
@@ -265,6 +284,7 @@ public class BulkUploadJobData extends JobData {
         dest.writeInt(this.type == null ? -1 : this.type.ordinal());
         dest.writeString(this.emailRecipients);
         dest.writeValue(this.numOfErrorObjects);
+        dest.writeString(this.privileges);
     }
 
     public BulkUploadJobData(Parcel in) {
@@ -285,6 +305,7 @@ public class BulkUploadJobData extends JobData {
         this.type = tmpType == -1 ? null : BulkUploadType.values()[tmpType];
         this.emailRecipients = in.readString();
         this.numOfErrorObjects = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.privileges = in.readString();
     }
 }
 
