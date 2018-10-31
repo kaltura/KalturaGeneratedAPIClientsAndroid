@@ -61,6 +61,7 @@ public class ConversionProfileAssetParams extends ObjectBase {
 		String chunkedEncodeMode();
 		String twoPass();
 		String tags();
+		String overloadParams();
 	}
 
 	/**
@@ -97,6 +98,10 @@ public class ConversionProfileAssetParams extends ObjectBase {
 	private Integer chunkedEncodeMode;
 	private Boolean twoPass;
 	private String tags;
+	/**
+	 * JSON string containing an array of flavotParams field-value pairs.
+	 */
+	private String overloadParams;
 
 	// conversionProfileId:
 	public Integer getConversionProfileId(){
@@ -226,6 +231,18 @@ public class ConversionProfileAssetParams extends ObjectBase {
 		setToken("tags", multirequestToken);
 	}
 
+	// overloadParams:
+	public String getOverloadParams(){
+		return this.overloadParams;
+	}
+	public void setOverloadParams(String overloadParams){
+		this.overloadParams = overloadParams;
+	}
+
+	public void overloadParams(String multirequestToken){
+		setToken("overloadParams", multirequestToken);
+	}
+
 
 	public ConversionProfileAssetParams() {
 		super();
@@ -249,6 +266,7 @@ public class ConversionProfileAssetParams extends ObjectBase {
 		chunkedEncodeMode = GsonParser.parseInt(jsonObject.get("chunkedEncodeMode"));
 		twoPass = GsonParser.parseBoolean(jsonObject.get("twoPass"));
 		tags = GsonParser.parseString(jsonObject.get("tags"));
+		overloadParams = GsonParser.parseString(jsonObject.get("overloadParams"));
 
 	}
 
@@ -265,6 +283,7 @@ public class ConversionProfileAssetParams extends ObjectBase {
 		kparams.add("chunkedEncodeMode", this.chunkedEncodeMode);
 		kparams.add("twoPass", this.twoPass);
 		kparams.add("tags", this.tags);
+		kparams.add("overloadParams", this.overloadParams);
 		return kparams;
 	}
 
@@ -296,6 +315,7 @@ public class ConversionProfileAssetParams extends ObjectBase {
         dest.writeValue(this.chunkedEncodeMode);
         dest.writeValue(this.twoPass);
         dest.writeString(this.tags);
+        dest.writeString(this.overloadParams);
     }
 
     public ConversionProfileAssetParams(Parcel in) {
@@ -315,6 +335,7 @@ public class ConversionProfileAssetParams extends ObjectBase {
         this.chunkedEncodeMode = (Integer)in.readValue(Integer.class.getClassLoader());
         this.twoPass = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.tags = in.readString();
+        this.overloadParams = in.readString();
     }
 }
 
