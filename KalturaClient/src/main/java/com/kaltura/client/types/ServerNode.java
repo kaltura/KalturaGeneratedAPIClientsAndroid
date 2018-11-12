@@ -62,6 +62,7 @@ public abstract class ServerNode extends ObjectBase {
 		String tags();
 		String dc();
 		String parentId();
+		String environment();
 	}
 
 	private Integer id;
@@ -96,6 +97,10 @@ public abstract class ServerNode extends ObjectBase {
 	 * Id of the parent serverNode
 	 */
 	private String parentId;
+	/**
+	 * Environment
+	 */
+	private String environment;
 
 	// id:
 	public Integer getId(){
@@ -201,6 +206,18 @@ public abstract class ServerNode extends ObjectBase {
 		setToken("parentId", multirequestToken);
 	}
 
+	// environment:
+	public String getEnvironment(){
+		return this.environment;
+	}
+	public void setEnvironment(String environment){
+		this.environment = environment;
+	}
+
+	public void environment(String multirequestToken){
+		setToken("environment", multirequestToken);
+	}
+
 
 	public ServerNode() {
 		super();
@@ -226,6 +243,7 @@ public abstract class ServerNode extends ObjectBase {
 		tags = GsonParser.parseString(jsonObject.get("tags"));
 		dc = GsonParser.parseInt(jsonObject.get("dc"));
 		parentId = GsonParser.parseString(jsonObject.get("parentId"));
+		environment = GsonParser.parseString(jsonObject.get("environment"));
 
 	}
 
@@ -238,6 +256,7 @@ public abstract class ServerNode extends ObjectBase {
 		kparams.add("hostName", this.hostName);
 		kparams.add("tags", this.tags);
 		kparams.add("parentId", this.parentId);
+		kparams.add("environment", this.environment);
 		return kparams;
 	}
 
@@ -259,6 +278,7 @@ public abstract class ServerNode extends ObjectBase {
         dest.writeString(this.tags);
         dest.writeValue(this.dc);
         dest.writeString(this.parentId);
+        dest.writeString(this.environment);
     }
 
     public ServerNode(Parcel in) {
@@ -279,6 +299,7 @@ public abstract class ServerNode extends ObjectBase {
         this.tags = in.readString();
         this.dc = (Integer)in.readValue(Integer.class.getClassLoader());
         this.parentId = in.readString();
+        this.environment = in.readString();
     }
 }
 
