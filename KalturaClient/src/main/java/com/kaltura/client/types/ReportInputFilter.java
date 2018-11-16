@@ -54,6 +54,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String customVar2In();
 		String customVar3In();
 		String devicesIn();
+		String countriesIn();
+		String regionsIn();
 		String timeZoneOffset();
 		String interval();
 	}
@@ -90,6 +92,14 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * Filter by device
 	 */
 	private String devicesIn;
+	/**
+	 * Filter by country
+	 */
+	private String countriesIn;
+	/**
+	 * Filter by region
+	 */
+	private String regionsIn;
 	/**
 	 * Time zone offset in minutes
 	 */
@@ -195,6 +205,30 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("devicesIn", multirequestToken);
 	}
 
+	// countriesIn:
+	public String getCountriesIn(){
+		return this.countriesIn;
+	}
+	public void setCountriesIn(String countriesIn){
+		this.countriesIn = countriesIn;
+	}
+
+	public void countriesIn(String multirequestToken){
+		setToken("countriesIn", multirequestToken);
+	}
+
+	// regionsIn:
+	public String getRegionsIn(){
+		return this.regionsIn;
+	}
+	public void setRegionsIn(String regionsIn){
+		this.regionsIn = regionsIn;
+	}
+
+	public void regionsIn(String multirequestToken){
+		setToken("regionsIn", multirequestToken);
+	}
+
 	// timeZoneOffset:
 	public Integer getTimeZoneOffset(){
 		return this.timeZoneOffset;
@@ -238,6 +272,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		customVar2In = GsonParser.parseString(jsonObject.get("customVar2In"));
 		customVar3In = GsonParser.parseString(jsonObject.get("customVar3In"));
 		devicesIn = GsonParser.parseString(jsonObject.get("devicesIn"));
+		countriesIn = GsonParser.parseString(jsonObject.get("countriesIn"));
+		regionsIn = GsonParser.parseString(jsonObject.get("regionsIn"));
 		timeZoneOffset = GsonParser.parseInt(jsonObject.get("timeZoneOffset"));
 		interval = ReportInterval.get(GsonParser.parseString(jsonObject.get("interval")));
 
@@ -254,6 +290,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("customVar2In", this.customVar2In);
 		kparams.add("customVar3In", this.customVar3In);
 		kparams.add("devicesIn", this.devicesIn);
+		kparams.add("countriesIn", this.countriesIn);
+		kparams.add("regionsIn", this.regionsIn);
 		kparams.add("timeZoneOffset", this.timeZoneOffset);
 		kparams.add("interval", this.interval);
 		return kparams;
@@ -283,6 +321,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.customVar2In);
         dest.writeString(this.customVar3In);
         dest.writeString(this.devicesIn);
+        dest.writeString(this.countriesIn);
+        dest.writeString(this.regionsIn);
         dest.writeValue(this.timeZoneOffset);
         dest.writeInt(this.interval == null ? -1 : this.interval.ordinal());
     }
@@ -297,6 +337,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.customVar2In = in.readString();
         this.customVar3In = in.readString();
         this.devicesIn = in.readString();
+        this.countriesIn = in.readString();
+        this.regionsIn = in.readString();
         this.timeZoneOffset = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpInterval = in.readInt();
         this.interval = tmpInterval == -1 ? null : ReportInterval.values()[tmpInterval];
