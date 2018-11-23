@@ -53,9 +53,11 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String customVar1In();
 		String customVar2In();
 		String customVar3In();
-		String devicesIn();
-		String countriesIn();
-		String regionsIn();
+		String deviceIn();
+		String countryIn();
+		String regionIn();
+		String operatingSystemFamilyIn();
+		String browserFamilyIn();
 		String timeZoneOffset();
 		String interval();
 	}
@@ -91,15 +93,23 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	/**
 	 * Filter by device
 	 */
-	private String devicesIn;
+	private String deviceIn;
 	/**
 	 * Filter by country
 	 */
-	private String countriesIn;
+	private String countryIn;
 	/**
 	 * Filter by region
 	 */
-	private String regionsIn;
+	private String regionIn;
+	/**
+	 * Filter by operating system family
+	 */
+	private String operatingSystemFamilyIn;
+	/**
+	 * Filter by browser family
+	 */
+	private String browserFamilyIn;
 	/**
 	 * Time zone offset in minutes
 	 */
@@ -193,40 +203,64 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("customVar3In", multirequestToken);
 	}
 
-	// devicesIn:
-	public String getDevicesIn(){
-		return this.devicesIn;
+	// deviceIn:
+	public String getDeviceIn(){
+		return this.deviceIn;
 	}
-	public void setDevicesIn(String devicesIn){
-		this.devicesIn = devicesIn;
-	}
-
-	public void devicesIn(String multirequestToken){
-		setToken("devicesIn", multirequestToken);
+	public void setDeviceIn(String deviceIn){
+		this.deviceIn = deviceIn;
 	}
 
-	// countriesIn:
-	public String getCountriesIn(){
-		return this.countriesIn;
-	}
-	public void setCountriesIn(String countriesIn){
-		this.countriesIn = countriesIn;
+	public void deviceIn(String multirequestToken){
+		setToken("deviceIn", multirequestToken);
 	}
 
-	public void countriesIn(String multirequestToken){
-		setToken("countriesIn", multirequestToken);
+	// countryIn:
+	public String getCountryIn(){
+		return this.countryIn;
+	}
+	public void setCountryIn(String countryIn){
+		this.countryIn = countryIn;
 	}
 
-	// regionsIn:
-	public String getRegionsIn(){
-		return this.regionsIn;
-	}
-	public void setRegionsIn(String regionsIn){
-		this.regionsIn = regionsIn;
+	public void countryIn(String multirequestToken){
+		setToken("countryIn", multirequestToken);
 	}
 
-	public void regionsIn(String multirequestToken){
-		setToken("regionsIn", multirequestToken);
+	// regionIn:
+	public String getRegionIn(){
+		return this.regionIn;
+	}
+	public void setRegionIn(String regionIn){
+		this.regionIn = regionIn;
+	}
+
+	public void regionIn(String multirequestToken){
+		setToken("regionIn", multirequestToken);
+	}
+
+	// operatingSystemFamilyIn:
+	public String getOperatingSystemFamilyIn(){
+		return this.operatingSystemFamilyIn;
+	}
+	public void setOperatingSystemFamilyIn(String operatingSystemFamilyIn){
+		this.operatingSystemFamilyIn = operatingSystemFamilyIn;
+	}
+
+	public void operatingSystemFamilyIn(String multirequestToken){
+		setToken("operatingSystemFamilyIn", multirequestToken);
+	}
+
+	// browserFamilyIn:
+	public String getBrowserFamilyIn(){
+		return this.browserFamilyIn;
+	}
+	public void setBrowserFamilyIn(String browserFamilyIn){
+		this.browserFamilyIn = browserFamilyIn;
+	}
+
+	public void browserFamilyIn(String multirequestToken){
+		setToken("browserFamilyIn", multirequestToken);
 	}
 
 	// timeZoneOffset:
@@ -271,9 +305,11 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		customVar1In = GsonParser.parseString(jsonObject.get("customVar1In"));
 		customVar2In = GsonParser.parseString(jsonObject.get("customVar2In"));
 		customVar3In = GsonParser.parseString(jsonObject.get("customVar3In"));
-		devicesIn = GsonParser.parseString(jsonObject.get("devicesIn"));
-		countriesIn = GsonParser.parseString(jsonObject.get("countriesIn"));
-		regionsIn = GsonParser.parseString(jsonObject.get("regionsIn"));
+		deviceIn = GsonParser.parseString(jsonObject.get("deviceIn"));
+		countryIn = GsonParser.parseString(jsonObject.get("countryIn"));
+		regionIn = GsonParser.parseString(jsonObject.get("regionIn"));
+		operatingSystemFamilyIn = GsonParser.parseString(jsonObject.get("operatingSystemFamilyIn"));
+		browserFamilyIn = GsonParser.parseString(jsonObject.get("browserFamilyIn"));
 		timeZoneOffset = GsonParser.parseInt(jsonObject.get("timeZoneOffset"));
 		interval = ReportInterval.get(GsonParser.parseString(jsonObject.get("interval")));
 
@@ -289,9 +325,11 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("customVar1In", this.customVar1In);
 		kparams.add("customVar2In", this.customVar2In);
 		kparams.add("customVar3In", this.customVar3In);
-		kparams.add("devicesIn", this.devicesIn);
-		kparams.add("countriesIn", this.countriesIn);
-		kparams.add("regionsIn", this.regionsIn);
+		kparams.add("deviceIn", this.deviceIn);
+		kparams.add("countryIn", this.countryIn);
+		kparams.add("regionIn", this.regionIn);
+		kparams.add("operatingSystemFamilyIn", this.operatingSystemFamilyIn);
+		kparams.add("browserFamilyIn", this.browserFamilyIn);
 		kparams.add("timeZoneOffset", this.timeZoneOffset);
 		kparams.add("interval", this.interval);
 		return kparams;
@@ -320,9 +358,11 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.customVar1In);
         dest.writeString(this.customVar2In);
         dest.writeString(this.customVar3In);
-        dest.writeString(this.devicesIn);
-        dest.writeString(this.countriesIn);
-        dest.writeString(this.regionsIn);
+        dest.writeString(this.deviceIn);
+        dest.writeString(this.countryIn);
+        dest.writeString(this.regionIn);
+        dest.writeString(this.operatingSystemFamilyIn);
+        dest.writeString(this.browserFamilyIn);
         dest.writeValue(this.timeZoneOffset);
         dest.writeInt(this.interval == null ? -1 : this.interval.ordinal());
     }
@@ -336,9 +376,11 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.customVar1In = in.readString();
         this.customVar2In = in.readString();
         this.customVar3In = in.readString();
-        this.devicesIn = in.readString();
-        this.countriesIn = in.readString();
-        this.regionsIn = in.readString();
+        this.deviceIn = in.readString();
+        this.countryIn = in.readString();
+        this.regionIn = in.readString();
+        this.operatingSystemFamilyIn = in.readString();
+        this.browserFamilyIn = in.readString();
         this.timeZoneOffset = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpInterval = in.readInt();
         this.interval = tmpInterval == -1 ? null : ReportInterval.values()[tmpInterval];
