@@ -50,16 +50,20 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String searchInTags();
 		String searchInAdminTags();
 		String categories();
+		String categoriesIdsIn();
 		String customVar1In();
 		String customVar2In();
 		String customVar3In();
 		String deviceIn();
 		String countryIn();
 		String regionIn();
+		String citiesIn();
 		String operatingSystemFamilyIn();
 		String browserFamilyIn();
 		String timeZoneOffset();
 		String interval();
+		String mediaTypeIn();
+		String sourceTypeIn();
 	}
 
 	/**
@@ -67,17 +71,21 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 */
 	private String keywords;
 	/**
-	 * Search keywords in onjects tags
+	 * Search keywords in objects tags
 	 */
 	private Boolean searchInTags;
 	/**
-	 * Search keywords in onjects admin tags
+	 * Search keywords in objects admin tags
 	 */
 	private Boolean searchInAdminTags;
 	/**
-	 * Search onjects in specified categories
+	 * Search objects in specified categories
 	 */
 	private String categories;
+	/**
+	 * Search objects in specified category ids
+	 */
+	private String categoriesIdsIn;
 	/**
 	 * Filter by customVar1
 	 */
@@ -103,6 +111,10 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 */
 	private String regionIn;
 	/**
+	 * Filter by city
+	 */
+	private String citiesIn;
+	/**
 	 * Filter by operating system family
 	 */
 	private String operatingSystemFamilyIn;
@@ -118,6 +130,14 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * Aggregated results according to interval
 	 */
 	private ReportInterval interval;
+	/**
+	 * Filter by media types
+	 */
+	private String mediaTypeIn;
+	/**
+	 * Filter by source types
+	 */
+	private String sourceTypeIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -165,6 +185,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 
 	public void categories(String multirequestToken){
 		setToken("categories", multirequestToken);
+	}
+
+	// categoriesIdsIn:
+	public String getCategoriesIdsIn(){
+		return this.categoriesIdsIn;
+	}
+	public void setCategoriesIdsIn(String categoriesIdsIn){
+		this.categoriesIdsIn = categoriesIdsIn;
+	}
+
+	public void categoriesIdsIn(String multirequestToken){
+		setToken("categoriesIdsIn", multirequestToken);
 	}
 
 	// customVar1In:
@@ -239,6 +271,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("regionIn", multirequestToken);
 	}
 
+	// citiesIn:
+	public String getCitiesIn(){
+		return this.citiesIn;
+	}
+	public void setCitiesIn(String citiesIn){
+		this.citiesIn = citiesIn;
+	}
+
+	public void citiesIn(String multirequestToken){
+		setToken("citiesIn", multirequestToken);
+	}
+
 	// operatingSystemFamilyIn:
 	public String getOperatingSystemFamilyIn(){
 		return this.operatingSystemFamilyIn;
@@ -287,6 +331,30 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("interval", multirequestToken);
 	}
 
+	// mediaTypeIn:
+	public String getMediaTypeIn(){
+		return this.mediaTypeIn;
+	}
+	public void setMediaTypeIn(String mediaTypeIn){
+		this.mediaTypeIn = mediaTypeIn;
+	}
+
+	public void mediaTypeIn(String multirequestToken){
+		setToken("mediaTypeIn", multirequestToken);
+	}
+
+	// sourceTypeIn:
+	public String getSourceTypeIn(){
+		return this.sourceTypeIn;
+	}
+	public void setSourceTypeIn(String sourceTypeIn){
+		this.sourceTypeIn = sourceTypeIn;
+	}
+
+	public void sourceTypeIn(String multirequestToken){
+		setToken("sourceTypeIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -302,16 +370,20 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		searchInTags = GsonParser.parseBoolean(jsonObject.get("searchInTags"));
 		searchInAdminTags = GsonParser.parseBoolean(jsonObject.get("searchInAdminTags"));
 		categories = GsonParser.parseString(jsonObject.get("categories"));
+		categoriesIdsIn = GsonParser.parseString(jsonObject.get("categoriesIdsIn"));
 		customVar1In = GsonParser.parseString(jsonObject.get("customVar1In"));
 		customVar2In = GsonParser.parseString(jsonObject.get("customVar2In"));
 		customVar3In = GsonParser.parseString(jsonObject.get("customVar3In"));
 		deviceIn = GsonParser.parseString(jsonObject.get("deviceIn"));
 		countryIn = GsonParser.parseString(jsonObject.get("countryIn"));
 		regionIn = GsonParser.parseString(jsonObject.get("regionIn"));
+		citiesIn = GsonParser.parseString(jsonObject.get("citiesIn"));
 		operatingSystemFamilyIn = GsonParser.parseString(jsonObject.get("operatingSystemFamilyIn"));
 		browserFamilyIn = GsonParser.parseString(jsonObject.get("browserFamilyIn"));
 		timeZoneOffset = GsonParser.parseInt(jsonObject.get("timeZoneOffset"));
 		interval = ReportInterval.get(GsonParser.parseString(jsonObject.get("interval")));
+		mediaTypeIn = GsonParser.parseString(jsonObject.get("mediaTypeIn"));
+		sourceTypeIn = GsonParser.parseString(jsonObject.get("sourceTypeIn"));
 
 	}
 
@@ -322,16 +394,20 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("searchInTags", this.searchInTags);
 		kparams.add("searchInAdminTags", this.searchInAdminTags);
 		kparams.add("categories", this.categories);
+		kparams.add("categoriesIdsIn", this.categoriesIdsIn);
 		kparams.add("customVar1In", this.customVar1In);
 		kparams.add("customVar2In", this.customVar2In);
 		kparams.add("customVar3In", this.customVar3In);
 		kparams.add("deviceIn", this.deviceIn);
 		kparams.add("countryIn", this.countryIn);
 		kparams.add("regionIn", this.regionIn);
+		kparams.add("citiesIn", this.citiesIn);
 		kparams.add("operatingSystemFamilyIn", this.operatingSystemFamilyIn);
 		kparams.add("browserFamilyIn", this.browserFamilyIn);
 		kparams.add("timeZoneOffset", this.timeZoneOffset);
 		kparams.add("interval", this.interval);
+		kparams.add("mediaTypeIn", this.mediaTypeIn);
+		kparams.add("sourceTypeIn", this.sourceTypeIn);
 		return kparams;
 	}
 
@@ -355,16 +431,20 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeValue(this.searchInTags);
         dest.writeValue(this.searchInAdminTags);
         dest.writeString(this.categories);
+        dest.writeString(this.categoriesIdsIn);
         dest.writeString(this.customVar1In);
         dest.writeString(this.customVar2In);
         dest.writeString(this.customVar3In);
         dest.writeString(this.deviceIn);
         dest.writeString(this.countryIn);
         dest.writeString(this.regionIn);
+        dest.writeString(this.citiesIn);
         dest.writeString(this.operatingSystemFamilyIn);
         dest.writeString(this.browserFamilyIn);
         dest.writeValue(this.timeZoneOffset);
         dest.writeInt(this.interval == null ? -1 : this.interval.ordinal());
+        dest.writeString(this.mediaTypeIn);
+        dest.writeString(this.sourceTypeIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -373,17 +453,21 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.searchInTags = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.searchInAdminTags = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.categories = in.readString();
+        this.categoriesIdsIn = in.readString();
         this.customVar1In = in.readString();
         this.customVar2In = in.readString();
         this.customVar3In = in.readString();
         this.deviceIn = in.readString();
         this.countryIn = in.readString();
         this.regionIn = in.readString();
+        this.citiesIn = in.readString();
         this.operatingSystemFamilyIn = in.readString();
         this.browserFamilyIn = in.readString();
         this.timeZoneOffset = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpInterval = in.readInt();
         this.interval = tmpInterval == -1 ? null : ReportInterval.values()[tmpInterval];
+        this.mediaTypeIn = in.readString();
+        this.sourceTypeIn = in.readString();
     }
 }
 
