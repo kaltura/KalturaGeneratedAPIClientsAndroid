@@ -34,6 +34,7 @@ package com.kaltura.client.enums;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 public enum BulkUploadObjectType implements EnumAsString {
+	JOB("bulkUploadFilter.JOB"),
 	SCHEDULE_EVENT("scheduleBulkUpload.SCHEDULE_EVENT"),
 	SCHEDULE_RESOURCE("scheduleBulkUpload.SCHEDULE_RESOURCE"),
 	ENTRY("1"),
