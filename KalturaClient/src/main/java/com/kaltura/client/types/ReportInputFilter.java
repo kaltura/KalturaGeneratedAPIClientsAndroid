@@ -64,6 +64,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String interval();
 		String mediaTypeIn();
 		String sourceTypeIn();
+		String ownerIdsIn();
 	}
 
 	/**
@@ -138,6 +139,10 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * Filter by source types
 	 */
 	private String sourceTypeIn;
+	/**
+	 * Filter by entry owner
+	 */
+	private String ownerIdsIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -355,6 +360,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("sourceTypeIn", multirequestToken);
 	}
 
+	// ownerIdsIn:
+	public String getOwnerIdsIn(){
+		return this.ownerIdsIn;
+	}
+	public void setOwnerIdsIn(String ownerIdsIn){
+		this.ownerIdsIn = ownerIdsIn;
+	}
+
+	public void ownerIdsIn(String multirequestToken){
+		setToken("ownerIdsIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -384,6 +401,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		interval = ReportInterval.get(GsonParser.parseString(jsonObject.get("interval")));
 		mediaTypeIn = GsonParser.parseString(jsonObject.get("mediaTypeIn"));
 		sourceTypeIn = GsonParser.parseString(jsonObject.get("sourceTypeIn"));
+		ownerIdsIn = GsonParser.parseString(jsonObject.get("ownerIdsIn"));
 
 	}
 
@@ -408,6 +426,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("interval", this.interval);
 		kparams.add("mediaTypeIn", this.mediaTypeIn);
 		kparams.add("sourceTypeIn", this.sourceTypeIn);
+		kparams.add("ownerIdsIn", this.ownerIdsIn);
 		return kparams;
 	}
 
@@ -445,6 +464,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeInt(this.interval == null ? -1 : this.interval.ordinal());
         dest.writeString(this.mediaTypeIn);
         dest.writeString(this.sourceTypeIn);
+        dest.writeString(this.ownerIdsIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -468,6 +488,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.interval = tmpInterval == -1 ? null : ReportInterval.values()[tmpInterval];
         this.mediaTypeIn = in.readString();
         this.sourceTypeIn = in.readString();
+        this.ownerIdsIn = in.readString();
     }
 }
 
