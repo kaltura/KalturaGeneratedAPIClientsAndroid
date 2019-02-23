@@ -67,6 +67,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String sourceTypeIn();
 		String ownerIdsIn();
 		ESearchEntryOperator.Tokenizer entryOperator();
+		String entryCreatedAtGreaterThanOrEqual();
+		String entryCreatedAtLessThanOrEqual();
 	}
 
 	/**
@@ -146,6 +148,14 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 */
 	private String ownerIdsIn;
 	private ESearchEntryOperator entryOperator;
+	/**
+	 * Entry created at greater than or equal as Unix timestamp
+	 */
+	private Integer entryCreatedAtGreaterThanOrEqual;
+	/**
+	 * Entry created at less than or equal as Unix timestamp
+	 */
+	private Integer entryCreatedAtLessThanOrEqual;
 
 	// keywords:
 	public String getKeywords(){
@@ -383,6 +393,30 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		this.entryOperator = entryOperator;
 	}
 
+	// entryCreatedAtGreaterThanOrEqual:
+	public Integer getEntryCreatedAtGreaterThanOrEqual(){
+		return this.entryCreatedAtGreaterThanOrEqual;
+	}
+	public void setEntryCreatedAtGreaterThanOrEqual(Integer entryCreatedAtGreaterThanOrEqual){
+		this.entryCreatedAtGreaterThanOrEqual = entryCreatedAtGreaterThanOrEqual;
+	}
+
+	public void entryCreatedAtGreaterThanOrEqual(String multirequestToken){
+		setToken("entryCreatedAtGreaterThanOrEqual", multirequestToken);
+	}
+
+	// entryCreatedAtLessThanOrEqual:
+	public Integer getEntryCreatedAtLessThanOrEqual(){
+		return this.entryCreatedAtLessThanOrEqual;
+	}
+	public void setEntryCreatedAtLessThanOrEqual(Integer entryCreatedAtLessThanOrEqual){
+		this.entryCreatedAtLessThanOrEqual = entryCreatedAtLessThanOrEqual;
+	}
+
+	public void entryCreatedAtLessThanOrEqual(String multirequestToken){
+		setToken("entryCreatedAtLessThanOrEqual", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -414,6 +448,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		sourceTypeIn = GsonParser.parseString(jsonObject.get("sourceTypeIn"));
 		ownerIdsIn = GsonParser.parseString(jsonObject.get("ownerIdsIn"));
 		entryOperator = GsonParser.parseObject(jsonObject.getAsJsonObject("entryOperator"), ESearchEntryOperator.class);
+		entryCreatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("entryCreatedAtGreaterThanOrEqual"));
+		entryCreatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("entryCreatedAtLessThanOrEqual"));
 
 	}
 
@@ -440,6 +476,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("sourceTypeIn", this.sourceTypeIn);
 		kparams.add("ownerIdsIn", this.ownerIdsIn);
 		kparams.add("entryOperator", this.entryOperator);
+		kparams.add("entryCreatedAtGreaterThanOrEqual", this.entryCreatedAtGreaterThanOrEqual);
+		kparams.add("entryCreatedAtLessThanOrEqual", this.entryCreatedAtLessThanOrEqual);
 		return kparams;
 	}
 
@@ -479,6 +517,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.sourceTypeIn);
         dest.writeString(this.ownerIdsIn);
         dest.writeParcelable(this.entryOperator, flags);
+        dest.writeValue(this.entryCreatedAtGreaterThanOrEqual);
+        dest.writeValue(this.entryCreatedAtLessThanOrEqual);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -504,6 +544,8 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.sourceTypeIn = in.readString();
         this.ownerIdsIn = in.readString();
         this.entryOperator = in.readParcelable(ESearchEntryOperator.class.getClassLoader());
+        this.entryCreatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.entryCreatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
