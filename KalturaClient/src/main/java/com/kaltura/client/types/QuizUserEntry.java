@@ -47,10 +47,12 @@ public class QuizUserEntry extends UserEntry {
 	public interface Tokenizer extends UserEntry.Tokenizer {
 		String score();
 		String feedback();
+		String version();
 	}
 
 	private Double score;
 	private String feedback;
+	private Integer version;
 
 	// score:
 	public Double getScore(){
@@ -68,6 +70,10 @@ public class QuizUserEntry extends UserEntry {
 		setToken("feedback", multirequestToken);
 	}
 
+	// version:
+	public Integer getVersion(){
+		return this.version;
+	}
 
 	public QuizUserEntry() {
 		super();
@@ -81,6 +87,7 @@ public class QuizUserEntry extends UserEntry {
 		// set members values:
 		score = GsonParser.parseDouble(jsonObject.get("score"));
 		feedback = GsonParser.parseString(jsonObject.get("feedback"));
+		version = GsonParser.parseInt(jsonObject.get("version"));
 
 	}
 
@@ -109,12 +116,14 @@ public class QuizUserEntry extends UserEntry {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.score);
         dest.writeString(this.feedback);
+        dest.writeValue(this.version);
     }
 
     public QuizUserEntry(Parcel in) {
         super(in);
         this.score = (Double)in.readValue(Double.class.getClassLoader());
         this.feedback = in.readString();
+        this.version = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
