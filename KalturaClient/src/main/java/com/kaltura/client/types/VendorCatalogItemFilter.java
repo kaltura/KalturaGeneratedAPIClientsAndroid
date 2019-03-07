@@ -41,98 +41,71 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(QuizUserEntry.Tokenizer.class)
-public class QuizUserEntry extends UserEntry {
+@MultiRequestBuilder.Tokenizer(VendorCatalogItemFilter.Tokenizer.class)
+public class VendorCatalogItemFilter extends VendorCatalogItemBaseFilter {
 	
-	public interface Tokenizer extends UserEntry.Tokenizer {
-		String score();
-		String calculatedScore();
-		String feedback();
-		String version();
+	public interface Tokenizer extends VendorCatalogItemBaseFilter.Tokenizer {
+		String partnerIdEqual();
 	}
 
-	private Double score;
-	private Double calculatedScore;
-	private String feedback;
-	private Integer version;
+	private Integer partnerIdEqual;
 
-	// score:
-	public Double getScore(){
-		return this.score;
+	// partnerIdEqual:
+	public Integer getPartnerIdEqual(){
+		return this.partnerIdEqual;
 	}
-	// calculatedScore:
-	public Double getCalculatedScore(){
-		return this.calculatedScore;
-	}
-	// feedback:
-	public String getFeedback(){
-		return this.feedback;
-	}
-	public void setFeedback(String feedback){
-		this.feedback = feedback;
+	public void setPartnerIdEqual(Integer partnerIdEqual){
+		this.partnerIdEqual = partnerIdEqual;
 	}
 
-	public void feedback(String multirequestToken){
-		setToken("feedback", multirequestToken);
+	public void partnerIdEqual(String multirequestToken){
+		setToken("partnerIdEqual", multirequestToken);
 	}
 
-	// version:
-	public Integer getVersion(){
-		return this.version;
-	}
 
-	public QuizUserEntry() {
+	public VendorCatalogItemFilter() {
 		super();
 	}
 
-	public QuizUserEntry(JsonObject jsonObject) throws APIException {
+	public VendorCatalogItemFilter(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		score = GsonParser.parseDouble(jsonObject.get("score"));
-		calculatedScore = GsonParser.parseDouble(jsonObject.get("calculatedScore"));
-		feedback = GsonParser.parseString(jsonObject.get("feedback"));
-		version = GsonParser.parseInt(jsonObject.get("version"));
+		partnerIdEqual = GsonParser.parseInt(jsonObject.get("partnerIdEqual"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaQuizUserEntry");
-		kparams.add("feedback", this.feedback);
+		kparams.add("objectType", "KalturaVendorCatalogItemFilter");
+		kparams.add("partnerIdEqual", this.partnerIdEqual);
 		return kparams;
 	}
 
 
-    public static final Creator<QuizUserEntry> CREATOR = new Creator<QuizUserEntry>() {
+    public static final Creator<VendorCatalogItemFilter> CREATOR = new Creator<VendorCatalogItemFilter>() {
         @Override
-        public QuizUserEntry createFromParcel(Parcel source) {
-            return new QuizUserEntry(source);
+        public VendorCatalogItemFilter createFromParcel(Parcel source) {
+            return new VendorCatalogItemFilter(source);
         }
 
         @Override
-        public QuizUserEntry[] newArray(int size) {
-            return new QuizUserEntry[size];
+        public VendorCatalogItemFilter[] newArray(int size) {
+            return new VendorCatalogItemFilter[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.score);
-        dest.writeValue(this.calculatedScore);
-        dest.writeString(this.feedback);
-        dest.writeValue(this.version);
+        dest.writeValue(this.partnerIdEqual);
     }
 
-    public QuizUserEntry(Parcel in) {
+    public VendorCatalogItemFilter(Parcel in) {
         super(in);
-        this.score = (Double)in.readValue(Double.class.getClassLoader());
-        this.calculatedScore = (Double)in.readValue(Double.class.getClassLoader());
-        this.feedback = in.readString();
-        this.version = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.partnerIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 

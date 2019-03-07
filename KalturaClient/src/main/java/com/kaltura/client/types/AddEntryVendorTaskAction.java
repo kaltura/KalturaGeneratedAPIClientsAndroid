@@ -41,98 +41,74 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(QuizUserEntry.Tokenizer.class)
-public class QuizUserEntry extends UserEntry {
+@MultiRequestBuilder.Tokenizer(AddEntryVendorTaskAction.Tokenizer.class)
+public class AddEntryVendorTaskAction extends RuleAction {
 	
-	public interface Tokenizer extends UserEntry.Tokenizer {
-		String score();
-		String calculatedScore();
-		String feedback();
-		String version();
+	public interface Tokenizer extends RuleAction.Tokenizer {
+		String catalogItemIds();
 	}
 
-	private Double score;
-	private Double calculatedScore;
-	private String feedback;
-	private Integer version;
+	/**
+	 * Catalog Item Id
+	 */
+	private String catalogItemIds;
 
-	// score:
-	public Double getScore(){
-		return this.score;
+	// catalogItemIds:
+	public String getCatalogItemIds(){
+		return this.catalogItemIds;
 	}
-	// calculatedScore:
-	public Double getCalculatedScore(){
-		return this.calculatedScore;
-	}
-	// feedback:
-	public String getFeedback(){
-		return this.feedback;
-	}
-	public void setFeedback(String feedback){
-		this.feedback = feedback;
+	public void setCatalogItemIds(String catalogItemIds){
+		this.catalogItemIds = catalogItemIds;
 	}
 
-	public void feedback(String multirequestToken){
-		setToken("feedback", multirequestToken);
+	public void catalogItemIds(String multirequestToken){
+		setToken("catalogItemIds", multirequestToken);
 	}
 
-	// version:
-	public Integer getVersion(){
-		return this.version;
-	}
 
-	public QuizUserEntry() {
+	public AddEntryVendorTaskAction() {
 		super();
 	}
 
-	public QuizUserEntry(JsonObject jsonObject) throws APIException {
+	public AddEntryVendorTaskAction(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		score = GsonParser.parseDouble(jsonObject.get("score"));
-		calculatedScore = GsonParser.parseDouble(jsonObject.get("calculatedScore"));
-		feedback = GsonParser.parseString(jsonObject.get("feedback"));
-		version = GsonParser.parseInt(jsonObject.get("version"));
+		catalogItemIds = GsonParser.parseString(jsonObject.get("catalogItemIds"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaQuizUserEntry");
-		kparams.add("feedback", this.feedback);
+		kparams.add("objectType", "KalturaAddEntryVendorTaskAction");
+		kparams.add("catalogItemIds", this.catalogItemIds);
 		return kparams;
 	}
 
 
-    public static final Creator<QuizUserEntry> CREATOR = new Creator<QuizUserEntry>() {
+    public static final Creator<AddEntryVendorTaskAction> CREATOR = new Creator<AddEntryVendorTaskAction>() {
         @Override
-        public QuizUserEntry createFromParcel(Parcel source) {
-            return new QuizUserEntry(source);
+        public AddEntryVendorTaskAction createFromParcel(Parcel source) {
+            return new AddEntryVendorTaskAction(source);
         }
 
         @Override
-        public QuizUserEntry[] newArray(int size) {
-            return new QuizUserEntry[size];
+        public AddEntryVendorTaskAction[] newArray(int size) {
+            return new AddEntryVendorTaskAction[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.score);
-        dest.writeValue(this.calculatedScore);
-        dest.writeString(this.feedback);
-        dest.writeValue(this.version);
+        dest.writeString(this.catalogItemIds);
     }
 
-    public QuizUserEntry(Parcel in) {
+    public AddEntryVendorTaskAction(Parcel in) {
         super(in);
-        this.score = (Double)in.readValue(Double.class.getClassLoader());
-        this.calculatedScore = (Double)in.readValue(Double.class.getClassLoader());
-        this.feedback = in.readString();
-        this.version = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.catalogItemIds = in.readString();
     }
 }
 

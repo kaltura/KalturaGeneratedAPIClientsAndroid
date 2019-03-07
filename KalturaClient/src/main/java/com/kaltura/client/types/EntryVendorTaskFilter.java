@@ -41,98 +41,71 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(QuizUserEntry.Tokenizer.class)
-public class QuizUserEntry extends UserEntry {
+@MultiRequestBuilder.Tokenizer(EntryVendorTaskFilter.Tokenizer.class)
+public class EntryVendorTaskFilter extends EntryVendorTaskBaseFilter {
 	
-	public interface Tokenizer extends UserEntry.Tokenizer {
-		String score();
-		String calculatedScore();
-		String feedback();
-		String version();
+	public interface Tokenizer extends EntryVendorTaskBaseFilter.Tokenizer {
+		String freeText();
 	}
 
-	private Double score;
-	private Double calculatedScore;
-	private String feedback;
-	private Integer version;
+	private String freeText;
 
-	// score:
-	public Double getScore(){
-		return this.score;
+	// freeText:
+	public String getFreeText(){
+		return this.freeText;
 	}
-	// calculatedScore:
-	public Double getCalculatedScore(){
-		return this.calculatedScore;
-	}
-	// feedback:
-	public String getFeedback(){
-		return this.feedback;
-	}
-	public void setFeedback(String feedback){
-		this.feedback = feedback;
+	public void setFreeText(String freeText){
+		this.freeText = freeText;
 	}
 
-	public void feedback(String multirequestToken){
-		setToken("feedback", multirequestToken);
+	public void freeText(String multirequestToken){
+		setToken("freeText", multirequestToken);
 	}
 
-	// version:
-	public Integer getVersion(){
-		return this.version;
-	}
 
-	public QuizUserEntry() {
+	public EntryVendorTaskFilter() {
 		super();
 	}
 
-	public QuizUserEntry(JsonObject jsonObject) throws APIException {
+	public EntryVendorTaskFilter(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		score = GsonParser.parseDouble(jsonObject.get("score"));
-		calculatedScore = GsonParser.parseDouble(jsonObject.get("calculatedScore"));
-		feedback = GsonParser.parseString(jsonObject.get("feedback"));
-		version = GsonParser.parseInt(jsonObject.get("version"));
+		freeText = GsonParser.parseString(jsonObject.get("freeText"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaQuizUserEntry");
-		kparams.add("feedback", this.feedback);
+		kparams.add("objectType", "KalturaEntryVendorTaskFilter");
+		kparams.add("freeText", this.freeText);
 		return kparams;
 	}
 
 
-    public static final Creator<QuizUserEntry> CREATOR = new Creator<QuizUserEntry>() {
+    public static final Creator<EntryVendorTaskFilter> CREATOR = new Creator<EntryVendorTaskFilter>() {
         @Override
-        public QuizUserEntry createFromParcel(Parcel source) {
-            return new QuizUserEntry(source);
+        public EntryVendorTaskFilter createFromParcel(Parcel source) {
+            return new EntryVendorTaskFilter(source);
         }
 
         @Override
-        public QuizUserEntry[] newArray(int size) {
-            return new QuizUserEntry[size];
+        public EntryVendorTaskFilter[] newArray(int size) {
+            return new EntryVendorTaskFilter[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.score);
-        dest.writeValue(this.calculatedScore);
-        dest.writeString(this.feedback);
-        dest.writeValue(this.version);
+        dest.writeString(this.freeText);
     }
 
-    public QuizUserEntry(Parcel in) {
+    public EntryVendorTaskFilter(Parcel in) {
         super(in);
-        this.score = (Double)in.readValue(Double.class.getClassLoader());
-        this.calculatedScore = (Double)in.readValue(Double.class.getClassLoader());
-        this.feedback = in.readString();
-        this.version = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.freeText = in.readString();
     }
 }
 

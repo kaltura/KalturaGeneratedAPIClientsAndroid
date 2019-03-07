@@ -30,6 +30,8 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.CatalogItemLanguage;
+import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -41,98 +43,90 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(QuizUserEntry.Tokenizer.class)
-public class QuizUserEntry extends UserEntry {
+@MultiRequestBuilder.Tokenizer(Dictionary.Tokenizer.class)
+public class Dictionary extends ObjectBase {
 	
-	public interface Tokenizer extends UserEntry.Tokenizer {
-		String score();
-		String calculatedScore();
-		String feedback();
-		String version();
+	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String language();
+		String data();
 	}
 
-	private Double score;
-	private Double calculatedScore;
-	private String feedback;
-	private Integer version;
+	private CatalogItemLanguage language;
+	private String data;
 
-	// score:
-	public Double getScore(){
-		return this.score;
+	// language:
+	public CatalogItemLanguage getLanguage(){
+		return this.language;
 	}
-	// calculatedScore:
-	public Double getCalculatedScore(){
-		return this.calculatedScore;
-	}
-	// feedback:
-	public String getFeedback(){
-		return this.feedback;
-	}
-	public void setFeedback(String feedback){
-		this.feedback = feedback;
+	public void setLanguage(CatalogItemLanguage language){
+		this.language = language;
 	}
 
-	public void feedback(String multirequestToken){
-		setToken("feedback", multirequestToken);
+	public void language(String multirequestToken){
+		setToken("language", multirequestToken);
 	}
 
-	// version:
-	public Integer getVersion(){
-		return this.version;
+	// data:
+	public String getData(){
+		return this.data;
+	}
+	public void setData(String data){
+		this.data = data;
 	}
 
-	public QuizUserEntry() {
+	public void data(String multirequestToken){
+		setToken("data", multirequestToken);
+	}
+
+
+	public Dictionary() {
 		super();
 	}
 
-	public QuizUserEntry(JsonObject jsonObject) throws APIException {
+	public Dictionary(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		score = GsonParser.parseDouble(jsonObject.get("score"));
-		calculatedScore = GsonParser.parseDouble(jsonObject.get("calculatedScore"));
-		feedback = GsonParser.parseString(jsonObject.get("feedback"));
-		version = GsonParser.parseInt(jsonObject.get("version"));
+		language = CatalogItemLanguage.get(GsonParser.parseString(jsonObject.get("language")));
+		data = GsonParser.parseString(jsonObject.get("data"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaQuizUserEntry");
-		kparams.add("feedback", this.feedback);
+		kparams.add("objectType", "KalturaDictionary");
+		kparams.add("language", this.language);
+		kparams.add("data", this.data);
 		return kparams;
 	}
 
 
-    public static final Creator<QuizUserEntry> CREATOR = new Creator<QuizUserEntry>() {
+    public static final Creator<Dictionary> CREATOR = new Creator<Dictionary>() {
         @Override
-        public QuizUserEntry createFromParcel(Parcel source) {
-            return new QuizUserEntry(source);
+        public Dictionary createFromParcel(Parcel source) {
+            return new Dictionary(source);
         }
 
         @Override
-        public QuizUserEntry[] newArray(int size) {
-            return new QuizUserEntry[size];
+        public Dictionary[] newArray(int size) {
+            return new Dictionary[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.score);
-        dest.writeValue(this.calculatedScore);
-        dest.writeString(this.feedback);
-        dest.writeValue(this.version);
+        dest.writeInt(this.language == null ? -1 : this.language.ordinal());
+        dest.writeString(this.data);
     }
 
-    public QuizUserEntry(Parcel in) {
+    public Dictionary(Parcel in) {
         super(in);
-        this.score = (Double)in.readValue(Double.class.getClassLoader());
-        this.calculatedScore = (Double)in.readValue(Double.class.getClassLoader());
-        this.feedback = in.readString();
-        this.version = (Integer)in.readValue(Integer.class.getClassLoader());
+        int tmpLanguage = in.readInt();
+        this.language = tmpLanguage == -1 ? null : CatalogItemLanguage.values()[tmpLanguage];
+        this.data = in.readString();
     }
 }
 

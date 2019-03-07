@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.ScoreType;
 import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
@@ -58,6 +59,7 @@ public class Quiz extends ObjectBase {
 		String allowDownload();
 		String showGradeAfterSubmission();
 		String maxRetakesAllowed();
+		String scoreType();
 	}
 
 	private Integer version;
@@ -72,6 +74,7 @@ public class Quiz extends ObjectBase {
 	private Boolean allowDownload;
 	private Boolean showGradeAfterSubmission;
 	private Integer maxRetakesAllowed;
+	private ScoreType scoreType;
 
 	// version:
 	public Integer getVersion(){
@@ -169,6 +172,18 @@ public class Quiz extends ObjectBase {
 		setToken("maxRetakesAllowed", multirequestToken);
 	}
 
+	// scoreType:
+	public ScoreType getScoreType(){
+		return this.scoreType;
+	}
+	public void setScoreType(ScoreType scoreType){
+		this.scoreType = scoreType;
+	}
+
+	public void scoreType(String multirequestToken){
+		setToken("scoreType", multirequestToken);
+	}
+
 
 	public Quiz() {
 		super();
@@ -189,6 +204,7 @@ public class Quiz extends ObjectBase {
 		allowDownload = GsonParser.parseBoolean(jsonObject.get("allowDownload"));
 		showGradeAfterSubmission = GsonParser.parseBoolean(jsonObject.get("showGradeAfterSubmission"));
 		maxRetakesAllowed = GsonParser.parseInt(jsonObject.get("maxRetakesAllowed"));
+		scoreType = ScoreType.get(GsonParser.parseInt(jsonObject.get("scoreType")));
 
 	}
 
@@ -203,6 +219,7 @@ public class Quiz extends ObjectBase {
 		kparams.add("allowDownload", this.allowDownload);
 		kparams.add("showGradeAfterSubmission", this.showGradeAfterSubmission);
 		kparams.add("maxRetakesAllowed", this.maxRetakesAllowed);
+		kparams.add("scoreType", this.scoreType);
 		return kparams;
 	}
 
@@ -236,6 +253,7 @@ public class Quiz extends ObjectBase {
         dest.writeValue(this.allowDownload);
         dest.writeValue(this.showGradeAfterSubmission);
         dest.writeValue(this.maxRetakesAllowed);
+        dest.writeInt(this.scoreType == null ? -1 : this.scoreType.ordinal());
     }
 
     public Quiz(Parcel in) {
@@ -253,6 +271,8 @@ public class Quiz extends ObjectBase {
         this.allowDownload = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.showGradeAfterSubmission = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.maxRetakesAllowed = (Integer)in.readValue(Integer.class.getClassLoader());
+        int tmpScoreType = in.readInt();
+        this.scoreType = tmpScoreType == -1 ? null : ScoreType.values()[tmpScoreType];
     }
 }
 
