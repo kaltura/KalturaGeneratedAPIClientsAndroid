@@ -30,7 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -45,22 +44,8 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class QuizUserEntryFilter extends QuizUserEntryBaseFilter {
 	
 	public interface Tokenizer extends QuizUserEntryBaseFilter.Tokenizer {
-		String versionEqual();
 	}
 
-	private Integer versionEqual;
-
-	// versionEqual:
-	public Integer getVersionEqual(){
-		return this.versionEqual;
-	}
-	public void setVersionEqual(Integer versionEqual){
-		this.versionEqual = versionEqual;
-	}
-
-	public void versionEqual(String multirequestToken){
-		setToken("versionEqual", multirequestToken);
-	}
 
 
 	public QuizUserEntryFilter() {
@@ -69,18 +54,11 @@ public class QuizUserEntryFilter extends QuizUserEntryBaseFilter {
 
 	public QuizUserEntryFilter(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
-
-		if(jsonObject == null) return;
-
-		// set members values:
-		versionEqual = GsonParser.parseInt(jsonObject.get("versionEqual"));
-
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaQuizUserEntryFilter");
-		kparams.add("versionEqual", this.versionEqual);
 		return kparams;
 	}
 
@@ -97,15 +75,8 @@ public class QuizUserEntryFilter extends QuizUserEntryBaseFilter {
         }
     };
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeValue(this.versionEqual);
-    }
-
     public QuizUserEntryFilter(Parcel in) {
         super(in);
-        this.versionEqual = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
