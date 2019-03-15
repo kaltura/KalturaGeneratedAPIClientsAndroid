@@ -30,7 +30,12 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.ESearchOperatorType;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -41,11 +46,35 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(ESearchGroupOperator.Tokenizer.class)
-public class ESearchGroupOperator extends ESearchUserOperator {
+public class ESearchGroupOperator extends ESearchGroupBaseItem {
 	
-	public interface Tokenizer extends ESearchUserOperator.Tokenizer {
+	public interface Tokenizer extends ESearchGroupBaseItem.Tokenizer {
+		String operator();
+		RequestBuilder.ListTokenizer<ESearchGroupBaseItem.Tokenizer> searchItems();
 	}
 
+	private ESearchOperatorType operator;
+	private List<ESearchGroupBaseItem> searchItems;
+
+	// operator:
+	public ESearchOperatorType getOperator(){
+		return this.operator;
+	}
+	public void setOperator(ESearchOperatorType operator){
+		this.operator = operator;
+	}
+
+	public void operator(String multirequestToken){
+		setToken("operator", multirequestToken);
+	}
+
+	// searchItems:
+	public List<ESearchGroupBaseItem> getSearchItems(){
+		return this.searchItems;
+	}
+	public void setSearchItems(List<ESearchGroupBaseItem> searchItems){
+		this.searchItems = searchItems;
+	}
 
 
 	public ESearchGroupOperator() {
@@ -54,11 +83,20 @@ public class ESearchGroupOperator extends ESearchUserOperator {
 
 	public ESearchGroupOperator(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		operator = ESearchOperatorType.get(GsonParser.parseInt(jsonObject.get("operator")));
+		searchItems = GsonParser.parseArray(jsonObject.getAsJsonArray("searchItems"), ESearchGroupBaseItem.class);
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaESearchGroupOperator");
+		kparams.add("operator", this.operator);
+		kparams.add("searchItems", this.searchItems);
 		return kparams;
 	}
 
@@ -75,8 +113,27 @@ public class ESearchGroupOperator extends ESearchUserOperator {
         }
     };
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(this.operator == null ? -1 : this.operator.ordinal());
+        if(this.searchItems != null) {
+            dest.writeInt(this.searchItems.size());
+            dest.writeList(this.searchItems);
+        } else {
+            dest.writeInt(-1);
+        }
+    }
+
     public ESearchGroupOperator(Parcel in) {
         super(in);
+        int tmpOperator = in.readInt();
+        this.operator = tmpOperator == -1 ? null : ESearchOperatorType.values()[tmpOperator];
+        int searchItemsSize = in.readInt();
+        if( searchItemsSize > -1) {
+            this.searchItems = new ArrayList<>();
+            in.readList(this.searchItems, ESearchGroupBaseItem.class.getClassLoader());
+        }
     }
 }
 

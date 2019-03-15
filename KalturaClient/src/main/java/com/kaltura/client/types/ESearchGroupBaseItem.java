@@ -30,8 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.enums.ESearchGroupFieldName;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -42,72 +40,31 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchGroupItem.Tokenizer.class)
-public class ESearchGroupItem extends ESearchAbstractGroupItem {
+@MultiRequestBuilder.Tokenizer(ESearchGroupBaseItem.Tokenizer.class)
+public abstract class ESearchGroupBaseItem extends ESearchBaseItem {
 	
-	public interface Tokenizer extends ESearchAbstractGroupItem.Tokenizer {
-		String fieldName();
-	}
-
-	private ESearchGroupFieldName fieldName;
-
-	// fieldName:
-	public ESearchGroupFieldName getFieldName(){
-		return this.fieldName;
-	}
-	public void setFieldName(ESearchGroupFieldName fieldName){
-		this.fieldName = fieldName;
-	}
-
-	public void fieldName(String multirequestToken){
-		setToken("fieldName", multirequestToken);
+	public interface Tokenizer extends ESearchBaseItem.Tokenizer {
 	}
 
 
-	public ESearchGroupItem() {
+
+	public ESearchGroupBaseItem() {
 		super();
 	}
 
-	public ESearchGroupItem(JsonObject jsonObject) throws APIException {
+	public ESearchGroupBaseItem(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
-
-		if(jsonObject == null) return;
-
-		// set members values:
-		fieldName = ESearchGroupFieldName.get(GsonParser.parseString(jsonObject.get("fieldName")));
-
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchGroupItem");
-		kparams.add("fieldName", this.fieldName);
+		kparams.add("objectType", "KalturaESearchGroupBaseItem");
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchGroupItem> CREATOR = new Creator<ESearchGroupItem>() {
-        @Override
-        public ESearchGroupItem createFromParcel(Parcel source) {
-            return new ESearchGroupItem(source);
-        }
-
-        @Override
-        public ESearchGroupItem[] newArray(int size) {
-            return new ESearchGroupItem[size];
-        }
-    };
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeInt(this.fieldName == null ? -1 : this.fieldName.ordinal());
-    }
-
-    public ESearchGroupItem(Parcel in) {
+    public ESearchGroupBaseItem(Parcel in) {
         super(in);
-        int tmpFieldName = in.readInt();
-        this.fieldName = tmpFieldName == -1 ? null : ESearchGroupFieldName.values()[tmpFieldName];
     }
 }
 
