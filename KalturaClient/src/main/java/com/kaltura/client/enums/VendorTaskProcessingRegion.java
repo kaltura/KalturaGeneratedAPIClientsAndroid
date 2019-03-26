@@ -33,23 +33,13 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum VendorServiceTurnAroundTime implements EnumAsInt {
-	BEST_EFFORT(-1),
-	IMMEDIATE(0),
-	THIRTY_MINUTES(1800),
-	TWO_HOURS(7200),
-	THREE_HOURS(10800),
-	SIX_HOURS(21600),
-	EIGHT_HOURS(28800),
-	TWELVE_HOURS(43200),
-	TWENTY_FOUR_HOURS(86400),
-	FORTY_EIGHT_HOURS(172800),
-	FOUR_DAYS(345600),
-	TEN_DAYS(864000);
+public enum VendorTaskProcessingRegion implements EnumAsInt {
+	US(1),
+	EU(2);
 
 	private int value;
 
-	VendorServiceTurnAroundTime(int value) {
+	VendorTaskProcessingRegion(int value) {
 		this.value = value;
 	}
 
@@ -62,19 +52,19 @@ public enum VendorServiceTurnAroundTime implements EnumAsInt {
 		this.value = value;
 	}
 
-	public static VendorServiceTurnAroundTime get(Integer value) {
+	public static VendorTaskProcessingRegion get(Integer value) {
 		if(value == null)
 		{
 			return null;
 		}
 		
-		// goes over VendorServiceTurnAroundTime defined values and compare the inner value with the given one:
-		for(VendorServiceTurnAroundTime item: values()) {
+		// goes over VendorTaskProcessingRegion defined values and compare the inner value with the given one:
+		for(VendorTaskProcessingRegion item: values()) {
 			if(item.getValue() == value) {
 				return item;
 			}
 		}
 		// in case the requested value was not found in the enum values, we return the first item as default.
-		return VendorServiceTurnAroundTime.values().length > 0 ? VendorServiceTurnAroundTime.values()[0]: null;
+		return VendorTaskProcessingRegion.values().length > 0 ? VendorTaskProcessingRegion.values()[0]: null;
    }
 }

@@ -25,7 +25,9 @@
 //
 // @ignore
 // ===================================================================================================
-package com.kaltura.client.enums;
+package com.kaltura.client.services;
+
+import com.kaltura.client.utils.request.RequestBuilder;
 
 /**
  * This class was generated using generate.php
@@ -33,48 +35,32 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum VendorServiceTurnAroundTime implements EnumAsInt {
-	BEST_EFFORT(-1),
-	IMMEDIATE(0),
-	THIRTY_MINUTES(1800),
-	TWO_HOURS(7200),
-	THREE_HOURS(10800),
-	SIX_HOURS(21600),
-	EIGHT_HOURS(28800),
-	TWELVE_HOURS(43200),
-	TWENTY_FOUR_HOURS(86400),
-	FORTY_EIGHT_HOURS(172800),
-	FOUR_DAYS(345600),
-	TEN_DAYS(864000);
 
-	private int value;
-
-	VendorServiceTurnAroundTime(int value) {
-		this.value = value;
-	}
-
-	@Override
-	public int getValue() {
-		return this.value;
-	}
-
-	public void setValue(int value) {
-		this.value = value;
-	}
-
-	public static VendorServiceTurnAroundTime get(Integer value) {
-		if(value == null)
-		{
-			return null;
+/**
+ * Export CSV service is used to manage CSV exports of objects
+ * 
+ * @param id - the requested file id
+ */
+public class ExportcsvService {
+	
+	public static class ServeCsvExportcsvBuilder extends RequestBuilder<String, String, ServeCsvExportcsvBuilder> {
+		
+		public ServeCsvExportcsvBuilder(String id) {
+			super(String.class, "exportcsv", "serveCsv");
+			params.add("id", id);
 		}
 		
-		// goes over VendorServiceTurnAroundTime defined values and compare the inner value with the given one:
-		for(VendorServiceTurnAroundTime item: values()) {
-			if(item.getValue() == value) {
-				return item;
-			}
+		public void id(String multirequestToken) {
+			params.add("id", multirequestToken);
 		}
-		// in case the requested value was not found in the enum values, we return the first item as default.
-		return VendorServiceTurnAroundTime.values().length > 0 ? VendorServiceTurnAroundTime.values()[0]: null;
-   }
+	}
+
+	/**
+	 * Will serve a requested CSV
+	 * 
+	 * @param id - the requested file id
+	 */
+    public static ServeCsvExportcsvBuilder serveCsv(String id)  {
+		return new ServeCsvExportcsvBuilder(id);
+	}
 }
