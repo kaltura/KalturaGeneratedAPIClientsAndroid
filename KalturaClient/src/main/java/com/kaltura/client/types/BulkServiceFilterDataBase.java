@@ -30,7 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.types.ObjectBase;
+import com.kaltura.client.types.Filter;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -45,70 +45,70 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * Represents the Bulk service input for filter bulk upload
  */
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(BulkServiceFilterData.Tokenizer.class)
-public class BulkServiceFilterData extends BulkServiceFilterDataBase {
+@MultiRequestBuilder.Tokenizer(BulkServiceFilterDataBase.Tokenizer.class)
+public class BulkServiceFilterDataBase extends BulkServiceData {
 	
-	public interface Tokenizer extends BulkServiceFilterDataBase.Tokenizer {
-		ObjectBase.Tokenizer templateObject();
+	public interface Tokenizer extends BulkServiceData.Tokenizer {
+		Filter.Tokenizer filter();
 	}
 
 	/**
-	 * Template object for new object creation
+	 * Filter for extracting the objects list to upload
 	 */
-	private ObjectBase templateObject;
+	private Filter filter;
 
-	// templateObject:
-	public ObjectBase getTemplateObject(){
-		return this.templateObject;
+	// filter:
+	public Filter getFilter(){
+		return this.filter;
 	}
-	public void setTemplateObject(ObjectBase templateObject){
-		this.templateObject = templateObject;
+	public void setFilter(Filter filter){
+		this.filter = filter;
 	}
 
 
-	public BulkServiceFilterData() {
+	public BulkServiceFilterDataBase() {
 		super();
 	}
 
-	public BulkServiceFilterData(JsonObject jsonObject) throws APIException {
+	public BulkServiceFilterDataBase(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		templateObject = GsonParser.parseObject(jsonObject.getAsJsonObject("templateObject"), ObjectBase.class);
+		filter = GsonParser.parseObject(jsonObject.getAsJsonObject("filter"), Filter.class);
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaBulkServiceFilterData");
-		kparams.add("templateObject", this.templateObject);
+		kparams.add("objectType", "KalturaBulkServiceFilterDataBase");
+		kparams.add("filter", this.filter);
 		return kparams;
 	}
 
 
-    public static final Creator<BulkServiceFilterData> CREATOR = new Creator<BulkServiceFilterData>() {
+    public static final Creator<BulkServiceFilterDataBase> CREATOR = new Creator<BulkServiceFilterDataBase>() {
         @Override
-        public BulkServiceFilterData createFromParcel(Parcel source) {
-            return new BulkServiceFilterData(source);
+        public BulkServiceFilterDataBase createFromParcel(Parcel source) {
+            return new BulkServiceFilterDataBase(source);
         }
 
         @Override
-        public BulkServiceFilterData[] newArray(int size) {
-            return new BulkServiceFilterData[size];
+        public BulkServiceFilterDataBase[] newArray(int size) {
+            return new BulkServiceFilterDataBase[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeParcelable(this.templateObject, flags);
+        dest.writeParcelable(this.filter, flags);
     }
 
-    public BulkServiceFilterData(Parcel in) {
+    public BulkServiceFilterDataBase(Parcel in) {
         super(in);
-        this.templateObject = in.readParcelable(ObjectBase.class.getClassLoader());
+        this.filter = in.readParcelable(Filter.class.getClassLoader());
     }
 }
 

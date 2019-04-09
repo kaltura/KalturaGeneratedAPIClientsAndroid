@@ -30,7 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -41,74 +40,72 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**
- * Represents the Bulk service input for filter bulk upload
- */
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(BulkServiceFilterData.Tokenizer.class)
-public class BulkServiceFilterData extends BulkServiceFilterDataBase {
+@MultiRequestBuilder.Tokenizer(BulkUploadResultUserEntry.Tokenizer.class)
+public class BulkUploadResultUserEntry extends BulkUploadResult {
 	
-	public interface Tokenizer extends BulkServiceFilterDataBase.Tokenizer {
-		ObjectBase.Tokenizer templateObject();
+	public interface Tokenizer extends BulkUploadResult.Tokenizer {
+		String userEntryId();
 	}
 
-	/**
-	 * Template object for new object creation
-	 */
-	private ObjectBase templateObject;
+	private Integer userEntryId;
 
-	// templateObject:
-	public ObjectBase getTemplateObject(){
-		return this.templateObject;
+	// userEntryId:
+	public Integer getUserEntryId(){
+		return this.userEntryId;
 	}
-	public void setTemplateObject(ObjectBase templateObject){
-		this.templateObject = templateObject;
+	public void setUserEntryId(Integer userEntryId){
+		this.userEntryId = userEntryId;
 	}
 
+	public void userEntryId(String multirequestToken){
+		setToken("userEntryId", multirequestToken);
+	}
 
-	public BulkServiceFilterData() {
+
+	public BulkUploadResultUserEntry() {
 		super();
 	}
 
-	public BulkServiceFilterData(JsonObject jsonObject) throws APIException {
+	public BulkUploadResultUserEntry(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		templateObject = GsonParser.parseObject(jsonObject.getAsJsonObject("templateObject"), ObjectBase.class);
+		userEntryId = GsonParser.parseInt(jsonObject.get("userEntryId"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaBulkServiceFilterData");
-		kparams.add("templateObject", this.templateObject);
+		kparams.add("objectType", "KalturaBulkUploadResultUserEntry");
+		kparams.add("userEntryId", this.userEntryId);
 		return kparams;
 	}
 
 
-    public static final Creator<BulkServiceFilterData> CREATOR = new Creator<BulkServiceFilterData>() {
+    public static final Creator<BulkUploadResultUserEntry> CREATOR = new Creator<BulkUploadResultUserEntry>() {
         @Override
-        public BulkServiceFilterData createFromParcel(Parcel source) {
-            return new BulkServiceFilterData(source);
+        public BulkUploadResultUserEntry createFromParcel(Parcel source) {
+            return new BulkUploadResultUserEntry(source);
         }
 
         @Override
-        public BulkServiceFilterData[] newArray(int size) {
-            return new BulkServiceFilterData[size];
+        public BulkUploadResultUserEntry[] newArray(int size) {
+            return new BulkUploadResultUserEntry[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeParcelable(this.templateObject, flags);
+        dest.writeValue(this.userEntryId);
     }
 
-    public BulkServiceFilterData(Parcel in) {
+    public BulkUploadResultUserEntry(Parcel in) {
         super(in);
-        this.templateObject = in.readParcelable(ObjectBase.class.getClassLoader());
+        this.userEntryId = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
