@@ -49,6 +49,7 @@ public abstract class CuePoint extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		String id();
+		String intId();
 		String cuePointType();
 		String status();
 		String entryId();
@@ -69,6 +70,7 @@ public abstract class CuePoint extends ObjectBase {
 	}
 
 	private String id;
+	private Integer intId;
 	private CuePointType cuePointType;
 	private CuePointStatus status;
 	private String entryId;
@@ -93,6 +95,10 @@ public abstract class CuePoint extends ObjectBase {
 	// id:
 	public String getId(){
 		return this.id;
+	}
+	// intId:
+	public Integer getIntId(){
+		return this.intId;
 	}
 	// cuePointType:
 	public CuePointType getCuePointType(){
@@ -246,6 +252,7 @@ public abstract class CuePoint extends ObjectBase {
 
 		// set members values:
 		id = GsonParser.parseString(jsonObject.get("id"));
+		intId = GsonParser.parseInt(jsonObject.get("intId"));
 		cuePointType = CuePointType.get(GsonParser.parseString(jsonObject.get("cuePointType")));
 		status = CuePointStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		entryId = GsonParser.parseString(jsonObject.get("entryId"));
@@ -286,6 +293,7 @@ public abstract class CuePoint extends ObjectBase {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.id);
+        dest.writeValue(this.intId);
         dest.writeInt(this.cuePointType == null ? -1 : this.cuePointType.ordinal());
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
         dest.writeString(this.entryId);
@@ -308,6 +316,7 @@ public abstract class CuePoint extends ObjectBase {
     public CuePoint(Parcel in) {
         super(in);
         this.id = in.readString();
+        this.intId = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpCuePointType = in.readInt();
         this.cuePointType = tmpCuePointType == -1 ? null : CuePointType.values()[tmpCuePointType];
         int tmpStatus = in.readInt();
