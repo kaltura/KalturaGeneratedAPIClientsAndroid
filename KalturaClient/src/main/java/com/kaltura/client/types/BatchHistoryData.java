@@ -55,6 +55,7 @@ public class BatchHistoryData extends ObjectBase {
 		String errNumber();
 		String hostName();
 		String sessionId();
+		String schedulerName();
 	}
 
 	private Integer schedulerId;
@@ -66,6 +67,7 @@ public class BatchHistoryData extends ObjectBase {
 	private Integer errNumber;
 	private String hostName;
 	private String sessionId;
+	private String schedulerName;
 
 	// schedulerId:
 	public Integer getSchedulerId(){
@@ -175,6 +177,18 @@ public class BatchHistoryData extends ObjectBase {
 		setToken("sessionId", multirequestToken);
 	}
 
+	// schedulerName:
+	public String getSchedulerName(){
+		return this.schedulerName;
+	}
+	public void setSchedulerName(String schedulerName){
+		this.schedulerName = schedulerName;
+	}
+
+	public void schedulerName(String multirequestToken){
+		setToken("schedulerName", multirequestToken);
+	}
+
 
 	public BatchHistoryData() {
 		super();
@@ -195,6 +209,7 @@ public class BatchHistoryData extends ObjectBase {
 		errNumber = GsonParser.parseInt(jsonObject.get("errNumber"));
 		hostName = GsonParser.parseString(jsonObject.get("hostName"));
 		sessionId = GsonParser.parseString(jsonObject.get("sessionId"));
+		schedulerName = GsonParser.parseString(jsonObject.get("schedulerName"));
 
 	}
 
@@ -210,6 +225,7 @@ public class BatchHistoryData extends ObjectBase {
 		kparams.add("errNumber", this.errNumber);
 		kparams.add("hostName", this.hostName);
 		kparams.add("sessionId", this.sessionId);
+		kparams.add("schedulerName", this.schedulerName);
 		return kparams;
 	}
 
@@ -238,6 +254,7 @@ public class BatchHistoryData extends ObjectBase {
         dest.writeValue(this.errNumber);
         dest.writeString(this.hostName);
         dest.writeString(this.sessionId);
+        dest.writeString(this.schedulerName);
     }
 
     public BatchHistoryData(Parcel in) {
@@ -251,6 +268,7 @@ public class BatchHistoryData extends ObjectBase {
         this.errNumber = (Integer)in.readValue(Integer.class.getClassLoader());
         this.hostName = in.readString();
         this.sessionId = in.readString();
+        this.schedulerName = in.readString();
     }
 }
 
