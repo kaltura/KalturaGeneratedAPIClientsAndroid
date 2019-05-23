@@ -48,10 +48,12 @@ public class PartnerPublicInfo extends ObjectBase {
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		String analyticsUrl();
 		String ottEnvironmentUrl();
+		String analyticsPersistentSessionId();
 	}
 
 	private String analyticsUrl;
 	private String ottEnvironmentUrl;
+	private Boolean analyticsPersistentSessionId;
 
 	// analyticsUrl:
 	public String getAnalyticsUrl(){
@@ -77,6 +79,18 @@ public class PartnerPublicInfo extends ObjectBase {
 		setToken("ottEnvironmentUrl", multirequestToken);
 	}
 
+	// analyticsPersistentSessionId:
+	public Boolean getAnalyticsPersistentSessionId(){
+		return this.analyticsPersistentSessionId;
+	}
+	public void setAnalyticsPersistentSessionId(Boolean analyticsPersistentSessionId){
+		this.analyticsPersistentSessionId = analyticsPersistentSessionId;
+	}
+
+	public void analyticsPersistentSessionId(String multirequestToken){
+		setToken("analyticsPersistentSessionId", multirequestToken);
+	}
+
 
 	public PartnerPublicInfo() {
 		super();
@@ -90,6 +104,7 @@ public class PartnerPublicInfo extends ObjectBase {
 		// set members values:
 		analyticsUrl = GsonParser.parseString(jsonObject.get("analyticsUrl"));
 		ottEnvironmentUrl = GsonParser.parseString(jsonObject.get("ottEnvironmentUrl"));
+		analyticsPersistentSessionId = GsonParser.parseBoolean(jsonObject.get("analyticsPersistentSessionId"));
 
 	}
 
@@ -98,6 +113,7 @@ public class PartnerPublicInfo extends ObjectBase {
 		kparams.add("objectType", "KalturaPartnerPublicInfo");
 		kparams.add("analyticsUrl", this.analyticsUrl);
 		kparams.add("ottEnvironmentUrl", this.ottEnvironmentUrl);
+		kparams.add("analyticsPersistentSessionId", this.analyticsPersistentSessionId);
 		return kparams;
 	}
 
@@ -119,12 +135,14 @@ public class PartnerPublicInfo extends ObjectBase {
         super.writeToParcel(dest, flags);
         dest.writeString(this.analyticsUrl);
         dest.writeString(this.ottEnvironmentUrl);
+        dest.writeValue(this.analyticsPersistentSessionId);
     }
 
     public PartnerPublicInfo(Parcel in) {
         super(in);
         this.analyticsUrl = in.readString();
         this.ottEnvironmentUrl = in.readString();
+        this.analyticsPersistentSessionId = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
