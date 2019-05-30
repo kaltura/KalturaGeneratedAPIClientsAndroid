@@ -46,9 +46,9 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(BulkUploadICalJobData.Tokenizer.class)
-public class BulkUploadICalJobData extends BulkUploadJobData {
+public class BulkUploadICalJobData extends BulkUploadScheduleEventJobData {
 	
-	public interface Tokenizer extends BulkUploadJobData.Tokenizer {
+	public interface Tokenizer extends BulkUploadScheduleEventJobData.Tokenizer {
 		String eventsType();
 	}
 
