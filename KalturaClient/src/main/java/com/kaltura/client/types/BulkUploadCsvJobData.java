@@ -54,6 +54,8 @@ public class BulkUploadCsvJobData extends BulkUploadJobData {
 	public interface Tokenizer extends BulkUploadJobData.Tokenizer {
 		String csvVersion();
 		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> columns();
+		String processObjectId();
+		String processObjectType();
 	}
 
 	/**
@@ -64,6 +66,14 @@ public class BulkUploadCsvJobData extends BulkUploadJobData {
 	 * Array containing CSV headers
 	 */
 	private List<StringHolder> columns;
+	/**
+	 * The object in process
+	 */
+	private String processObjectId;
+	/**
+	 * The type of the object in process
+	 */
+	private String processObjectType;
 
 	// csvVersion:
 	public BulkUploadCsvVersion getCsvVersion(){
@@ -75,6 +85,30 @@ public class BulkUploadCsvJobData extends BulkUploadJobData {
 	}
 	public void setColumns(List<StringHolder> columns){
 		this.columns = columns;
+	}
+
+	// processObjectId:
+	public String getProcessObjectId(){
+		return this.processObjectId;
+	}
+	public void setProcessObjectId(String processObjectId){
+		this.processObjectId = processObjectId;
+	}
+
+	public void processObjectId(String multirequestToken){
+		setToken("processObjectId", multirequestToken);
+	}
+
+	// processObjectType:
+	public String getProcessObjectType(){
+		return this.processObjectType;
+	}
+	public void setProcessObjectType(String processObjectType){
+		this.processObjectType = processObjectType;
+	}
+
+	public void processObjectType(String multirequestToken){
+		setToken("processObjectType", multirequestToken);
 	}
 
 
@@ -90,6 +124,8 @@ public class BulkUploadCsvJobData extends BulkUploadJobData {
 		// set members values:
 		csvVersion = BulkUploadCsvVersion.get(GsonParser.parseInt(jsonObject.get("csvVersion")));
 		columns = GsonParser.parseArray(jsonObject.getAsJsonArray("columns"), StringHolder.class);
+		processObjectId = GsonParser.parseString(jsonObject.get("processObjectId"));
+		processObjectType = GsonParser.parseString(jsonObject.get("processObjectType"));
 
 	}
 
@@ -97,6 +133,8 @@ public class BulkUploadCsvJobData extends BulkUploadJobData {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaBulkUploadCsvJobData");
 		kparams.add("columns", this.columns);
+		kparams.add("processObjectId", this.processObjectId);
+		kparams.add("processObjectType", this.processObjectType);
 		return kparams;
 	}
 
@@ -123,6 +161,8 @@ public class BulkUploadCsvJobData extends BulkUploadJobData {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeString(this.processObjectId);
+        dest.writeString(this.processObjectType);
     }
 
     public BulkUploadCsvJobData(Parcel in) {
@@ -134,6 +174,8 @@ public class BulkUploadCsvJobData extends BulkUploadJobData {
             this.columns = new ArrayList<>();
             in.readList(this.columns, StringHolder.class.getClassLoader());
         }
+        this.processObjectId = in.readString();
+        this.processObjectType = in.readString();
     }
 }
 

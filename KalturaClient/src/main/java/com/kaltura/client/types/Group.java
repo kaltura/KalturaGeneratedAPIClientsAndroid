@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.GroupProcessStatus;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -46,14 +47,28 @@ public class Group extends BaseUser {
 	
 	public interface Tokenizer extends BaseUser.Tokenizer {
 		String membersCount();
+		String processStatus();
 	}
 
 	private Integer membersCount;
+	private GroupProcessStatus processStatus;
 
 	// membersCount:
 	public Integer getMembersCount(){
 		return this.membersCount;
 	}
+	// processStatus:
+	public GroupProcessStatus getProcessStatus(){
+		return this.processStatus;
+	}
+	public void setProcessStatus(GroupProcessStatus processStatus){
+		this.processStatus = processStatus;
+	}
+
+	public void processStatus(String multirequestToken){
+		setToken("processStatus", multirequestToken);
+	}
+
 
 	public Group() {
 		super();
@@ -66,12 +81,14 @@ public class Group extends BaseUser {
 
 		// set members values:
 		membersCount = GsonParser.parseInt(jsonObject.get("membersCount"));
+		processStatus = GroupProcessStatus.get(GsonParser.parseInt(jsonObject.get("processStatus")));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaGroup");
+		kparams.add("processStatus", this.processStatus);
 		return kparams;
 	}
 
@@ -92,11 +109,14 @@ public class Group extends BaseUser {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.membersCount);
+        dest.writeInt(this.processStatus == null ? -1 : this.processStatus.ordinal());
     }
 
     public Group(Parcel in) {
         super(in);
         this.membersCount = (Integer)in.readValue(Integer.class.getClassLoader());
+        int tmpProcessStatus = in.readInt();
+        this.processStatus = tmpProcessStatus == -1 ? null : GroupProcessStatus.values()[tmpProcessStatus];
     }
 }
 
