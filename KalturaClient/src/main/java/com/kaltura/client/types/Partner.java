@@ -185,7 +185,7 @@ public class Partner extends ObjectBase {
 	private String ovpEnvironmentUrl;
 	private String ottEnvironmentUrl;
 	private List<ESearchLanguageItem> eSearchLanguages;
-	private Boolean authenticationType;
+	private Integer authenticationType;
 
 	// id:
 	public Integer getId(){
@@ -664,7 +664,7 @@ public class Partner extends ObjectBase {
 	}
 
 	// authenticationType:
-	public Boolean getAuthenticationType(){
+	public Integer getAuthenticationType(){
 		return this.authenticationType;
 	}
 
@@ -735,7 +735,7 @@ public class Partner extends ObjectBase {
 		ovpEnvironmentUrl = GsonParser.parseString(jsonObject.get("ovpEnvironmentUrl"));
 		ottEnvironmentUrl = GsonParser.parseString(jsonObject.get("ottEnvironmentUrl"));
 		eSearchLanguages = GsonParser.parseArray(jsonObject.getAsJsonArray("eSearchLanguages"), ESearchLanguageItem.class);
-		authenticationType = GsonParser.parseBoolean(jsonObject.get("authenticationType"));
+		authenticationType = GsonParser.parseInt(jsonObject.get("authenticationType"));
 
 	}
 
@@ -952,7 +952,7 @@ public class Partner extends ObjectBase {
             this.eSearchLanguages = new ArrayList<>();
             in.readList(this.eSearchLanguages, ESearchLanguageItem.class.getClassLoader());
         }
-        this.authenticationType = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.authenticationType = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
