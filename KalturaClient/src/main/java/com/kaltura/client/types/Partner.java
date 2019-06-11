@@ -31,6 +31,7 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.CommercialUseType;
+import com.kaltura.client.enums.PartnerAuthenticationType;
 import com.kaltura.client.enums.PartnerGroupType;
 import com.kaltura.client.enums.PartnerStatus;
 import com.kaltura.client.enums.PartnerType;
@@ -185,7 +186,7 @@ public class Partner extends ObjectBase {
 	private String ovpEnvironmentUrl;
 	private String ottEnvironmentUrl;
 	private List<ESearchLanguageItem> eSearchLanguages;
-	private Integer authenticationType;
+	private PartnerAuthenticationType authenticationType;
 
 	// id:
 	public Integer getId(){
@@ -664,7 +665,7 @@ public class Partner extends ObjectBase {
 	}
 
 	// authenticationType:
-	public Integer getAuthenticationType(){
+	public PartnerAuthenticationType getAuthenticationType(){
 		return this.authenticationType;
 	}
 
@@ -735,7 +736,7 @@ public class Partner extends ObjectBase {
 		ovpEnvironmentUrl = GsonParser.parseString(jsonObject.get("ovpEnvironmentUrl"));
 		ottEnvironmentUrl = GsonParser.parseString(jsonObject.get("ottEnvironmentUrl"));
 		eSearchLanguages = GsonParser.parseArray(jsonObject.getAsJsonArray("eSearchLanguages"), ESearchLanguageItem.class);
-		authenticationType = GsonParser.parseInt(jsonObject.get("authenticationType"));
+		authenticationType = PartnerAuthenticationType.get(GsonParser.parseInt(jsonObject.get("authenticationType")));
 
 	}
 
@@ -870,7 +871,7 @@ public class Partner extends ObjectBase {
         } else {
             dest.writeInt(-1);
         }
-        dest.writeValue(this.authenticationType);
+        dest.writeInt(this.authenticationType == null ? -1 : this.authenticationType.ordinal());
     }
 
     public Partner(Parcel in) {
@@ -952,7 +953,8 @@ public class Partner extends ObjectBase {
             this.eSearchLanguages = new ArrayList<>();
             in.readList(this.eSearchLanguages, ESearchLanguageItem.class.getClassLoader());
         }
-        this.authenticationType = (Integer)in.readValue(Integer.class.getClassLoader());
+        int tmpAuthenticationType = in.readInt();
+        this.authenticationType = tmpAuthenticationType == -1 ? null : PartnerAuthenticationType.values()[tmpAuthenticationType];
     }
 }
 
