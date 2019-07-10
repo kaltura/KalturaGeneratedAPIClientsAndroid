@@ -77,6 +77,7 @@ public class Partner extends ObjectBase {
 		String allowQuickEdit();
 		String mergeEntryLists();
 		String notificationsConfig();
+		String allowedFromEmailWhiteList();
 		String maxUploadSize();
 		String partnerPackage();
 		String secret();
@@ -140,6 +141,7 @@ public class Partner extends ObjectBase {
 	private Integer allowQuickEdit;
 	private Integer mergeEntryLists;
 	private String notificationsConfig;
+	private String allowedFromEmailWhiteList;
 	private Integer maxUploadSize;
 	private Integer partnerPackage;
 	private String secret;
@@ -440,6 +442,18 @@ public class Partner extends ObjectBase {
 		setToken("notificationsConfig", multirequestToken);
 	}
 
+	// allowedFromEmailWhiteList:
+	public String getAllowedFromEmailWhiteList(){
+		return this.allowedFromEmailWhiteList;
+	}
+	public void setAllowedFromEmailWhiteList(String allowedFromEmailWhiteList){
+		this.allowedFromEmailWhiteList = allowedFromEmailWhiteList;
+	}
+
+	public void allowedFromEmailWhiteList(String multirequestToken){
+		setToken("allowedFromEmailWhiteList", multirequestToken);
+	}
+
 	// maxUploadSize:
 	public Integer getMaxUploadSize(){
 		return this.maxUploadSize;
@@ -702,6 +716,7 @@ public class Partner extends ObjectBase {
 		allowQuickEdit = GsonParser.parseInt(jsonObject.get("allowQuickEdit"));
 		mergeEntryLists = GsonParser.parseInt(jsonObject.get("mergeEntryLists"));
 		notificationsConfig = GsonParser.parseString(jsonObject.get("notificationsConfig"));
+		allowedFromEmailWhiteList = GsonParser.parseString(jsonObject.get("allowedFromEmailWhiteList"));
 		maxUploadSize = GsonParser.parseInt(jsonObject.get("maxUploadSize"));
 		partnerPackage = GsonParser.parseInt(jsonObject.get("partnerPackage"));
 		secret = GsonParser.parseString(jsonObject.get("secret"));
@@ -763,6 +778,7 @@ public class Partner extends ObjectBase {
 		kparams.add("allowQuickEdit", this.allowQuickEdit);
 		kparams.add("mergeEntryLists", this.mergeEntryLists);
 		kparams.add("notificationsConfig", this.notificationsConfig);
+		kparams.add("allowedFromEmailWhiteList", this.allowedFromEmailWhiteList);
 		kparams.add("maxUploadSize", this.maxUploadSize);
 		kparams.add("partnerPackage", this.partnerPackage);
 		kparams.add("allowMultiNotification", this.allowMultiNotification);
@@ -817,6 +833,7 @@ public class Partner extends ObjectBase {
         dest.writeValue(this.allowQuickEdit);
         dest.writeValue(this.mergeEntryLists);
         dest.writeString(this.notificationsConfig);
+        dest.writeString(this.allowedFromEmailWhiteList);
         dest.writeValue(this.maxUploadSize);
         dest.writeValue(this.partnerPackage);
         dest.writeString(this.secret);
@@ -902,6 +919,7 @@ public class Partner extends ObjectBase {
         this.allowQuickEdit = (Integer)in.readValue(Integer.class.getClassLoader());
         this.mergeEntryLists = (Integer)in.readValue(Integer.class.getClassLoader());
         this.notificationsConfig = in.readString();
+        this.allowedFromEmailWhiteList = in.readString();
         this.maxUploadSize = (Integer)in.readValue(Integer.class.getClassLoader());
         this.partnerPackage = (Integer)in.readValue(Integer.class.getClassLoader());
         this.secret = in.readString();
