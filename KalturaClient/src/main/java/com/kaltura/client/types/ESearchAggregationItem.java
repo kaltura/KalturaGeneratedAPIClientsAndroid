@@ -25,7 +25,14 @@
 //
 // @ignore
 // ===================================================================================================
-package com.kaltura.client.enums;
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.types.ObjectBase;
+import com.kaltura.client.utils.GsonParser;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
  * This class was generated using generate.php
@@ -33,41 +40,61 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum CaptionType implements EnumAsString {
-	SRT("1"),
-	DFXP("2"),
-	WEBVTT("3"),
-	CAP("4"),
-	SCC("5");
 
-	private String value;
-
-	CaptionType(String value) {
-		this.value = value;
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(ESearchAggregationItem.Tokenizer.class)
+public abstract class ESearchAggregationItem extends ObjectBase {
+	
+	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String size();
 	}
 
-	@Override
-	public String getValue() {
-		return this.value;
+	private Integer size;
+
+	// size:
+	public Integer getSize(){
+		return this.size;
+	}
+	public void setSize(Integer size){
+		this.size = size;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public void size(String multirequestToken){
+		setToken("size", multirequestToken);
 	}
 
-	public static CaptionType get(String value) {
-		if(value == null)
-		{
-			return null;
-		}
-		
-		// goes over CaptionType defined values and compare the inner value with the given one:
-		for(CaptionType item: values()) {
-			if(item.getValue().equals(value)) {
-				return item;
-			}
-		}
-		// in case the requested value was not found in the enum values, we return the first item as default.
-		return CaptionType.values().length > 0 ? CaptionType.values()[0]: null;
-   }
+
+	public ESearchAggregationItem() {
+		super();
+	}
+
+	public ESearchAggregationItem(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		size = GsonParser.parseInt(jsonObject.get("size"));
+
+	}
+
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaESearchAggregationItem");
+		kparams.add("size", this.size);
+		return kparams;
+	}
+
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeValue(this.size);
+    }
+
+    public ESearchAggregationItem(Parcel in) {
+        super(in);
+        this.size = (Integer)in.readValue(Integer.class.getClassLoader());
+    }
 }
+

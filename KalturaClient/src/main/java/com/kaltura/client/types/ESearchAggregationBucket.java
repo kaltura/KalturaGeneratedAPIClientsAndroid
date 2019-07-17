@@ -30,8 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.types.ESearchAggregation;
-import com.kaltura.client.types.ESearchEntryOperator;
+import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -43,81 +42,89 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchEntryParams.Tokenizer.class)
-public class ESearchEntryParams extends ESearchParams {
+@MultiRequestBuilder.Tokenizer(ESearchAggregationBucket.Tokenizer.class)
+public class ESearchAggregationBucket extends ObjectBase {
 	
-	public interface Tokenizer extends ESearchParams.Tokenizer {
-		ESearchEntryOperator.Tokenizer searchOperator();
-		ESearchAggregation.Tokenizer aggregations();
+	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String value();
+		String count();
 	}
 
-	private ESearchEntryOperator searchOperator;
-	private ESearchAggregation aggregations;
+	private String value;
+	private Integer count;
 
-	// searchOperator:
-	public ESearchEntryOperator getSearchOperator(){
-		return this.searchOperator;
+	// value:
+	public String getValue(){
+		return this.value;
 	}
-	public void setSearchOperator(ESearchEntryOperator searchOperator){
-		this.searchOperator = searchOperator;
-	}
-
-	// aggregations:
-	public ESearchAggregation getAggregations(){
-		return this.aggregations;
-	}
-	public void setAggregations(ESearchAggregation aggregations){
-		this.aggregations = aggregations;
+	public void setValue(String value){
+		this.value = value;
 	}
 
+	public void value(String multirequestToken){
+		setToken("value", multirequestToken);
+	}
 
-	public ESearchEntryParams() {
+	// count:
+	public Integer getCount(){
+		return this.count;
+	}
+	public void setCount(Integer count){
+		this.count = count;
+	}
+
+	public void count(String multirequestToken){
+		setToken("count", multirequestToken);
+	}
+
+
+	public ESearchAggregationBucket() {
 		super();
 	}
 
-	public ESearchEntryParams(JsonObject jsonObject) throws APIException {
+	public ESearchAggregationBucket(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		searchOperator = GsonParser.parseObject(jsonObject.getAsJsonObject("searchOperator"), ESearchEntryOperator.class);
-		aggregations = GsonParser.parseObject(jsonObject.getAsJsonObject("aggregations"), ESearchAggregation.class);
+		value = GsonParser.parseString(jsonObject.get("value"));
+		count = GsonParser.parseInt(jsonObject.get("count"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchEntryParams");
-		kparams.add("searchOperator", this.searchOperator);
-		kparams.add("aggregations", this.aggregations);
+		kparams.add("objectType", "KalturaESearchAggregationBucket");
+		kparams.add("value", this.value);
+		kparams.add("count", this.count);
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchEntryParams> CREATOR = new Creator<ESearchEntryParams>() {
+    public static final Creator<ESearchAggregationBucket> CREATOR = new Creator<ESearchAggregationBucket>() {
         @Override
-        public ESearchEntryParams createFromParcel(Parcel source) {
-            return new ESearchEntryParams(source);
+        public ESearchAggregationBucket createFromParcel(Parcel source) {
+            return new ESearchAggregationBucket(source);
         }
 
         @Override
-        public ESearchEntryParams[] newArray(int size) {
-            return new ESearchEntryParams[size];
+        public ESearchAggregationBucket[] newArray(int size) {
+            return new ESearchAggregationBucket[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeParcelable(this.searchOperator, flags);
-        dest.writeParcelable(this.aggregations, flags);
+        dest.writeString(this.value);
+        dest.writeValue(this.count);
     }
 
-    public ESearchEntryParams(Parcel in) {
+    public ESearchAggregationBucket(Parcel in) {
         super(in);
-        this.searchOperator = in.readParcelable(ESearchEntryOperator.class.getClassLoader());
-        this.aggregations = in.readParcelable(ESearchAggregation.class.getClassLoader());
+        this.value = in.readString();
+        this.count = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 

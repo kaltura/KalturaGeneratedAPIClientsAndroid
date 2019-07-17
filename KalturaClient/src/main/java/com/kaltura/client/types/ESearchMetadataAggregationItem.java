@@ -30,8 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.types.ESearchAggregation;
-import com.kaltura.client.types.ESearchEntryOperator;
+import com.kaltura.client.enums.ESearchMetadataAggregateByFieldName;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -43,81 +42,72 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchEntryParams.Tokenizer.class)
-public class ESearchEntryParams extends ESearchParams {
+@MultiRequestBuilder.Tokenizer(ESearchMetadataAggregationItem.Tokenizer.class)
+public class ESearchMetadataAggregationItem extends ESearchAggregationItem {
 	
-	public interface Tokenizer extends ESearchParams.Tokenizer {
-		ESearchEntryOperator.Tokenizer searchOperator();
-		ESearchAggregation.Tokenizer aggregations();
+	public interface Tokenizer extends ESearchAggregationItem.Tokenizer {
+		String fieldName();
 	}
 
-	private ESearchEntryOperator searchOperator;
-	private ESearchAggregation aggregations;
+	private ESearchMetadataAggregateByFieldName fieldName;
 
-	// searchOperator:
-	public ESearchEntryOperator getSearchOperator(){
-		return this.searchOperator;
+	// fieldName:
+	public ESearchMetadataAggregateByFieldName getFieldName(){
+		return this.fieldName;
 	}
-	public void setSearchOperator(ESearchEntryOperator searchOperator){
-		this.searchOperator = searchOperator;
+	public void setFieldName(ESearchMetadataAggregateByFieldName fieldName){
+		this.fieldName = fieldName;
 	}
 
-	// aggregations:
-	public ESearchAggregation getAggregations(){
-		return this.aggregations;
-	}
-	public void setAggregations(ESearchAggregation aggregations){
-		this.aggregations = aggregations;
+	public void fieldName(String multirequestToken){
+		setToken("fieldName", multirequestToken);
 	}
 
 
-	public ESearchEntryParams() {
+	public ESearchMetadataAggregationItem() {
 		super();
 	}
 
-	public ESearchEntryParams(JsonObject jsonObject) throws APIException {
+	public ESearchMetadataAggregationItem(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		searchOperator = GsonParser.parseObject(jsonObject.getAsJsonObject("searchOperator"), ESearchEntryOperator.class);
-		aggregations = GsonParser.parseObject(jsonObject.getAsJsonObject("aggregations"), ESearchAggregation.class);
+		fieldName = ESearchMetadataAggregateByFieldName.get(GsonParser.parseString(jsonObject.get("fieldName")));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchEntryParams");
-		kparams.add("searchOperator", this.searchOperator);
-		kparams.add("aggregations", this.aggregations);
+		kparams.add("objectType", "KalturaESearchMetadataAggregationItem");
+		kparams.add("fieldName", this.fieldName);
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchEntryParams> CREATOR = new Creator<ESearchEntryParams>() {
+    public static final Creator<ESearchMetadataAggregationItem> CREATOR = new Creator<ESearchMetadataAggregationItem>() {
         @Override
-        public ESearchEntryParams createFromParcel(Parcel source) {
-            return new ESearchEntryParams(source);
+        public ESearchMetadataAggregationItem createFromParcel(Parcel source) {
+            return new ESearchMetadataAggregationItem(source);
         }
 
         @Override
-        public ESearchEntryParams[] newArray(int size) {
-            return new ESearchEntryParams[size];
+        public ESearchMetadataAggregationItem[] newArray(int size) {
+            return new ESearchMetadataAggregationItem[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeParcelable(this.searchOperator, flags);
-        dest.writeParcelable(this.aggregations, flags);
+        dest.writeInt(this.fieldName == null ? -1 : this.fieldName.ordinal());
     }
 
-    public ESearchEntryParams(Parcel in) {
+    public ESearchMetadataAggregationItem(Parcel in) {
         super(in);
-        this.searchOperator = in.readParcelable(ESearchEntryOperator.class.getClassLoader());
-        this.aggregations = in.readParcelable(ESearchAggregation.class.getClassLoader());
+        int tmpFieldName = in.readInt();
+        this.fieldName = tmpFieldName == -1 ? null : ESearchMetadataAggregateByFieldName.values()[tmpFieldName];
     }
 }
 

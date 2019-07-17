@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 import com.kaltura.client.utils.request.RequestBuilder;
@@ -44,69 +45,61 @@ import java.util.List;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ESearchEntryResponse.Tokenizer.class)
-public class ESearchEntryResponse extends ESearchResponse {
+@MultiRequestBuilder.Tokenizer(ESearchAggregation.Tokenizer.class)
+public class ESearchAggregation extends ObjectBase {
 	
-	public interface Tokenizer extends ESearchResponse.Tokenizer {
-		RequestBuilder.ListTokenizer<ESearchEntryResult.Tokenizer> objects();
-		RequestBuilder.ListTokenizer<ESearchAggregationResponseItem.Tokenizer> aggregations();
+	public interface Tokenizer extends ObjectBase.Tokenizer {
+		RequestBuilder.ListTokenizer<ESearchAggregationItem.Tokenizer> aggregations();
 	}
 
-	private List<ESearchEntryResult> objects;
-	private List<ESearchAggregationResponseItem> aggregations;
+	private List<ESearchAggregationItem> aggregations;
 
-	// objects:
-	public List<ESearchEntryResult> getObjects(){
-		return this.objects;
-	}
 	// aggregations:
-	public List<ESearchAggregationResponseItem> getAggregations(){
+	public List<ESearchAggregationItem> getAggregations(){
 		return this.aggregations;
 	}
+	public void setAggregations(List<ESearchAggregationItem> aggregations){
+		this.aggregations = aggregations;
+	}
 
-	public ESearchEntryResponse() {
+
+	public ESearchAggregation() {
 		super();
 	}
 
-	public ESearchEntryResponse(JsonObject jsonObject) throws APIException {
+	public ESearchAggregation(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		objects = GsonParser.parseArray(jsonObject.getAsJsonArray("objects"), ESearchEntryResult.class);
-		aggregations = GsonParser.parseArray(jsonObject.getAsJsonArray("aggregations"), ESearchAggregationResponseItem.class);
+		aggregations = GsonParser.parseArray(jsonObject.getAsJsonArray("aggregations"), ESearchAggregationItem.class);
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaESearchEntryResponse");
+		kparams.add("objectType", "KalturaESearchAggregation");
+		kparams.add("aggregations", this.aggregations);
 		return kparams;
 	}
 
 
-    public static final Creator<ESearchEntryResponse> CREATOR = new Creator<ESearchEntryResponse>() {
+    public static final Creator<ESearchAggregation> CREATOR = new Creator<ESearchAggregation>() {
         @Override
-        public ESearchEntryResponse createFromParcel(Parcel source) {
-            return new ESearchEntryResponse(source);
+        public ESearchAggregation createFromParcel(Parcel source) {
+            return new ESearchAggregation(source);
         }
 
         @Override
-        public ESearchEntryResponse[] newArray(int size) {
-            return new ESearchEntryResponse[size];
+        public ESearchAggregation[] newArray(int size) {
+            return new ESearchAggregation[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        if(this.objects != null) {
-            dest.writeInt(this.objects.size());
-            dest.writeList(this.objects);
-        } else {
-            dest.writeInt(-1);
-        }
         if(this.aggregations != null) {
             dest.writeInt(this.aggregations.size());
             dest.writeList(this.aggregations);
@@ -115,17 +108,12 @@ public class ESearchEntryResponse extends ESearchResponse {
         }
     }
 
-    public ESearchEntryResponse(Parcel in) {
+    public ESearchAggregation(Parcel in) {
         super(in);
-        int objectsSize = in.readInt();
-        if( objectsSize > -1) {
-            this.objects = new ArrayList<>();
-            in.readList(this.objects, ESearchEntryResult.class.getClassLoader());
-        }
         int aggregationsSize = in.readInt();
         if( aggregationsSize > -1) {
             this.aggregations = new ArrayList<>();
-            in.readList(this.aggregations, ESearchAggregationResponseItem.class.getClassLoader());
+            in.readList(this.aggregations, ESearchAggregationItem.class.getClassLoader());
         }
     }
 }
