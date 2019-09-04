@@ -59,6 +59,7 @@ public class CaptionAsset extends Asset {
 		String parentId();
 		String accuracy();
 		String displayOnPlayer();
+		String associatedTranscriptIds();
 	}
 
 	/**
@@ -101,6 +102,10 @@ public class CaptionAsset extends Asset {
 	 * The Accuracy of the caption content
 	 */
 	private Boolean displayOnPlayer;
+	/**
+	 * List of associated transcript asset id's, comma separated
+	 */
+	private String associatedTranscriptIds;
 
 	// captionParamsId:
 	public Integer getCaptionParamsId(){
@@ -206,6 +211,18 @@ public class CaptionAsset extends Asset {
 		setToken("displayOnPlayer", multirequestToken);
 	}
 
+	// associatedTranscriptIds:
+	public String getAssociatedTranscriptIds(){
+		return this.associatedTranscriptIds;
+	}
+	public void setAssociatedTranscriptIds(String associatedTranscriptIds){
+		this.associatedTranscriptIds = associatedTranscriptIds;
+	}
+
+	public void associatedTranscriptIds(String multirequestToken){
+		setToken("associatedTranscriptIds", multirequestToken);
+	}
+
 
 	public CaptionAsset() {
 		super();
@@ -227,6 +244,7 @@ public class CaptionAsset extends Asset {
 		parentId = GsonParser.parseString(jsonObject.get("parentId"));
 		accuracy = GsonParser.parseInt(jsonObject.get("accuracy"));
 		displayOnPlayer = GsonParser.parseBoolean(jsonObject.get("displayOnPlayer"));
+		associatedTranscriptIds = GsonParser.parseString(jsonObject.get("associatedTranscriptIds"));
 
 	}
 
@@ -241,6 +259,7 @@ public class CaptionAsset extends Asset {
 		kparams.add("parentId", this.parentId);
 		kparams.add("accuracy", this.accuracy);
 		kparams.add("displayOnPlayer", this.displayOnPlayer);
+		kparams.add("associatedTranscriptIds", this.associatedTranscriptIds);
 		return kparams;
 	}
 
@@ -270,6 +289,7 @@ public class CaptionAsset extends Asset {
         dest.writeString(this.parentId);
         dest.writeValue(this.accuracy);
         dest.writeValue(this.displayOnPlayer);
+        dest.writeString(this.associatedTranscriptIds);
     }
 
     public CaptionAsset(Parcel in) {
@@ -288,6 +308,7 @@ public class CaptionAsset extends Asset {
         this.parentId = in.readString();
         this.accuracy = (Integer)in.readValue(Integer.class.getClassLoader());
         this.displayOnPlayer = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.associatedTranscriptIds = in.readString();
     }
 }
 
