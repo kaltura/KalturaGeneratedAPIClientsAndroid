@@ -47,6 +47,7 @@ public abstract class PlayableEntryBaseFilter extends BaseEntryFilter {
 	public interface Tokenizer extends BaseEntryFilter.Tokenizer {
 		String lastPlayedAtGreaterThanOrEqual();
 		String lastPlayedAtLessThanOrEqual();
+		String lastPlayedAtLessThanOrEqualOrNull();
 		String durationLessThan();
 		String durationGreaterThan();
 		String durationLessThanOrEqual();
@@ -56,6 +57,7 @@ public abstract class PlayableEntryBaseFilter extends BaseEntryFilter {
 
 	private Integer lastPlayedAtGreaterThanOrEqual;
 	private Integer lastPlayedAtLessThanOrEqual;
+	private Integer lastPlayedAtLessThanOrEqualOrNull;
 	private Integer durationLessThan;
 	private Integer durationGreaterThan;
 	private Integer durationLessThanOrEqual;
@@ -84,6 +86,18 @@ public abstract class PlayableEntryBaseFilter extends BaseEntryFilter {
 
 	public void lastPlayedAtLessThanOrEqual(String multirequestToken){
 		setToken("lastPlayedAtLessThanOrEqual", multirequestToken);
+	}
+
+	// lastPlayedAtLessThanOrEqualOrNull:
+	public Integer getLastPlayedAtLessThanOrEqualOrNull(){
+		return this.lastPlayedAtLessThanOrEqualOrNull;
+	}
+	public void setLastPlayedAtLessThanOrEqualOrNull(Integer lastPlayedAtLessThanOrEqualOrNull){
+		this.lastPlayedAtLessThanOrEqualOrNull = lastPlayedAtLessThanOrEqualOrNull;
+	}
+
+	public void lastPlayedAtLessThanOrEqualOrNull(String multirequestToken){
+		setToken("lastPlayedAtLessThanOrEqualOrNull", multirequestToken);
 	}
 
 	// durationLessThan:
@@ -159,6 +173,7 @@ public abstract class PlayableEntryBaseFilter extends BaseEntryFilter {
 		// set members values:
 		lastPlayedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("lastPlayedAtGreaterThanOrEqual"));
 		lastPlayedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("lastPlayedAtLessThanOrEqual"));
+		lastPlayedAtLessThanOrEqualOrNull = GsonParser.parseInt(jsonObject.get("lastPlayedAtLessThanOrEqualOrNull"));
 		durationLessThan = GsonParser.parseInt(jsonObject.get("durationLessThan"));
 		durationGreaterThan = GsonParser.parseInt(jsonObject.get("durationGreaterThan"));
 		durationLessThanOrEqual = GsonParser.parseInt(jsonObject.get("durationLessThanOrEqual"));
@@ -172,6 +187,7 @@ public abstract class PlayableEntryBaseFilter extends BaseEntryFilter {
 		kparams.add("objectType", "KalturaPlayableEntryBaseFilter");
 		kparams.add("lastPlayedAtGreaterThanOrEqual", this.lastPlayedAtGreaterThanOrEqual);
 		kparams.add("lastPlayedAtLessThanOrEqual", this.lastPlayedAtLessThanOrEqual);
+		kparams.add("lastPlayedAtLessThanOrEqualOrNull", this.lastPlayedAtLessThanOrEqualOrNull);
 		kparams.add("durationLessThan", this.durationLessThan);
 		kparams.add("durationGreaterThan", this.durationGreaterThan);
 		kparams.add("durationLessThanOrEqual", this.durationLessThanOrEqual);
@@ -186,6 +202,7 @@ public abstract class PlayableEntryBaseFilter extends BaseEntryFilter {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.lastPlayedAtGreaterThanOrEqual);
         dest.writeValue(this.lastPlayedAtLessThanOrEqual);
+        dest.writeValue(this.lastPlayedAtLessThanOrEqualOrNull);
         dest.writeValue(this.durationLessThan);
         dest.writeValue(this.durationGreaterThan);
         dest.writeValue(this.durationLessThanOrEqual);
@@ -197,6 +214,7 @@ public abstract class PlayableEntryBaseFilter extends BaseEntryFilter {
         super(in);
         this.lastPlayedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.lastPlayedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.lastPlayedAtLessThanOrEqualOrNull = (Integer)in.readValue(Integer.class.getClassLoader());
         this.durationLessThan = (Integer)in.readValue(Integer.class.getClassLoader());
         this.durationGreaterThan = (Integer)in.readValue(Integer.class.getClassLoader());
         this.durationLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
