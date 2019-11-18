@@ -82,6 +82,12 @@ public class MediaInfo extends ObjectBase {
 		String contentStreams();
 		String complexityValue();
 		String maxGOP();
+		String matrixCoefficients();
+		String colorTransfer();
+		String colorPrimaries();
+		String pixelFormat();
+		String chromaSubsampling();
+		String bitsDepth();
 	}
 
 	/**
@@ -200,6 +206,12 @@ public class MediaInfo extends ObjectBase {
 	private String contentStreams;
 	private Integer complexityValue;
 	private Double maxGOP;
+	private String matrixCoefficients;
+	private String colorTransfer;
+	private String colorPrimaries;
+	private String pixelFormat;
+	private String chromaSubsampling;
+	private Integer bitsDepth;
 
 	// id:
 	public Integer getId(){
@@ -613,6 +625,78 @@ public class MediaInfo extends ObjectBase {
 		setToken("maxGOP", multirequestToken);
 	}
 
+	// matrixCoefficients:
+	public String getMatrixCoefficients(){
+		return this.matrixCoefficients;
+	}
+	public void setMatrixCoefficients(String matrixCoefficients){
+		this.matrixCoefficients = matrixCoefficients;
+	}
+
+	public void matrixCoefficients(String multirequestToken){
+		setToken("matrixCoefficients", multirequestToken);
+	}
+
+	// colorTransfer:
+	public String getColorTransfer(){
+		return this.colorTransfer;
+	}
+	public void setColorTransfer(String colorTransfer){
+		this.colorTransfer = colorTransfer;
+	}
+
+	public void colorTransfer(String multirequestToken){
+		setToken("colorTransfer", multirequestToken);
+	}
+
+	// colorPrimaries:
+	public String getColorPrimaries(){
+		return this.colorPrimaries;
+	}
+	public void setColorPrimaries(String colorPrimaries){
+		this.colorPrimaries = colorPrimaries;
+	}
+
+	public void colorPrimaries(String multirequestToken){
+		setToken("colorPrimaries", multirequestToken);
+	}
+
+	// pixelFormat:
+	public String getPixelFormat(){
+		return this.pixelFormat;
+	}
+	public void setPixelFormat(String pixelFormat){
+		this.pixelFormat = pixelFormat;
+	}
+
+	public void pixelFormat(String multirequestToken){
+		setToken("pixelFormat", multirequestToken);
+	}
+
+	// chromaSubsampling:
+	public String getChromaSubsampling(){
+		return this.chromaSubsampling;
+	}
+	public void setChromaSubsampling(String chromaSubsampling){
+		this.chromaSubsampling = chromaSubsampling;
+	}
+
+	public void chromaSubsampling(String multirequestToken){
+		setToken("chromaSubsampling", multirequestToken);
+	}
+
+	// bitsDepth:
+	public Integer getBitsDepth(){
+		return this.bitsDepth;
+	}
+	public void setBitsDepth(Integer bitsDepth){
+		this.bitsDepth = bitsDepth;
+	}
+
+	public void bitsDepth(String multirequestToken){
+		setToken("bitsDepth", multirequestToken);
+	}
+
 
 	public MediaInfo() {
 		super();
@@ -659,6 +743,12 @@ public class MediaInfo extends ObjectBase {
 		contentStreams = GsonParser.parseString(jsonObject.get("contentStreams"));
 		complexityValue = GsonParser.parseInt(jsonObject.get("complexityValue"));
 		maxGOP = GsonParser.parseDouble(jsonObject.get("maxGOP"));
+		matrixCoefficients = GsonParser.parseString(jsonObject.get("matrixCoefficients"));
+		colorTransfer = GsonParser.parseString(jsonObject.get("colorTransfer"));
+		colorPrimaries = GsonParser.parseString(jsonObject.get("colorPrimaries"));
+		pixelFormat = GsonParser.parseString(jsonObject.get("pixelFormat"));
+		chromaSubsampling = GsonParser.parseString(jsonObject.get("chromaSubsampling"));
+		bitsDepth = GsonParser.parseInt(jsonObject.get("bitsDepth"));
 
 	}
 
@@ -699,6 +789,12 @@ public class MediaInfo extends ObjectBase {
 		kparams.add("contentStreams", this.contentStreams);
 		kparams.add("complexityValue", this.complexityValue);
 		kparams.add("maxGOP", this.maxGOP);
+		kparams.add("matrixCoefficients", this.matrixCoefficients);
+		kparams.add("colorTransfer", this.colorTransfer);
+		kparams.add("colorPrimaries", this.colorPrimaries);
+		kparams.add("pixelFormat", this.pixelFormat);
+		kparams.add("chromaSubsampling", this.chromaSubsampling);
+		kparams.add("bitsDepth", this.bitsDepth);
 		return kparams;
 	}
 
@@ -753,6 +849,12 @@ public class MediaInfo extends ObjectBase {
         dest.writeString(this.contentStreams);
         dest.writeValue(this.complexityValue);
         dest.writeValue(this.maxGOP);
+        dest.writeString(this.matrixCoefficients);
+        dest.writeString(this.colorTransfer);
+        dest.writeString(this.colorPrimaries);
+        dest.writeString(this.pixelFormat);
+        dest.writeString(this.chromaSubsampling);
+        dest.writeValue(this.bitsDepth);
     }
 
     public MediaInfo(Parcel in) {
@@ -794,6 +896,12 @@ public class MediaInfo extends ObjectBase {
         this.contentStreams = in.readString();
         this.complexityValue = (Integer)in.readValue(Integer.class.getClassLoader());
         this.maxGOP = (Double)in.readValue(Double.class.getClassLoader());
+        this.matrixCoefficients = in.readString();
+        this.colorTransfer = in.readString();
+        this.colorPrimaries = in.readString();
+        this.pixelFormat = in.readString();
+        this.chromaSubsampling = in.readString();
+        this.bitsDepth = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 

@@ -89,6 +89,8 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 		String createdAtLessThanOrEqual();
 		String updatedAtGreaterThanOrEqual();
 		String updatedAtLessThanOrEqual();
+		String rankLessThanOrEqual();
+		String rankGreaterThanOrEqual();
 		String totalRankLessThanOrEqual();
 		String totalRankGreaterThanOrEqual();
 		String groupIdEqual();
@@ -278,6 +280,8 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 	private Integer createdAtLessThanOrEqual;
 	private Integer updatedAtGreaterThanOrEqual;
 	private Integer updatedAtLessThanOrEqual;
+	private Double rankLessThanOrEqual;
+	private Double rankGreaterThanOrEqual;
 	private Integer totalRankLessThanOrEqual;
 	private Integer totalRankGreaterThanOrEqual;
 	private Integer groupIdEqual;
@@ -807,6 +811,30 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 
 	public void updatedAtLessThanOrEqual(String multirequestToken){
 		setToken("updatedAtLessThanOrEqual", multirequestToken);
+	}
+
+	// rankLessThanOrEqual:
+	public Double getRankLessThanOrEqual(){
+		return this.rankLessThanOrEqual;
+	}
+	public void setRankLessThanOrEqual(Double rankLessThanOrEqual){
+		this.rankLessThanOrEqual = rankLessThanOrEqual;
+	}
+
+	public void rankLessThanOrEqual(String multirequestToken){
+		setToken("rankLessThanOrEqual", multirequestToken);
+	}
+
+	// rankGreaterThanOrEqual:
+	public Double getRankGreaterThanOrEqual(){
+		return this.rankGreaterThanOrEqual;
+	}
+	public void setRankGreaterThanOrEqual(Double rankGreaterThanOrEqual){
+		this.rankGreaterThanOrEqual = rankGreaterThanOrEqual;
+	}
+
+	public void rankGreaterThanOrEqual(String multirequestToken){
+		setToken("rankGreaterThanOrEqual", multirequestToken);
 	}
 
 	// totalRankLessThanOrEqual:
@@ -1340,6 +1368,8 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
 		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
 		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
+		rankLessThanOrEqual = GsonParser.parseDouble(jsonObject.get("rankLessThanOrEqual"));
+		rankGreaterThanOrEqual = GsonParser.parseDouble(jsonObject.get("rankGreaterThanOrEqual"));
 		totalRankLessThanOrEqual = GsonParser.parseInt(jsonObject.get("totalRankLessThanOrEqual"));
 		totalRankGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("totalRankGreaterThanOrEqual"));
 		groupIdEqual = GsonParser.parseInt(jsonObject.get("groupIdEqual"));
@@ -1426,6 +1456,8 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 		kparams.add("createdAtLessThanOrEqual", this.createdAtLessThanOrEqual);
 		kparams.add("updatedAtGreaterThanOrEqual", this.updatedAtGreaterThanOrEqual);
 		kparams.add("updatedAtLessThanOrEqual", this.updatedAtLessThanOrEqual);
+		kparams.add("rankLessThanOrEqual", this.rankLessThanOrEqual);
+		kparams.add("rankGreaterThanOrEqual", this.rankGreaterThanOrEqual);
 		kparams.add("totalRankLessThanOrEqual", this.totalRankLessThanOrEqual);
 		kparams.add("totalRankGreaterThanOrEqual", this.totalRankGreaterThanOrEqual);
 		kparams.add("groupIdEqual", this.groupIdEqual);
@@ -1513,6 +1545,8 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
         dest.writeValue(this.createdAtLessThanOrEqual);
         dest.writeValue(this.updatedAtGreaterThanOrEqual);
         dest.writeValue(this.updatedAtLessThanOrEqual);
+        dest.writeValue(this.rankLessThanOrEqual);
+        dest.writeValue(this.rankGreaterThanOrEqual);
         dest.writeValue(this.totalRankLessThanOrEqual);
         dest.writeValue(this.totalRankGreaterThanOrEqual);
         dest.writeValue(this.groupIdEqual);
@@ -1602,6 +1636,8 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
         this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.rankLessThanOrEqual = (Double)in.readValue(Double.class.getClassLoader());
+        this.rankGreaterThanOrEqual = (Double)in.readValue(Double.class.getClassLoader());
         this.totalRankLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.totalRankGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.groupIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());
