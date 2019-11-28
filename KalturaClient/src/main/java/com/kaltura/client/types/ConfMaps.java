@@ -50,8 +50,9 @@ public class ConfMaps extends ObjectBase {
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		String name();
 		String content();
+		String rawData();
 		String isEditable();
-		String lastUpdate();
+		String createdAt();
 		String relatedHost();
 		String version();
 		String sourceLocation();
@@ -67,6 +68,7 @@ public class ConfMaps extends ObjectBase {
 	 * Ini file content
 	 */
 	private String content;
+	private String rawData;
 	/**
 	 * IsEditable - true / false
 	 */
@@ -74,7 +76,7 @@ public class ConfMaps extends ObjectBase {
 	/**
 	 * Time of the last update
 	 */
-	private Integer lastUpdate;
+	private Integer createdAt;
 	/**
 	 * Regex that represent the host/s that this map affect
 	 */
@@ -111,13 +113,25 @@ public class ConfMaps extends ObjectBase {
 		setToken("content", multirequestToken);
 	}
 
+	// rawData:
+	public String getRawData(){
+		return this.rawData;
+	}
+	public void setRawData(String rawData){
+		this.rawData = rawData;
+	}
+
+	public void rawData(String multirequestToken){
+		setToken("rawData", multirequestToken);
+	}
+
 	// isEditable:
 	public Boolean getIsEditable(){
 		return this.isEditable;
 	}
-	// lastUpdate:
-	public Integer getLastUpdate(){
-		return this.lastUpdate;
+	// createdAt:
+	public Integer getCreatedAt(){
+		return this.createdAt;
 	}
 	// relatedHost:
 	public String getRelatedHost(){
@@ -184,8 +198,9 @@ public class ConfMaps extends ObjectBase {
 		// set members values:
 		name = GsonParser.parseString(jsonObject.get("name"));
 		content = GsonParser.parseString(jsonObject.get("content"));
+		rawData = GsonParser.parseString(jsonObject.get("rawData"));
 		isEditable = GsonParser.parseBoolean(jsonObject.get("isEditable"));
-		lastUpdate = GsonParser.parseInt(jsonObject.get("lastUpdate"));
+		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
 		relatedHost = GsonParser.parseString(jsonObject.get("relatedHost"));
 		version = GsonParser.parseInt(jsonObject.get("version"));
 		sourceLocation = ConfMapsSourceLocation.get(GsonParser.parseString(jsonObject.get("sourceLocation")));
@@ -199,6 +214,7 @@ public class ConfMaps extends ObjectBase {
 		kparams.add("objectType", "KalturaConfMaps");
 		kparams.add("name", this.name);
 		kparams.add("content", this.content);
+		kparams.add("rawData", this.rawData);
 		kparams.add("relatedHost", this.relatedHost);
 		kparams.add("sourceLocation", this.sourceLocation);
 		kparams.add("remarks", this.remarks);
@@ -224,8 +240,9 @@ public class ConfMaps extends ObjectBase {
         super.writeToParcel(dest, flags);
         dest.writeString(this.name);
         dest.writeString(this.content);
+        dest.writeString(this.rawData);
         dest.writeValue(this.isEditable);
-        dest.writeValue(this.lastUpdate);
+        dest.writeValue(this.createdAt);
         dest.writeString(this.relatedHost);
         dest.writeValue(this.version);
         dest.writeInt(this.sourceLocation == null ? -1 : this.sourceLocation.ordinal());
@@ -237,8 +254,9 @@ public class ConfMaps extends ObjectBase {
         super(in);
         this.name = in.readString();
         this.content = in.readString();
+        this.rawData = in.readString();
         this.isEditable = (Boolean)in.readValue(Boolean.class.getClassLoader());
-        this.lastUpdate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
         this.relatedHost = in.readString();
         this.version = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpSourceLocation = in.readInt();
