@@ -85,6 +85,8 @@ public class StorageProfile extends ObjectBase {
 		String publicKey();
 		String passPhrase();
 		String shouldExportThumbs();
+		String mappedPackagerUrl();
+		String regularPackagerUrl();
 	}
 
 	private Integer id;
@@ -139,6 +141,8 @@ public class StorageProfile extends ObjectBase {
 	private String publicKey;
 	private String passPhrase;
 	private Boolean shouldExportThumbs;
+	private String mappedPackagerUrl;
+	private String regularPackagerUrl;
 
 	// id:
 	public Integer getId(){
@@ -480,6 +484,30 @@ public class StorageProfile extends ObjectBase {
 		setToken("shouldExportThumbs", multirequestToken);
 	}
 
+	// mappedPackagerUrl:
+	public String getMappedPackagerUrl(){
+		return this.mappedPackagerUrl;
+	}
+	public void setMappedPackagerUrl(String mappedPackagerUrl){
+		this.mappedPackagerUrl = mappedPackagerUrl;
+	}
+
+	public void mappedPackagerUrl(String multirequestToken){
+		setToken("mappedPackagerUrl", multirequestToken);
+	}
+
+	// regularPackagerUrl:
+	public String getRegularPackagerUrl(){
+		return this.regularPackagerUrl;
+	}
+	public void setRegularPackagerUrl(String regularPackagerUrl){
+		this.regularPackagerUrl = regularPackagerUrl;
+	}
+
+	public void regularPackagerUrl(String multirequestToken){
+		setToken("regularPackagerUrl", multirequestToken);
+	}
+
 
 	public StorageProfile() {
 		super();
@@ -523,6 +551,8 @@ public class StorageProfile extends ObjectBase {
 		publicKey = GsonParser.parseString(jsonObject.get("publicKey"));
 		passPhrase = GsonParser.parseString(jsonObject.get("passPhrase"));
 		shouldExportThumbs = GsonParser.parseBoolean(jsonObject.get("shouldExportThumbs"));
+		mappedPackagerUrl = GsonParser.parseString(jsonObject.get("mappedPackagerUrl"));
+		regularPackagerUrl = GsonParser.parseString(jsonObject.get("regularPackagerUrl"));
 
 	}
 
@@ -557,6 +587,8 @@ public class StorageProfile extends ObjectBase {
 		kparams.add("publicKey", this.publicKey);
 		kparams.add("passPhrase", this.passPhrase);
 		kparams.add("shouldExportThumbs", this.shouldExportThumbs);
+		kparams.add("mappedPackagerUrl", this.mappedPackagerUrl);
+		kparams.add("regularPackagerUrl", this.regularPackagerUrl);
 		return kparams;
 	}
 
@@ -623,6 +655,8 @@ public class StorageProfile extends ObjectBase {
         dest.writeString(this.publicKey);
         dest.writeString(this.passPhrase);
         dest.writeValue(this.shouldExportThumbs);
+        dest.writeString(this.mappedPackagerUrl);
+        dest.writeString(this.regularPackagerUrl);
     }
 
     public StorageProfile(Parcel in) {
@@ -675,6 +709,8 @@ public class StorageProfile extends ObjectBase {
         this.publicKey = in.readString();
         this.passPhrase = in.readString();
         this.shouldExportThumbs = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.mappedPackagerUrl = in.readString();
+        this.regularPackagerUrl = in.readString();
     }
 }
 
