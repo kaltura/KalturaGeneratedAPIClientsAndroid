@@ -33,6 +33,9 @@ import com.kaltura.client.Params;
 import com.kaltura.client.types.ESearchEntryParams;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -47,12 +50,17 @@ public class MediaEsearchExportToCsvJobData extends ExportCsvJobData {
 	
 	public interface Tokenizer extends ExportCsvJobData.Tokenizer {
 		ESearchEntryParams.Tokenizer searchParams();
+		RequestBuilder.ListTokenizer<ExportToCsvOptions.Tokenizer> options();
 	}
 
 	/**
 	 * Esearch parameters for the entry search
 	 */
 	private ESearchEntryParams searchParams;
+	/**
+	 * options
+	 */
+	private List<ExportToCsvOptions> options;
 
 	// searchParams:
 	public ESearchEntryParams getSearchParams(){
@@ -60,6 +68,14 @@ public class MediaEsearchExportToCsvJobData extends ExportCsvJobData {
 	}
 	public void setSearchParams(ESearchEntryParams searchParams){
 		this.searchParams = searchParams;
+	}
+
+	// options:
+	public List<ExportToCsvOptions> getOptions(){
+		return this.options;
+	}
+	public void setOptions(List<ExportToCsvOptions> options){
+		this.options = options;
 	}
 
 
@@ -74,6 +90,7 @@ public class MediaEsearchExportToCsvJobData extends ExportCsvJobData {
 
 		// set members values:
 		searchParams = GsonParser.parseObject(jsonObject.getAsJsonObject("searchParams"), ESearchEntryParams.class);
+		options = GsonParser.parseArray(jsonObject.getAsJsonArray("options"), ExportToCsvOptions.class);
 
 	}
 
@@ -81,6 +98,7 @@ public class MediaEsearchExportToCsvJobData extends ExportCsvJobData {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaMediaEsearchExportToCsvJobData");
 		kparams.add("searchParams", this.searchParams);
+		kparams.add("options", this.options);
 		return kparams;
 	}
 
@@ -101,11 +119,22 @@ public class MediaEsearchExportToCsvJobData extends ExportCsvJobData {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(this.searchParams, flags);
+        if(this.options != null) {
+            dest.writeInt(this.options.size());
+            dest.writeList(this.options);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public MediaEsearchExportToCsvJobData(Parcel in) {
         super(in);
         this.searchParams = in.readParcelable(ESearchEntryParams.class.getClassLoader());
+        int optionsSize = in.readInt();
+        if( optionsSize > -1) {
+            this.options = new ArrayList<>();
+            in.readList(this.options, ExportToCsvOptions.class.getClassLoader());
+        }
     }
 }
 
