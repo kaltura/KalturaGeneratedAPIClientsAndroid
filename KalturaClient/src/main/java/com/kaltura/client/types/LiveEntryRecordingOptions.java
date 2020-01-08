@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2019  Kaltura Inc.
+// Copyright (C) 2006-2020  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -53,12 +53,16 @@ public class LiveEntryRecordingOptions extends ObjectBase {
 		String shouldCopyScheduling();
 		String shouldCopyThumbnail();
 		String shouldMakeHidden();
+		String shouldAutoArchive();
+		String nonDeletedCuePointsTags();
 	}
 
 	private Boolean shouldCopyEntitlement;
 	private Boolean shouldCopyScheduling;
 	private Boolean shouldCopyThumbnail;
 	private Boolean shouldMakeHidden;
+	private Boolean shouldAutoArchive;
+	private String nonDeletedCuePointsTags;
 
 	// shouldCopyEntitlement:
 	public Boolean getShouldCopyEntitlement(){
@@ -108,6 +112,30 @@ public class LiveEntryRecordingOptions extends ObjectBase {
 		setToken("shouldMakeHidden", multirequestToken);
 	}
 
+	// shouldAutoArchive:
+	public Boolean getShouldAutoArchive(){
+		return this.shouldAutoArchive;
+	}
+	public void setShouldAutoArchive(Boolean shouldAutoArchive){
+		this.shouldAutoArchive = shouldAutoArchive;
+	}
+
+	public void shouldAutoArchive(String multirequestToken){
+		setToken("shouldAutoArchive", multirequestToken);
+	}
+
+	// nonDeletedCuePointsTags:
+	public String getNonDeletedCuePointsTags(){
+		return this.nonDeletedCuePointsTags;
+	}
+	public void setNonDeletedCuePointsTags(String nonDeletedCuePointsTags){
+		this.nonDeletedCuePointsTags = nonDeletedCuePointsTags;
+	}
+
+	public void nonDeletedCuePointsTags(String multirequestToken){
+		setToken("nonDeletedCuePointsTags", multirequestToken);
+	}
+
 
 	public LiveEntryRecordingOptions() {
 		super();
@@ -123,6 +151,8 @@ public class LiveEntryRecordingOptions extends ObjectBase {
 		shouldCopyScheduling = GsonParser.parseBoolean(jsonObject.get("shouldCopyScheduling"));
 		shouldCopyThumbnail = GsonParser.parseBoolean(jsonObject.get("shouldCopyThumbnail"));
 		shouldMakeHidden = GsonParser.parseBoolean(jsonObject.get("shouldMakeHidden"));
+		shouldAutoArchive = GsonParser.parseBoolean(jsonObject.get("shouldAutoArchive"));
+		nonDeletedCuePointsTags = GsonParser.parseString(jsonObject.get("nonDeletedCuePointsTags"));
 
 	}
 
@@ -133,6 +163,8 @@ public class LiveEntryRecordingOptions extends ObjectBase {
 		kparams.add("shouldCopyScheduling", this.shouldCopyScheduling);
 		kparams.add("shouldCopyThumbnail", this.shouldCopyThumbnail);
 		kparams.add("shouldMakeHidden", this.shouldMakeHidden);
+		kparams.add("shouldAutoArchive", this.shouldAutoArchive);
+		kparams.add("nonDeletedCuePointsTags", this.nonDeletedCuePointsTags);
 		return kparams;
 	}
 
@@ -156,6 +188,8 @@ public class LiveEntryRecordingOptions extends ObjectBase {
         dest.writeValue(this.shouldCopyScheduling);
         dest.writeValue(this.shouldCopyThumbnail);
         dest.writeValue(this.shouldMakeHidden);
+        dest.writeValue(this.shouldAutoArchive);
+        dest.writeString(this.nonDeletedCuePointsTags);
     }
 
     public LiveEntryRecordingOptions(Parcel in) {
@@ -164,6 +198,8 @@ public class LiveEntryRecordingOptions extends ObjectBase {
         this.shouldCopyScheduling = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.shouldCopyThumbnail = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.shouldMakeHidden = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.shouldAutoArchive = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.nonDeletedCuePointsTags = in.readString();
     }
 }
 
