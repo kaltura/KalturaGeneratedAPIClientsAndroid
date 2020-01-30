@@ -50,6 +50,7 @@ public abstract class EntryServerNodeBaseFilter extends Filter {
 		String entryIdEqual();
 		String entryIdIn();
 		String serverNodeIdEqual();
+		String serverNodeIdIn();
 		String createdAtLessThanOrEqual();
 		String createdAtGreaterThanOrEqual();
 		String updatedAtGreaterThanOrEqual();
@@ -63,6 +64,7 @@ public abstract class EntryServerNodeBaseFilter extends Filter {
 	private String entryIdEqual;
 	private String entryIdIn;
 	private Integer serverNodeIdEqual;
+	private String serverNodeIdIn;
 	private Integer createdAtLessThanOrEqual;
 	private Integer createdAtGreaterThanOrEqual;
 	private Integer updatedAtGreaterThanOrEqual;
@@ -106,6 +108,18 @@ public abstract class EntryServerNodeBaseFilter extends Filter {
 
 	public void serverNodeIdEqual(String multirequestToken){
 		setToken("serverNodeIdEqual", multirequestToken);
+	}
+
+	// serverNodeIdIn:
+	public String getServerNodeIdIn(){
+		return this.serverNodeIdIn;
+	}
+	public void setServerNodeIdIn(String serverNodeIdIn){
+		this.serverNodeIdIn = serverNodeIdIn;
+	}
+
+	public void serverNodeIdIn(String multirequestToken){
+		setToken("serverNodeIdIn", multirequestToken);
 	}
 
 	// createdAtLessThanOrEqual:
@@ -218,6 +232,7 @@ public abstract class EntryServerNodeBaseFilter extends Filter {
 		entryIdEqual = GsonParser.parseString(jsonObject.get("entryIdEqual"));
 		entryIdIn = GsonParser.parseString(jsonObject.get("entryIdIn"));
 		serverNodeIdEqual = GsonParser.parseInt(jsonObject.get("serverNodeIdEqual"));
+		serverNodeIdIn = GsonParser.parseString(jsonObject.get("serverNodeIdIn"));
 		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
 		createdAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtGreaterThanOrEqual"));
 		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
@@ -235,6 +250,7 @@ public abstract class EntryServerNodeBaseFilter extends Filter {
 		kparams.add("entryIdEqual", this.entryIdEqual);
 		kparams.add("entryIdIn", this.entryIdIn);
 		kparams.add("serverNodeIdEqual", this.serverNodeIdEqual);
+		kparams.add("serverNodeIdIn", this.serverNodeIdIn);
 		kparams.add("createdAtLessThanOrEqual", this.createdAtLessThanOrEqual);
 		kparams.add("createdAtGreaterThanOrEqual", this.createdAtGreaterThanOrEqual);
 		kparams.add("updatedAtGreaterThanOrEqual", this.updatedAtGreaterThanOrEqual);
@@ -253,6 +269,7 @@ public abstract class EntryServerNodeBaseFilter extends Filter {
         dest.writeString(this.entryIdEqual);
         dest.writeString(this.entryIdIn);
         dest.writeValue(this.serverNodeIdEqual);
+        dest.writeString(this.serverNodeIdIn);
         dest.writeValue(this.createdAtLessThanOrEqual);
         dest.writeValue(this.createdAtGreaterThanOrEqual);
         dest.writeValue(this.updatedAtGreaterThanOrEqual);
@@ -268,6 +285,7 @@ public abstract class EntryServerNodeBaseFilter extends Filter {
         this.entryIdEqual = in.readString();
         this.entryIdIn = in.readString();
         this.serverNodeIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.serverNodeIdIn = in.readString();
         this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.createdAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());

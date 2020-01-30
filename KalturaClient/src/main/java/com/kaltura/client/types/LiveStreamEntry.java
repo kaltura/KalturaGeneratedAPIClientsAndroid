@@ -53,6 +53,8 @@ public class LiveStreamEntry extends LiveEntry {
 		RequestBuilder.ListTokenizer<LiveStreamBitrate.Tokenizer> bitrates();
 		String primaryBroadcastingUrl();
 		String secondaryBroadcastingUrl();
+		String primarySecuredBroadcastingUrl();
+		String secondarySecuredBroadcastingUrl();
 		String primaryRtspBroadcastingUrl();
 		String secondaryRtspBroadcastingUrl();
 		String streamName();
@@ -81,6 +83,8 @@ public class LiveStreamEntry extends LiveEntry {
 	private List<LiveStreamBitrate> bitrates;
 	private String primaryBroadcastingUrl;
 	private String secondaryBroadcastingUrl;
+	private String primarySecuredBroadcastingUrl;
+	private String secondarySecuredBroadcastingUrl;
 	private String primaryRtspBroadcastingUrl;
 	private String secondaryRtspBroadcastingUrl;
 	private String streamName;
@@ -156,6 +160,30 @@ public class LiveStreamEntry extends LiveEntry {
 
 	public void secondaryBroadcastingUrl(String multirequestToken){
 		setToken("secondaryBroadcastingUrl", multirequestToken);
+	}
+
+	// primarySecuredBroadcastingUrl:
+	public String getPrimarySecuredBroadcastingUrl(){
+		return this.primarySecuredBroadcastingUrl;
+	}
+	public void setPrimarySecuredBroadcastingUrl(String primarySecuredBroadcastingUrl){
+		this.primarySecuredBroadcastingUrl = primarySecuredBroadcastingUrl;
+	}
+
+	public void primarySecuredBroadcastingUrl(String multirequestToken){
+		setToken("primarySecuredBroadcastingUrl", multirequestToken);
+	}
+
+	// secondarySecuredBroadcastingUrl:
+	public String getSecondarySecuredBroadcastingUrl(){
+		return this.secondarySecuredBroadcastingUrl;
+	}
+	public void setSecondarySecuredBroadcastingUrl(String secondarySecuredBroadcastingUrl){
+		this.secondarySecuredBroadcastingUrl = secondarySecuredBroadcastingUrl;
+	}
+
+	public void secondarySecuredBroadcastingUrl(String multirequestToken){
+		setToken("secondarySecuredBroadcastingUrl", multirequestToken);
 	}
 
 	// primaryRtspBroadcastingUrl:
@@ -294,6 +322,8 @@ public class LiveStreamEntry extends LiveEntry {
 		bitrates = GsonParser.parseArray(jsonObject.getAsJsonArray("bitrates"), LiveStreamBitrate.class);
 		primaryBroadcastingUrl = GsonParser.parseString(jsonObject.get("primaryBroadcastingUrl"));
 		secondaryBroadcastingUrl = GsonParser.parseString(jsonObject.get("secondaryBroadcastingUrl"));
+		primarySecuredBroadcastingUrl = GsonParser.parseString(jsonObject.get("primarySecuredBroadcastingUrl"));
+		secondarySecuredBroadcastingUrl = GsonParser.parseString(jsonObject.get("secondarySecuredBroadcastingUrl"));
 		primaryRtspBroadcastingUrl = GsonParser.parseString(jsonObject.get("primaryRtspBroadcastingUrl"));
 		secondaryRtspBroadcastingUrl = GsonParser.parseString(jsonObject.get("secondaryRtspBroadcastingUrl"));
 		streamName = GsonParser.parseString(jsonObject.get("streamName"));
@@ -315,6 +345,8 @@ public class LiveStreamEntry extends LiveEntry {
 		kparams.add("bitrates", this.bitrates);
 		kparams.add("primaryBroadcastingUrl", this.primaryBroadcastingUrl);
 		kparams.add("secondaryBroadcastingUrl", this.secondaryBroadcastingUrl);
+		kparams.add("primarySecuredBroadcastingUrl", this.primarySecuredBroadcastingUrl);
+		kparams.add("secondarySecuredBroadcastingUrl", this.secondarySecuredBroadcastingUrl);
 		kparams.add("primaryRtspBroadcastingUrl", this.primaryRtspBroadcastingUrl);
 		kparams.add("secondaryRtspBroadcastingUrl", this.secondaryRtspBroadcastingUrl);
 		kparams.add("streamName", this.streamName);
@@ -353,6 +385,8 @@ public class LiveStreamEntry extends LiveEntry {
         }
         dest.writeString(this.primaryBroadcastingUrl);
         dest.writeString(this.secondaryBroadcastingUrl);
+        dest.writeString(this.primarySecuredBroadcastingUrl);
+        dest.writeString(this.secondarySecuredBroadcastingUrl);
         dest.writeString(this.primaryRtspBroadcastingUrl);
         dest.writeString(this.secondaryRtspBroadcastingUrl);
         dest.writeString(this.streamName);
@@ -378,6 +412,8 @@ public class LiveStreamEntry extends LiveEntry {
         }
         this.primaryBroadcastingUrl = in.readString();
         this.secondaryBroadcastingUrl = in.readString();
+        this.primarySecuredBroadcastingUrl = in.readString();
+        this.secondarySecuredBroadcastingUrl = in.readString();
         this.primaryRtspBroadcastingUrl = in.readString();
         this.secondaryRtspBroadcastingUrl = in.readString();
         this.streamName = in.readString();

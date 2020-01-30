@@ -47,12 +47,10 @@ public class UnlimitedVendorCredit extends BaseVendorCredit {
 	public interface Tokenizer extends BaseVendorCredit.Tokenizer {
 		String credit();
 		String fromDate();
-		String toDate();
 	}
 
 	private Integer credit;
 	private Integer fromDate;
-	private Integer toDate;
 
 	// credit:
 	public Integer getCredit(){
@@ -70,18 +68,6 @@ public class UnlimitedVendorCredit extends BaseVendorCredit {
 		setToken("fromDate", multirequestToken);
 	}
 
-	// toDate:
-	public Integer getToDate(){
-		return this.toDate;
-	}
-	public void setToDate(Integer toDate){
-		this.toDate = toDate;
-	}
-
-	public void toDate(String multirequestToken){
-		setToken("toDate", multirequestToken);
-	}
-
 
 	public UnlimitedVendorCredit() {
 		super();
@@ -95,7 +81,6 @@ public class UnlimitedVendorCredit extends BaseVendorCredit {
 		// set members values:
 		credit = GsonParser.parseInt(jsonObject.get("credit"));
 		fromDate = GsonParser.parseInt(jsonObject.get("fromDate"));
-		toDate = GsonParser.parseInt(jsonObject.get("toDate"));
 
 	}
 
@@ -103,7 +88,6 @@ public class UnlimitedVendorCredit extends BaseVendorCredit {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaUnlimitedVendorCredit");
 		kparams.add("fromDate", this.fromDate);
-		kparams.add("toDate", this.toDate);
 		return kparams;
 	}
 
@@ -125,14 +109,12 @@ public class UnlimitedVendorCredit extends BaseVendorCredit {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.credit);
         dest.writeValue(this.fromDate);
-        dest.writeValue(this.toDate);
     }
 
     public UnlimitedVendorCredit(Parcel in) {
         super(in);
         this.credit = (Integer)in.readValue(Integer.class.getClassLoader());
         this.fromDate = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.toDate = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
