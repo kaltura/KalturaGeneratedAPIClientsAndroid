@@ -78,6 +78,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String errorCodeIn();
 		String playerVersionIn();
 		String ispIn();
+		String applicationVersionIn();
 	}
 
 	/**
@@ -195,6 +196,10 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * filter by isp
 	 */
 	private String ispIn;
+	/**
+	 * filter by application version
+	 */
+	private String applicationVersionIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -564,6 +569,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("ispIn", multirequestToken);
 	}
 
+	// applicationVersionIn:
+	public String getApplicationVersionIn(){
+		return this.applicationVersionIn;
+	}
+	public void setApplicationVersionIn(String applicationVersionIn){
+		this.applicationVersionIn = applicationVersionIn;
+	}
+
+	public void applicationVersionIn(String multirequestToken){
+		setToken("applicationVersionIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -606,6 +623,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		errorCodeIn = GsonParser.parseString(jsonObject.get("errorCodeIn"));
 		playerVersionIn = GsonParser.parseString(jsonObject.get("playerVersionIn"));
 		ispIn = GsonParser.parseString(jsonObject.get("ispIn"));
+		applicationVersionIn = GsonParser.parseString(jsonObject.get("applicationVersionIn"));
 
 	}
 
@@ -643,6 +661,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("errorCodeIn", this.errorCodeIn);
 		kparams.add("playerVersionIn", this.playerVersionIn);
 		kparams.add("ispIn", this.ispIn);
+		kparams.add("applicationVersionIn", this.applicationVersionIn);
 		return kparams;
 	}
 
@@ -693,6 +712,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.errorCodeIn);
         dest.writeString(this.playerVersionIn);
         dest.writeString(this.ispIn);
+        dest.writeString(this.applicationVersionIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -729,6 +749,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.errorCodeIn = in.readString();
         this.playerVersionIn = in.readString();
         this.ispIn = in.readString();
+        this.applicationVersionIn = in.readString();
     }
 }
 
