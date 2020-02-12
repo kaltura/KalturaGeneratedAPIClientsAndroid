@@ -46,9 +46,11 @@ public class LiveEntryArchiveJobData extends JobData {
 	
 	public interface Tokenizer extends JobData.Tokenizer {
 		String liveEntryId();
+		String vodEntryId();
 	}
 
 	private String liveEntryId;
+	private String vodEntryId;
 
 	// liveEntryId:
 	public String getLiveEntryId(){
@@ -60,6 +62,18 @@ public class LiveEntryArchiveJobData extends JobData {
 
 	public void liveEntryId(String multirequestToken){
 		setToken("liveEntryId", multirequestToken);
+	}
+
+	// vodEntryId:
+	public String getVodEntryId(){
+		return this.vodEntryId;
+	}
+	public void setVodEntryId(String vodEntryId){
+		this.vodEntryId = vodEntryId;
+	}
+
+	public void vodEntryId(String multirequestToken){
+		setToken("vodEntryId", multirequestToken);
 	}
 
 
@@ -74,6 +88,7 @@ public class LiveEntryArchiveJobData extends JobData {
 
 		// set members values:
 		liveEntryId = GsonParser.parseString(jsonObject.get("liveEntryId"));
+		vodEntryId = GsonParser.parseString(jsonObject.get("vodEntryId"));
 
 	}
 
@@ -81,6 +96,7 @@ public class LiveEntryArchiveJobData extends JobData {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaLiveEntryArchiveJobData");
 		kparams.add("liveEntryId", this.liveEntryId);
+		kparams.add("vodEntryId", this.vodEntryId);
 		return kparams;
 	}
 
@@ -101,11 +117,13 @@ public class LiveEntryArchiveJobData extends JobData {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.liveEntryId);
+        dest.writeString(this.vodEntryId);
     }
 
     public LiveEntryArchiveJobData(Parcel in) {
         super(in);
         this.liveEntryId = in.readString();
+        this.vodEntryId = in.readString();
     }
 }
 
