@@ -113,6 +113,14 @@ public class Partner extends ObjectBase {
 		String ottEnvironmentUrl();
 		RequestBuilder.ListTokenizer<ESearchLanguageItem.Tokenizer> eSearchLanguages();
 		String authenticationType();
+		String extendedFreeTrailExpiryReason();
+		String extendedFreeTrailExpiryDate();
+		String extendedFreeTrail();
+		String extendedFreeTrailEndsWarning();
+		String eightyPercentWarning();
+		String usageLimitWarning();
+		String lastFreeTrialNotificationDay();
+		String monitorUsage();
 	}
 
 	private Integer id;
@@ -189,6 +197,17 @@ public class Partner extends ObjectBase {
 	private String ottEnvironmentUrl;
 	private List<ESearchLanguageItem> eSearchLanguages;
 	private PartnerAuthenticationType authenticationType;
+	private String extendedFreeTrailExpiryReason;
+	/**
+	 * Unix timestamp (In seconds)
+	 */
+	private Integer extendedFreeTrailExpiryDate;
+	private Integer extendedFreeTrail;
+	private Boolean extendedFreeTrailEndsWarning;
+	private Integer eightyPercentWarning;
+	private Integer usageLimitWarning;
+	private Integer lastFreeTrialNotificationDay;
+	private Integer monitorUsage;
 
 	// id:
 	public Integer getId(){
@@ -682,6 +701,38 @@ public class Partner extends ObjectBase {
 	public PartnerAuthenticationType getAuthenticationType(){
 		return this.authenticationType;
 	}
+	// extendedFreeTrailExpiryReason:
+	public String getExtendedFreeTrailExpiryReason(){
+		return this.extendedFreeTrailExpiryReason;
+	}
+	// extendedFreeTrailExpiryDate:
+	public Integer getExtendedFreeTrailExpiryDate(){
+		return this.extendedFreeTrailExpiryDate;
+	}
+	// extendedFreeTrail:
+	public Integer getExtendedFreeTrail(){
+		return this.extendedFreeTrail;
+	}
+	// extendedFreeTrailEndsWarning:
+	public Boolean getExtendedFreeTrailEndsWarning(){
+		return this.extendedFreeTrailEndsWarning;
+	}
+	// eightyPercentWarning:
+	public Integer getEightyPercentWarning(){
+		return this.eightyPercentWarning;
+	}
+	// usageLimitWarning:
+	public Integer getUsageLimitWarning(){
+		return this.usageLimitWarning;
+	}
+	// lastFreeTrialNotificationDay:
+	public Integer getLastFreeTrialNotificationDay(){
+		return this.lastFreeTrialNotificationDay;
+	}
+	// monitorUsage:
+	public Integer getMonitorUsage(){
+		return this.monitorUsage;
+	}
 
 	public Partner() {
 		super();
@@ -752,6 +803,14 @@ public class Partner extends ObjectBase {
 		ottEnvironmentUrl = GsonParser.parseString(jsonObject.get("ottEnvironmentUrl"));
 		eSearchLanguages = GsonParser.parseArray(jsonObject.getAsJsonArray("eSearchLanguages"), ESearchLanguageItem.class);
 		authenticationType = PartnerAuthenticationType.get(GsonParser.parseInt(jsonObject.get("authenticationType")));
+		extendedFreeTrailExpiryReason = GsonParser.parseString(jsonObject.get("extendedFreeTrailExpiryReason"));
+		extendedFreeTrailExpiryDate = GsonParser.parseInt(jsonObject.get("extendedFreeTrailExpiryDate"));
+		extendedFreeTrail = GsonParser.parseInt(jsonObject.get("extendedFreeTrail"));
+		extendedFreeTrailEndsWarning = GsonParser.parseBoolean(jsonObject.get("extendedFreeTrailEndsWarning"));
+		eightyPercentWarning = GsonParser.parseInt(jsonObject.get("eightyPercentWarning"));
+		usageLimitWarning = GsonParser.parseInt(jsonObject.get("usageLimitWarning"));
+		lastFreeTrialNotificationDay = GsonParser.parseInt(jsonObject.get("lastFreeTrialNotificationDay"));
+		monitorUsage = GsonParser.parseInt(jsonObject.get("monitorUsage"));
 
 	}
 
@@ -889,6 +948,14 @@ public class Partner extends ObjectBase {
             dest.writeInt(-1);
         }
         dest.writeInt(this.authenticationType == null ? -1 : this.authenticationType.ordinal());
+        dest.writeString(this.extendedFreeTrailExpiryReason);
+        dest.writeValue(this.extendedFreeTrailExpiryDate);
+        dest.writeValue(this.extendedFreeTrail);
+        dest.writeValue(this.extendedFreeTrailEndsWarning);
+        dest.writeValue(this.eightyPercentWarning);
+        dest.writeValue(this.usageLimitWarning);
+        dest.writeValue(this.lastFreeTrialNotificationDay);
+        dest.writeValue(this.monitorUsage);
     }
 
     public Partner(Parcel in) {
@@ -973,6 +1040,14 @@ public class Partner extends ObjectBase {
         }
         int tmpAuthenticationType = in.readInt();
         this.authenticationType = tmpAuthenticationType == -1 ? null : PartnerAuthenticationType.values()[tmpAuthenticationType];
+        this.extendedFreeTrailExpiryReason = in.readString();
+        this.extendedFreeTrailExpiryDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.extendedFreeTrail = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.extendedFreeTrailEndsWarning = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.eightyPercentWarning = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.usageLimitWarning = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.lastFreeTrialNotificationDay = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.monitorUsage = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
