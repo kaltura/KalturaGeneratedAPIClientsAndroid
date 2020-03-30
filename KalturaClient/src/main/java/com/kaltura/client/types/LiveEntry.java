@@ -74,6 +74,7 @@ public abstract class LiveEntry extends MediaEntry {
 		String viewMode();
 		String recordingStatus();
 		String lastBroadcastEndTime();
+		String broadcastTime();
 	}
 
 	/**
@@ -142,6 +143,10 @@ public abstract class LiveEntry extends MediaEntry {
 	 * The time the last broadcast finished.
 	 */
 	private Integer lastBroadcastEndTime;
+	/**
+	 * The time when the entry was first live with view_all
+	 */
+	private Integer broadcastTime;
 
 	// offlineMessage:
 	public String getOfflineMessage(){
@@ -327,6 +332,18 @@ public abstract class LiveEntry extends MediaEntry {
 	public Integer getLastBroadcastEndTime(){
 		return this.lastBroadcastEndTime;
 	}
+	// broadcastTime:
+	public Integer getBroadcastTime(){
+		return this.broadcastTime;
+	}
+	public void setBroadcastTime(Integer broadcastTime){
+		this.broadcastTime = broadcastTime;
+	}
+
+	public void broadcastTime(String multirequestToken){
+		setToken("broadcastTime", multirequestToken);
+	}
+
 
 	public LiveEntry() {
 		super();
@@ -357,6 +374,7 @@ public abstract class LiveEntry extends MediaEntry {
 		viewMode = ViewMode.get(GsonParser.parseInt(jsonObject.get("viewMode")));
 		recordingStatus = RecordingStatus.get(GsonParser.parseInt(jsonObject.get("recordingStatus")));
 		lastBroadcastEndTime = GsonParser.parseInt(jsonObject.get("lastBroadcastEndTime"));
+		broadcastTime = GsonParser.parseInt(jsonObject.get("broadcastTime"));
 
 	}
 
@@ -378,6 +396,7 @@ public abstract class LiveEntry extends MediaEntry {
 		kparams.add("explicitLive", this.explicitLive);
 		kparams.add("viewMode", this.viewMode);
 		kparams.add("recordingStatus", this.recordingStatus);
+		kparams.add("broadcastTime", this.broadcastTime);
 		return kparams;
 	}
 
@@ -414,6 +433,7 @@ public abstract class LiveEntry extends MediaEntry {
         dest.writeInt(this.viewMode == null ? -1 : this.viewMode.ordinal());
         dest.writeInt(this.recordingStatus == null ? -1 : this.recordingStatus.ordinal());
         dest.writeValue(this.lastBroadcastEndTime);
+        dest.writeValue(this.broadcastTime);
     }
 
     public LiveEntry(Parcel in) {
@@ -451,6 +471,7 @@ public abstract class LiveEntry extends MediaEntry {
         int tmpRecordingStatus = in.readInt();
         this.recordingStatus = tmpRecordingStatus == -1 ? null : RecordingStatus.values()[tmpRecordingStatus];
         this.lastBroadcastEndTime = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.broadcastTime = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
