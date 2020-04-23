@@ -25,7 +25,12 @@
 //
 // @ignore
 // ===================================================================================================
-package com.kaltura.client.enums;
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
  * This class was generated using generate.php
@@ -33,40 +38,45 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum UserEntryType implements EnumAsString {
-	QUIZ("quiz.QUIZ"),
-	REGISTRATION("registration.REGISTRATION"),
-	VIEW_HISTORY("viewHistory.VIEW_HISTORY"),
-	WATCH_LATER("watchLater.WATCH_LATER");
 
-	private String value;
-
-	UserEntryType(String value) {
-		this.value = value;
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(SipEntryServerNodeFilter.Tokenizer.class)
+public class SipEntryServerNodeFilter extends SipEntryServerNodeBaseFilter {
+	
+	public interface Tokenizer extends SipEntryServerNodeBaseFilter.Tokenizer {
 	}
 
-	@Override
-	public String getValue() {
-		return this.value;
+
+
+	public SipEntryServerNodeFilter() {
+		super();
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public SipEntryServerNodeFilter(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
 	}
 
-	public static UserEntryType get(String value) {
-		if(value == null)
-		{
-			return null;
-		}
-		
-		// goes over UserEntryType defined values and compare the inner value with the given one:
-		for(UserEntryType item: values()) {
-			if(item.getValue().equals(value)) {
-				return item;
-			}
-		}
-		// in case the requested value was not found in the enum values, we return the first item as default.
-		return UserEntryType.values().length > 0 ? UserEntryType.values()[0]: null;
-   }
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaSipEntryServerNodeFilter");
+		return kparams;
+	}
+
+
+    public static final Creator<SipEntryServerNodeFilter> CREATOR = new Creator<SipEntryServerNodeFilter>() {
+        @Override
+        public SipEntryServerNodeFilter createFromParcel(Parcel source) {
+            return new SipEntryServerNodeFilter(source);
+        }
+
+        @Override
+        public SipEntryServerNodeFilter[] newArray(int size) {
+            return new SipEntryServerNodeFilter[size];
+        }
+    };
+
+    public SipEntryServerNodeFilter(Parcel in) {
+        super(in);
+    }
 }
+

@@ -25,7 +25,12 @@
 //
 // @ignore
 // ===================================================================================================
-package com.kaltura.client.enums;
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
  * This class was generated using generate.php
@@ -33,40 +38,45 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum UserEntryType implements EnumAsString {
-	QUIZ("quiz.QUIZ"),
-	REGISTRATION("registration.REGISTRATION"),
-	VIEW_HISTORY("viewHistory.VIEW_HISTORY"),
-	WATCH_LATER("watchLater.WATCH_LATER");
 
-	private String value;
-
-	UserEntryType(String value) {
-		this.value = value;
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(PodcastDistributionProvider.Tokenizer.class)
+public class PodcastDistributionProvider extends DistributionProvider {
+	
+	public interface Tokenizer extends DistributionProvider.Tokenizer {
 	}
 
-	@Override
-	public String getValue() {
-		return this.value;
+
+
+	public PodcastDistributionProvider() {
+		super();
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public PodcastDistributionProvider(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
 	}
 
-	public static UserEntryType get(String value) {
-		if(value == null)
-		{
-			return null;
-		}
-		
-		// goes over UserEntryType defined values and compare the inner value with the given one:
-		for(UserEntryType item: values()) {
-			if(item.getValue().equals(value)) {
-				return item;
-			}
-		}
-		// in case the requested value was not found in the enum values, we return the first item as default.
-		return UserEntryType.values().length > 0 ? UserEntryType.values()[0]: null;
-   }
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaPodcastDistributionProvider");
+		return kparams;
+	}
+
+
+    public static final Creator<PodcastDistributionProvider> CREATOR = new Creator<PodcastDistributionProvider>() {
+        @Override
+        public PodcastDistributionProvider createFromParcel(Parcel source) {
+            return new PodcastDistributionProvider(source);
+        }
+
+        @Override
+        public PodcastDistributionProvider[] newArray(int size) {
+            return new PodcastDistributionProvider[size];
+        }
+    };
+
+    public PodcastDistributionProvider(Parcel in) {
+        super(in);
+    }
 }
+
