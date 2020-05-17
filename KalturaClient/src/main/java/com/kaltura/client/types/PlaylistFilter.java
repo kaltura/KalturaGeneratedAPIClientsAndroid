@@ -30,6 +30,8 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.PlaylistType;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -44,8 +46,36 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class PlaylistFilter extends PlaylistBaseFilter {
 	
 	public interface Tokenizer extends PlaylistBaseFilter.Tokenizer {
+		String playListTypeEqual();
+		String playListTypeIn();
 	}
 
+	private PlaylistType playListTypeEqual;
+	private String playListTypeIn;
+
+	// playListTypeEqual:
+	public PlaylistType getPlayListTypeEqual(){
+		return this.playListTypeEqual;
+	}
+	public void setPlayListTypeEqual(PlaylistType playListTypeEqual){
+		this.playListTypeEqual = playListTypeEqual;
+	}
+
+	public void playListTypeEqual(String multirequestToken){
+		setToken("playListTypeEqual", multirequestToken);
+	}
+
+	// playListTypeIn:
+	public String getPlayListTypeIn(){
+		return this.playListTypeIn;
+	}
+	public void setPlayListTypeIn(String playListTypeIn){
+		this.playListTypeIn = playListTypeIn;
+	}
+
+	public void playListTypeIn(String multirequestToken){
+		setToken("playListTypeIn", multirequestToken);
+	}
 
 
 	public PlaylistFilter() {
@@ -54,11 +84,20 @@ public class PlaylistFilter extends PlaylistBaseFilter {
 
 	public PlaylistFilter(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		playListTypeEqual = PlaylistType.get(GsonParser.parseInt(jsonObject.get("playListTypeEqual")));
+		playListTypeIn = GsonParser.parseString(jsonObject.get("playListTypeIn"));
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaPlaylistFilter");
+		kparams.add("playListTypeEqual", this.playListTypeEqual);
+		kparams.add("playListTypeIn", this.playListTypeIn);
 		return kparams;
 	}
 
@@ -75,8 +114,18 @@ public class PlaylistFilter extends PlaylistBaseFilter {
         }
     };
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(this.playListTypeEqual == null ? -1 : this.playListTypeEqual.ordinal());
+        dest.writeString(this.playListTypeIn);
+    }
+
     public PlaylistFilter(Parcel in) {
         super(in);
+        int tmpPlayListTypeEqual = in.readInt();
+        this.playListTypeEqual = tmpPlayListTypeEqual == -1 ? null : PlaylistType.values()[tmpPlayListTypeEqual];
+        this.playListTypeIn = in.readString();
     }
 }
 

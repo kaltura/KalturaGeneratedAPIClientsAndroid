@@ -85,8 +85,10 @@ public class StorageProfile extends ObjectBase {
 		String publicKey();
 		String passPhrase();
 		String shouldExportThumbs();
-		String mappedPackagerUrl();
-		String regularPackagerUrl();
+		String packagerUrl();
+		String exportPeriodically();
+		String excludedFlavorParamsIds();
+		String shouldExportCaptions();
 	}
 
 	private Integer id;
@@ -141,8 +143,10 @@ public class StorageProfile extends ObjectBase {
 	private String publicKey;
 	private String passPhrase;
 	private Boolean shouldExportThumbs;
-	private String mappedPackagerUrl;
-	private String regularPackagerUrl;
+	private String packagerUrl;
+	private Boolean exportPeriodically;
+	private String excludedFlavorParamsIds;
+	private Boolean shouldExportCaptions;
 
 	// id:
 	public Integer getId(){
@@ -484,28 +488,52 @@ public class StorageProfile extends ObjectBase {
 		setToken("shouldExportThumbs", multirequestToken);
 	}
 
-	// mappedPackagerUrl:
-	public String getMappedPackagerUrl(){
-		return this.mappedPackagerUrl;
+	// packagerUrl:
+	public String getPackagerUrl(){
+		return this.packagerUrl;
 	}
-	public void setMappedPackagerUrl(String mappedPackagerUrl){
-		this.mappedPackagerUrl = mappedPackagerUrl;
-	}
-
-	public void mappedPackagerUrl(String multirequestToken){
-		setToken("mappedPackagerUrl", multirequestToken);
+	public void setPackagerUrl(String packagerUrl){
+		this.packagerUrl = packagerUrl;
 	}
 
-	// regularPackagerUrl:
-	public String getRegularPackagerUrl(){
-		return this.regularPackagerUrl;
-	}
-	public void setRegularPackagerUrl(String regularPackagerUrl){
-		this.regularPackagerUrl = regularPackagerUrl;
+	public void packagerUrl(String multirequestToken){
+		setToken("packagerUrl", multirequestToken);
 	}
 
-	public void regularPackagerUrl(String multirequestToken){
-		setToken("regularPackagerUrl", multirequestToken);
+	// exportPeriodically:
+	public Boolean getExportPeriodically(){
+		return this.exportPeriodically;
+	}
+	public void setExportPeriodically(Boolean exportPeriodically){
+		this.exportPeriodically = exportPeriodically;
+	}
+
+	public void exportPeriodically(String multirequestToken){
+		setToken("exportPeriodically", multirequestToken);
+	}
+
+	// excludedFlavorParamsIds:
+	public String getExcludedFlavorParamsIds(){
+		return this.excludedFlavorParamsIds;
+	}
+	public void setExcludedFlavorParamsIds(String excludedFlavorParamsIds){
+		this.excludedFlavorParamsIds = excludedFlavorParamsIds;
+	}
+
+	public void excludedFlavorParamsIds(String multirequestToken){
+		setToken("excludedFlavorParamsIds", multirequestToken);
+	}
+
+	// shouldExportCaptions:
+	public Boolean getShouldExportCaptions(){
+		return this.shouldExportCaptions;
+	}
+	public void setShouldExportCaptions(Boolean shouldExportCaptions){
+		this.shouldExportCaptions = shouldExportCaptions;
+	}
+
+	public void shouldExportCaptions(String multirequestToken){
+		setToken("shouldExportCaptions", multirequestToken);
 	}
 
 
@@ -551,8 +579,10 @@ public class StorageProfile extends ObjectBase {
 		publicKey = GsonParser.parseString(jsonObject.get("publicKey"));
 		passPhrase = GsonParser.parseString(jsonObject.get("passPhrase"));
 		shouldExportThumbs = GsonParser.parseBoolean(jsonObject.get("shouldExportThumbs"));
-		mappedPackagerUrl = GsonParser.parseString(jsonObject.get("mappedPackagerUrl"));
-		regularPackagerUrl = GsonParser.parseString(jsonObject.get("regularPackagerUrl"));
+		packagerUrl = GsonParser.parseString(jsonObject.get("packagerUrl"));
+		exportPeriodically = GsonParser.parseBoolean(jsonObject.get("exportPeriodically"));
+		excludedFlavorParamsIds = GsonParser.parseString(jsonObject.get("excludedFlavorParamsIds"));
+		shouldExportCaptions = GsonParser.parseBoolean(jsonObject.get("shouldExportCaptions"));
 
 	}
 
@@ -587,8 +617,10 @@ public class StorageProfile extends ObjectBase {
 		kparams.add("publicKey", this.publicKey);
 		kparams.add("passPhrase", this.passPhrase);
 		kparams.add("shouldExportThumbs", this.shouldExportThumbs);
-		kparams.add("mappedPackagerUrl", this.mappedPackagerUrl);
-		kparams.add("regularPackagerUrl", this.regularPackagerUrl);
+		kparams.add("packagerUrl", this.packagerUrl);
+		kparams.add("exportPeriodically", this.exportPeriodically);
+		kparams.add("excludedFlavorParamsIds", this.excludedFlavorParamsIds);
+		kparams.add("shouldExportCaptions", this.shouldExportCaptions);
 		return kparams;
 	}
 
@@ -655,8 +687,10 @@ public class StorageProfile extends ObjectBase {
         dest.writeString(this.publicKey);
         dest.writeString(this.passPhrase);
         dest.writeValue(this.shouldExportThumbs);
-        dest.writeString(this.mappedPackagerUrl);
-        dest.writeString(this.regularPackagerUrl);
+        dest.writeString(this.packagerUrl);
+        dest.writeValue(this.exportPeriodically);
+        dest.writeString(this.excludedFlavorParamsIds);
+        dest.writeValue(this.shouldExportCaptions);
     }
 
     public StorageProfile(Parcel in) {
@@ -709,8 +743,10 @@ public class StorageProfile extends ObjectBase {
         this.publicKey = in.readString();
         this.passPhrase = in.readString();
         this.shouldExportThumbs = (Boolean)in.readValue(Boolean.class.getClassLoader());
-        this.mappedPackagerUrl = in.readString();
-        this.regularPackagerUrl = in.readString();
+        this.packagerUrl = in.readString();
+        this.exportPeriodically = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.excludedFlavorParamsIds = in.readString();
+        this.shouldExportCaptions = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

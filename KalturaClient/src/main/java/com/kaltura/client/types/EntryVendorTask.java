@@ -33,6 +33,7 @@ import com.kaltura.client.Params;
 import com.kaltura.client.enums.EntryVendorTaskCreationMode;
 import com.kaltura.client.enums.EntryVendorTaskStatus;
 import com.kaltura.client.enums.VendorServiceFeature;
+import com.kaltura.client.enums.VendorServiceTurnAroundTime;
 import com.kaltura.client.enums.VendorServiceType;
 import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.types.VendorTaskData;
@@ -79,6 +80,7 @@ public class EntryVendorTask extends ObjectBase {
 		String expectedFinishTime();
 		String serviceType();
 		String serviceFeature();
+		String turnAroundTime();
 	}
 
 	private Long id;
@@ -155,6 +157,7 @@ public class EntryVendorTask extends ObjectBase {
 	private Integer expectedFinishTime;
 	private VendorServiceType serviceType;
 	private VendorServiceFeature serviceFeature;
+	private VendorServiceTurnAroundTime turnAroundTime;
 
 	// id:
 	public Long getId(){
@@ -352,6 +355,10 @@ public class EntryVendorTask extends ObjectBase {
 	public VendorServiceFeature getServiceFeature(){
 		return this.serviceFeature;
 	}
+	// turnAroundTime:
+	public VendorServiceTurnAroundTime getTurnAroundTime(){
+		return this.turnAroundTime;
+	}
 
 	public EntryVendorTask() {
 		super();
@@ -391,6 +398,7 @@ public class EntryVendorTask extends ObjectBase {
 		expectedFinishTime = GsonParser.parseInt(jsonObject.get("expectedFinishTime"));
 		serviceType = VendorServiceType.get(GsonParser.parseInt(jsonObject.get("serviceType")));
 		serviceFeature = VendorServiceFeature.get(GsonParser.parseInt(jsonObject.get("serviceFeature")));
+		turnAroundTime = VendorServiceTurnAroundTime.get(GsonParser.parseInt(jsonObject.get("turnAroundTime")));
 
 	}
 
@@ -455,6 +463,7 @@ public class EntryVendorTask extends ObjectBase {
         dest.writeValue(this.expectedFinishTime);
         dest.writeInt(this.serviceType == null ? -1 : this.serviceType.ordinal());
         dest.writeInt(this.serviceFeature == null ? -1 : this.serviceFeature.ordinal());
+        dest.writeInt(this.turnAroundTime == null ? -1 : this.turnAroundTime.ordinal());
     }
 
     public EntryVendorTask(Parcel in) {
@@ -491,6 +500,8 @@ public class EntryVendorTask extends ObjectBase {
         this.serviceType = tmpServiceType == -1 ? null : VendorServiceType.values()[tmpServiceType];
         int tmpServiceFeature = in.readInt();
         this.serviceFeature = tmpServiceFeature == -1 ? null : VendorServiceFeature.values()[tmpServiceFeature];
+        int tmpTurnAroundTime = in.readInt();
+        this.turnAroundTime = tmpTurnAroundTime == -1 ? null : VendorServiceTurnAroundTime.values()[tmpTurnAroundTime];
     }
 }
 

@@ -74,6 +74,8 @@ public class FileSync extends ObjectBase {
 		String isCurrentDc();
 		String isDir();
 		String originalId();
+		String srcPath();
+		String srcEncKey();
 	}
 
 	private Long id;
@@ -101,6 +103,8 @@ public class FileSync extends ObjectBase {
 	private Boolean isCurrentDc;
 	private Boolean isDir;
 	private Integer originalId;
+	private String srcPath;
+	private String srcEncKey;
 
 	// id:
 	public Long getId(){
@@ -226,6 +230,30 @@ public class FileSync extends ObjectBase {
 	public Integer getOriginalId(){
 		return this.originalId;
 	}
+	// srcPath:
+	public String getSrcPath(){
+		return this.srcPath;
+	}
+	public void setSrcPath(String srcPath){
+		this.srcPath = srcPath;
+	}
+
+	public void srcPath(String multirequestToken){
+		setToken("srcPath", multirequestToken);
+	}
+
+	// srcEncKey:
+	public String getSrcEncKey(){
+		return this.srcEncKey;
+	}
+	public void setSrcEncKey(String srcEncKey){
+		this.srcEncKey = srcEncKey;
+	}
+
+	public void srcEncKey(String multirequestToken){
+		setToken("srcEncKey", multirequestToken);
+	}
+
 
 	public FileSync() {
 		super();
@@ -262,6 +290,8 @@ public class FileSync extends ObjectBase {
 		isCurrentDc = GsonParser.parseBoolean(jsonObject.get("isCurrentDc"));
 		isDir = GsonParser.parseBoolean(jsonObject.get("isDir"));
 		originalId = GsonParser.parseInt(jsonObject.get("originalId"));
+		srcPath = GsonParser.parseString(jsonObject.get("srcPath"));
+		srcEncKey = GsonParser.parseString(jsonObject.get("srcEncKey"));
 
 	}
 
@@ -271,6 +301,8 @@ public class FileSync extends ObjectBase {
 		kparams.add("status", this.status);
 		kparams.add("fileRoot", this.fileRoot);
 		kparams.add("filePath", this.filePath);
+		kparams.add("srcPath", this.srcPath);
+		kparams.add("srcEncKey", this.srcEncKey);
 		return kparams;
 	}
 
@@ -315,6 +347,8 @@ public class FileSync extends ObjectBase {
         dest.writeValue(this.isCurrentDc);
         dest.writeValue(this.isDir);
         dest.writeValue(this.originalId);
+        dest.writeString(this.srcPath);
+        dest.writeString(this.srcEncKey);
     }
 
     public FileSync(Parcel in) {
@@ -347,6 +381,8 @@ public class FileSync extends ObjectBase {
         this.isCurrentDc = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.isDir = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.originalId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.srcPath = in.readString();
+        this.srcEncKey = in.readString();
     }
 }
 
