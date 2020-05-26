@@ -76,6 +76,7 @@ public class FileSync extends ObjectBase {
 		String originalId();
 		String srcPath();
 		String srcEncKey();
+		String storageClass();
 	}
 
 	private Long id;
@@ -105,6 +106,7 @@ public class FileSync extends ObjectBase {
 	private Integer originalId;
 	private String srcPath;
 	private String srcEncKey;
+	private String storageClass;
 
 	// id:
 	public Long getId(){
@@ -254,6 +256,18 @@ public class FileSync extends ObjectBase {
 		setToken("srcEncKey", multirequestToken);
 	}
 
+	// storageClass:
+	public String getStorageClass(){
+		return this.storageClass;
+	}
+	public void setStorageClass(String storageClass){
+		this.storageClass = storageClass;
+	}
+
+	public void storageClass(String multirequestToken){
+		setToken("storageClass", multirequestToken);
+	}
+
 
 	public FileSync() {
 		super();
@@ -292,6 +306,7 @@ public class FileSync extends ObjectBase {
 		originalId = GsonParser.parseInt(jsonObject.get("originalId"));
 		srcPath = GsonParser.parseString(jsonObject.get("srcPath"));
 		srcEncKey = GsonParser.parseString(jsonObject.get("srcEncKey"));
+		storageClass = GsonParser.parseString(jsonObject.get("storageClass"));
 
 	}
 
@@ -303,6 +318,7 @@ public class FileSync extends ObjectBase {
 		kparams.add("filePath", this.filePath);
 		kparams.add("srcPath", this.srcPath);
 		kparams.add("srcEncKey", this.srcEncKey);
+		kparams.add("storageClass", this.storageClass);
 		return kparams;
 	}
 
@@ -349,6 +365,7 @@ public class FileSync extends ObjectBase {
         dest.writeValue(this.originalId);
         dest.writeString(this.srcPath);
         dest.writeString(this.srcEncKey);
+        dest.writeString(this.storageClass);
     }
 
     public FileSync(Parcel in) {
@@ -383,6 +400,7 @@ public class FileSync extends ObjectBase {
         this.originalId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.srcPath = in.readString();
         this.srcEncKey = in.readString();
+        this.storageClass = in.readString();
     }
 }
 

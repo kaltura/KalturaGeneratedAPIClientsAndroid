@@ -52,6 +52,7 @@ public class AmazonS3StorageExportJobData extends StorageExportJobData {
 		String sseKmsKeyId();
 		String signatureType();
 		String endPoint();
+		String storageClass();
 	}
 
 	private AmazonS3StorageProfileFilesPermissionLevel filesPermissionInS3;
@@ -60,6 +61,7 @@ public class AmazonS3StorageExportJobData extends StorageExportJobData {
 	private String sseKmsKeyId;
 	private String signatureType;
 	private String endPoint;
+	private String storageClass;
 
 	// filesPermissionInS3:
 	public AmazonS3StorageProfileFilesPermissionLevel getFilesPermissionInS3(){
@@ -133,6 +135,18 @@ public class AmazonS3StorageExportJobData extends StorageExportJobData {
 		setToken("endPoint", multirequestToken);
 	}
 
+	// storageClass:
+	public String getStorageClass(){
+		return this.storageClass;
+	}
+	public void setStorageClass(String storageClass){
+		this.storageClass = storageClass;
+	}
+
+	public void storageClass(String multirequestToken){
+		setToken("storageClass", multirequestToken);
+	}
+
 
 	public AmazonS3StorageExportJobData() {
 		super();
@@ -150,6 +164,7 @@ public class AmazonS3StorageExportJobData extends StorageExportJobData {
 		sseKmsKeyId = GsonParser.parseString(jsonObject.get("sseKmsKeyId"));
 		signatureType = GsonParser.parseString(jsonObject.get("signatureType"));
 		endPoint = GsonParser.parseString(jsonObject.get("endPoint"));
+		storageClass = GsonParser.parseString(jsonObject.get("storageClass"));
 
 	}
 
@@ -162,6 +177,7 @@ public class AmazonS3StorageExportJobData extends StorageExportJobData {
 		kparams.add("sseKmsKeyId", this.sseKmsKeyId);
 		kparams.add("signatureType", this.signatureType);
 		kparams.add("endPoint", this.endPoint);
+		kparams.add("storageClass", this.storageClass);
 		return kparams;
 	}
 
@@ -187,6 +203,7 @@ public class AmazonS3StorageExportJobData extends StorageExportJobData {
         dest.writeString(this.sseKmsKeyId);
         dest.writeString(this.signatureType);
         dest.writeString(this.endPoint);
+        dest.writeString(this.storageClass);
     }
 
     public AmazonS3StorageExportJobData(Parcel in) {
@@ -198,6 +215,7 @@ public class AmazonS3StorageExportJobData extends StorageExportJobData {
         this.sseKmsKeyId = in.readString();
         this.signatureType = in.readString();
         this.endPoint = in.readString();
+        this.storageClass = in.readString();
     }
 }
 

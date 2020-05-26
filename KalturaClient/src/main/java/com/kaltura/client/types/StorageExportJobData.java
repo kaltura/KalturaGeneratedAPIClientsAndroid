@@ -47,10 +47,14 @@ public class StorageExportJobData extends StorageJobData {
 	public interface Tokenizer extends StorageJobData.Tokenizer {
 		String force();
 		String createLink();
+		String assetId();
+		String externalUrl();
 	}
 
 	private Boolean force;
 	private Boolean createLink;
+	private String assetId;
+	private String externalUrl;
 
 	// force:
 	public Boolean getForce(){
@@ -76,6 +80,30 @@ public class StorageExportJobData extends StorageJobData {
 		setToken("createLink", multirequestToken);
 	}
 
+	// assetId:
+	public String getAssetId(){
+		return this.assetId;
+	}
+	public void setAssetId(String assetId){
+		this.assetId = assetId;
+	}
+
+	public void assetId(String multirequestToken){
+		setToken("assetId", multirequestToken);
+	}
+
+	// externalUrl:
+	public String getExternalUrl(){
+		return this.externalUrl;
+	}
+	public void setExternalUrl(String externalUrl){
+		this.externalUrl = externalUrl;
+	}
+
+	public void externalUrl(String multirequestToken){
+		setToken("externalUrl", multirequestToken);
+	}
+
 
 	public StorageExportJobData() {
 		super();
@@ -89,6 +117,8 @@ public class StorageExportJobData extends StorageJobData {
 		// set members values:
 		force = GsonParser.parseBoolean(jsonObject.get("force"));
 		createLink = GsonParser.parseBoolean(jsonObject.get("createLink"));
+		assetId = GsonParser.parseString(jsonObject.get("assetId"));
+		externalUrl = GsonParser.parseString(jsonObject.get("externalUrl"));
 
 	}
 
@@ -97,6 +127,8 @@ public class StorageExportJobData extends StorageJobData {
 		kparams.add("objectType", "KalturaStorageExportJobData");
 		kparams.add("force", this.force);
 		kparams.add("createLink", this.createLink);
+		kparams.add("assetId", this.assetId);
+		kparams.add("externalUrl", this.externalUrl);
 		return kparams;
 	}
 
@@ -118,12 +150,16 @@ public class StorageExportJobData extends StorageJobData {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.force);
         dest.writeValue(this.createLink);
+        dest.writeString(this.assetId);
+        dest.writeString(this.externalUrl);
     }
 
     public StorageExportJobData(Parcel in) {
         super(in);
         this.force = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.createLink = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.assetId = in.readString();
+        this.externalUrl = in.readString();
     }
 }
 
