@@ -42,12 +42,11 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(AlignmentVendorTaskData.Tokenizer.class)
-public class AlignmentVendorTaskData extends VendorTaskData {
+public class AlignmentVendorTaskData extends VendorTaskDataCaptionAsset {
 	
-	public interface Tokenizer extends VendorTaskData.Tokenizer {
+	public interface Tokenizer extends VendorTaskDataCaptionAsset.Tokenizer {
 		String textTranscriptAssetId();
 		String jsonTranscriptAssetId();
-		String captionAssetId();
 	}
 
 	/**
@@ -60,11 +59,6 @@ public class AlignmentVendorTaskData extends VendorTaskData {
 	  alignment task processing is done
 	 */
 	private String jsonTranscriptAssetId;
-	/**
-	 * Optional - The id of the caption asset object the vendor should update once
-	  alignment task processing is done
-	 */
-	private String captionAssetId;
 
 	// textTranscriptAssetId:
 	public String getTextTranscriptAssetId(){
@@ -90,18 +84,6 @@ public class AlignmentVendorTaskData extends VendorTaskData {
 		setToken("jsonTranscriptAssetId", multirequestToken);
 	}
 
-	// captionAssetId:
-	public String getCaptionAssetId(){
-		return this.captionAssetId;
-	}
-	public void setCaptionAssetId(String captionAssetId){
-		this.captionAssetId = captionAssetId;
-	}
-
-	public void captionAssetId(String multirequestToken){
-		setToken("captionAssetId", multirequestToken);
-	}
-
 
 	public AlignmentVendorTaskData() {
 		super();
@@ -115,7 +97,6 @@ public class AlignmentVendorTaskData extends VendorTaskData {
 		// set members values:
 		textTranscriptAssetId = GsonParser.parseString(jsonObject.get("textTranscriptAssetId"));
 		jsonTranscriptAssetId = GsonParser.parseString(jsonObject.get("jsonTranscriptAssetId"));
-		captionAssetId = GsonParser.parseString(jsonObject.get("captionAssetId"));
 
 	}
 
@@ -124,7 +105,6 @@ public class AlignmentVendorTaskData extends VendorTaskData {
 		kparams.add("objectType", "KalturaAlignmentVendorTaskData");
 		kparams.add("textTranscriptAssetId", this.textTranscriptAssetId);
 		kparams.add("jsonTranscriptAssetId", this.jsonTranscriptAssetId);
-		kparams.add("captionAssetId", this.captionAssetId);
 		return kparams;
 	}
 
@@ -146,14 +126,12 @@ public class AlignmentVendorTaskData extends VendorTaskData {
         super.writeToParcel(dest, flags);
         dest.writeString(this.textTranscriptAssetId);
         dest.writeString(this.jsonTranscriptAssetId);
-        dest.writeString(this.captionAssetId);
     }
 
     public AlignmentVendorTaskData(Parcel in) {
         super(in);
         this.textTranscriptAssetId = in.readString();
         this.jsonTranscriptAssetId = in.readString();
-        this.captionAssetId = in.readString();
     }
 }
 
