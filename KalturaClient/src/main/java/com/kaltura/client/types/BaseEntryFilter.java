@@ -47,6 +47,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 	public interface Tokenizer extends BaseEntryBaseFilter.Tokenizer {
 		String freeText();
 		String excludedFreeTextGroups();
+		String descriptionLike();
 		String isRoot();
 		String categoriesFullNameIn();
 		String categoryAncestorIdIn();
@@ -55,6 +56,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 
 	private String freeText;
 	private String excludedFreeTextGroups;
+	private String descriptionLike;
 	private Boolean isRoot;
 	private String categoriesFullNameIn;
 	/**
@@ -88,6 +90,18 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 
 	public void excludedFreeTextGroups(String multirequestToken){
 		setToken("excludedFreeTextGroups", multirequestToken);
+	}
+
+	// descriptionLike:
+	public String getDescriptionLike(){
+		return this.descriptionLike;
+	}
+	public void setDescriptionLike(String descriptionLike){
+		this.descriptionLike = descriptionLike;
+	}
+
+	public void descriptionLike(String multirequestToken){
+		setToken("descriptionLike", multirequestToken);
 	}
 
 	// isRoot:
@@ -151,6 +165,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 		// set members values:
 		freeText = GsonParser.parseString(jsonObject.get("freeText"));
 		excludedFreeTextGroups = GsonParser.parseString(jsonObject.get("excludedFreeTextGroups"));
+		descriptionLike = GsonParser.parseString(jsonObject.get("descriptionLike"));
 		isRoot = GsonParser.parseBoolean(jsonObject.get("isRoot"));
 		categoriesFullNameIn = GsonParser.parseString(jsonObject.get("categoriesFullNameIn"));
 		categoryAncestorIdIn = GsonParser.parseString(jsonObject.get("categoryAncestorIdIn"));
@@ -163,6 +178,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 		kparams.add("objectType", "KalturaBaseEntryFilter");
 		kparams.add("freeText", this.freeText);
 		kparams.add("excludedFreeTextGroups", this.excludedFreeTextGroups);
+		kparams.add("descriptionLike", this.descriptionLike);
 		kparams.add("isRoot", this.isRoot);
 		kparams.add("categoriesFullNameIn", this.categoriesFullNameIn);
 		kparams.add("categoryAncestorIdIn", this.categoryAncestorIdIn);
@@ -188,6 +204,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
         super.writeToParcel(dest, flags);
         dest.writeString(this.freeText);
         dest.writeString(this.excludedFreeTextGroups);
+        dest.writeString(this.descriptionLike);
         dest.writeValue(this.isRoot);
         dest.writeString(this.categoriesFullNameIn);
         dest.writeString(this.categoryAncestorIdIn);
@@ -198,6 +215,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
         super(in);
         this.freeText = in.readString();
         this.excludedFreeTextGroups = in.readString();
+        this.descriptionLike = in.readString();
         this.isRoot = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.categoriesFullNameIn = in.readString();
         this.categoryAncestorIdIn = in.readString();
