@@ -81,6 +81,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String applicationVersionIn();
 		String nodeIdsIn();
 		String categoriesAncestorIdIn();
+		String hotspotIdIn();
 	}
 
 	/**
@@ -210,6 +211,10 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * filter by categories ancestor
 	 */
 	private String categoriesAncestorIdIn;
+	/**
+	 * filter by hotspot id
+	 */
+	private String hotspotIdIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -615,6 +620,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("categoriesAncestorIdIn", multirequestToken);
 	}
 
+	// hotspotIdIn:
+	public String getHotspotIdIn(){
+		return this.hotspotIdIn;
+	}
+	public void setHotspotIdIn(String hotspotIdIn){
+		this.hotspotIdIn = hotspotIdIn;
+	}
+
+	public void hotspotIdIn(String multirequestToken){
+		setToken("hotspotIdIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -660,6 +677,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		applicationVersionIn = GsonParser.parseString(jsonObject.get("applicationVersionIn"));
 		nodeIdsIn = GsonParser.parseString(jsonObject.get("nodeIdsIn"));
 		categoriesAncestorIdIn = GsonParser.parseString(jsonObject.get("categoriesAncestorIdIn"));
+		hotspotIdIn = GsonParser.parseString(jsonObject.get("hotspotIdIn"));
 
 	}
 
@@ -700,6 +718,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("applicationVersionIn", this.applicationVersionIn);
 		kparams.add("nodeIdsIn", this.nodeIdsIn);
 		kparams.add("categoriesAncestorIdIn", this.categoriesAncestorIdIn);
+		kparams.add("hotspotIdIn", this.hotspotIdIn);
 		return kparams;
 	}
 
@@ -753,6 +772,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.applicationVersionIn);
         dest.writeString(this.nodeIdsIn);
         dest.writeString(this.categoriesAncestorIdIn);
+        dest.writeString(this.hotspotIdIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -792,6 +812,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.applicationVersionIn = in.readString();
         this.nodeIdsIn = in.readString();
         this.categoriesAncestorIdIn = in.readString();
+        this.hotspotIdIn = in.readString();
     }
 }
 
