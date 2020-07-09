@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.EntryApplication;
 import com.kaltura.client.enums.EntryDisplayInSearchType;
 import com.kaltura.client.enums.EntryModerationStatus;
 import com.kaltura.client.enums.EntryReplacementStatus;
@@ -100,6 +101,8 @@ public class BaseEntry extends ObjectBase {
 		String capabilities();
 		String templateEntryId();
 		String displayInSearch();
+		String application();
+		String applicationVersion();
 	}
 
 	/**
@@ -288,6 +291,14 @@ public class BaseEntry extends ObjectBase {
 	 * should we display this entry in search
 	 */
 	private EntryDisplayInSearchType displayInSearch;
+	/**
+	 * Entry application
+	 */
+	private EntryApplication application;
+	/**
+	 * Entry application version
+	 */
+	private String applicationVersion;
 
 	// id:
 	public String getId(){
@@ -673,6 +684,30 @@ public class BaseEntry extends ObjectBase {
 		setToken("displayInSearch", multirequestToken);
 	}
 
+	// application:
+	public EntryApplication getApplication(){
+		return this.application;
+	}
+	public void setApplication(EntryApplication application){
+		this.application = application;
+	}
+
+	public void application(String multirequestToken){
+		setToken("application", multirequestToken);
+	}
+
+	// applicationVersion:
+	public String getApplicationVersion(){
+		return this.applicationVersion;
+	}
+	public void setApplicationVersion(String applicationVersion){
+		this.applicationVersion = applicationVersion;
+	}
+
+	public void applicationVersion(String multirequestToken){
+		setToken("applicationVersion", multirequestToken);
+	}
+
 
 	public BaseEntry() {
 		super();
@@ -729,6 +764,8 @@ public class BaseEntry extends ObjectBase {
 		capabilities = GsonParser.parseString(jsonObject.get("capabilities"));
 		templateEntryId = GsonParser.parseString(jsonObject.get("templateEntryId"));
 		displayInSearch = EntryDisplayInSearchType.get(GsonParser.parseInt(jsonObject.get("displayInSearch")));
+		application = EntryApplication.get(GsonParser.parseString(jsonObject.get("application")));
+		applicationVersion = GsonParser.parseString(jsonObject.get("applicationVersion"));
 
 	}
 
@@ -761,6 +798,8 @@ public class BaseEntry extends ObjectBase {
 		kparams.add("entitledUsersView", this.entitledUsersView);
 		kparams.add("templateEntryId", this.templateEntryId);
 		kparams.add("displayInSearch", this.displayInSearch);
+		kparams.add("application", this.application);
+		kparams.add("applicationVersion", this.applicationVersion);
 		return kparams;
 	}
 
@@ -830,6 +869,8 @@ public class BaseEntry extends ObjectBase {
         dest.writeString(this.capabilities);
         dest.writeString(this.templateEntryId);
         dest.writeInt(this.displayInSearch == null ? -1 : this.displayInSearch.ordinal());
+        dest.writeInt(this.application == null ? -1 : this.application.ordinal());
+        dest.writeString(this.applicationVersion);
     }
 
     public BaseEntry(Parcel in) {
@@ -889,6 +930,9 @@ public class BaseEntry extends ObjectBase {
         this.templateEntryId = in.readString();
         int tmpDisplayInSearch = in.readInt();
         this.displayInSearch = tmpDisplayInSearch == -1 ? null : EntryDisplayInSearchType.values()[tmpDisplayInSearch];
+        int tmpApplication = in.readInt();
+        this.application = tmpApplication == -1 ? null : EntryApplication.values()[tmpApplication];
+        this.applicationVersion = in.readString();
     }
 }
 

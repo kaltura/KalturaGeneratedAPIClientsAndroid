@@ -54,6 +54,7 @@ public class MediaEntry extends PlayableEntry {
 		String mediaType();
 		String conversionQuality();
 		String sourceType();
+		String sourceVersion();
 		String searchProviderType();
 		String searchProviderId();
 		String creditUserName();
@@ -77,6 +78,10 @@ public class MediaEntry extends PlayableEntry {
 	 * The source type of the entry
 	 */
 	private SourceType sourceType;
+	/**
+	 * The source version of the entry
+	 */
+	private String sourceVersion;
 	/**
 	 * The search provider type used to import this entry
 	 */
@@ -149,6 +154,18 @@ public class MediaEntry extends PlayableEntry {
 
 	public void sourceType(String multirequestToken){
 		setToken("sourceType", multirequestToken);
+	}
+
+	// sourceVersion:
+	public String getSourceVersion(){
+		return this.sourceVersion;
+	}
+	public void setSourceVersion(String sourceVersion){
+		this.sourceVersion = sourceVersion;
+	}
+
+	public void sourceVersion(String multirequestToken){
+		setToken("sourceVersion", multirequestToken);
 	}
 
 	// searchProviderType:
@@ -237,6 +254,7 @@ public class MediaEntry extends PlayableEntry {
 		mediaType = MediaType.get(GsonParser.parseInt(jsonObject.get("mediaType")));
 		conversionQuality = GsonParser.parseString(jsonObject.get("conversionQuality"));
 		sourceType = SourceType.get(GsonParser.parseString(jsonObject.get("sourceType")));
+		sourceVersion = GsonParser.parseString(jsonObject.get("sourceVersion"));
 		searchProviderType = SearchProviderType.get(GsonParser.parseInt(jsonObject.get("searchProviderType")));
 		searchProviderId = GsonParser.parseString(jsonObject.get("searchProviderId"));
 		creditUserName = GsonParser.parseString(jsonObject.get("creditUserName"));
@@ -255,6 +273,7 @@ public class MediaEntry extends PlayableEntry {
 		kparams.add("mediaType", this.mediaType);
 		kparams.add("conversionQuality", this.conversionQuality);
 		kparams.add("sourceType", this.sourceType);
+		kparams.add("sourceVersion", this.sourceVersion);
 		kparams.add("searchProviderType", this.searchProviderType);
 		kparams.add("searchProviderId", this.searchProviderId);
 		kparams.add("creditUserName", this.creditUserName);
@@ -282,6 +301,7 @@ public class MediaEntry extends PlayableEntry {
         dest.writeInt(this.mediaType == null ? -1 : this.mediaType.ordinal());
         dest.writeString(this.conversionQuality);
         dest.writeInt(this.sourceType == null ? -1 : this.sourceType.ordinal());
+        dest.writeString(this.sourceVersion);
         dest.writeInt(this.searchProviderType == null ? -1 : this.searchProviderType.ordinal());
         dest.writeString(this.searchProviderId);
         dest.writeString(this.creditUserName);
@@ -305,6 +325,7 @@ public class MediaEntry extends PlayableEntry {
         this.conversionQuality = in.readString();
         int tmpSourceType = in.readInt();
         this.sourceType = tmpSourceType == -1 ? null : SourceType.values()[tmpSourceType];
+        this.sourceVersion = in.readString();
         int tmpSearchProviderType = in.readInt();
         this.searchProviderType = tmpSearchProviderType == -1 ? null : SearchProviderType.values()[tmpSearchProviderType];
         this.searchProviderId = in.readString();
