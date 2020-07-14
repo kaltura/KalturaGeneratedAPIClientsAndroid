@@ -55,6 +55,7 @@ public class HttpNotificationDispatchJobData extends EventNotificationDispatchJo
 	public interface Tokenizer extends EventNotificationDispatchJobData.Tokenizer {
 		String url();
 		String method();
+		String contentType();
 		String data();
 		String timeout();
 		String connectTimeout();
@@ -82,6 +83,10 @@ public class HttpNotificationDispatchJobData extends EventNotificationDispatchJo
 	 * Request method.
 	 */
 	private HttpNotificationMethod method;
+	/**
+	 * The type of the data to send.
+	 */
+	private String contentType;
 	/**
 	 * Data to send.
 	 */
@@ -176,6 +181,18 @@ public class HttpNotificationDispatchJobData extends EventNotificationDispatchJo
 
 	public void method(String multirequestToken){
 		setToken("method", multirequestToken);
+	}
+
+	// contentType:
+	public String getContentType(){
+		return this.contentType;
+	}
+	public void setContentType(String contentType){
+		this.contentType = contentType;
+	}
+
+	public void contentType(String multirequestToken){
+		setToken("contentType", multirequestToken);
 	}
 
 	// data:
@@ -391,6 +408,7 @@ public class HttpNotificationDispatchJobData extends EventNotificationDispatchJo
 		// set members values:
 		url = GsonParser.parseString(jsonObject.get("url"));
 		method = HttpNotificationMethod.get(GsonParser.parseInt(jsonObject.get("method")));
+		contentType = GsonParser.parseString(jsonObject.get("contentType"));
 		data = GsonParser.parseString(jsonObject.get("data"));
 		timeout = GsonParser.parseInt(jsonObject.get("timeout"));
 		connectTimeout = GsonParser.parseInt(jsonObject.get("connectTimeout"));
@@ -416,6 +434,7 @@ public class HttpNotificationDispatchJobData extends EventNotificationDispatchJo
 		kparams.add("objectType", "KalturaHttpNotificationDispatchJobData");
 		kparams.add("url", this.url);
 		kparams.add("method", this.method);
+		kparams.add("contentType", this.contentType);
 		kparams.add("data", this.data);
 		kparams.add("timeout", this.timeout);
 		kparams.add("connectTimeout", this.connectTimeout);
@@ -454,6 +473,7 @@ public class HttpNotificationDispatchJobData extends EventNotificationDispatchJo
         super.writeToParcel(dest, flags);
         dest.writeString(this.url);
         dest.writeInt(this.method == null ? -1 : this.method.ordinal());
+        dest.writeString(this.contentType);
         dest.writeString(this.data);
         dest.writeValue(this.timeout);
         dest.writeValue(this.connectTimeout);
@@ -483,6 +503,7 @@ public class HttpNotificationDispatchJobData extends EventNotificationDispatchJo
         this.url = in.readString();
         int tmpMethod = in.readInt();
         this.method = tmpMethod == -1 ? null : HttpNotificationMethod.values()[tmpMethod];
+        this.contentType = in.readString();
         this.data = in.readString();
         this.timeout = (Integer)in.readValue(Integer.class.getClassLoader());
         this.connectTimeout = (Integer)in.readValue(Integer.class.getClassLoader());

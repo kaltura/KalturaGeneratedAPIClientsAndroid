@@ -172,6 +172,14 @@ public abstract class CuePoint extends ObjectBase {
 	public String getUserId(){
 		return this.userId;
 	}
+	public void setUserId(String userId){
+		this.userId = userId;
+	}
+
+	public void userId(String multirequestToken){
+		setToken("userId", multirequestToken);
+	}
+
 	// partnerData:
 	public String getPartnerData(){
 		return this.partnerData;
@@ -280,6 +288,7 @@ public abstract class CuePoint extends ObjectBase {
 		kparams.add("triggeredAt", this.triggeredAt);
 		kparams.add("tags", this.tags);
 		kparams.add("startTime", this.startTime);
+		kparams.add("userId", this.userId);
 		kparams.add("partnerData", this.partnerData);
 		kparams.add("partnerSortValue", this.partnerSortValue);
 		kparams.add("forceStop", this.forceStop);
