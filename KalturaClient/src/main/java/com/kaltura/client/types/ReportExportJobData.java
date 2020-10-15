@@ -51,11 +51,15 @@ public class ReportExportJobData extends JobData {
 		String recipientEmail();
 		RequestBuilder.ListTokenizer<ReportExportItem.Tokenizer> reportItems();
 		String filePaths();
+		String reportsGroup();
+		RequestBuilder.ListTokenizer<ReportExportFile.Tokenizer> files();
 	}
 
 	private String recipientEmail;
 	private List<ReportExportItem> reportItems;
 	private String filePaths;
+	private String reportsGroup;
+	private List<ReportExportFile> files;
 
 	// recipientEmail:
 	public String getRecipientEmail(){
@@ -89,6 +93,26 @@ public class ReportExportJobData extends JobData {
 		setToken("filePaths", multirequestToken);
 	}
 
+	// reportsGroup:
+	public String getReportsGroup(){
+		return this.reportsGroup;
+	}
+	public void setReportsGroup(String reportsGroup){
+		this.reportsGroup = reportsGroup;
+	}
+
+	public void reportsGroup(String multirequestToken){
+		setToken("reportsGroup", multirequestToken);
+	}
+
+	// files:
+	public List<ReportExportFile> getFiles(){
+		return this.files;
+	}
+	public void setFiles(List<ReportExportFile> files){
+		this.files = files;
+	}
+
 
 	public ReportExportJobData() {
 		super();
@@ -103,6 +127,8 @@ public class ReportExportJobData extends JobData {
 		recipientEmail = GsonParser.parseString(jsonObject.get("recipientEmail"));
 		reportItems = GsonParser.parseArray(jsonObject.getAsJsonArray("reportItems"), ReportExportItem.class);
 		filePaths = GsonParser.parseString(jsonObject.get("filePaths"));
+		reportsGroup = GsonParser.parseString(jsonObject.get("reportsGroup"));
+		files = GsonParser.parseArray(jsonObject.getAsJsonArray("files"), ReportExportFile.class);
 
 	}
 
@@ -112,6 +138,8 @@ public class ReportExportJobData extends JobData {
 		kparams.add("recipientEmail", this.recipientEmail);
 		kparams.add("reportItems", this.reportItems);
 		kparams.add("filePaths", this.filePaths);
+		kparams.add("reportsGroup", this.reportsGroup);
+		kparams.add("files", this.files);
 		return kparams;
 	}
 
@@ -139,6 +167,13 @@ public class ReportExportJobData extends JobData {
             dest.writeInt(-1);
         }
         dest.writeString(this.filePaths);
+        dest.writeString(this.reportsGroup);
+        if(this.files != null) {
+            dest.writeInt(this.files.size());
+            dest.writeList(this.files);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public ReportExportJobData(Parcel in) {
@@ -150,6 +185,12 @@ public class ReportExportJobData extends JobData {
             in.readList(this.reportItems, ReportExportItem.class.getClassLoader());
         }
         this.filePaths = in.readString();
+        this.reportsGroup = in.readString();
+        int filesSize = in.readInt();
+        if( filesSize > -1) {
+            this.files = new ArrayList<>();
+            in.readList(this.files, ReportExportFile.class.getClassLoader());
+        }
     }
 }
 

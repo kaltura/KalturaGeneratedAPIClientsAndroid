@@ -64,6 +64,7 @@ public class StorageProfile extends ObjectBase {
 		String protocol();
 		String storageUrl();
 		String storageBaseDir();
+		String pathPrefix();
 		String storageUsername();
 		String storagePassword();
 		String storageFtpPassiveMode();
@@ -103,6 +104,7 @@ public class StorageProfile extends ObjectBase {
 	private StorageProfileProtocol protocol;
 	private String storageUrl;
 	private String storageBaseDir;
+	private String pathPrefix;
 	private String storageUsername;
 	private String storagePassword;
 	private Boolean storageFtpPassiveMode;
@@ -248,6 +250,18 @@ public class StorageProfile extends ObjectBase {
 
 	public void storageBaseDir(String multirequestToken){
 		setToken("storageBaseDir", multirequestToken);
+	}
+
+	// pathPrefix:
+	public String getPathPrefix(){
+		return this.pathPrefix;
+	}
+	public void setPathPrefix(String pathPrefix){
+		this.pathPrefix = pathPrefix;
+	}
+
+	public void pathPrefix(String multirequestToken){
+		setToken("pathPrefix", multirequestToken);
 	}
 
 	// storageUsername:
@@ -572,6 +586,7 @@ public class StorageProfile extends ObjectBase {
 		protocol = StorageProfileProtocol.get(GsonParser.parseString(jsonObject.get("protocol")));
 		storageUrl = GsonParser.parseString(jsonObject.get("storageUrl"));
 		storageBaseDir = GsonParser.parseString(jsonObject.get("storageBaseDir"));
+		pathPrefix = GsonParser.parseString(jsonObject.get("pathPrefix"));
 		storageUsername = GsonParser.parseString(jsonObject.get("storageUsername"));
 		storagePassword = GsonParser.parseString(jsonObject.get("storagePassword"));
 		storageFtpPassiveMode = GsonParser.parseBoolean(jsonObject.get("storageFtpPassiveMode"));
@@ -611,6 +626,7 @@ public class StorageProfile extends ObjectBase {
 		kparams.add("protocol", this.protocol);
 		kparams.add("storageUrl", this.storageUrl);
 		kparams.add("storageBaseDir", this.storageBaseDir);
+		kparams.add("pathPrefix", this.pathPrefix);
 		kparams.add("storageUsername", this.storageUsername);
 		kparams.add("storagePassword", this.storagePassword);
 		kparams.add("storageFtpPassiveMode", this.storageFtpPassiveMode);
@@ -667,6 +683,7 @@ public class StorageProfile extends ObjectBase {
         dest.writeInt(this.protocol == null ? -1 : this.protocol.ordinal());
         dest.writeString(this.storageUrl);
         dest.writeString(this.storageBaseDir);
+        dest.writeString(this.pathPrefix);
         dest.writeString(this.storageUsername);
         dest.writeString(this.storagePassword);
         dest.writeValue(this.storageFtpPassiveMode);
@@ -725,6 +742,7 @@ public class StorageProfile extends ObjectBase {
         this.protocol = tmpProtocol == -1 ? null : StorageProfileProtocol.values()[tmpProtocol];
         this.storageUrl = in.readString();
         this.storageBaseDir = in.readString();
+        this.pathPrefix = in.readString();
         this.storageUsername = in.readString();
         this.storagePassword = in.readString();
         this.storageFtpPassiveMode = (Boolean)in.readValue(Boolean.class.getClassLoader());

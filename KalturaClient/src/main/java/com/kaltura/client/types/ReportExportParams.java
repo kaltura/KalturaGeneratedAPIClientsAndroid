@@ -52,6 +52,7 @@ public class ReportExportParams extends ObjectBase {
 		String recipientEmail();
 		String timeZoneOffset();
 		RequestBuilder.ListTokenizer<ReportExportItem.Tokenizer> reportItems();
+		String reportsItemsGroup();
 	}
 
 	private String recipientEmail;
@@ -60,6 +61,7 @@ public class ReportExportParams extends ObjectBase {
 	 */
 	private Integer timeZoneOffset;
 	private List<ReportExportItem> reportItems;
+	private String reportsItemsGroup;
 
 	// recipientEmail:
 	public String getRecipientEmail(){
@@ -93,6 +95,18 @@ public class ReportExportParams extends ObjectBase {
 		this.reportItems = reportItems;
 	}
 
+	// reportsItemsGroup:
+	public String getReportsItemsGroup(){
+		return this.reportsItemsGroup;
+	}
+	public void setReportsItemsGroup(String reportsItemsGroup){
+		this.reportsItemsGroup = reportsItemsGroup;
+	}
+
+	public void reportsItemsGroup(String multirequestToken){
+		setToken("reportsItemsGroup", multirequestToken);
+	}
+
 
 	public ReportExportParams() {
 		super();
@@ -107,6 +121,7 @@ public class ReportExportParams extends ObjectBase {
 		recipientEmail = GsonParser.parseString(jsonObject.get("recipientEmail"));
 		timeZoneOffset = GsonParser.parseInt(jsonObject.get("timeZoneOffset"));
 		reportItems = GsonParser.parseArray(jsonObject.getAsJsonArray("reportItems"), ReportExportItem.class);
+		reportsItemsGroup = GsonParser.parseString(jsonObject.get("reportsItemsGroup"));
 
 	}
 
@@ -116,6 +131,7 @@ public class ReportExportParams extends ObjectBase {
 		kparams.add("recipientEmail", this.recipientEmail);
 		kparams.add("timeZoneOffset", this.timeZoneOffset);
 		kparams.add("reportItems", this.reportItems);
+		kparams.add("reportsItemsGroup", this.reportsItemsGroup);
 		return kparams;
 	}
 
@@ -143,6 +159,7 @@ public class ReportExportParams extends ObjectBase {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeString(this.reportsItemsGroup);
     }
 
     public ReportExportParams(Parcel in) {
@@ -154,6 +171,7 @@ public class ReportExportParams extends ObjectBase {
             this.reportItems = new ArrayList<>();
             in.readList(this.reportItems, ReportExportItem.class.getClassLoader());
         }
+        this.reportsItemsGroup = in.readString();
     }
 }
 
