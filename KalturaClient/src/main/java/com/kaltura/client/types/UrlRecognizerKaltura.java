@@ -41,71 +41,71 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(DeliveryProfileGenericHttp.Tokenizer.class)
-public class DeliveryProfileGenericHttp extends DeliveryProfileHttp {
+@MultiRequestBuilder.Tokenizer(UrlRecognizerKaltura.Tokenizer.class)
+public class UrlRecognizerKaltura extends UrlRecognizer {
 	
-	public interface Tokenizer extends DeliveryProfileHttp.Tokenizer {
-		String pattern();
+	public interface Tokenizer extends UrlRecognizer.Tokenizer {
+		String key();
 	}
 
-	private String pattern;
+	private String key;
 
-	// pattern:
-	public String getPattern(){
-		return this.pattern;
+	// key:
+	public String getKey(){
+		return this.key;
 	}
-	public void setPattern(String pattern){
-		this.pattern = pattern;
-	}
-
-	public void pattern(String multirequestToken){
-		setToken("pattern", multirequestToken);
+	public void setKey(String key){
+		this.key = key;
 	}
 
+	public void key(String multirequestToken){
+		setToken("key", multirequestToken);
+	}
 
-	public DeliveryProfileGenericHttp() {
+
+	public UrlRecognizerKaltura() {
 		super();
 	}
 
-	public DeliveryProfileGenericHttp(JsonObject jsonObject) throws APIException {
+	public UrlRecognizerKaltura(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		pattern = GsonParser.parseString(jsonObject.get("pattern"));
+		key = GsonParser.parseString(jsonObject.get("key"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaDeliveryProfileGenericHttp");
-		kparams.add("pattern", this.pattern);
+		kparams.add("objectType", "KalturaUrlRecognizerKaltura");
+		kparams.add("key", this.key);
 		return kparams;
 	}
 
 
-    public static final Creator<DeliveryProfileGenericHttp> CREATOR = new Creator<DeliveryProfileGenericHttp>() {
+    public static final Creator<UrlRecognizerKaltura> CREATOR = new Creator<UrlRecognizerKaltura>() {
         @Override
-        public DeliveryProfileGenericHttp createFromParcel(Parcel source) {
-            return new DeliveryProfileGenericHttp(source);
+        public UrlRecognizerKaltura createFromParcel(Parcel source) {
+            return new UrlRecognizerKaltura(source);
         }
 
         @Override
-        public DeliveryProfileGenericHttp[] newArray(int size) {
-            return new DeliveryProfileGenericHttp[size];
+        public UrlRecognizerKaltura[] newArray(int size) {
+            return new UrlRecognizerKaltura[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(this.pattern);
+        dest.writeString(this.key);
     }
 
-    public DeliveryProfileGenericHttp(Parcel in) {
+    public UrlRecognizerKaltura(Parcel in) {
         super(in);
-        this.pattern = in.readString();
+        this.key = in.readString();
     }
 }
 
