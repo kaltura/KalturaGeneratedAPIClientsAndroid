@@ -31,6 +31,7 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.types.ObjectBase;
+import com.kaltura.client.types.TypedArray;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 import com.kaltura.client.utils.request.RequestBuilder;
@@ -54,6 +55,7 @@ public class PlaybackContext extends ObjectBase {
 		RequestBuilder.ListTokenizer<FlavorAsset.Tokenizer> flavorAssets();
 		RequestBuilder.ListTokenizer<RuleAction.Tokenizer> actions();
 		RequestBuilder.ListTokenizer<AccessControlMessage.Tokenizer> messages();
+		TypedArray.Tokenizer bumperData();
 	}
 
 	private List<PlaybackSource> sources;
@@ -67,6 +69,7 @@ public class PlaybackContext extends ObjectBase {
 	 * Array of actions as received from the rules that invalidated
 	 */
 	private List<AccessControlMessage> messages;
+	private TypedArray bumperData;
 
 	// sources:
 	public List<PlaybackSource> getSources(){
@@ -108,6 +111,14 @@ public class PlaybackContext extends ObjectBase {
 		this.messages = messages;
 	}
 
+	// bumperData:
+	public TypedArray getBumperData(){
+		return this.bumperData;
+	}
+	public void setBumperData(TypedArray bumperData){
+		this.bumperData = bumperData;
+	}
+
 
 	public PlaybackContext() {
 		super();
@@ -124,6 +135,7 @@ public class PlaybackContext extends ObjectBase {
 		flavorAssets = GsonParser.parseArray(jsonObject.getAsJsonArray("flavorAssets"), FlavorAsset.class);
 		actions = GsonParser.parseArray(jsonObject.getAsJsonArray("actions"), RuleAction.class);
 		messages = GsonParser.parseArray(jsonObject.getAsJsonArray("messages"), AccessControlMessage.class);
+		bumperData = GsonParser.parseObject(jsonObject.getAsJsonObject("bumperData"), TypedArray.class);
 
 	}
 
@@ -135,6 +147,7 @@ public class PlaybackContext extends ObjectBase {
 		kparams.add("flavorAssets", this.flavorAssets);
 		kparams.add("actions", this.actions);
 		kparams.add("messages", this.messages);
+		kparams.add("bumperData", this.bumperData);
 		return kparams;
 	}
 
@@ -184,6 +197,7 @@ public class PlaybackContext extends ObjectBase {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeParcelable(this.bumperData, flags);
     }
 
     public PlaybackContext(Parcel in) {
@@ -213,6 +227,7 @@ public class PlaybackContext extends ObjectBase {
             this.messages = new ArrayList<>();
             in.readList(this.messages, AccessControlMessage.class.getClassLoader());
         }
+        this.bumperData = in.readParcelable(TypedArray.class.getClassLoader());
     }
 }
 
