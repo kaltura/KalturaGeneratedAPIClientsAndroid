@@ -8,7 +8,7 @@
 // to do with audio, video, and animation what Wiki platfroms allow them to do with
 // text.
 //
-// Copyright (C) 2006-2020  Kaltura Inc.
+// Copyright (C) 2006-2021  Kaltura Inc.
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU Affero General Public License as
@@ -82,6 +82,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String nodeIdsIn();
 		String categoriesAncestorIdIn();
 		String hotspotIdIn();
+		String crmIdIn();
 	}
 
 	/**
@@ -215,6 +216,10 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * filter by hotspot id
 	 */
 	private String hotspotIdIn;
+	/**
+	 * filter by crm id
+	 */
+	private String crmIdIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -632,6 +637,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("hotspotIdIn", multirequestToken);
 	}
 
+	// crmIdIn:
+	public String getCrmIdIn(){
+		return this.crmIdIn;
+	}
+	public void setCrmIdIn(String crmIdIn){
+		this.crmIdIn = crmIdIn;
+	}
+
+	public void crmIdIn(String multirequestToken){
+		setToken("crmIdIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -678,6 +695,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		nodeIdsIn = GsonParser.parseString(jsonObject.get("nodeIdsIn"));
 		categoriesAncestorIdIn = GsonParser.parseString(jsonObject.get("categoriesAncestorIdIn"));
 		hotspotIdIn = GsonParser.parseString(jsonObject.get("hotspotIdIn"));
+		crmIdIn = GsonParser.parseString(jsonObject.get("crmIdIn"));
 
 	}
 
@@ -719,6 +737,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("nodeIdsIn", this.nodeIdsIn);
 		kparams.add("categoriesAncestorIdIn", this.categoriesAncestorIdIn);
 		kparams.add("hotspotIdIn", this.hotspotIdIn);
+		kparams.add("crmIdIn", this.crmIdIn);
 		return kparams;
 	}
 
@@ -773,6 +792,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.nodeIdsIn);
         dest.writeString(this.categoriesAncestorIdIn);
         dest.writeString(this.hotspotIdIn);
+        dest.writeString(this.crmIdIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -813,6 +833,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.nodeIdsIn = in.readString();
         this.categoriesAncestorIdIn = in.readString();
         this.hotspotIdIn = in.readString();
+        this.crmIdIn = in.readString();
     }
 }
 
