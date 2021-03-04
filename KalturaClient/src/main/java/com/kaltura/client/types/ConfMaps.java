@@ -59,6 +59,7 @@ public class ConfMaps extends ObjectBase {
 		String sourceLocation();
 		String remarks();
 		String status();
+		String changeDescription();
 	}
 
 	/**
@@ -90,6 +91,7 @@ public class ConfMaps extends ObjectBase {
 	 * map status
 	 */
 	private ConfMapsStatus status;
+	private String changeDescription;
 
 	// name:
 	public String getName(){
@@ -199,6 +201,18 @@ public class ConfMaps extends ObjectBase {
 		setToken("status", multirequestToken);
 	}
 
+	// changeDescription:
+	public String getChangeDescription(){
+		return this.changeDescription;
+	}
+	public void setChangeDescription(String changeDescription){
+		this.changeDescription = changeDescription;
+	}
+
+	public void changeDescription(String multirequestToken){
+		setToken("changeDescription", multirequestToken);
+	}
+
 
 	public ConfMaps() {
 		super();
@@ -221,6 +235,7 @@ public class ConfMaps extends ObjectBase {
 		sourceLocation = ConfMapsSourceLocation.get(GsonParser.parseString(jsonObject.get("sourceLocation")));
 		remarks = GsonParser.parseString(jsonObject.get("remarks"));
 		status = ConfMapsStatus.get(GsonParser.parseInt(jsonObject.get("status")));
+		changeDescription = GsonParser.parseString(jsonObject.get("changeDescription"));
 
 	}
 
@@ -235,6 +250,7 @@ public class ConfMaps extends ObjectBase {
 		kparams.add("sourceLocation", this.sourceLocation);
 		kparams.add("remarks", this.remarks);
 		kparams.add("status", this.status);
+		kparams.add("changeDescription", this.changeDescription);
 		return kparams;
 	}
 
@@ -265,6 +281,7 @@ public class ConfMaps extends ObjectBase {
         dest.writeInt(this.sourceLocation == null ? -1 : this.sourceLocation.ordinal());
         dest.writeString(this.remarks);
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
+        dest.writeString(this.changeDescription);
     }
 
     public ConfMaps(Parcel in) {
@@ -282,6 +299,7 @@ public class ConfMaps extends ObjectBase {
         this.remarks = in.readString();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : ConfMapsStatus.values()[tmpStatus];
+        this.changeDescription = in.readString();
     }
 }
 

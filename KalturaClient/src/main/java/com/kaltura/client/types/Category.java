@@ -89,6 +89,7 @@ public class Category extends ObjectBase {
 		String pendingEntriesCount();
 		String isAggregationCategory();
 		String aggregationCategories();
+		String adminTags();
 	}
 
 	/**
@@ -228,6 +229,7 @@ public class Category extends ObjectBase {
 	 * List of aggregation channels the category belongs to
 	 */
 	private String aggregationCategories;
+	private String adminTags;
 
 	// id:
 	public Integer getId(){
@@ -513,6 +515,18 @@ public class Category extends ObjectBase {
 		setToken("aggregationCategories", multirequestToken);
 	}
 
+	// adminTags:
+	public String getAdminTags(){
+		return this.adminTags;
+	}
+	public void setAdminTags(String adminTags){
+		this.adminTags = adminTags;
+	}
+
+	public void adminTags(String multirequestToken){
+		setToken("adminTags", multirequestToken);
+	}
+
 
 	public Category() {
 		super();
@@ -559,6 +573,7 @@ public class Category extends ObjectBase {
 		pendingEntriesCount = GsonParser.parseInt(jsonObject.get("pendingEntriesCount"));
 		isAggregationCategory = GsonParser.parseBoolean(jsonObject.get("isAggregationCategory"));
 		aggregationCategories = GsonParser.parseString(jsonObject.get("aggregationCategories"));
+		adminTags = GsonParser.parseString(jsonObject.get("adminTags"));
 
 	}
 
@@ -583,6 +598,7 @@ public class Category extends ObjectBase {
 		kparams.add("moderation", this.moderation);
 		kparams.add("isAggregationCategory", this.isAggregationCategory);
 		kparams.add("aggregationCategories", this.aggregationCategories);
+		kparams.add("adminTags", this.adminTags);
 		return kparams;
 	}
 
@@ -637,6 +653,7 @@ public class Category extends ObjectBase {
         dest.writeValue(this.pendingEntriesCount);
         dest.writeValue(this.isAggregationCategory);
         dest.writeString(this.aggregationCategories);
+        dest.writeString(this.adminTags);
     }
 
     public Category(Parcel in) {
@@ -684,6 +701,7 @@ public class Category extends ObjectBase {
         this.pendingEntriesCount = (Integer)in.readValue(Integer.class.getClassLoader());
         this.isAggregationCategory = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.aggregationCategories = in.readString();
+        this.adminTags = in.readString();
     }
 }
 
