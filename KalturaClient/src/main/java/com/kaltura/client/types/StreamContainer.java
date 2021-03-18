@@ -46,6 +46,7 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class StreamContainer extends ObjectBase {
 	
 	public interface Tokenizer extends ObjectBase.Tokenizer {
+		String id();
 		String type();
 		String trackIndex();
 		String language();
@@ -54,12 +55,25 @@ public class StreamContainer extends ObjectBase {
 		String channelLayout();
 	}
 
+	private String id;
 	private String type;
 	private Integer trackIndex;
 	private String language;
 	private Integer channelIndex;
 	private String label;
 	private String channelLayout;
+
+	// id:
+	public String getId(){
+		return this.id;
+	}
+	public void setId(String id){
+		this.id = id;
+	}
+
+	public void id(String multirequestToken){
+		setToken("id", multirequestToken);
+	}
 
 	// type:
 	public String getType(){
@@ -144,6 +158,7 @@ public class StreamContainer extends ObjectBase {
 		if(jsonObject == null) return;
 
 		// set members values:
+		id = GsonParser.parseString(jsonObject.get("id"));
 		type = GsonParser.parseString(jsonObject.get("type"));
 		trackIndex = GsonParser.parseInt(jsonObject.get("trackIndex"));
 		language = GsonParser.parseString(jsonObject.get("language"));
@@ -156,6 +171,7 @@ public class StreamContainer extends ObjectBase {
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaStreamContainer");
+		kparams.add("id", this.id);
 		kparams.add("type", this.type);
 		kparams.add("trackIndex", this.trackIndex);
 		kparams.add("language", this.language);
@@ -181,6 +197,7 @@ public class StreamContainer extends ObjectBase {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
+        dest.writeString(this.id);
         dest.writeString(this.type);
         dest.writeValue(this.trackIndex);
         dest.writeString(this.language);
@@ -191,6 +208,7 @@ public class StreamContainer extends ObjectBase {
 
     public StreamContainer(Parcel in) {
         super(in);
+        this.id = in.readString();
         this.type = in.readString();
         this.trackIndex = (Integer)in.readValue(Integer.class.getClassLoader());
         this.language = in.readString();
