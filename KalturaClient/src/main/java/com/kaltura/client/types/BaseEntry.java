@@ -5,7 +5,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -103,6 +103,7 @@ public class BaseEntry extends ObjectBase {
 		String displayInSearch();
 		String application();
 		String applicationVersion();
+		String blockAutoTranscript();
 	}
 
 	/**
@@ -299,6 +300,10 @@ public class BaseEntry extends ObjectBase {
 	 * Entry application version
 	 */
 	private String applicationVersion;
+	/**
+	 * Block auto transcript on Entry
+	 */
+	private Boolean blockAutoTranscript;
 
 	// id:
 	public String getId(){
@@ -708,6 +713,18 @@ public class BaseEntry extends ObjectBase {
 		setToken("applicationVersion", multirequestToken);
 	}
 
+	// blockAutoTranscript:
+	public Boolean getBlockAutoTranscript(){
+		return this.blockAutoTranscript;
+	}
+	public void setBlockAutoTranscript(Boolean blockAutoTranscript){
+		this.blockAutoTranscript = blockAutoTranscript;
+	}
+
+	public void blockAutoTranscript(String multirequestToken){
+		setToken("blockAutoTranscript", multirequestToken);
+	}
+
 
 	public BaseEntry() {
 		super();
@@ -766,6 +783,7 @@ public class BaseEntry extends ObjectBase {
 		displayInSearch = EntryDisplayInSearchType.get(GsonParser.parseInt(jsonObject.get("displayInSearch")));
 		application = EntryApplication.get(GsonParser.parseString(jsonObject.get("application")));
 		applicationVersion = GsonParser.parseString(jsonObject.get("applicationVersion"));
+		blockAutoTranscript = GsonParser.parseBoolean(jsonObject.get("blockAutoTranscript"));
 
 	}
 
@@ -800,6 +818,7 @@ public class BaseEntry extends ObjectBase {
 		kparams.add("displayInSearch", this.displayInSearch);
 		kparams.add("application", this.application);
 		kparams.add("applicationVersion", this.applicationVersion);
+		kparams.add("blockAutoTranscript", this.blockAutoTranscript);
 		return kparams;
 	}
 
@@ -871,6 +890,7 @@ public class BaseEntry extends ObjectBase {
         dest.writeInt(this.displayInSearch == null ? -1 : this.displayInSearch.ordinal());
         dest.writeInt(this.application == null ? -1 : this.application.ordinal());
         dest.writeString(this.applicationVersion);
+        dest.writeValue(this.blockAutoTranscript);
     }
 
     public BaseEntry(Parcel in) {
@@ -933,6 +953,7 @@ public class BaseEntry extends ObjectBase {
         int tmpApplication = in.readInt();
         this.application = tmpApplication == -1 ? null : EntryApplication.values()[tmpApplication];
         this.applicationVersion = in.readString();
+        this.blockAutoTranscript = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

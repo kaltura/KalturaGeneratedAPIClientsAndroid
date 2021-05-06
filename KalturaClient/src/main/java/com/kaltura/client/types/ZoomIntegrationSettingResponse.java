@@ -5,7 +5,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -30,9 +30,11 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -42,59 +44,71 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(TypedArray.Tokenizer.class)
-public abstract class TypedArray extends ObjectBase {
+@MultiRequestBuilder.Tokenizer(ZoomIntegrationSettingResponse.Tokenizer.class)
+public class ZoomIntegrationSettingResponse extends ListResponse {
 	
-	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String count();
+	public interface Tokenizer extends ListResponse.Tokenizer {
+		RequestBuilder.ListTokenizer<ZoomIntegrationSetting.Tokenizer> objects();
 	}
 
-	private Integer count;
+	private List<ZoomIntegrationSetting> objects;
 
-	// count:
-	public Integer getCount(){
-		return this.count;
-	}
-	public void setCount(Integer count){
-		this.count = count;
+	// objects:
+	public List<ZoomIntegrationSetting> getObjects(){
+		return this.objects;
 	}
 
-	public void count(String multirequestToken){
-		setToken("count", multirequestToken);
-	}
-
-
-	public TypedArray() {
+	public ZoomIntegrationSettingResponse() {
 		super();
 	}
 
-	public TypedArray(JsonObject jsonObject) throws APIException {
+	public ZoomIntegrationSettingResponse(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		count = GsonParser.parseInt(jsonObject.get("count"));
+		objects = GsonParser.parseArray(jsonObject.getAsJsonArray("objects"), ZoomIntegrationSetting.class);
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaTypedArray");
-		kparams.add("count", this.count);
+		kparams.add("objectType", "KalturaZoomIntegrationSettingResponse");
 		return kparams;
 	}
 
 
+    public static final Creator<ZoomIntegrationSettingResponse> CREATOR = new Creator<ZoomIntegrationSettingResponse>() {
+        @Override
+        public ZoomIntegrationSettingResponse createFromParcel(Parcel source) {
+            return new ZoomIntegrationSettingResponse(source);
+        }
+
+        @Override
+        public ZoomIntegrationSettingResponse[] newArray(int size) {
+            return new ZoomIntegrationSettingResponse[size];
+        }
+    };
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.count);
+        if(this.objects != null) {
+            dest.writeInt(this.objects.size());
+            dest.writeList(this.objects);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
-    public TypedArray(Parcel in) {
+    public ZoomIntegrationSettingResponse(Parcel in) {
         super(in);
-        this.count = (Integer)in.readValue(Integer.class.getClassLoader());
+        int objectsSize = in.readInt();
+        if( objectsSize > -1) {
+            this.objects = new ArrayList<>();
+            in.readList(this.objects, ZoomIntegrationSetting.class.getClassLoader());
+        }
     }
 }
 

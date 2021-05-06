@@ -5,7 +5,7 @@
 //                          |_|\_\__,_|_|\__|\_,_|_| \__,_|
 //
 // This file is part of the Kaltura Collaborative Media Suite which allows users
-// to do with audio, video, and animation what Wiki platfroms allow them to do with
+// to do with audio, video, and animation what Wiki platforms allow them to do with
 // text.
 //
 // Copyright (C) 2006-2021  Kaltura Inc.
@@ -31,6 +31,7 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.CaptionAssetStatus;
+import com.kaltura.client.enums.CaptionSource;
 import com.kaltura.client.enums.CaptionType;
 import com.kaltura.client.enums.Language;
 import com.kaltura.client.enums.LanguageCode;
@@ -55,6 +56,7 @@ public class CaptionAsset extends Asset {
 		String isDefault();
 		String label();
 		String format();
+		String source();
 		String status();
 		String parentId();
 		String accuracy();
@@ -86,6 +88,10 @@ public class CaptionAsset extends Asset {
 	 * The caption format
 	 */
 	private CaptionType format;
+	/**
+	 * The source of the asset
+	 */
+	private CaptionSource source;
 	/**
 	 * The status of the asset
 	 */
@@ -171,6 +177,18 @@ public class CaptionAsset extends Asset {
 		setToken("format", multirequestToken);
 	}
 
+	// source:
+	public CaptionSource getSource(){
+		return this.source;
+	}
+	public void setSource(CaptionSource source){
+		this.source = source;
+	}
+
+	public void source(String multirequestToken){
+		setToken("source", multirequestToken);
+	}
+
 	// status:
 	public CaptionAssetStatus getStatus(){
 		return this.status;
@@ -240,6 +258,7 @@ public class CaptionAsset extends Asset {
 		isDefault = GsonParser.parseBoolean(jsonObject.get("isDefault"));
 		label = GsonParser.parseString(jsonObject.get("label"));
 		format = CaptionType.get(GsonParser.parseString(jsonObject.get("format")));
+		source = CaptionSource.get(GsonParser.parseString(jsonObject.get("source")));
 		status = CaptionAssetStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		parentId = GsonParser.parseString(jsonObject.get("parentId"));
 		accuracy = GsonParser.parseInt(jsonObject.get("accuracy"));
@@ -256,6 +275,7 @@ public class CaptionAsset extends Asset {
 		kparams.add("isDefault", this.isDefault);
 		kparams.add("label", this.label);
 		kparams.add("format", this.format);
+		kparams.add("source", this.source);
 		kparams.add("parentId", this.parentId);
 		kparams.add("accuracy", this.accuracy);
 		kparams.add("displayOnPlayer", this.displayOnPlayer);
@@ -285,6 +305,7 @@ public class CaptionAsset extends Asset {
         dest.writeValue(this.isDefault);
         dest.writeString(this.label);
         dest.writeInt(this.format == null ? -1 : this.format.ordinal());
+        dest.writeInt(this.source == null ? -1 : this.source.ordinal());
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
         dest.writeString(this.parentId);
         dest.writeValue(this.accuracy);
@@ -303,6 +324,8 @@ public class CaptionAsset extends Asset {
         this.label = in.readString();
         int tmpFormat = in.readInt();
         this.format = tmpFormat == -1 ? null : CaptionType.values()[tmpFormat];
+        int tmpSource = in.readInt();
+        this.source = tmpSource == -1 ? null : CaptionSource.values()[tmpSource];
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : CaptionAssetStatus.values()[tmpStatus];
         this.parentId = in.readString();
