@@ -63,6 +63,9 @@ public class ZoomIntegrationSetting extends ObjectBase {
 		String deletionPolicy();
 		String enableZoomTranscription();
 		String zoomAccountDescription();
+		String createdAt();
+		String updatedAt();
+		String enableMeetingUpload();
 	}
 
 	private String defaultUserId;
@@ -80,6 +83,9 @@ public class ZoomIntegrationSetting extends ObjectBase {
 	private Boolean deletionPolicy;
 	private Boolean enableZoomTranscription;
 	private String zoomAccountDescription;
+	private String createdAt;
+	private String updatedAt;
+	private Boolean enableMeetingUpload;
 
 	// defaultUserId:
 	public String getDefaultUserId(){
@@ -253,6 +259,42 @@ public class ZoomIntegrationSetting extends ObjectBase {
 		setToken("zoomAccountDescription", multirequestToken);
 	}
 
+	// createdAt:
+	public String getCreatedAt(){
+		return this.createdAt;
+	}
+	public void setCreatedAt(String createdAt){
+		this.createdAt = createdAt;
+	}
+
+	public void createdAt(String multirequestToken){
+		setToken("createdAt", multirequestToken);
+	}
+
+	// updatedAt:
+	public String getUpdatedAt(){
+		return this.updatedAt;
+	}
+	public void setUpdatedAt(String updatedAt){
+		this.updatedAt = updatedAt;
+	}
+
+	public void updatedAt(String multirequestToken){
+		setToken("updatedAt", multirequestToken);
+	}
+
+	// enableMeetingUpload:
+	public Boolean getEnableMeetingUpload(){
+		return this.enableMeetingUpload;
+	}
+	public void setEnableMeetingUpload(Boolean enableMeetingUpload){
+		this.enableMeetingUpload = enableMeetingUpload;
+	}
+
+	public void enableMeetingUpload(String multirequestToken){
+		setToken("enableMeetingUpload", multirequestToken);
+	}
+
 
 	public ZoomIntegrationSetting() {
 		super();
@@ -279,6 +321,9 @@ public class ZoomIntegrationSetting extends ObjectBase {
 		deletionPolicy = GsonParser.parseBoolean(jsonObject.get("deletionPolicy"));
 		enableZoomTranscription = GsonParser.parseBoolean(jsonObject.get("enableZoomTranscription"));
 		zoomAccountDescription = GsonParser.parseString(jsonObject.get("zoomAccountDescription"));
+		createdAt = GsonParser.parseString(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseString(jsonObject.get("updatedAt"));
+		enableMeetingUpload = GsonParser.parseBoolean(jsonObject.get("enableMeetingUpload"));
 
 	}
 
@@ -299,6 +344,9 @@ public class ZoomIntegrationSetting extends ObjectBase {
 		kparams.add("deletionPolicy", this.deletionPolicy);
 		kparams.add("enableZoomTranscription", this.enableZoomTranscription);
 		kparams.add("zoomAccountDescription", this.zoomAccountDescription);
+		kparams.add("createdAt", this.createdAt);
+		kparams.add("updatedAt", this.updatedAt);
+		kparams.add("enableMeetingUpload", this.enableMeetingUpload);
 		return kparams;
 	}
 
@@ -333,6 +381,9 @@ public class ZoomIntegrationSetting extends ObjectBase {
         dest.writeValue(this.deletionPolicy);
         dest.writeValue(this.enableZoomTranscription);
         dest.writeString(this.zoomAccountDescription);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.updatedAt);
+        dest.writeValue(this.enableMeetingUpload);
     }
 
     public ZoomIntegrationSetting(Parcel in) {
@@ -354,6 +405,9 @@ public class ZoomIntegrationSetting extends ObjectBase {
         this.deletionPolicy = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.enableZoomTranscription = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.zoomAccountDescription = in.readString();
+        this.createdAt = in.readString();
+        this.updatedAt = in.readString();
+        this.enableMeetingUpload = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
