@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -40,43 +41,74 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(VendorChapteringCatalogItem.Tokenizer.class)
-public class VendorChapteringCatalogItem extends VendorCatalogItem {
+@MultiRequestBuilder.Tokenizer(IntelligentTaggingVendorTaskData.Tokenizer.class)
+public class IntelligentTaggingVendorTaskData extends VendorTaskData {
 	
-	public interface Tokenizer extends VendorCatalogItem.Tokenizer {
+	public interface Tokenizer extends VendorTaskData.Tokenizer {
+		String assetId();
+	}
+
+	/**
+	 * Optional - The id of the caption asset object
+	 */
+	private String assetId;
+
+	// assetId:
+	public String getAssetId(){
+		return this.assetId;
+	}
+	public void setAssetId(String assetId){
+		this.assetId = assetId;
+	}
+
+	public void assetId(String multirequestToken){
+		setToken("assetId", multirequestToken);
 	}
 
 
-
-	public VendorChapteringCatalogItem() {
+	public IntelligentTaggingVendorTaskData() {
 		super();
 	}
 
-	public VendorChapteringCatalogItem(JsonObject jsonObject) throws APIException {
+	public IntelligentTaggingVendorTaskData(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		assetId = GsonParser.parseString(jsonObject.get("assetId"));
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaVendorChapteringCatalogItem");
+		kparams.add("objectType", "KalturaIntelligentTaggingVendorTaskData");
+		kparams.add("assetId", this.assetId);
 		return kparams;
 	}
 
 
-    public static final Creator<VendorChapteringCatalogItem> CREATOR = new Creator<VendorChapteringCatalogItem>() {
+    public static final Creator<IntelligentTaggingVendorTaskData> CREATOR = new Creator<IntelligentTaggingVendorTaskData>() {
         @Override
-        public VendorChapteringCatalogItem createFromParcel(Parcel source) {
-            return new VendorChapteringCatalogItem(source);
+        public IntelligentTaggingVendorTaskData createFromParcel(Parcel source) {
+            return new IntelligentTaggingVendorTaskData(source);
         }
 
         @Override
-        public VendorChapteringCatalogItem[] newArray(int size) {
-            return new VendorChapteringCatalogItem[size];
+        public IntelligentTaggingVendorTaskData[] newArray(int size) {
+            return new IntelligentTaggingVendorTaskData[size];
         }
     };
 
-    public VendorChapteringCatalogItem(Parcel in) {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(this.assetId);
+    }
+
+    public IntelligentTaggingVendorTaskData(Parcel in) {
         super(in);
+        this.assetId = in.readString();
     }
 }
 

@@ -30,7 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.enums.CatalogItemLanguage;
 import com.kaltura.client.enums.VendorCatalogItemOutputFormat;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
@@ -47,28 +46,14 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class VendorCaptionsCatalogItem extends VendorCatalogItem {
 	
 	public interface Tokenizer extends VendorCatalogItem.Tokenizer {
-		String sourceLanguage();
 		String outputFormat();
 		String enableSpeakerId();
 		String fixedPriceAddons();
 	}
 
-	private CatalogItemLanguage sourceLanguage;
 	private VendorCatalogItemOutputFormat outputFormat;
 	private Boolean enableSpeakerId;
 	private Integer fixedPriceAddons;
-
-	// sourceLanguage:
-	public CatalogItemLanguage getSourceLanguage(){
-		return this.sourceLanguage;
-	}
-	public void setSourceLanguage(CatalogItemLanguage sourceLanguage){
-		this.sourceLanguage = sourceLanguage;
-	}
-
-	public void sourceLanguage(String multirequestToken){
-		setToken("sourceLanguage", multirequestToken);
-	}
 
 	// outputFormat:
 	public VendorCatalogItemOutputFormat getOutputFormat(){
@@ -117,7 +102,6 @@ public class VendorCaptionsCatalogItem extends VendorCatalogItem {
 		if(jsonObject == null) return;
 
 		// set members values:
-		sourceLanguage = CatalogItemLanguage.get(GsonParser.parseString(jsonObject.get("sourceLanguage")));
 		outputFormat = VendorCatalogItemOutputFormat.get(GsonParser.parseInt(jsonObject.get("outputFormat")));
 		enableSpeakerId = GsonParser.parseBoolean(jsonObject.get("enableSpeakerId"));
 		fixedPriceAddons = GsonParser.parseInt(jsonObject.get("fixedPriceAddons"));
@@ -127,7 +111,6 @@ public class VendorCaptionsCatalogItem extends VendorCatalogItem {
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaVendorCaptionsCatalogItem");
-		kparams.add("sourceLanguage", this.sourceLanguage);
 		kparams.add("outputFormat", this.outputFormat);
 		kparams.add("enableSpeakerId", this.enableSpeakerId);
 		kparams.add("fixedPriceAddons", this.fixedPriceAddons);
@@ -150,7 +133,6 @@ public class VendorCaptionsCatalogItem extends VendorCatalogItem {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeInt(this.sourceLanguage == null ? -1 : this.sourceLanguage.ordinal());
         dest.writeInt(this.outputFormat == null ? -1 : this.outputFormat.ordinal());
         dest.writeValue(this.enableSpeakerId);
         dest.writeValue(this.fixedPriceAddons);
@@ -158,8 +140,6 @@ public class VendorCaptionsCatalogItem extends VendorCatalogItem {
 
     public VendorCaptionsCatalogItem(Parcel in) {
         super(in);
-        int tmpSourceLanguage = in.readInt();
-        this.sourceLanguage = tmpSourceLanguage == -1 ? null : CatalogItemLanguage.values()[tmpSourceLanguage];
         int tmpOutputFormat = in.readInt();
         this.outputFormat = tmpOutputFormat == -1 ? null : VendorCatalogItemOutputFormat.values()[tmpOutputFormat];
         this.enableSpeakerId = (Boolean)in.readValue(Boolean.class.getClassLoader());

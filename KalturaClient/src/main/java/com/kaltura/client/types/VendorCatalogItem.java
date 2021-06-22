@@ -30,6 +30,8 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.CatalogItemLanguage;
+import com.kaltura.client.enums.ReachVendorEngineType;
 import com.kaltura.client.enums.VendorCatalogItemStatus;
 import com.kaltura.client.enums.VendorServiceFeature;
 import com.kaltura.client.enums.VendorServiceTurnAroundTime;
@@ -62,6 +64,8 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		String serviceFeature();
 		String turnAroundTime();
 		VendorCatalogItemPricing.Tokenizer pricing();
+		String engineType();
+		String sourceLanguage();
 		String allowResubmission();
 	}
 
@@ -76,6 +80,12 @@ public abstract class VendorCatalogItem extends ObjectBase {
 	private VendorServiceFeature serviceFeature;
 	private VendorServiceTurnAroundTime turnAroundTime;
 	private VendorCatalogItemPricing pricing;
+	/**
+	 * Property showing the catalog item's engine type, in case a vendor can offer the
+	  same service via different engines.
+	 */
+	private ReachVendorEngineType engineType;
+	private CatalogItemLanguage sourceLanguage;
 	private Boolean allowResubmission;
 
 	// id:
@@ -166,6 +176,30 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		this.pricing = pricing;
 	}
 
+	// engineType:
+	public ReachVendorEngineType getEngineType(){
+		return this.engineType;
+	}
+	public void setEngineType(ReachVendorEngineType engineType){
+		this.engineType = engineType;
+	}
+
+	public void engineType(String multirequestToken){
+		setToken("engineType", multirequestToken);
+	}
+
+	// sourceLanguage:
+	public CatalogItemLanguage getSourceLanguage(){
+		return this.sourceLanguage;
+	}
+	public void setSourceLanguage(CatalogItemLanguage sourceLanguage){
+		this.sourceLanguage = sourceLanguage;
+	}
+
+	public void sourceLanguage(String multirequestToken){
+		setToken("sourceLanguage", multirequestToken);
+	}
+
 	// allowResubmission:
 	public Boolean getAllowResubmission(){
 		return this.allowResubmission;
@@ -200,6 +234,8 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		serviceFeature = VendorServiceFeature.get(GsonParser.parseInt(jsonObject.get("serviceFeature")));
 		turnAroundTime = VendorServiceTurnAroundTime.get(GsonParser.parseInt(jsonObject.get("turnAroundTime")));
 		pricing = GsonParser.parseObject(jsonObject.getAsJsonObject("pricing"), VendorCatalogItemPricing.class);
+		engineType = ReachVendorEngineType.get(GsonParser.parseString(jsonObject.get("engineType")));
+		sourceLanguage = CatalogItemLanguage.get(GsonParser.parseString(jsonObject.get("sourceLanguage")));
 		allowResubmission = GsonParser.parseBoolean(jsonObject.get("allowResubmission"));
 
 	}
@@ -213,6 +249,8 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		kparams.add("serviceType", this.serviceType);
 		kparams.add("turnAroundTime", this.turnAroundTime);
 		kparams.add("pricing", this.pricing);
+		kparams.add("engineType", this.engineType);
+		kparams.add("sourceLanguage", this.sourceLanguage);
 		kparams.add("allowResubmission", this.allowResubmission);
 		return kparams;
 	}
@@ -232,6 +270,8 @@ public abstract class VendorCatalogItem extends ObjectBase {
         dest.writeInt(this.serviceFeature == null ? -1 : this.serviceFeature.ordinal());
         dest.writeInt(this.turnAroundTime == null ? -1 : this.turnAroundTime.ordinal());
         dest.writeParcelable(this.pricing, flags);
+        dest.writeInt(this.engineType == null ? -1 : this.engineType.ordinal());
+        dest.writeInt(this.sourceLanguage == null ? -1 : this.sourceLanguage.ordinal());
         dest.writeValue(this.allowResubmission);
     }
 
@@ -252,6 +292,10 @@ public abstract class VendorCatalogItem extends ObjectBase {
         int tmpTurnAroundTime = in.readInt();
         this.turnAroundTime = tmpTurnAroundTime == -1 ? null : VendorServiceTurnAroundTime.values()[tmpTurnAroundTime];
         this.pricing = in.readParcelable(VendorCatalogItemPricing.class.getClassLoader());
+        int tmpEngineType = in.readInt();
+        this.engineType = tmpEngineType == -1 ? null : ReachVendorEngineType.values()[tmpEngineType];
+        int tmpSourceLanguage = in.readInt();
+        this.sourceLanguage = tmpSourceLanguage == -1 ? null : CatalogItemLanguage.values()[tmpSourceLanguage];
         this.allowResubmission = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
