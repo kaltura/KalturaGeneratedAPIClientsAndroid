@@ -46,13 +46,9 @@ public class EntryVendorTaskFilter extends EntryVendorTaskBaseFilter {
 	
 	public interface Tokenizer extends EntryVendorTaskBaseFilter.Tokenizer {
 		String freeText();
-		String expectedFinishTimeGreaterThanOrEqual();
-		String expectedFinishTimeLessThanOrEqual();
 	}
 
 	private String freeText;
-	private Integer expectedFinishTimeGreaterThanOrEqual;
-	private Integer expectedFinishTimeLessThanOrEqual;
 
 	// freeText:
 	public String getFreeText(){
@@ -64,30 +60,6 @@ public class EntryVendorTaskFilter extends EntryVendorTaskBaseFilter {
 
 	public void freeText(String multirequestToken){
 		setToken("freeText", multirequestToken);
-	}
-
-	// expectedFinishTimeGreaterThanOrEqual:
-	public Integer getExpectedFinishTimeGreaterThanOrEqual(){
-		return this.expectedFinishTimeGreaterThanOrEqual;
-	}
-	public void setExpectedFinishTimeGreaterThanOrEqual(Integer expectedFinishTimeGreaterThanOrEqual){
-		this.expectedFinishTimeGreaterThanOrEqual = expectedFinishTimeGreaterThanOrEqual;
-	}
-
-	public void expectedFinishTimeGreaterThanOrEqual(String multirequestToken){
-		setToken("expectedFinishTimeGreaterThanOrEqual", multirequestToken);
-	}
-
-	// expectedFinishTimeLessThanOrEqual:
-	public Integer getExpectedFinishTimeLessThanOrEqual(){
-		return this.expectedFinishTimeLessThanOrEqual;
-	}
-	public void setExpectedFinishTimeLessThanOrEqual(Integer expectedFinishTimeLessThanOrEqual){
-		this.expectedFinishTimeLessThanOrEqual = expectedFinishTimeLessThanOrEqual;
-	}
-
-	public void expectedFinishTimeLessThanOrEqual(String multirequestToken){
-		setToken("expectedFinishTimeLessThanOrEqual", multirequestToken);
 	}
 
 
@@ -102,8 +74,6 @@ public class EntryVendorTaskFilter extends EntryVendorTaskBaseFilter {
 
 		// set members values:
 		freeText = GsonParser.parseString(jsonObject.get("freeText"));
-		expectedFinishTimeGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("expectedFinishTimeGreaterThanOrEqual"));
-		expectedFinishTimeLessThanOrEqual = GsonParser.parseInt(jsonObject.get("expectedFinishTimeLessThanOrEqual"));
 
 	}
 
@@ -111,8 +81,6 @@ public class EntryVendorTaskFilter extends EntryVendorTaskBaseFilter {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaEntryVendorTaskFilter");
 		kparams.add("freeText", this.freeText);
-		kparams.add("expectedFinishTimeGreaterThanOrEqual", this.expectedFinishTimeGreaterThanOrEqual);
-		kparams.add("expectedFinishTimeLessThanOrEqual", this.expectedFinishTimeLessThanOrEqual);
 		return kparams;
 	}
 
@@ -133,15 +101,11 @@ public class EntryVendorTaskFilter extends EntryVendorTaskBaseFilter {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.freeText);
-        dest.writeValue(this.expectedFinishTimeGreaterThanOrEqual);
-        dest.writeValue(this.expectedFinishTimeLessThanOrEqual);
     }
 
     public EntryVendorTaskFilter(Parcel in) {
         super(in);
         this.freeText = in.readString();
-        this.expectedFinishTimeGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.expectedFinishTimeLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
