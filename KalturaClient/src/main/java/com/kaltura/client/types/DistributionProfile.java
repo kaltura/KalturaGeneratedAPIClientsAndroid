@@ -78,6 +78,7 @@ public abstract class DistributionProfile extends ObjectBase {
 		String recommendedDcForDownload();
 		String recommendedDcForExecute();
 		String distributeTrigger();
+		String supportImageEntry();
 	}
 
 	/**
@@ -159,6 +160,7 @@ public abstract class DistributionProfile extends ObjectBase {
 	 * The event that trigger the automatic distribute
 	 */
 	private DistributeTrigger distributeTrigger;
+	private Boolean supportImageEntry;
 
 	// id:
 	public Integer getId(){
@@ -412,6 +414,10 @@ public abstract class DistributionProfile extends ObjectBase {
 		setToken("distributeTrigger", multirequestToken);
 	}
 
+	// supportImageEntry:
+	public Boolean getSupportImageEntry(){
+		return this.supportImageEntry;
+	}
 
 	public DistributionProfile() {
 		super();
@@ -448,6 +454,7 @@ public abstract class DistributionProfile extends ObjectBase {
 		recommendedDcForDownload = GsonParser.parseInt(jsonObject.get("recommendedDcForDownload"));
 		recommendedDcForExecute = GsonParser.parseInt(jsonObject.get("recommendedDcForExecute"));
 		distributeTrigger = DistributeTrigger.get(GsonParser.parseInt(jsonObject.get("distributeTrigger")));
+		supportImageEntry = GsonParser.parseBoolean(jsonObject.get("supportImageEntry"));
 
 	}
 
@@ -527,6 +534,7 @@ public abstract class DistributionProfile extends ObjectBase {
         dest.writeValue(this.recommendedDcForDownload);
         dest.writeValue(this.recommendedDcForExecute);
         dest.writeInt(this.distributeTrigger == null ? -1 : this.distributeTrigger.ordinal());
+        dest.writeValue(this.supportImageEntry);
     }
 
     public DistributionProfile(Parcel in) {
@@ -579,6 +587,7 @@ public abstract class DistributionProfile extends ObjectBase {
         this.recommendedDcForExecute = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpDistributeTrigger = in.readInt();
         this.distributeTrigger = tmpDistributeTrigger == -1 ? null : DistributeTrigger.values()[tmpDistributeTrigger];
+        this.supportImageEntry = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

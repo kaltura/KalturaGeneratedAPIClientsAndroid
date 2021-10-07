@@ -30,7 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -41,71 +40,43 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(DeliveryProfileVodPackagerPlayServer.Tokenizer.class)
-public class DeliveryProfileVodPackagerPlayServer extends DeliveryProfileVod {
+@MultiRequestBuilder.Tokenizer(VodScheduleEvent.Tokenizer.class)
+public class VodScheduleEvent extends EntryScheduleEvent {
 	
-	public interface Tokenizer extends DeliveryProfileVod.Tokenizer {
-		String adStitchingEnabled();
-	}
-
-	private Boolean adStitchingEnabled;
-
-	// adStitchingEnabled:
-	public Boolean getAdStitchingEnabled(){
-		return this.adStitchingEnabled;
-	}
-	public void setAdStitchingEnabled(Boolean adStitchingEnabled){
-		this.adStitchingEnabled = adStitchingEnabled;
-	}
-
-	public void adStitchingEnabled(String multirequestToken){
-		setToken("adStitchingEnabled", multirequestToken);
+	public interface Tokenizer extends EntryScheduleEvent.Tokenizer {
 	}
 
 
-	public DeliveryProfileVodPackagerPlayServer() {
+
+	public VodScheduleEvent() {
 		super();
 	}
 
-	public DeliveryProfileVodPackagerPlayServer(JsonObject jsonObject) throws APIException {
+	public VodScheduleEvent(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
-
-		if(jsonObject == null) return;
-
-		// set members values:
-		adStitchingEnabled = GsonParser.parseBoolean(jsonObject.get("adStitchingEnabled"));
-
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaDeliveryProfileVodPackagerPlayServer");
-		kparams.add("adStitchingEnabled", this.adStitchingEnabled);
+		kparams.add("objectType", "KalturaVodScheduleEvent");
 		return kparams;
 	}
 
 
-    public static final Creator<DeliveryProfileVodPackagerPlayServer> CREATOR = new Creator<DeliveryProfileVodPackagerPlayServer>() {
+    public static final Creator<VodScheduleEvent> CREATOR = new Creator<VodScheduleEvent>() {
         @Override
-        public DeliveryProfileVodPackagerPlayServer createFromParcel(Parcel source) {
-            return new DeliveryProfileVodPackagerPlayServer(source);
+        public VodScheduleEvent createFromParcel(Parcel source) {
+            return new VodScheduleEvent(source);
         }
 
         @Override
-        public DeliveryProfileVodPackagerPlayServer[] newArray(int size) {
-            return new DeliveryProfileVodPackagerPlayServer[size];
+        public VodScheduleEvent[] newArray(int size) {
+            return new VodScheduleEvent[size];
         }
     };
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeValue(this.adStitchingEnabled);
-    }
-
-    public DeliveryProfileVodPackagerPlayServer(Parcel in) {
+    public VodScheduleEvent(Parcel in) {
         super(in);
-        this.adStitchingEnabled = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

@@ -110,7 +110,7 @@ public class Asset extends ObjectBase {
 	/**
 	 * The size (in Bytes) of the asset
 	 */
-	private Integer sizeInBytes;
+	private Long sizeInBytes;
 
 	// id:
 	public String getId(){
@@ -209,7 +209,7 @@ public class Asset extends ObjectBase {
 	}
 
 	// sizeInBytes:
-	public Integer getSizeInBytes(){
+	public Long getSizeInBytes(){
 		return this.sizeInBytes;
 	}
 
@@ -237,7 +237,7 @@ public class Asset extends ObjectBase {
 		partnerData = GsonParser.parseString(jsonObject.get("partnerData"));
 		partnerDescription = GsonParser.parseString(jsonObject.get("partnerDescription"));
 		actualSourceAssetParamsIds = GsonParser.parseString(jsonObject.get("actualSourceAssetParamsIds"));
-		sizeInBytes = GsonParser.parseInt(jsonObject.get("sizeInBytes"));
+		sizeInBytes = GsonParser.parseLong(jsonObject.get("sizeInBytes"));
 
 	}
 
@@ -301,7 +301,7 @@ public class Asset extends ObjectBase {
         this.partnerData = in.readString();
         this.partnerDescription = in.readString();
         this.actualSourceAssetParamsIds = in.readString();
-        this.sizeInBytes = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.sizeInBytes = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

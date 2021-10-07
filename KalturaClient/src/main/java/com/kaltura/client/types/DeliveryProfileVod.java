@@ -41,71 +41,71 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(DeliveryProfileVodPackagerPlayServer.Tokenizer.class)
-public class DeliveryProfileVodPackagerPlayServer extends DeliveryProfileVod {
+@MultiRequestBuilder.Tokenizer(DeliveryProfileVod.Tokenizer.class)
+public class DeliveryProfileVod extends DeliveryProfile {
 	
-	public interface Tokenizer extends DeliveryProfileVod.Tokenizer {
-		String adStitchingEnabled();
+	public interface Tokenizer extends DeliveryProfile.Tokenizer {
+		String simuliveSupport();
 	}
 
-	private Boolean adStitchingEnabled;
+	private Boolean simuliveSupport;
 
-	// adStitchingEnabled:
-	public Boolean getAdStitchingEnabled(){
-		return this.adStitchingEnabled;
+	// simuliveSupport:
+	public Boolean getSimuliveSupport(){
+		return this.simuliveSupport;
 	}
-	public void setAdStitchingEnabled(Boolean adStitchingEnabled){
-		this.adStitchingEnabled = adStitchingEnabled;
-	}
-
-	public void adStitchingEnabled(String multirequestToken){
-		setToken("adStitchingEnabled", multirequestToken);
+	public void setSimuliveSupport(Boolean simuliveSupport){
+		this.simuliveSupport = simuliveSupport;
 	}
 
+	public void simuliveSupport(String multirequestToken){
+		setToken("simuliveSupport", multirequestToken);
+	}
 
-	public DeliveryProfileVodPackagerPlayServer() {
+
+	public DeliveryProfileVod() {
 		super();
 	}
 
-	public DeliveryProfileVodPackagerPlayServer(JsonObject jsonObject) throws APIException {
+	public DeliveryProfileVod(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		adStitchingEnabled = GsonParser.parseBoolean(jsonObject.get("adStitchingEnabled"));
+		simuliveSupport = GsonParser.parseBoolean(jsonObject.get("simuliveSupport"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaDeliveryProfileVodPackagerPlayServer");
-		kparams.add("adStitchingEnabled", this.adStitchingEnabled);
+		kparams.add("objectType", "KalturaDeliveryProfileVod");
+		kparams.add("simuliveSupport", this.simuliveSupport);
 		return kparams;
 	}
 
 
-    public static final Creator<DeliveryProfileVodPackagerPlayServer> CREATOR = new Creator<DeliveryProfileVodPackagerPlayServer>() {
+    public static final Creator<DeliveryProfileVod> CREATOR = new Creator<DeliveryProfileVod>() {
         @Override
-        public DeliveryProfileVodPackagerPlayServer createFromParcel(Parcel source) {
-            return new DeliveryProfileVodPackagerPlayServer(source);
+        public DeliveryProfileVod createFromParcel(Parcel source) {
+            return new DeliveryProfileVod(source);
         }
 
         @Override
-        public DeliveryProfileVodPackagerPlayServer[] newArray(int size) {
-            return new DeliveryProfileVodPackagerPlayServer[size];
+        public DeliveryProfileVod[] newArray(int size) {
+            return new DeliveryProfileVod[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeValue(this.adStitchingEnabled);
+        dest.writeValue(this.simuliveSupport);
     }
 
-    public DeliveryProfileVodPackagerPlayServer(Parcel in) {
+    public DeliveryProfileVod(Parcel in) {
         super(in);
-        this.adStitchingEnabled = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.simuliveSupport = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

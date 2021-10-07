@@ -52,6 +52,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 		String categoriesFullNameIn();
 		String categoryAncestorIdIn();
 		String redirectFromEntryId();
+		String conversionProfileIdEqual();
 	}
 
 	private String freeText;
@@ -67,6 +68,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 	 * The id of the original entry
 	 */
 	private String redirectFromEntryId;
+	private Integer conversionProfileIdEqual;
 
 	// freeText:
 	public String getFreeText(){
@@ -152,6 +154,18 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 		setToken("redirectFromEntryId", multirequestToken);
 	}
 
+	// conversionProfileIdEqual:
+	public Integer getConversionProfileIdEqual(){
+		return this.conversionProfileIdEqual;
+	}
+	public void setConversionProfileIdEqual(Integer conversionProfileIdEqual){
+		this.conversionProfileIdEqual = conversionProfileIdEqual;
+	}
+
+	public void conversionProfileIdEqual(String multirequestToken){
+		setToken("conversionProfileIdEqual", multirequestToken);
+	}
+
 
 	public BaseEntryFilter() {
 		super();
@@ -170,6 +184,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 		categoriesFullNameIn = GsonParser.parseString(jsonObject.get("categoriesFullNameIn"));
 		categoryAncestorIdIn = GsonParser.parseString(jsonObject.get("categoryAncestorIdIn"));
 		redirectFromEntryId = GsonParser.parseString(jsonObject.get("redirectFromEntryId"));
+		conversionProfileIdEqual = GsonParser.parseInt(jsonObject.get("conversionProfileIdEqual"));
 
 	}
 
@@ -183,6 +198,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
 		kparams.add("categoriesFullNameIn", this.categoriesFullNameIn);
 		kparams.add("categoryAncestorIdIn", this.categoryAncestorIdIn);
 		kparams.add("redirectFromEntryId", this.redirectFromEntryId);
+		kparams.add("conversionProfileIdEqual", this.conversionProfileIdEqual);
 		return kparams;
 	}
 
@@ -209,6 +225,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
         dest.writeString(this.categoriesFullNameIn);
         dest.writeString(this.categoryAncestorIdIn);
         dest.writeString(this.redirectFromEntryId);
+        dest.writeValue(this.conversionProfileIdEqual);
     }
 
     public BaseEntryFilter(Parcel in) {
@@ -220,6 +237,7 @@ public class BaseEntryFilter extends BaseEntryBaseFilter {
         this.categoriesFullNameIn = in.readString();
         this.categoryAncestorIdIn = in.readString();
         this.redirectFromEntryId = in.readString();
+        this.conversionProfileIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 

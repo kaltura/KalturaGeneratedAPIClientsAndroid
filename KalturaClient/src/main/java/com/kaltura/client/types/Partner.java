@@ -35,6 +35,7 @@ import com.kaltura.client.enums.PartnerAuthenticationType;
 import com.kaltura.client.enums.PartnerGroupType;
 import com.kaltura.client.enums.PartnerStatus;
 import com.kaltura.client.enums.PartnerType;
+import com.kaltura.client.enums.TwoFactorAuthenticationMode;
 import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
@@ -128,6 +129,7 @@ public class Partner extends ObjectBase {
 		String maxLoginAttempts();
 		String loginBlockPeriod();
 		String numPrevPassToKeep();
+		String twoFactorAuthenticationMode();
 	}
 
 	private Integer id;
@@ -222,6 +224,7 @@ public class Partner extends ObjectBase {
 	private Integer maxLoginAttempts;
 	private Integer loginBlockPeriod;
 	private Integer numPrevPassToKeep;
+	private TwoFactorAuthenticationMode twoFactorAuthenticationMode;
 
 	// id:
 	public Integer getId(){
@@ -823,6 +826,10 @@ public class Partner extends ObjectBase {
 		setToken("numPrevPassToKeep", multirequestToken);
 	}
 
+	// twoFactorAuthenticationMode:
+	public TwoFactorAuthenticationMode getTwoFactorAuthenticationMode(){
+		return this.twoFactorAuthenticationMode;
+	}
 
 	public Partner() {
 		super();
@@ -908,6 +915,7 @@ public class Partner extends ObjectBase {
 		maxLoginAttempts = GsonParser.parseInt(jsonObject.get("maxLoginAttempts"));
 		loginBlockPeriod = GsonParser.parseInt(jsonObject.get("loginBlockPeriod"));
 		numPrevPassToKeep = GsonParser.parseInt(jsonObject.get("numPrevPassToKeep"));
+		twoFactorAuthenticationMode = TwoFactorAuthenticationMode.get(GsonParser.parseInt(jsonObject.get("twoFactorAuthenticationMode")));
 
 	}
 
@@ -1066,6 +1074,7 @@ public class Partner extends ObjectBase {
         dest.writeValue(this.maxLoginAttempts);
         dest.writeValue(this.loginBlockPeriod);
         dest.writeValue(this.numPrevPassToKeep);
+        dest.writeInt(this.twoFactorAuthenticationMode == null ? -1 : this.twoFactorAuthenticationMode.ordinal());
     }
 
     public Partner(Parcel in) {
@@ -1165,6 +1174,8 @@ public class Partner extends ObjectBase {
         this.maxLoginAttempts = (Integer)in.readValue(Integer.class.getClassLoader());
         this.loginBlockPeriod = (Integer)in.readValue(Integer.class.getClassLoader());
         this.numPrevPassToKeep = (Integer)in.readValue(Integer.class.getClassLoader());
+        int tmpTwoFactorAuthenticationMode = in.readInt();
+        this.twoFactorAuthenticationMode = tmpTwoFactorAuthenticationMode == -1 ? null : TwoFactorAuthenticationMode.values()[tmpTwoFactorAuthenticationMode];
     }
 }
 

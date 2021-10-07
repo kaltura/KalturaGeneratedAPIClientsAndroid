@@ -53,6 +53,7 @@ public class ReportExportParams extends ObjectBase {
 		String timeZoneOffset();
 		RequestBuilder.ListTokenizer<ReportExportItem.Tokenizer> reportItems();
 		String reportsItemsGroup();
+		String baseUrl();
 	}
 
 	private String recipientEmail;
@@ -62,6 +63,7 @@ public class ReportExportParams extends ObjectBase {
 	private Integer timeZoneOffset;
 	private List<ReportExportItem> reportItems;
 	private String reportsItemsGroup;
+	private String baseUrl;
 
 	// recipientEmail:
 	public String getRecipientEmail(){
@@ -107,6 +109,18 @@ public class ReportExportParams extends ObjectBase {
 		setToken("reportsItemsGroup", multirequestToken);
 	}
 
+	// baseUrl:
+	public String getBaseUrl(){
+		return this.baseUrl;
+	}
+	public void setBaseUrl(String baseUrl){
+		this.baseUrl = baseUrl;
+	}
+
+	public void baseUrl(String multirequestToken){
+		setToken("baseUrl", multirequestToken);
+	}
+
 
 	public ReportExportParams() {
 		super();
@@ -122,6 +136,7 @@ public class ReportExportParams extends ObjectBase {
 		timeZoneOffset = GsonParser.parseInt(jsonObject.get("timeZoneOffset"));
 		reportItems = GsonParser.parseArray(jsonObject.getAsJsonArray("reportItems"), ReportExportItem.class);
 		reportsItemsGroup = GsonParser.parseString(jsonObject.get("reportsItemsGroup"));
+		baseUrl = GsonParser.parseString(jsonObject.get("baseUrl"));
 
 	}
 
@@ -132,6 +147,7 @@ public class ReportExportParams extends ObjectBase {
 		kparams.add("timeZoneOffset", this.timeZoneOffset);
 		kparams.add("reportItems", this.reportItems);
 		kparams.add("reportsItemsGroup", this.reportsItemsGroup);
+		kparams.add("baseUrl", this.baseUrl);
 		return kparams;
 	}
 
@@ -160,6 +176,7 @@ public class ReportExportParams extends ObjectBase {
             dest.writeInt(-1);
         }
         dest.writeString(this.reportsItemsGroup);
+        dest.writeString(this.baseUrl);
     }
 
     public ReportExportParams(Parcel in) {
@@ -172,6 +189,7 @@ public class ReportExportParams extends ObjectBase {
             in.readList(this.reportItems, ReportExportItem.class.getClassLoader());
         }
         this.reportsItemsGroup = in.readString();
+        this.baseUrl = in.readString();
     }
 }
 

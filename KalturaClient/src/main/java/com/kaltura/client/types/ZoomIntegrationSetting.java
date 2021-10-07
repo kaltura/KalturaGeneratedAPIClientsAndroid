@@ -30,9 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.enums.HandleParticipantsMode;
 import com.kaltura.client.enums.ZoomUsersMatching;
-import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -45,59 +43,31 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(ZoomIntegrationSetting.Tokenizer.class)
-public class ZoomIntegrationSetting extends ObjectBase {
+public class ZoomIntegrationSetting extends IntegrationSetting {
 	
-	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String defaultUserId();
+	public interface Tokenizer extends IntegrationSetting.Tokenizer {
 		String zoomCategory();
-		String accountId();
 		String enableRecordingUpload();
-		String createUserIfNotExist();
-		String handleParticipantsMode();
 		String zoomUserMatchingMode();
 		String zoomUserPostfix();
 		String zoomWebinarCategory();
 		String enableWebinarUploads();
-		String conversionProfileId();
 		String jwtToken();
-		String deletionPolicy();
 		String enableZoomTranscription();
 		String zoomAccountDescription();
-		String createdAt();
-		String updatedAt();
 		String enableMeetingUpload();
 	}
 
-	private String defaultUserId;
 	private String zoomCategory;
-	private String accountId;
 	private Boolean enableRecordingUpload;
-	private Boolean createUserIfNotExist;
-	private HandleParticipantsMode handleParticipantsMode;
 	private ZoomUsersMatching zoomUserMatchingMode;
 	private String zoomUserPostfix;
 	private String zoomWebinarCategory;
 	private Boolean enableWebinarUploads;
-	private Integer conversionProfileId;
 	private String jwtToken;
-	private Boolean deletionPolicy;
 	private Boolean enableZoomTranscription;
 	private String zoomAccountDescription;
-	private String createdAt;
-	private String updatedAt;
 	private Boolean enableMeetingUpload;
-
-	// defaultUserId:
-	public String getDefaultUserId(){
-		return this.defaultUserId;
-	}
-	public void setDefaultUserId(String defaultUserId){
-		this.defaultUserId = defaultUserId;
-	}
-
-	public void defaultUserId(String multirequestToken){
-		setToken("defaultUserId", multirequestToken);
-	}
 
 	// zoomCategory:
 	public String getZoomCategory(){
@@ -111,10 +81,6 @@ public class ZoomIntegrationSetting extends ObjectBase {
 		setToken("zoomCategory", multirequestToken);
 	}
 
-	// accountId:
-	public String getAccountId(){
-		return this.accountId;
-	}
 	// enableRecordingUpload:
 	public Boolean getEnableRecordingUpload(){
 		return this.enableRecordingUpload;
@@ -125,30 +91,6 @@ public class ZoomIntegrationSetting extends ObjectBase {
 
 	public void enableRecordingUpload(String multirequestToken){
 		setToken("enableRecordingUpload", multirequestToken);
-	}
-
-	// createUserIfNotExist:
-	public Boolean getCreateUserIfNotExist(){
-		return this.createUserIfNotExist;
-	}
-	public void setCreateUserIfNotExist(Boolean createUserIfNotExist){
-		this.createUserIfNotExist = createUserIfNotExist;
-	}
-
-	public void createUserIfNotExist(String multirequestToken){
-		setToken("createUserIfNotExist", multirequestToken);
-	}
-
-	// handleParticipantsMode:
-	public HandleParticipantsMode getHandleParticipantsMode(){
-		return this.handleParticipantsMode;
-	}
-	public void setHandleParticipantsMode(HandleParticipantsMode handleParticipantsMode){
-		this.handleParticipantsMode = handleParticipantsMode;
-	}
-
-	public void handleParticipantsMode(String multirequestToken){
-		setToken("handleParticipantsMode", multirequestToken);
 	}
 
 	// zoomUserMatchingMode:
@@ -199,18 +141,6 @@ public class ZoomIntegrationSetting extends ObjectBase {
 		setToken("enableWebinarUploads", multirequestToken);
 	}
 
-	// conversionProfileId:
-	public Integer getConversionProfileId(){
-		return this.conversionProfileId;
-	}
-	public void setConversionProfileId(Integer conversionProfileId){
-		this.conversionProfileId = conversionProfileId;
-	}
-
-	public void conversionProfileId(String multirequestToken){
-		setToken("conversionProfileId", multirequestToken);
-	}
-
 	// jwtToken:
 	public String getJwtToken(){
 		return this.jwtToken;
@@ -221,18 +151,6 @@ public class ZoomIntegrationSetting extends ObjectBase {
 
 	public void jwtToken(String multirequestToken){
 		setToken("jwtToken", multirequestToken);
-	}
-
-	// deletionPolicy:
-	public Boolean getDeletionPolicy(){
-		return this.deletionPolicy;
-	}
-	public void setDeletionPolicy(Boolean deletionPolicy){
-		this.deletionPolicy = deletionPolicy;
-	}
-
-	public void deletionPolicy(String multirequestToken){
-		setToken("deletionPolicy", multirequestToken);
 	}
 
 	// enableZoomTranscription:
@@ -259,30 +177,6 @@ public class ZoomIntegrationSetting extends ObjectBase {
 		setToken("zoomAccountDescription", multirequestToken);
 	}
 
-	// createdAt:
-	public String getCreatedAt(){
-		return this.createdAt;
-	}
-	public void setCreatedAt(String createdAt){
-		this.createdAt = createdAt;
-	}
-
-	public void createdAt(String multirequestToken){
-		setToken("createdAt", multirequestToken);
-	}
-
-	// updatedAt:
-	public String getUpdatedAt(){
-		return this.updatedAt;
-	}
-	public void setUpdatedAt(String updatedAt){
-		this.updatedAt = updatedAt;
-	}
-
-	public void updatedAt(String multirequestToken){
-		setToken("updatedAt", multirequestToken);
-	}
-
 	// enableMeetingUpload:
 	public Boolean getEnableMeetingUpload(){
 		return this.enableMeetingUpload;
@@ -306,23 +200,15 @@ public class ZoomIntegrationSetting extends ObjectBase {
 		if(jsonObject == null) return;
 
 		// set members values:
-		defaultUserId = GsonParser.parseString(jsonObject.get("defaultUserId"));
 		zoomCategory = GsonParser.parseString(jsonObject.get("zoomCategory"));
-		accountId = GsonParser.parseString(jsonObject.get("accountId"));
 		enableRecordingUpload = GsonParser.parseBoolean(jsonObject.get("enableRecordingUpload"));
-		createUserIfNotExist = GsonParser.parseBoolean(jsonObject.get("createUserIfNotExist"));
-		handleParticipantsMode = HandleParticipantsMode.get(GsonParser.parseInt(jsonObject.get("handleParticipantsMode")));
 		zoomUserMatchingMode = ZoomUsersMatching.get(GsonParser.parseInt(jsonObject.get("zoomUserMatchingMode")));
 		zoomUserPostfix = GsonParser.parseString(jsonObject.get("zoomUserPostfix"));
 		zoomWebinarCategory = GsonParser.parseString(jsonObject.get("zoomWebinarCategory"));
 		enableWebinarUploads = GsonParser.parseBoolean(jsonObject.get("enableWebinarUploads"));
-		conversionProfileId = GsonParser.parseInt(jsonObject.get("conversionProfileId"));
 		jwtToken = GsonParser.parseString(jsonObject.get("jwtToken"));
-		deletionPolicy = GsonParser.parseBoolean(jsonObject.get("deletionPolicy"));
 		enableZoomTranscription = GsonParser.parseBoolean(jsonObject.get("enableZoomTranscription"));
 		zoomAccountDescription = GsonParser.parseString(jsonObject.get("zoomAccountDescription"));
-		createdAt = GsonParser.parseString(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseString(jsonObject.get("updatedAt"));
 		enableMeetingUpload = GsonParser.parseBoolean(jsonObject.get("enableMeetingUpload"));
 
 	}
@@ -330,22 +216,15 @@ public class ZoomIntegrationSetting extends ObjectBase {
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaZoomIntegrationSetting");
-		kparams.add("defaultUserId", this.defaultUserId);
 		kparams.add("zoomCategory", this.zoomCategory);
 		kparams.add("enableRecordingUpload", this.enableRecordingUpload);
-		kparams.add("createUserIfNotExist", this.createUserIfNotExist);
-		kparams.add("handleParticipantsMode", this.handleParticipantsMode);
 		kparams.add("zoomUserMatchingMode", this.zoomUserMatchingMode);
 		kparams.add("zoomUserPostfix", this.zoomUserPostfix);
 		kparams.add("zoomWebinarCategory", this.zoomWebinarCategory);
 		kparams.add("enableWebinarUploads", this.enableWebinarUploads);
-		kparams.add("conversionProfileId", this.conversionProfileId);
 		kparams.add("jwtToken", this.jwtToken);
-		kparams.add("deletionPolicy", this.deletionPolicy);
 		kparams.add("enableZoomTranscription", this.enableZoomTranscription);
 		kparams.add("zoomAccountDescription", this.zoomAccountDescription);
-		kparams.add("createdAt", this.createdAt);
-		kparams.add("updatedAt", this.updatedAt);
 		kparams.add("enableMeetingUpload", this.enableMeetingUpload);
 		return kparams;
 	}
@@ -366,47 +245,30 @@ public class ZoomIntegrationSetting extends ObjectBase {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(this.defaultUserId);
         dest.writeString(this.zoomCategory);
-        dest.writeString(this.accountId);
         dest.writeValue(this.enableRecordingUpload);
-        dest.writeValue(this.createUserIfNotExist);
-        dest.writeInt(this.handleParticipantsMode == null ? -1 : this.handleParticipantsMode.ordinal());
         dest.writeInt(this.zoomUserMatchingMode == null ? -1 : this.zoomUserMatchingMode.ordinal());
         dest.writeString(this.zoomUserPostfix);
         dest.writeString(this.zoomWebinarCategory);
         dest.writeValue(this.enableWebinarUploads);
-        dest.writeValue(this.conversionProfileId);
         dest.writeString(this.jwtToken);
-        dest.writeValue(this.deletionPolicy);
         dest.writeValue(this.enableZoomTranscription);
         dest.writeString(this.zoomAccountDescription);
-        dest.writeString(this.createdAt);
-        dest.writeString(this.updatedAt);
         dest.writeValue(this.enableMeetingUpload);
     }
 
     public ZoomIntegrationSetting(Parcel in) {
         super(in);
-        this.defaultUserId = in.readString();
         this.zoomCategory = in.readString();
-        this.accountId = in.readString();
         this.enableRecordingUpload = (Boolean)in.readValue(Boolean.class.getClassLoader());
-        this.createUserIfNotExist = (Boolean)in.readValue(Boolean.class.getClassLoader());
-        int tmpHandleParticipantsMode = in.readInt();
-        this.handleParticipantsMode = tmpHandleParticipantsMode == -1 ? null : HandleParticipantsMode.values()[tmpHandleParticipantsMode];
         int tmpZoomUserMatchingMode = in.readInt();
         this.zoomUserMatchingMode = tmpZoomUserMatchingMode == -1 ? null : ZoomUsersMatching.values()[tmpZoomUserMatchingMode];
         this.zoomUserPostfix = in.readString();
         this.zoomWebinarCategory = in.readString();
         this.enableWebinarUploads = (Boolean)in.readValue(Boolean.class.getClassLoader());
-        this.conversionProfileId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.jwtToken = in.readString();
-        this.deletionPolicy = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.enableZoomTranscription = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.zoomAccountDescription = in.readString();
-        this.createdAt = in.readString();
-        this.updatedAt = in.readString();
         this.enableMeetingUpload = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
