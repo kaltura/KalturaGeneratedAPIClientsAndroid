@@ -25,7 +25,12 @@
 //
 // @ignore
 // ===================================================================================================
-package com.kaltura.client.enums;
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
  * This class was generated using generate.php
@@ -33,43 +38,45 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum DropFolderErrorCode implements EnumAsString {
-	ERROR_CONNECT("1"),
-	ERROR_AUTENTICATE("2"),
-	ERROR_GET_PHISICAL_FILE_LIST("3"),
-	ERROR_GET_DB_FILE_LIST("4"),
-	DROP_FOLDER_APP_ERROR("5"),
-	CONTENT_MATCH_POLICY_UNDEFINED("6"),
-	MISSING_CONFIG("7");
 
-	private String value;
-
-	DropFolderErrorCode(String value) {
-		this.value = value;
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(UrlAuthenticationParamsCondition.Tokenizer.class)
+public class UrlAuthenticationParamsCondition extends Condition {
+	
+	public interface Tokenizer extends Condition.Tokenizer {
 	}
 
-	@Override
-	public String getValue() {
-		return this.value;
+
+
+	public UrlAuthenticationParamsCondition() {
+		super();
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public UrlAuthenticationParamsCondition(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
 	}
 
-	public static DropFolderErrorCode get(String value) {
-		if(value == null)
-		{
-			return null;
-		}
-		
-		// goes over DropFolderErrorCode defined values and compare the inner value with the given one:
-		for(DropFolderErrorCode item: values()) {
-			if(item.getValue().equals(value)) {
-				return item;
-			}
-		}
-		// in case the requested value was not found in the enum values, we return the first item as default.
-		return DropFolderErrorCode.values().length > 0 ? DropFolderErrorCode.values()[0]: null;
-   }
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaUrlAuthenticationParamsCondition");
+		return kparams;
+	}
+
+
+    public static final Creator<UrlAuthenticationParamsCondition> CREATOR = new Creator<UrlAuthenticationParamsCondition>() {
+        @Override
+        public UrlAuthenticationParamsCondition createFromParcel(Parcel source) {
+            return new UrlAuthenticationParamsCondition(source);
+        }
+
+        @Override
+        public UrlAuthenticationParamsCondition[] newArray(int size) {
+            return new UrlAuthenticationParamsCondition[size];
+        }
+    };
+
+    public UrlAuthenticationParamsCondition(Parcel in) {
+        super(in);
+    }
 }
+
