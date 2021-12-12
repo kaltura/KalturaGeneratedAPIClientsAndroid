@@ -33,6 +33,7 @@ import com.kaltura.client.Params;
 import com.kaltura.client.enums.LanguageCode;
 import com.kaltura.client.enums.MailJobStatus;
 import com.kaltura.client.enums.MailType;
+import com.kaltura.client.types.DynamicEmailContents;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -58,6 +59,7 @@ public class MailJobData extends JobData {
 		String fromEmail();
 		String bodyParams();
 		String subjectParams();
+		DynamicEmailContents.Tokenizer dynamicEmailContents();
 		String templatePath();
 		String language();
 		String campaignId();
@@ -79,6 +81,7 @@ public class MailJobData extends JobData {
 	private String fromEmail;
 	private String bodyParams;
 	private String subjectParams;
+	private DynamicEmailContents dynamicEmailContents;
 	private String templatePath;
 	private LanguageCode language;
 	private Integer campaignId;
@@ -206,6 +209,14 @@ public class MailJobData extends JobData {
 		setToken("subjectParams", multirequestToken);
 	}
 
+	// dynamicEmailContents:
+	public DynamicEmailContents getDynamicEmailContents(){
+		return this.dynamicEmailContents;
+	}
+	public void setDynamicEmailContents(DynamicEmailContents dynamicEmailContents){
+		this.dynamicEmailContents = dynamicEmailContents;
+	}
+
 	// templatePath:
 	public String getTemplatePath(){
 		return this.templatePath;
@@ -299,6 +310,7 @@ public class MailJobData extends JobData {
 		fromEmail = GsonParser.parseString(jsonObject.get("fromEmail"));
 		bodyParams = GsonParser.parseString(jsonObject.get("bodyParams"));
 		subjectParams = GsonParser.parseString(jsonObject.get("subjectParams"));
+		dynamicEmailContents = GsonParser.parseObject(jsonObject.getAsJsonObject("dynamicEmailContents"), DynamicEmailContents.class);
 		templatePath = GsonParser.parseString(jsonObject.get("templatePath"));
 		language = LanguageCode.get(GsonParser.parseString(jsonObject.get("language")));
 		campaignId = GsonParser.parseInt(jsonObject.get("campaignId"));
@@ -321,6 +333,7 @@ public class MailJobData extends JobData {
 		kparams.add("fromEmail", this.fromEmail);
 		kparams.add("bodyParams", this.bodyParams);
 		kparams.add("subjectParams", this.subjectParams);
+		kparams.add("dynamicEmailContents", this.dynamicEmailContents);
 		kparams.add("templatePath", this.templatePath);
 		kparams.add("language", this.language);
 		kparams.add("campaignId", this.campaignId);
@@ -356,6 +369,7 @@ public class MailJobData extends JobData {
         dest.writeString(this.fromEmail);
         dest.writeString(this.bodyParams);
         dest.writeString(this.subjectParams);
+        dest.writeParcelable(this.dynamicEmailContents, flags);
         dest.writeString(this.templatePath);
         dest.writeInt(this.language == null ? -1 : this.language.ordinal());
         dest.writeValue(this.campaignId);
@@ -378,6 +392,7 @@ public class MailJobData extends JobData {
         this.fromEmail = in.readString();
         this.bodyParams = in.readString();
         this.subjectParams = in.readString();
+        this.dynamicEmailContents = in.readParcelable(DynamicEmailContents.class.getClassLoader());
         this.templatePath = in.readString();
         int tmpLanguage = in.readInt();
         this.language = tmpLanguage == -1 ? null : LanguageCode.values()[tmpLanguage];

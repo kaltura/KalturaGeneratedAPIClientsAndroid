@@ -85,6 +85,7 @@ public class StorageProfile extends ObjectBase {
 		String privateKey();
 		String publicKey();
 		String passPhrase();
+		String port();
 		String shouldExportThumbs();
 		String packagerUrl();
 		String exportPeriodically();
@@ -145,6 +146,7 @@ public class StorageProfile extends ObjectBase {
 	private String privateKey;
 	private String publicKey;
 	private String passPhrase;
+	private Integer port;
 	private Boolean shouldExportThumbs;
 	private String packagerUrl;
 	private Boolean exportPeriodically;
@@ -492,6 +494,18 @@ public class StorageProfile extends ObjectBase {
 		setToken("passPhrase", multirequestToken);
 	}
 
+	// port:
+	public Integer getPort(){
+		return this.port;
+	}
+	public void setPort(Integer port){
+		this.port = port;
+	}
+
+	public void port(String multirequestToken){
+		setToken("port", multirequestToken);
+	}
+
 	// shouldExportThumbs:
 	public Boolean getShouldExportThumbs(){
 		return this.shouldExportThumbs;
@@ -607,6 +621,7 @@ public class StorageProfile extends ObjectBase {
 		privateKey = GsonParser.parseString(jsonObject.get("privateKey"));
 		publicKey = GsonParser.parseString(jsonObject.get("publicKey"));
 		passPhrase = GsonParser.parseString(jsonObject.get("passPhrase"));
+		port = GsonParser.parseInt(jsonObject.get("port"));
 		shouldExportThumbs = GsonParser.parseBoolean(jsonObject.get("shouldExportThumbs"));
 		packagerUrl = GsonParser.parseString(jsonObject.get("packagerUrl"));
 		exportPeriodically = GsonParser.parseBoolean(jsonObject.get("exportPeriodically"));
@@ -647,6 +662,7 @@ public class StorageProfile extends ObjectBase {
 		kparams.add("privateKey", this.privateKey);
 		kparams.add("publicKey", this.publicKey);
 		kparams.add("passPhrase", this.passPhrase);
+		kparams.add("port", this.port);
 		kparams.add("shouldExportThumbs", this.shouldExportThumbs);
 		kparams.add("packagerUrl", this.packagerUrl);
 		kparams.add("exportPeriodically", this.exportPeriodically);
@@ -719,6 +735,7 @@ public class StorageProfile extends ObjectBase {
         dest.writeString(this.privateKey);
         dest.writeString(this.publicKey);
         dest.writeString(this.passPhrase);
+        dest.writeValue(this.port);
         dest.writeValue(this.shouldExportThumbs);
         dest.writeString(this.packagerUrl);
         dest.writeValue(this.exportPeriodically);
@@ -777,6 +794,7 @@ public class StorageProfile extends ObjectBase {
         this.privateKey = in.readString();
         this.publicKey = in.readString();
         this.passPhrase = in.readString();
+        this.port = (Integer)in.readValue(Integer.class.getClassLoader());
         this.shouldExportThumbs = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.packagerUrl = in.readString();
         this.exportPeriodically = (Boolean)in.readValue(Boolean.class.getClassLoader());
