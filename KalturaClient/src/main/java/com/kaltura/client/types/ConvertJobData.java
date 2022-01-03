@@ -59,6 +59,7 @@ public class ConvertJobData extends ConvartableJobData {
 		String engineMessage();
 		String destFileSyncSharedPath();
 		String userCpu();
+		String estimatedEffort();
 	}
 
 	private String destFileSyncLocalPath;
@@ -72,6 +73,7 @@ public class ConvertJobData extends ConvartableJobData {
 	private String engineMessage;
 	private String destFileSyncSharedPath;
 	private Integer userCpu;
+	private Integer estimatedEffort;
 
 	// destFileSyncLocalPath:
 	public String getDestFileSyncLocalPath(){
@@ -201,6 +203,18 @@ public class ConvertJobData extends ConvartableJobData {
 		setToken("userCpu", multirequestToken);
 	}
 
+	// estimatedEffort:
+	public Integer getEstimatedEffort(){
+		return this.estimatedEffort;
+	}
+	public void setEstimatedEffort(Integer estimatedEffort){
+		this.estimatedEffort = estimatedEffort;
+	}
+
+	public void estimatedEffort(String multirequestToken){
+		setToken("estimatedEffort", multirequestToken);
+	}
+
 
 	public ConvertJobData() {
 		super();
@@ -223,6 +237,7 @@ public class ConvertJobData extends ConvartableJobData {
 		engineMessage = GsonParser.parseString(jsonObject.get("engineMessage"));
 		destFileSyncSharedPath = GsonParser.parseString(jsonObject.get("destFileSyncSharedPath"));
 		userCpu = GsonParser.parseInt(jsonObject.get("userCpu"));
+		estimatedEffort = GsonParser.parseInt(jsonObject.get("estimatedEffort"));
 
 	}
 
@@ -240,6 +255,7 @@ public class ConvertJobData extends ConvartableJobData {
 		kparams.add("engineMessage", this.engineMessage);
 		kparams.add("destFileSyncSharedPath", this.destFileSyncSharedPath);
 		kparams.add("userCpu", this.userCpu);
+		kparams.add("estimatedEffort", this.estimatedEffort);
 		return kparams;
 	}
 
@@ -275,6 +291,7 @@ public class ConvertJobData extends ConvartableJobData {
         dest.writeString(this.engineMessage);
         dest.writeString(this.destFileSyncSharedPath);
         dest.writeValue(this.userCpu);
+        dest.writeValue(this.estimatedEffort);
     }
 
     public ConvertJobData(Parcel in) {
@@ -294,6 +311,7 @@ public class ConvertJobData extends ConvartableJobData {
         this.engineMessage = in.readString();
         this.destFileSyncSharedPath = in.readString();
         this.userCpu = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.estimatedEffort = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 

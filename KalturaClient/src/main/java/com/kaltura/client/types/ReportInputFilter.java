@@ -86,6 +86,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String playlistIdIn();
 		String domainIn();
 		String canonicalUrlIn();
+		String virtualEventIdIn();
 	}
 
 	/**
@@ -235,6 +236,10 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * filter by canonical url
 	 */
 	private String canonicalUrlIn;
+	/**
+	 * filter by virtual event id
+	 */
+	private String virtualEventIdIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -700,6 +705,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("canonicalUrlIn", multirequestToken);
 	}
 
+	// virtualEventIdIn:
+	public String getVirtualEventIdIn(){
+		return this.virtualEventIdIn;
+	}
+	public void setVirtualEventIdIn(String virtualEventIdIn){
+		this.virtualEventIdIn = virtualEventIdIn;
+	}
+
+	public void virtualEventIdIn(String multirequestToken){
+		setToken("virtualEventIdIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -750,6 +767,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		playlistIdIn = GsonParser.parseString(jsonObject.get("playlistIdIn"));
 		domainIn = GsonParser.parseString(jsonObject.get("domainIn"));
 		canonicalUrlIn = GsonParser.parseString(jsonObject.get("canonicalUrlIn"));
+		virtualEventIdIn = GsonParser.parseString(jsonObject.get("virtualEventIdIn"));
 
 	}
 
@@ -795,6 +813,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("playlistIdIn", this.playlistIdIn);
 		kparams.add("domainIn", this.domainIn);
 		kparams.add("canonicalUrlIn", this.canonicalUrlIn);
+		kparams.add("virtualEventIdIn", this.virtualEventIdIn);
 		return kparams;
 	}
 
@@ -853,6 +872,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.playlistIdIn);
         dest.writeString(this.domainIn);
         dest.writeString(this.canonicalUrlIn);
+        dest.writeString(this.virtualEventIdIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -897,6 +917,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.playlistIdIn = in.readString();
         this.domainIn = in.readString();
         this.canonicalUrlIn = in.readString();
+        this.virtualEventIdIn = in.readString();
     }
 }
 
