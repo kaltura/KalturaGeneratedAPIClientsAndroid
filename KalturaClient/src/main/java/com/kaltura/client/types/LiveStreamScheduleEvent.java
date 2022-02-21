@@ -51,6 +51,7 @@ public class LiveStreamScheduleEvent extends BaseLiveScheduleEvent {
 		String postEndTime();
 		String preStartEntryId();
 		String postEndEntryId();
+		String isContentInterruptible();
 	}
 
 	/**
@@ -77,6 +78,10 @@ public class LiveStreamScheduleEvent extends BaseLiveScheduleEvent {
 	 * The entry id of the post end entry
 	 */
 	private String postEndEntryId;
+	/**
+	 * Detect whether "real" live can interrupt to the "main" content
+	 */
+	private Boolean isContentInterruptible;
 
 	// sourceEntryId:
 	public String getSourceEntryId(){
@@ -150,6 +155,18 @@ public class LiveStreamScheduleEvent extends BaseLiveScheduleEvent {
 		setToken("postEndEntryId", multirequestToken);
 	}
 
+	// isContentInterruptible:
+	public Boolean getIsContentInterruptible(){
+		return this.isContentInterruptible;
+	}
+	public void setIsContentInterruptible(Boolean isContentInterruptible){
+		this.isContentInterruptible = isContentInterruptible;
+	}
+
+	public void isContentInterruptible(String multirequestToken){
+		setToken("isContentInterruptible", multirequestToken);
+	}
+
 
 	public LiveStreamScheduleEvent() {
 		super();
@@ -167,6 +184,7 @@ public class LiveStreamScheduleEvent extends BaseLiveScheduleEvent {
 		postEndTime = GsonParser.parseInt(jsonObject.get("postEndTime"));
 		preStartEntryId = GsonParser.parseString(jsonObject.get("preStartEntryId"));
 		postEndEntryId = GsonParser.parseString(jsonObject.get("postEndEntryId"));
+		isContentInterruptible = GsonParser.parseBoolean(jsonObject.get("isContentInterruptible"));
 
 	}
 
@@ -179,6 +197,7 @@ public class LiveStreamScheduleEvent extends BaseLiveScheduleEvent {
 		kparams.add("postEndTime", this.postEndTime);
 		kparams.add("preStartEntryId", this.preStartEntryId);
 		kparams.add("postEndEntryId", this.postEndEntryId);
+		kparams.add("isContentInterruptible", this.isContentInterruptible);
 		return kparams;
 	}
 
@@ -204,6 +223,7 @@ public class LiveStreamScheduleEvent extends BaseLiveScheduleEvent {
         dest.writeValue(this.postEndTime);
         dest.writeString(this.preStartEntryId);
         dest.writeString(this.postEndEntryId);
+        dest.writeValue(this.isContentInterruptible);
     }
 
     public LiveStreamScheduleEvent(Parcel in) {
@@ -214,6 +234,7 @@ public class LiveStreamScheduleEvent extends BaseLiveScheduleEvent {
         this.postEndTime = (Integer)in.readValue(Integer.class.getClassLoader());
         this.preStartEntryId = in.readString();
         this.postEndEntryId = in.readString();
+        this.isContentInterruptible = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
