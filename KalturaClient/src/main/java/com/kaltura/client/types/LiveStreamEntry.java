@@ -58,6 +58,10 @@ public class LiveStreamEntry extends LiveEntry {
 		String secondarySecuredBroadcastingUrl();
 		String primaryRtspBroadcastingUrl();
 		String secondaryRtspBroadcastingUrl();
+		String primarySrtBroadcastingUrl();
+		String primarySrtStreamId();
+		String secondarySrtBroadcastingUrl();
+		String secondarySrtStreamId();
 		String streamName();
 		String streamUrl();
 		String hlsStreamUrl();
@@ -66,6 +70,7 @@ public class LiveStreamEntry extends LiveEntry {
 		String encodingIP2();
 		String streamPassword();
 		String streamUsername();
+		String srtPass();
 		String primaryServerNodeId();
 		String sipToken();
 		String sipSourceType();
@@ -89,6 +94,10 @@ public class LiveStreamEntry extends LiveEntry {
 	private String secondarySecuredBroadcastingUrl;
 	private String primaryRtspBroadcastingUrl;
 	private String secondaryRtspBroadcastingUrl;
+	private String primarySrtBroadcastingUrl;
+	private String primarySrtStreamId;
+	private String secondarySrtBroadcastingUrl;
+	private String secondarySrtStreamId;
 	private String streamName;
 	/**
 	 * The stream url
@@ -118,6 +127,7 @@ public class LiveStreamEntry extends LiveEntry {
 	 * The broadcast username
 	 */
 	private String streamUsername;
+	private String srtPass;
 	/**
 	 * The Streams primary server node id
 	 */
@@ -213,6 +223,54 @@ public class LiveStreamEntry extends LiveEntry {
 		setToken("secondaryRtspBroadcastingUrl", multirequestToken);
 	}
 
+	// primarySrtBroadcastingUrl:
+	public String getPrimarySrtBroadcastingUrl(){
+		return this.primarySrtBroadcastingUrl;
+	}
+	public void setPrimarySrtBroadcastingUrl(String primarySrtBroadcastingUrl){
+		this.primarySrtBroadcastingUrl = primarySrtBroadcastingUrl;
+	}
+
+	public void primarySrtBroadcastingUrl(String multirequestToken){
+		setToken("primarySrtBroadcastingUrl", multirequestToken);
+	}
+
+	// primarySrtStreamId:
+	public String getPrimarySrtStreamId(){
+		return this.primarySrtStreamId;
+	}
+	public void setPrimarySrtStreamId(String primarySrtStreamId){
+		this.primarySrtStreamId = primarySrtStreamId;
+	}
+
+	public void primarySrtStreamId(String multirequestToken){
+		setToken("primarySrtStreamId", multirequestToken);
+	}
+
+	// secondarySrtBroadcastingUrl:
+	public String getSecondarySrtBroadcastingUrl(){
+		return this.secondarySrtBroadcastingUrl;
+	}
+	public void setSecondarySrtBroadcastingUrl(String secondarySrtBroadcastingUrl){
+		this.secondarySrtBroadcastingUrl = secondarySrtBroadcastingUrl;
+	}
+
+	public void secondarySrtBroadcastingUrl(String multirequestToken){
+		setToken("secondarySrtBroadcastingUrl", multirequestToken);
+	}
+
+	// secondarySrtStreamId:
+	public String getSecondarySrtStreamId(){
+		return this.secondarySrtStreamId;
+	}
+	public void setSecondarySrtStreamId(String secondarySrtStreamId){
+		this.secondarySrtStreamId = secondarySrtStreamId;
+	}
+
+	public void secondarySrtStreamId(String multirequestToken){
+		setToken("secondarySrtStreamId", multirequestToken);
+	}
+
 	// streamName:
 	public String getStreamName(){
 		return this.streamName;
@@ -301,6 +359,18 @@ public class LiveStreamEntry extends LiveEntry {
 	public String getStreamUsername(){
 		return this.streamUsername;
 	}
+	// srtPass:
+	public String getSrtPass(){
+		return this.srtPass;
+	}
+	public void setSrtPass(String srtPass){
+		this.srtPass = srtPass;
+	}
+
+	public void srtPass(String multirequestToken){
+		setToken("srtPass", multirequestToken);
+	}
+
 	// primaryServerNodeId:
 	public Integer getPrimaryServerNodeId(){
 		return this.primaryServerNodeId;
@@ -333,6 +403,10 @@ public class LiveStreamEntry extends LiveEntry {
 		secondarySecuredBroadcastingUrl = GsonParser.parseString(jsonObject.get("secondarySecuredBroadcastingUrl"));
 		primaryRtspBroadcastingUrl = GsonParser.parseString(jsonObject.get("primaryRtspBroadcastingUrl"));
 		secondaryRtspBroadcastingUrl = GsonParser.parseString(jsonObject.get("secondaryRtspBroadcastingUrl"));
+		primarySrtBroadcastingUrl = GsonParser.parseString(jsonObject.get("primarySrtBroadcastingUrl"));
+		primarySrtStreamId = GsonParser.parseString(jsonObject.get("primarySrtStreamId"));
+		secondarySrtBroadcastingUrl = GsonParser.parseString(jsonObject.get("secondarySrtBroadcastingUrl"));
+		secondarySrtStreamId = GsonParser.parseString(jsonObject.get("secondarySrtStreamId"));
 		streamName = GsonParser.parseString(jsonObject.get("streamName"));
 		streamUrl = GsonParser.parseString(jsonObject.get("streamUrl"));
 		hlsStreamUrl = GsonParser.parseString(jsonObject.get("hlsStreamUrl"));
@@ -341,6 +415,7 @@ public class LiveStreamEntry extends LiveEntry {
 		encodingIP2 = GsonParser.parseString(jsonObject.get("encodingIP2"));
 		streamPassword = GsonParser.parseString(jsonObject.get("streamPassword"));
 		streamUsername = GsonParser.parseString(jsonObject.get("streamUsername"));
+		srtPass = GsonParser.parseString(jsonObject.get("srtPass"));
 		primaryServerNodeId = GsonParser.parseInt(jsonObject.get("primaryServerNodeId"));
 		sipToken = GsonParser.parseString(jsonObject.get("sipToken"));
 		sipSourceType = SipSourceType.get(GsonParser.parseInt(jsonObject.get("sipSourceType")));
@@ -357,6 +432,10 @@ public class LiveStreamEntry extends LiveEntry {
 		kparams.add("secondarySecuredBroadcastingUrl", this.secondarySecuredBroadcastingUrl);
 		kparams.add("primaryRtspBroadcastingUrl", this.primaryRtspBroadcastingUrl);
 		kparams.add("secondaryRtspBroadcastingUrl", this.secondaryRtspBroadcastingUrl);
+		kparams.add("primarySrtBroadcastingUrl", this.primarySrtBroadcastingUrl);
+		kparams.add("primarySrtStreamId", this.primarySrtStreamId);
+		kparams.add("secondarySrtBroadcastingUrl", this.secondarySrtBroadcastingUrl);
+		kparams.add("secondarySrtStreamId", this.secondarySrtStreamId);
 		kparams.add("streamName", this.streamName);
 		kparams.add("streamUrl", this.streamUrl);
 		kparams.add("hlsStreamUrl", this.hlsStreamUrl);
@@ -364,6 +443,7 @@ public class LiveStreamEntry extends LiveEntry {
 		kparams.add("encodingIP1", this.encodingIP1);
 		kparams.add("encodingIP2", this.encodingIP2);
 		kparams.add("streamPassword", this.streamPassword);
+		kparams.add("srtPass", this.srtPass);
 		return kparams;
 	}
 
@@ -397,6 +477,10 @@ public class LiveStreamEntry extends LiveEntry {
         dest.writeString(this.secondarySecuredBroadcastingUrl);
         dest.writeString(this.primaryRtspBroadcastingUrl);
         dest.writeString(this.secondaryRtspBroadcastingUrl);
+        dest.writeString(this.primarySrtBroadcastingUrl);
+        dest.writeString(this.primarySrtStreamId);
+        dest.writeString(this.secondarySrtBroadcastingUrl);
+        dest.writeString(this.secondarySrtStreamId);
         dest.writeString(this.streamName);
         dest.writeString(this.streamUrl);
         dest.writeString(this.hlsStreamUrl);
@@ -405,6 +489,7 @@ public class LiveStreamEntry extends LiveEntry {
         dest.writeString(this.encodingIP2);
         dest.writeString(this.streamPassword);
         dest.writeString(this.streamUsername);
+        dest.writeString(this.srtPass);
         dest.writeValue(this.primaryServerNodeId);
         dest.writeString(this.sipToken);
         dest.writeInt(this.sipSourceType == null ? -1 : this.sipSourceType.ordinal());
@@ -425,6 +510,10 @@ public class LiveStreamEntry extends LiveEntry {
         this.secondarySecuredBroadcastingUrl = in.readString();
         this.primaryRtspBroadcastingUrl = in.readString();
         this.secondaryRtspBroadcastingUrl = in.readString();
+        this.primarySrtBroadcastingUrl = in.readString();
+        this.primarySrtStreamId = in.readString();
+        this.secondarySrtBroadcastingUrl = in.readString();
+        this.secondarySrtStreamId = in.readString();
         this.streamName = in.readString();
         this.streamUrl = in.readString();
         this.hlsStreamUrl = in.readString();
@@ -433,6 +522,7 @@ public class LiveStreamEntry extends LiveEntry {
         this.encodingIP2 = in.readString();
         this.streamPassword = in.readString();
         this.streamUsername = in.readString();
+        this.srtPass = in.readString();
         this.primaryServerNodeId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.sipToken = in.readString();
         int tmpSipSourceType = in.readInt();

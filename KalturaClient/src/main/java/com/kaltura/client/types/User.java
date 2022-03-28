@@ -64,6 +64,7 @@ public class User extends BaseUser {
 		String company();
 		String ksPrivileges();
 		String encryptedSeed();
+		String isSsoExcluded();
 	}
 
 	private UserType type;
@@ -83,6 +84,7 @@ public class User extends BaseUser {
 	private String company;
 	private String ksPrivileges;
 	private String encryptedSeed;
+	private Boolean isSsoExcluded;
 
 	// type:
 	public UserType getType(){
@@ -272,6 +274,18 @@ public class User extends BaseUser {
 	public String getEncryptedSeed(){
 		return this.encryptedSeed;
 	}
+	// isSsoExcluded:
+	public Boolean getIsSsoExcluded(){
+		return this.isSsoExcluded;
+	}
+	public void setIsSsoExcluded(Boolean isSsoExcluded){
+		this.isSsoExcluded = isSsoExcluded;
+	}
+
+	public void isSsoExcluded(String multirequestToken){
+		setToken("isSsoExcluded", multirequestToken);
+	}
+
 
 	public User() {
 		super();
@@ -300,6 +314,7 @@ public class User extends BaseUser {
 		company = GsonParser.parseString(jsonObject.get("company"));
 		ksPrivileges = GsonParser.parseString(jsonObject.get("ksPrivileges"));
 		encryptedSeed = GsonParser.parseString(jsonObject.get("encryptedSeed"));
+		isSsoExcluded = GsonParser.parseBoolean(jsonObject.get("isSsoExcluded"));
 
 	}
 
@@ -321,6 +336,7 @@ public class User extends BaseUser {
 		kparams.add("title", this.title);
 		kparams.add("company", this.company);
 		kparams.add("ksPrivileges", this.ksPrivileges);
+		kparams.add("isSsoExcluded", this.isSsoExcluded);
 		return kparams;
 	}
 
@@ -357,6 +373,7 @@ public class User extends BaseUser {
         dest.writeString(this.company);
         dest.writeString(this.ksPrivileges);
         dest.writeString(this.encryptedSeed);
+        dest.writeValue(this.isSsoExcluded);
     }
 
     public User(Parcel in) {
@@ -380,6 +397,7 @@ public class User extends BaseUser {
         this.company = in.readString();
         this.ksPrivileges = in.readString();
         this.encryptedSeed = in.readString();
+        this.isSsoExcluded = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
