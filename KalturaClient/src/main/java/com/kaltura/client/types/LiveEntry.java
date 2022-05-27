@@ -126,7 +126,7 @@ public abstract class LiveEntry extends MediaEntry {
 	 * The time (unix timestamp in milliseconds) in which the entry broadcast started
 	  or 0 when the entry is off the air
 	 */
-	private Double currentBroadcastStartTime;
+	private Integer currentBroadcastStartTime;
 	private LiveEntryRecordingOptions recordingOptions;
 	/**
 	 * the status of the entry of type EntryServerNodeStatus
@@ -257,10 +257,10 @@ public abstract class LiveEntry extends MediaEntry {
 		return this.lastBroadcast;
 	}
 	// currentBroadcastStartTime:
-	public Double getCurrentBroadcastStartTime(){
+	public Integer getCurrentBroadcastStartTime(){
 		return this.currentBroadcastStartTime;
 	}
-	public void setCurrentBroadcastStartTime(Double currentBroadcastStartTime){
+	public void setCurrentBroadcastStartTime(Integer currentBroadcastStartTime){
 		this.currentBroadcastStartTime = currentBroadcastStartTime;
 	}
 
@@ -366,7 +366,7 @@ public abstract class LiveEntry extends MediaEntry {
 		publishConfigurations = GsonParser.parseArray(jsonObject.getAsJsonArray("publishConfigurations"), LiveStreamPushPublishConfiguration.class);
 		firstBroadcast = GsonParser.parseInt(jsonObject.get("firstBroadcast"));
 		lastBroadcast = GsonParser.parseInt(jsonObject.get("lastBroadcast"));
-		currentBroadcastStartTime = GsonParser.parseDouble(jsonObject.get("currentBroadcastStartTime"));
+		currentBroadcastStartTime = GsonParser.parseInt(jsonObject.get("currentBroadcastStartTime"));
 		recordingOptions = GsonParser.parseObject(jsonObject.getAsJsonObject("recordingOptions"), LiveEntryRecordingOptions.class);
 		liveStatus = EntryServerNodeStatus.get(GsonParser.parseInt(jsonObject.get("liveStatus")));
 		segmentDuration = GsonParser.parseInt(jsonObject.get("segmentDuration"));
@@ -460,7 +460,7 @@ public abstract class LiveEntry extends MediaEntry {
         }
         this.firstBroadcast = (Integer)in.readValue(Integer.class.getClassLoader());
         this.lastBroadcast = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.currentBroadcastStartTime = (Double)in.readValue(Double.class.getClassLoader());
+        this.currentBroadcastStartTime = (Integer)in.readValue(Integer.class.getClassLoader());
         this.recordingOptions = in.readParcelable(LiveEntryRecordingOptions.class.getClassLoader());
         int tmpLiveStatus = in.readInt();
         this.liveStatus = tmpLiveStatus == -1 ? null : EntryServerNodeStatus.values()[tmpLiveStatus];
