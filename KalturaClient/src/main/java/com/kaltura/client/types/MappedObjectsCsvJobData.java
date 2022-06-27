@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.types.ExportToCsvOptions;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 import com.kaltura.client.utils.request.RequestBuilder;
@@ -51,6 +52,7 @@ public abstract class MappedObjectsCsvJobData extends ExportCsvJobData {
 		String metadataProfileId();
 		RequestBuilder.ListTokenizer<CsvAdditionalFieldInfo.Tokenizer> additionalFields();
 		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> mappedFields();
+		ExportToCsvOptions.Tokenizer options();
 	}
 
 	/**
@@ -65,6 +67,7 @@ public abstract class MappedObjectsCsvJobData extends ExportCsvJobData {
 	 * Array of header names and their mapped user fields
 	 */
 	private List<KeyValue> mappedFields;
+	private ExportToCsvOptions options;
 
 	// metadataProfileId:
 	public Integer getMetadataProfileId(){
@@ -94,6 +97,14 @@ public abstract class MappedObjectsCsvJobData extends ExportCsvJobData {
 		this.mappedFields = mappedFields;
 	}
 
+	// options:
+	public ExportToCsvOptions getOptions(){
+		return this.options;
+	}
+	public void setOptions(ExportToCsvOptions options){
+		this.options = options;
+	}
+
 
 	public MappedObjectsCsvJobData() {
 		super();
@@ -108,6 +119,7 @@ public abstract class MappedObjectsCsvJobData extends ExportCsvJobData {
 		metadataProfileId = GsonParser.parseInt(jsonObject.get("metadataProfileId"));
 		additionalFields = GsonParser.parseArray(jsonObject.getAsJsonArray("additionalFields"), CsvAdditionalFieldInfo.class);
 		mappedFields = GsonParser.parseArray(jsonObject.getAsJsonArray("mappedFields"), KeyValue.class);
+		options = GsonParser.parseObject(jsonObject.getAsJsonObject("options"), ExportToCsvOptions.class);
 
 	}
 
@@ -117,6 +129,7 @@ public abstract class MappedObjectsCsvJobData extends ExportCsvJobData {
 		kparams.add("metadataProfileId", this.metadataProfileId);
 		kparams.add("additionalFields", this.additionalFields);
 		kparams.add("mappedFields", this.mappedFields);
+		kparams.add("options", this.options);
 		return kparams;
 	}
 
@@ -137,6 +150,7 @@ public abstract class MappedObjectsCsvJobData extends ExportCsvJobData {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeParcelable(this.options, flags);
     }
 
     public MappedObjectsCsvJobData(Parcel in) {
@@ -152,6 +166,7 @@ public abstract class MappedObjectsCsvJobData extends ExportCsvJobData {
             this.mappedFields = new ArrayList<>();
             in.readList(this.mappedFields, KeyValue.class.getClassLoader());
         }
+        this.options = in.readParcelable(ExportToCsvOptions.class.getClassLoader());
     }
 }
 
