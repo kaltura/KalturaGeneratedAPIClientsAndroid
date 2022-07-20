@@ -1,13 +1,5 @@
 package com.kaltura.player;
 
-import java.util.ArrayList;
-import com.kaltura.client.types.WidevineFlavorAsset;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
-import org.apache.commons.codec.binary.Base64;
-
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -32,7 +24,7 @@ import android.widget.TextView;
 import com.kaltura.activity.R;
 import com.kaltura.boxAdapter.BoxAdapterRate;
 import com.kaltura.client.types.FlavorAsset;
-import com.kaltura.services.AdminUser;
+import com.kaltura.client.types.WidevineFlavorAsset;
 import com.kaltura.utils.ApiHelper;
 import com.kaltura.utils.Utils;
 import com.kaltura.widevine.WidevineHandler;
@@ -41,6 +33,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Performs the mapping of elements of the player, handling control events
@@ -458,7 +455,7 @@ public class ViewPlayer implements Observer, OnClickListener, SeekBar.OnSeekBarC
 
         String url;
         String host = (ApiHelper.getCdnHost() != null ) ? ApiHelper.getCdnHost() : ApiHelper.getHost();
-        String appName64 = new String(Base64.encodeBase64(activity.getString(R.string.app_name).getBytes()));
+        String appName64 = activity.getString(R.string.app_name);
         Log.w(TAG, "versionName: " + VERSION.SDK_INT);
         if (flavor instanceof WidevineFlavorAsset) {
         	WidevineHandler wvHandler = new WidevineHandler(activity, partnerId, entryId, flavorId);

@@ -44,22 +44,7 @@ import com.kaltura.client.utils.request.RequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**
- * Manage response profiles
- * 
- * @param addResponseProfile 
- * @param id 
- * @param profile 
- * @param id 
- * @param id 
- * @param filter 
- * @param pager 
- * @param options 
- * @param id 
- * @param updateResponseProfile 
- * @param id 
- * @param status 
- */
+
 public class ResponseProfileService {
 	
 	public static class AddResponseProfileBuilder extends RequestBuilder<ResponseProfile, ResponseProfile.Tokenizer, AddResponseProfileBuilder> {

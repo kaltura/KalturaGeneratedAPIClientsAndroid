@@ -45,33 +45,7 @@ import com.kaltura.client.utils.request.ServeRequestBuilder;
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 
-/**
- * Retrieve information and invoke actions on caption Asset
- * 
- * @param entryId 
- * @param captionAsset 
- * @param captionAssetId 
- * @param assetId 
- * @param storageProfileId 
- * @param captionAssetId 
- * @param id 
- * @param id 
- * @param storageId 
- * @param filter 
- * @param pager 
- * @param captionAssetId 
- * @param entryId 
- * @param captionParamId if not set, default caption will be used.
- * @param captionAssetId 
- * @param segmentDuration 
- * @param segmentIndex 
- * @param localTimestamp 
- * @param captionAssetId 
- * @param id 
- * @param contentResource 
- * @param id 
- * @param captionAsset 
- */
+
 public class CaptionAssetService {
 	
 	public static class AddCaptionAssetBuilder extends RequestBuilder<CaptionAsset, CaptionAsset.Tokenizer, AddCaptionAssetBuilder> {

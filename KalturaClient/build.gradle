@@ -2,12 +2,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 30
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -36,14 +36,44 @@ android {
     }
 }
 
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    exclude '**/*.kt'
+    include '**/**'
+}
+
+afterEvaluate {
+    androidJavadocs.classpath += files(android.libraryVariants.collect { variant ->
+        variant.javaCompileProvider.get().classpath.files
+    })
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}
+
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'commons-codec:commons-codec:1.4'
-    compile 'org.codeartisans:org.json:20130603'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.squareup.okhttp3:okhttp:3.7.0'
-    compile 'com.squareup.okio:okio:1.12.0'
-    compile 'com.android.support:appcompat-v7:25.4.0'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.awaitility:awaitility:3.0.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'commons-codec:commons-codec:1.10'
+    implementation 'org.codeartisans:org.json:20130603'
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+    implementation 'com.squareup.okio:okio:2.9.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.awaitility:awaitility:3.0.0'
 }

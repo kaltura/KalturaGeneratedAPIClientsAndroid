@@ -103,7 +103,7 @@ public class ZoomIntegrationSettingResponse extends ListResponse {
     }
 
     public ZoomIntegrationSettingResponse(Parcel in) {
-        super(in);
+        //super(in);
         int objectsSize = in.readInt();
         if( objectsSize > -1) {
             this.objects = new ArrayList<>();

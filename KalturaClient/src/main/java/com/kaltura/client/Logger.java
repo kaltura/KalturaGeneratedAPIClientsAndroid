@@ -27,21 +27,36 @@
 // ===================================================================================================
 package com.kaltura.client;
 
-abstract public class Logger
+abstract public class Logger implements ILogger
 {
-	// Creation & retrieval methods:
-	public static ILogger getLogger(String name)
-	{
-		return new LoggerLog4j(name);
-	}
-	
-	public static ILogger getLogger(Class<?> clazz)
-	{
-		return getLogger(clazz.getName());
-	}
-	
-	public boolean isEnabled()
-	{
-		return true;
-	}
+    // Creation & retrieval methods:
+    public static Logger getLogger(String name)
+    {
+        return LoggerAndroid.getLogger(name);
+    }
+
+    public static Logger getLogger(Class<?> clazz)
+    {
+        return getLogger(clazz.getName());
+    }
+
+    public boolean isEnabled()
+    {
+        return true;
+    }
+
+    // printing methods:
+    abstract public void trace(Object message);
+    abstract public void debug(Object message);
+    abstract public void info(Object message);
+    abstract public void warn(Object message);
+    abstract public void error(Object message);
+    abstract public void fatal(Object message);
+
+    abstract public void trace(Object message, Throwable t);
+    abstract public void debug(Object message, Throwable t);
+    abstract public void info(Object message, Throwable t);
+    abstract public void warn(Object message, Throwable t);
+    abstract public void error(Object message, Throwable t);
+    abstract public void fatal(Object message, Throwable t);
 }
