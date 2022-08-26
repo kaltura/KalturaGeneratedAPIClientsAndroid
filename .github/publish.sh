@@ -9,7 +9,6 @@ fail() {
  
  # Create javadoc jar, sources jar, pom
 ./gradlew KalturaClient:build
-./gradlew KalturaClient:publishReleasePublicationToMavenLocal
 
 # Upload
-./gradlew publishReleasePublicationToSonatypeRepository --max-workers 1 #closeAndReleaseSonatypeStagingRepository
+./gradlew KalturaClient:publishReleasePublicationToSonatypeRepository --max-workers 1 #closeAndReleaseSonatypeStagingRepository
