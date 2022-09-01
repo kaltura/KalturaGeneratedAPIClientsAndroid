@@ -11,4 +11,4 @@ fail() {
 ./gradlew KalturaClient:build
 
 # Upload
-./gradlew KalturaClient:publishToSonatype #closeAndReleaseSonatypeStagingRepository
+./gradlew KalturaClient:publishToSonatype closeAndReleaseSonatypeStagingRepository
