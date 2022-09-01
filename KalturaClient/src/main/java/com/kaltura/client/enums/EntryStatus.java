@@ -28,7 +28,7 @@
 package com.kaltura.client.enums;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -36,9 +36,9 @@ package com.kaltura.client.enums;
 public enum EntryStatus implements EnumAsString {
 	ERROR_IMPORTING("-2"),
 	ERROR_CONVERTING("-1"),
+	SCAN_FAILURE("virusScan.ScanFailure"),
 	IMPORT("0"),
 	INFECTED("virusScan.Infected"),
-	SCAN_FAILURE("virusScan.ScanFailure"),
 	PRECONVERT("1"),
 	READY("2"),
 	DELETED("3"),

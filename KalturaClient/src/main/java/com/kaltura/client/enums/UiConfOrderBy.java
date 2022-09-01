@@ -28,19 +28,15 @@
 package com.kaltura.client.enums;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
 public enum UiConfOrderBy implements EnumAsString {
 	CREATED_AT_ASC("+createdAt"),
-	ID_ASC("+id"),
-	NAME_ASC("+name"),
 	UPDATED_AT_ASC("+updatedAt"),
 	CREATED_AT_DESC("-createdAt"),
-	ID_DESC("-id"),
-	NAME_DESC("-name"),
 	UPDATED_AT_DESC("-updatedAt");
 
 	private String value;

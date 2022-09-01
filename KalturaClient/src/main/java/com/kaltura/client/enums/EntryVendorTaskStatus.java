@@ -28,7 +28,7 @@
 package com.kaltura.client.enums;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -41,8 +41,7 @@ public enum EntryVendorTaskStatus implements EnumAsInt {
 	REJECTED(5),
 	ERROR(6),
 	ABORTED(7),
-	PENDING_ENTRY_READY(8),
-	SCHEDULED(9);
+	PENDING_ENTRY_READY(8);
 
 	private int value;
 

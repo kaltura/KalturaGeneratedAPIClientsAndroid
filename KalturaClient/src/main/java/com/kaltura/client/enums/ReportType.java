@@ -28,7 +28,7 @@
 package com.kaltura.client.enums;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -96,10 +96,6 @@ public enum ReportType implements EnumAsString {
 	SELF_SERVE_USAGE("60"),
 	FLAVOR_PARAMS_TRANSCODING_USAGE("61"),
 	PLAYER_HIGHLIGHTS("62"),
-	PARTNER_USAGE_HIGHLIGHTS("63"),
-	CDN_BANDWIDTH_USAGE("64"),
-	REACH_CATALOG_USAGE("65"),
-	REACH_PROFILE_USAGE("66"),
 	PARTNER_USAGE("201"),
 	MAP_OVERLAY_COUNTRY_REALTIME("10001"),
 	MAP_OVERLAY_REGION_REALTIME("10002"),

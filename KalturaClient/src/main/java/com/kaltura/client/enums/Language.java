@@ -28,7 +28,7 @@
 package com.kaltura.client.enums;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -229,7 +229,7 @@ public enum Language implements EnumAsString {
 	HNI("Hani"),
 	HA("Hausa"),
 	HAW("Hawaiian"),
-	IW("Hebrew"),
+	HE("Hebrew"),
 	HEI("Heiltsuk"),
 	HID("Hidatsa"),
 	HIL("Hiligaynon"),
@@ -243,7 +243,7 @@ public enum Language implements EnumAsString {
 	KPO("Ikposo"),
 	ILO("Iloko"),
 	SMN("Inari Sami"),
-	IN("Indonesian"),
+	ID("Indonesian"),
 	IZH("Ingrian"),
 	INH("Ingush"),
 	IA("Interlingua"),

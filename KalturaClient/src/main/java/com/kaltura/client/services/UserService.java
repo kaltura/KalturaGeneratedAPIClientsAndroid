@@ -51,7 +51,7 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -633,10 +633,10 @@ public class UserService {
 		return new LoginByLoginIdUserBuilder(loginId, password, partnerId, expiry, privileges, otp);
 	}
 	
-	public static class LoginDataResetPasswordUserBuilder extends RequestBuilder<User, User.Tokenizer, LoginDataResetPasswordUserBuilder> {
+	public static class LoginDataResetPasswordUserBuilder extends NullRequestBuilder {
 		
 		public LoginDataResetPasswordUserBuilder(String loginDataId, String newPassword) {
-			super(User.class, "user", "loginDataResetPassword");
+			super("user", "loginDataResetPassword");
 			params.add("loginDataId", loginDataId);
 			params.add("newPassword", newPassword);
 		}
