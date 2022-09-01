@@ -11,4 +11,4 @@ fail() {
 ./gradlew KalturaClient:build
 
 # Upload
-./gradlew KalturaClient:publishReleasePublicationToSonatypeRepository --max-workers 1 #closeAndReleaseSonatypeStagingRepository
+./gradlew KalturaClient:publishToSonatype #closeAndReleaseSonatypeStagingRepository
