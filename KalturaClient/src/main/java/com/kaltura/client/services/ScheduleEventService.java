@@ -33,8 +33,6 @@ import com.kaltura.client.enums.ScheduleEventConflictType;
 import com.kaltura.client.types.BulkUpload;
 import com.kaltura.client.types.BulkUploadScheduleEventJobData;
 import com.kaltura.client.types.FilterPager;
-import com.kaltura.client.types.LiveFeature;
-import com.kaltura.client.types.LiveStreamScheduleEvent;
 import com.kaltura.client.types.ScheduleEvent;
 import com.kaltura.client.types.ScheduleEventFilter;
 import com.kaltura.client.utils.request.ListResponseRequestBuilder;
@@ -44,7 +42,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -68,9 +66,6 @@ import java.io.InputStream;
  * @param pager 
  * @param scheduleEventId 
  * @param scheduleEvent Id
- * @param scheduledEventId 
- * @param featureName 
- * @param liveFeature 
  */
 public class ScheduleEventService {
 	
@@ -293,34 +288,5 @@ public class ScheduleEventService {
 	 */
     public static UpdateScheduleEventBuilder update(int scheduleEventId, ScheduleEvent scheduleEvent)  {
 		return new UpdateScheduleEventBuilder(scheduleEventId, scheduleEvent);
-	}
-	
-	public static class UpdateLiveFeatureScheduleEventBuilder extends RequestBuilder<LiveStreamScheduleEvent, LiveStreamScheduleEvent.Tokenizer, UpdateLiveFeatureScheduleEventBuilder> {
-		
-		public UpdateLiveFeatureScheduleEventBuilder(int scheduledEventId, String featureName, LiveFeature liveFeature) {
-			super(LiveStreamScheduleEvent.class, "schedule_scheduleevent", "updateLiveFeature");
-			params.add("scheduledEventId", scheduledEventId);
-			params.add("featureName", featureName);
-			params.add("liveFeature", liveFeature);
-		}
-		
-		public void scheduledEventId(String multirequestToken) {
-			params.add("scheduledEventId", multirequestToken);
-		}
-		
-		public void featureName(String multirequestToken) {
-			params.add("featureName", multirequestToken);
-		}
-	}
-
-	/**
-	 * Add feature to live event
-	 * 
-	 * @param scheduledEventId 
-	 * @param featureName 
-	 * @param liveFeature 
-	 */
-    public static UpdateLiveFeatureScheduleEventBuilder updateLiveFeature(int scheduledEventId, String featureName, LiveFeature liveFeature)  {
-		return new UpdateLiveFeatureScheduleEventBuilder(scheduledEventId, featureName, liveFeature);
 	}
 }

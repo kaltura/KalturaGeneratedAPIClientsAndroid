@@ -31,7 +31,7 @@ import com.kaltura.client.utils.request.ConnectionConfiguration;
 import com.kaltura.client.types.BaseResponseProfile;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -43,8 +43,8 @@ public class Client extends ClientBase {
 	public Client(ConnectionConfiguration config) {
 		super(config);
 		
-		this.setClientTag("java:22-08-08");
-		this.setApiVersion("18.11.0");
+		this.setClientTag("java:22-09-01");
+		this.setApiVersion("18.10.0");
 		this.clientConfiguration.put("format", 1); // JSON
 	}
 	
