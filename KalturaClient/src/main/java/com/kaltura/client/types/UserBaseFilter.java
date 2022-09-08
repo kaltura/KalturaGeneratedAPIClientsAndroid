@@ -46,6 +46,8 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public abstract class UserBaseFilter extends BaseUserFilter {
 	
 	public interface Tokenizer extends BaseUserFilter.Tokenizer {
+		String idEqual();
+		String idIn();
 		String typeEqual();
 		String typeIn();
 		String isAdminEqual();
@@ -53,11 +55,37 @@ public abstract class UserBaseFilter extends BaseUserFilter {
 		String lastNameStartsWith();
 	}
 
+	private String idEqual;
+	private String idIn;
 	private UserType typeEqual;
 	private String typeIn;
 	private Boolean isAdminEqual;
 	private String firstNameStartsWith;
 	private String lastNameStartsWith;
+
+	// idEqual:
+	public String getIdEqual(){
+		return this.idEqual;
+	}
+	public void setIdEqual(String idEqual){
+		this.idEqual = idEqual;
+	}
+
+	public void idEqual(String multirequestToken){
+		setToken("idEqual", multirequestToken);
+	}
+
+	// idIn:
+	public String getIdIn(){
+		return this.idIn;
+	}
+	public void setIdIn(String idIn){
+		this.idIn = idIn;
+	}
+
+	public void idIn(String multirequestToken){
+		setToken("idIn", multirequestToken);
+	}
 
 	// typeEqual:
 	public UserType getTypeEqual(){
@@ -130,6 +158,8 @@ public abstract class UserBaseFilter extends BaseUserFilter {
 		if(jsonObject == null) return;
 
 		// set members values:
+		idEqual = GsonParser.parseString(jsonObject.get("idEqual"));
+		idIn = GsonParser.parseString(jsonObject.get("idIn"));
 		typeEqual = UserType.get(GsonParser.parseInt(jsonObject.get("typeEqual")));
 		typeIn = GsonParser.parseString(jsonObject.get("typeIn"));
 		isAdminEqual = GsonParser.parseBoolean(jsonObject.get("isAdminEqual"));
@@ -141,6 +171,8 @@ public abstract class UserBaseFilter extends BaseUserFilter {
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaUserBaseFilter");
+		kparams.add("idEqual", this.idEqual);
+		kparams.add("idIn", this.idIn);
 		kparams.add("typeEqual", this.typeEqual);
 		kparams.add("typeIn", this.typeIn);
 		kparams.add("isAdminEqual", this.isAdminEqual);
@@ -153,6 +185,8 @@ public abstract class UserBaseFilter extends BaseUserFilter {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
+        dest.writeString(this.idEqual);
+        dest.writeString(this.idIn);
         dest.writeInt(this.typeEqual == null ? -1 : this.typeEqual.ordinal());
         dest.writeString(this.typeIn);
         dest.writeValue(this.isAdminEqual);
@@ -162,6 +196,8 @@ public abstract class UserBaseFilter extends BaseUserFilter {
 
     public UserBaseFilter(Parcel in) {
         super(in);
+        this.idEqual = in.readString();
+        this.idIn = in.readString();
         int tmpTypeEqual = in.readInt();
         this.typeEqual = tmpTypeEqual == -1 ? null : UserType.values()[tmpTypeEqual];
         this.typeIn = in.readString();
