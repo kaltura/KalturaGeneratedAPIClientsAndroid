@@ -48,6 +48,7 @@ public class AccessControlModifyRequestHostRegexAction extends RuleAction {
 		String pattern();
 		String replacement();
 		String replacmenServerNodeId();
+		String checkAliveTimeoutMs();
 	}
 
 	/**
@@ -62,6 +63,11 @@ public class AccessControlModifyRequestHostRegexAction extends RuleAction {
 	 * serverNodeId to generate replacment host from
 	 */
 	private Integer replacmenServerNodeId;
+	/**
+	 * Set this value if you want to check if the server is accessible before
+	  redirecting traffic to it (this value is in milliseconds)
+	 */
+	private Integer checkAliveTimeoutMs;
 
 	// pattern:
 	public String getPattern(){
@@ -99,6 +105,18 @@ public class AccessControlModifyRequestHostRegexAction extends RuleAction {
 		setToken("replacmenServerNodeId", multirequestToken);
 	}
 
+	// checkAliveTimeoutMs:
+	public Integer getCheckAliveTimeoutMs(){
+		return this.checkAliveTimeoutMs;
+	}
+	public void setCheckAliveTimeoutMs(Integer checkAliveTimeoutMs){
+		this.checkAliveTimeoutMs = checkAliveTimeoutMs;
+	}
+
+	public void checkAliveTimeoutMs(String multirequestToken){
+		setToken("checkAliveTimeoutMs", multirequestToken);
+	}
+
 
 	public AccessControlModifyRequestHostRegexAction() {
 		super();
@@ -113,6 +131,7 @@ public class AccessControlModifyRequestHostRegexAction extends RuleAction {
 		pattern = GsonParser.parseString(jsonObject.get("pattern"));
 		replacement = GsonParser.parseString(jsonObject.get("replacement"));
 		replacmenServerNodeId = GsonParser.parseInt(jsonObject.get("replacmenServerNodeId"));
+		checkAliveTimeoutMs = GsonParser.parseInt(jsonObject.get("checkAliveTimeoutMs"));
 
 	}
 
@@ -122,6 +141,7 @@ public class AccessControlModifyRequestHostRegexAction extends RuleAction {
 		kparams.add("pattern", this.pattern);
 		kparams.add("replacement", this.replacement);
 		kparams.add("replacmenServerNodeId", this.replacmenServerNodeId);
+		kparams.add("checkAliveTimeoutMs", this.checkAliveTimeoutMs);
 		return kparams;
 	}
 
@@ -144,6 +164,7 @@ public class AccessControlModifyRequestHostRegexAction extends RuleAction {
         dest.writeString(this.pattern);
         dest.writeString(this.replacement);
         dest.writeValue(this.replacmenServerNodeId);
+        dest.writeValue(this.checkAliveTimeoutMs);
     }
 
     public AccessControlModifyRequestHostRegexAction(Parcel in) {
@@ -151,6 +172,7 @@ public class AccessControlModifyRequestHostRegexAction extends RuleAction {
         this.pattern = in.readString();
         this.replacement = in.readString();
         this.replacmenServerNodeId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.checkAliveTimeoutMs = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
