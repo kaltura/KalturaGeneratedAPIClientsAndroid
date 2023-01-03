@@ -51,6 +51,7 @@ public class User extends BaseUser {
 		String dateOfBirth();
 		String gender();
 		String isAdmin();
+		String isGuest();
 		String roleIds();
 		String roleNames();
 		String isAccountOwner();
@@ -65,12 +66,14 @@ public class User extends BaseUser {
 		String ksPrivileges();
 		String encryptedSeed();
 		String isSsoExcluded();
+		String externalId();
 	}
 
 	private UserType type;
 	private Integer dateOfBirth;
 	private Gender gender;
 	private Boolean isAdmin;
+	private Boolean isGuest;
 	private String roleIds;
 	private String roleNames;
 	private Boolean isAccountOwner;
@@ -85,6 +88,11 @@ public class User extends BaseUser {
 	private String ksPrivileges;
 	private String encryptedSeed;
 	private Boolean isSsoExcluded;
+	/**
+	 * This field should be sent instead of the id field whenever you want to work with
+	  hashed user ids
+	 */
+	private String externalId;
 
 	// type:
 	public UserType getType(){
@@ -132,6 +140,18 @@ public class User extends BaseUser {
 
 	public void isAdmin(String multirequestToken){
 		setToken("isAdmin", multirequestToken);
+	}
+
+	// isGuest:
+	public Boolean getIsGuest(){
+		return this.isGuest;
+	}
+	public void setIsGuest(Boolean isGuest){
+		this.isGuest = isGuest;
+	}
+
+	public void isGuest(String multirequestToken){
+		setToken("isGuest", multirequestToken);
 	}
 
 	// roleIds:
@@ -286,6 +306,18 @@ public class User extends BaseUser {
 		setToken("isSsoExcluded", multirequestToken);
 	}
 
+	// externalId:
+	public String getExternalId(){
+		return this.externalId;
+	}
+	public void setExternalId(String externalId){
+		this.externalId = externalId;
+	}
+
+	public void externalId(String multirequestToken){
+		setToken("externalId", multirequestToken);
+	}
+
 
 	public User() {
 		super();
@@ -301,6 +333,7 @@ public class User extends BaseUser {
 		dateOfBirth = GsonParser.parseInt(jsonObject.get("dateOfBirth"));
 		gender = Gender.get(GsonParser.parseInt(jsonObject.get("gender")));
 		isAdmin = GsonParser.parseBoolean(jsonObject.get("isAdmin"));
+		isGuest = GsonParser.parseBoolean(jsonObject.get("isGuest"));
 		roleIds = GsonParser.parseString(jsonObject.get("roleIds"));
 		roleNames = GsonParser.parseString(jsonObject.get("roleNames"));
 		isAccountOwner = GsonParser.parseBoolean(jsonObject.get("isAccountOwner"));
@@ -315,6 +348,7 @@ public class User extends BaseUser {
 		ksPrivileges = GsonParser.parseString(jsonObject.get("ksPrivileges"));
 		encryptedSeed = GsonParser.parseString(jsonObject.get("encryptedSeed"));
 		isSsoExcluded = GsonParser.parseBoolean(jsonObject.get("isSsoExcluded"));
+		externalId = GsonParser.parseString(jsonObject.get("externalId"));
 
 	}
 
@@ -325,6 +359,7 @@ public class User extends BaseUser {
 		kparams.add("dateOfBirth", this.dateOfBirth);
 		kparams.add("gender", this.gender);
 		kparams.add("isAdmin", this.isAdmin);
+		kparams.add("isGuest", this.isGuest);
 		kparams.add("roleIds", this.roleIds);
 		kparams.add("isAccountOwner", this.isAccountOwner);
 		kparams.add("password", this.password);
@@ -337,6 +372,7 @@ public class User extends BaseUser {
 		kparams.add("company", this.company);
 		kparams.add("ksPrivileges", this.ksPrivileges);
 		kparams.add("isSsoExcluded", this.isSsoExcluded);
+		kparams.add("externalId", this.externalId);
 		return kparams;
 	}
 
@@ -360,6 +396,7 @@ public class User extends BaseUser {
         dest.writeValue(this.dateOfBirth);
         dest.writeInt(this.gender == null ? -1 : this.gender.ordinal());
         dest.writeValue(this.isAdmin);
+        dest.writeValue(this.isGuest);
         dest.writeString(this.roleIds);
         dest.writeString(this.roleNames);
         dest.writeValue(this.isAccountOwner);
@@ -374,6 +411,7 @@ public class User extends BaseUser {
         dest.writeString(this.ksPrivileges);
         dest.writeString(this.encryptedSeed);
         dest.writeValue(this.isSsoExcluded);
+        dest.writeString(this.externalId);
     }
 
     public User(Parcel in) {
@@ -384,6 +422,7 @@ public class User extends BaseUser {
         int tmpGender = in.readInt();
         this.gender = tmpGender == -1 ? null : Gender.values()[tmpGender];
         this.isAdmin = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.isGuest = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.roleIds = in.readString();
         this.roleNames = in.readString();
         this.isAccountOwner = (Boolean)in.readValue(Boolean.class.getClassLoader());
@@ -398,6 +437,7 @@ public class User extends BaseUser {
         this.ksPrivileges = in.readString();
         this.encryptedSeed = in.readString();
         this.isSsoExcluded = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.externalId = in.readString();
     }
 }
 

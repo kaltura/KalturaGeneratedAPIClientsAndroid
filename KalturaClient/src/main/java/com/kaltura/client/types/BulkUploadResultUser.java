@@ -59,6 +59,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
 		String firstName();
 		String lastName();
 		String group();
+		String externalId();
 	}
 
 	private String userId;
@@ -75,6 +76,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
 	private String firstName;
 	private String lastName;
 	private String group;
+	private String externalId;
 
 	// userId:
 	public String getUserId(){
@@ -244,6 +246,18 @@ public class BulkUploadResultUser extends BulkUploadResult {
 		setToken("group", multirequestToken);
 	}
 
+	// externalId:
+	public String getExternalId(){
+		return this.externalId;
+	}
+	public void setExternalId(String externalId){
+		this.externalId = externalId;
+	}
+
+	public void externalId(String multirequestToken){
+		setToken("externalId", multirequestToken);
+	}
+
 
 	public BulkUploadResultUser() {
 		super();
@@ -269,6 +283,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
 		firstName = GsonParser.parseString(jsonObject.get("firstName"));
 		lastName = GsonParser.parseString(jsonObject.get("lastName"));
 		group = GsonParser.parseString(jsonObject.get("group"));
+		externalId = GsonParser.parseString(jsonObject.get("externalId"));
 
 	}
 
@@ -289,6 +304,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
 		kparams.add("firstName", this.firstName);
 		kparams.add("lastName", this.lastName);
 		kparams.add("group", this.group);
+		kparams.add("externalId", this.externalId);
 		return kparams;
 	}
 
@@ -322,6 +338,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
         dest.writeString(this.firstName);
         dest.writeString(this.lastName);
         dest.writeString(this.group);
+        dest.writeString(this.externalId);
     }
 
     public BulkUploadResultUser(Parcel in) {
@@ -340,6 +357,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
         this.firstName = in.readString();
         this.lastName = in.readString();
         this.group = in.readString();
+        this.externalId = in.readString();
     }
 }
 
