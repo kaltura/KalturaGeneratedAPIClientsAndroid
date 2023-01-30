@@ -32,6 +32,9 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using generate.php
@@ -52,6 +55,7 @@ public class UrlResource extends ContentResource {
 	public interface Tokenizer extends ContentResource.Tokenizer {
 		String url();
 		String forceAsyncDownload();
+		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> urlHeaders();
 	}
 
 	/**
@@ -62,6 +66,7 @@ public class UrlResource extends ContentResource {
 	 * Force Import Job
 	 */
 	private Boolean forceAsyncDownload;
+	private List<StringHolder> urlHeaders;
 
 	// url:
 	public String getUrl(){
@@ -87,6 +92,14 @@ public class UrlResource extends ContentResource {
 		setToken("forceAsyncDownload", multirequestToken);
 	}
 
+	// urlHeaders:
+	public List<StringHolder> getUrlHeaders(){
+		return this.urlHeaders;
+	}
+	public void setUrlHeaders(List<StringHolder> urlHeaders){
+		this.urlHeaders = urlHeaders;
+	}
+
 
 	public UrlResource() {
 		super();
@@ -100,6 +113,7 @@ public class UrlResource extends ContentResource {
 		// set members values:
 		url = GsonParser.parseString(jsonObject.get("url"));
 		forceAsyncDownload = GsonParser.parseBoolean(jsonObject.get("forceAsyncDownload"));
+		urlHeaders = GsonParser.parseArray(jsonObject.getAsJsonArray("urlHeaders"), StringHolder.class);
 
 	}
 
@@ -108,6 +122,7 @@ public class UrlResource extends ContentResource {
 		kparams.add("objectType", "KalturaUrlResource");
 		kparams.add("url", this.url);
 		kparams.add("forceAsyncDownload", this.forceAsyncDownload);
+		kparams.add("urlHeaders", this.urlHeaders);
 		return kparams;
 	}
 
@@ -129,12 +144,23 @@ public class UrlResource extends ContentResource {
         super.writeToParcel(dest, flags);
         dest.writeString(this.url);
         dest.writeValue(this.forceAsyncDownload);
+        if(this.urlHeaders != null) {
+            dest.writeInt(this.urlHeaders.size());
+            dest.writeList(this.urlHeaders);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public UrlResource(Parcel in) {
         super(in);
         this.url = in.readString();
         this.forceAsyncDownload = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        int urlHeadersSize = in.readInt();
+        if( urlHeadersSize > -1) {
+            this.urlHeaders = new ArrayList<>();
+            in.readList(this.urlHeaders, StringHolder.class.getClassLoader());
+        }
     }
 }
 
