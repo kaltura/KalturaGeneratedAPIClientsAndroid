@@ -76,7 +76,7 @@ public class BulkUpload extends ObjectBase {
 	private Long id;
 	private String uploadedBy;
 	private String uploadedByUserId;
-	private Integer uploadedOn;
+	private Long uploadedOn;
 	private Integer numOfEntries;
 	private BatchJobStatus status;
 	private String logFileUrl;
@@ -129,10 +129,10 @@ public class BulkUpload extends ObjectBase {
 	}
 
 	// uploadedOn:
-	public Integer getUploadedOn(){
+	public Long getUploadedOn(){
 		return this.uploadedOn;
 	}
-	public void setUploadedOn(Integer uploadedOn){
+	public void setUploadedOn(Long uploadedOn){
 		this.uploadedOn = uploadedOn;
 	}
 
@@ -318,7 +318,7 @@ public class BulkUpload extends ObjectBase {
 		id = GsonParser.parseLong(jsonObject.get("id"));
 		uploadedBy = GsonParser.parseString(jsonObject.get("uploadedBy"));
 		uploadedByUserId = GsonParser.parseString(jsonObject.get("uploadedByUserId"));
-		uploadedOn = GsonParser.parseInt(jsonObject.get("uploadedOn"));
+		uploadedOn = GsonParser.parseLong(jsonObject.get("uploadedOn"));
 		numOfEntries = GsonParser.parseInt(jsonObject.get("numOfEntries"));
 		status = BatchJobStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		logFileUrl = GsonParser.parseString(jsonObject.get("logFileUrl"));
@@ -406,7 +406,7 @@ public class BulkUpload extends ObjectBase {
         this.id = (Long)in.readValue(Long.class.getClassLoader());
         this.uploadedBy = in.readString();
         this.uploadedByUserId = in.readString();
-        this.uploadedOn = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.uploadedOn = (Long)in.readValue(Long.class.getClassLoader());
         this.numOfEntries = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : BatchJobStatus.values()[tmpStatus];

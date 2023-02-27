@@ -81,8 +81,8 @@ public class TrackEntry extends ObjectBase {
 	private String paramStr3;
 	private String ks;
 	private String description;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 	private String userIp;
 	private Integer sessionId;
 
@@ -255,10 +255,10 @@ public class TrackEntry extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
-	public void setCreatedAt(Integer createdAt){
+	public void setCreatedAt(Long createdAt){
 		this.createdAt = createdAt;
 	}
 
@@ -267,10 +267,10 @@ public class TrackEntry extends ObjectBase {
 	}
 
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
-	public void setUpdatedAt(Integer updatedAt){
+	public void setUpdatedAt(Long updatedAt){
 		this.updatedAt = updatedAt;
 	}
 
@@ -327,8 +327,8 @@ public class TrackEntry extends ObjectBase {
 		paramStr3 = GsonParser.parseString(jsonObject.get("paramStr3"));
 		ks = GsonParser.parseString(jsonObject.get("ks"));
 		description = GsonParser.parseString(jsonObject.get("description"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		userIp = GsonParser.parseString(jsonObject.get("userIp"));
 		sessionId = GsonParser.parseInt(jsonObject.get("sessionId"));
 
@@ -411,8 +411,8 @@ public class TrackEntry extends ObjectBase {
         this.paramStr3 = in.readString();
         this.ks = in.readString();
         this.description = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.userIp = in.readString();
         this.sessionId = (Integer)in.readValue(Integer.class.getClassLoader());
     }

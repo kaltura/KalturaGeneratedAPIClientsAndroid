@@ -67,11 +67,11 @@ public abstract class BusinessProcessServer extends ObjectBase {
 	/**
 	 * Server creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Server update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	private Integer partnerId;
 	private String name;
 	private String systemName;
@@ -91,11 +91,11 @@ public abstract class BusinessProcessServer extends ObjectBase {
 		return this.id;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// partnerId:
@@ -170,8 +170,8 @@ public abstract class BusinessProcessServer extends ObjectBase {
 
 		// set members values:
 		id = GsonParser.parseInt(jsonObject.get("id"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		name = GsonParser.parseString(jsonObject.get("name"));
 		systemName = GsonParser.parseString(jsonObject.get("systemName"));
@@ -211,8 +211,8 @@ public abstract class BusinessProcessServer extends ObjectBase {
     public BusinessProcessServer(Parcel in) {
         super(in);
         this.id = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
         this.systemName = in.readString();

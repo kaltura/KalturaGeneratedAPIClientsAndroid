@@ -73,8 +73,8 @@ public class MetadataProfile extends ObjectBase {
 	private String name;
 	private String systemName;
 	private String description;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 	private MetadataProfileStatus status;
 	private String xsd;
 	private String views;
@@ -143,11 +143,11 @@ public class MetadataProfile extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// status:
@@ -208,8 +208,8 @@ public class MetadataProfile extends ObjectBase {
 		name = GsonParser.parseString(jsonObject.get("name"));
 		systemName = GsonParser.parseString(jsonObject.get("systemName"));
 		description = GsonParser.parseString(jsonObject.get("description"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		status = MetadataProfileStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		xsd = GsonParser.parseString(jsonObject.get("xsd"));
 		views = GsonParser.parseString(jsonObject.get("views"));
@@ -274,8 +274,8 @@ public class MetadataProfile extends ObjectBase {
         this.name = in.readString();
         this.systemName = in.readString();
         this.description = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : MetadataProfileStatus.values()[tmpStatus];
         this.xsd = in.readString();

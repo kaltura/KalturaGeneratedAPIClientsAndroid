@@ -71,13 +71,13 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 	private String systemNameIn;
 	private ScheduledTaskProfileStatus statusEqual;
 	private String statusIn;
-	private Integer createdAtGreaterThanOrEqual;
-	private Integer createdAtLessThanOrEqual;
-	private Integer updatedAtGreaterThanOrEqual;
-	private Integer updatedAtLessThanOrEqual;
-	private Integer lastExecutionStartedAtGreaterThanOrEqual;
-	private Integer lastExecutionStartedAtLessThanOrEqual;
-	private Integer lastExecutionStartedAtLessThanOrEqualOrNull;
+	private Long createdAtGreaterThanOrEqual;
+	private Long createdAtLessThanOrEqual;
+	private Long updatedAtGreaterThanOrEqual;
+	private Long updatedAtLessThanOrEqual;
+	private Long lastExecutionStartedAtGreaterThanOrEqual;
+	private Long lastExecutionStartedAtLessThanOrEqual;
+	private Long lastExecutionStartedAtLessThanOrEqualOrNull;
 
 	// idEqual:
 	public Integer getIdEqual(){
@@ -176,10 +176,10 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 	}
 
 	// createdAtGreaterThanOrEqual:
-	public Integer getCreatedAtGreaterThanOrEqual(){
+	public Long getCreatedAtGreaterThanOrEqual(){
 		return this.createdAtGreaterThanOrEqual;
 	}
-	public void setCreatedAtGreaterThanOrEqual(Integer createdAtGreaterThanOrEqual){
+	public void setCreatedAtGreaterThanOrEqual(Long createdAtGreaterThanOrEqual){
 		this.createdAtGreaterThanOrEqual = createdAtGreaterThanOrEqual;
 	}
 
@@ -188,10 +188,10 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 	}
 
 	// createdAtLessThanOrEqual:
-	public Integer getCreatedAtLessThanOrEqual(){
+	public Long getCreatedAtLessThanOrEqual(){
 		return this.createdAtLessThanOrEqual;
 	}
-	public void setCreatedAtLessThanOrEqual(Integer createdAtLessThanOrEqual){
+	public void setCreatedAtLessThanOrEqual(Long createdAtLessThanOrEqual){
 		this.createdAtLessThanOrEqual = createdAtLessThanOrEqual;
 	}
 
@@ -200,10 +200,10 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 	}
 
 	// updatedAtGreaterThanOrEqual:
-	public Integer getUpdatedAtGreaterThanOrEqual(){
+	public Long getUpdatedAtGreaterThanOrEqual(){
 		return this.updatedAtGreaterThanOrEqual;
 	}
-	public void setUpdatedAtGreaterThanOrEqual(Integer updatedAtGreaterThanOrEqual){
+	public void setUpdatedAtGreaterThanOrEqual(Long updatedAtGreaterThanOrEqual){
 		this.updatedAtGreaterThanOrEqual = updatedAtGreaterThanOrEqual;
 	}
 
@@ -212,10 +212,10 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 	}
 
 	// updatedAtLessThanOrEqual:
-	public Integer getUpdatedAtLessThanOrEqual(){
+	public Long getUpdatedAtLessThanOrEqual(){
 		return this.updatedAtLessThanOrEqual;
 	}
-	public void setUpdatedAtLessThanOrEqual(Integer updatedAtLessThanOrEqual){
+	public void setUpdatedAtLessThanOrEqual(Long updatedAtLessThanOrEqual){
 		this.updatedAtLessThanOrEqual = updatedAtLessThanOrEqual;
 	}
 
@@ -224,10 +224,10 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 	}
 
 	// lastExecutionStartedAtGreaterThanOrEqual:
-	public Integer getLastExecutionStartedAtGreaterThanOrEqual(){
+	public Long getLastExecutionStartedAtGreaterThanOrEqual(){
 		return this.lastExecutionStartedAtGreaterThanOrEqual;
 	}
-	public void setLastExecutionStartedAtGreaterThanOrEqual(Integer lastExecutionStartedAtGreaterThanOrEqual){
+	public void setLastExecutionStartedAtGreaterThanOrEqual(Long lastExecutionStartedAtGreaterThanOrEqual){
 		this.lastExecutionStartedAtGreaterThanOrEqual = lastExecutionStartedAtGreaterThanOrEqual;
 	}
 
@@ -236,10 +236,10 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 	}
 
 	// lastExecutionStartedAtLessThanOrEqual:
-	public Integer getLastExecutionStartedAtLessThanOrEqual(){
+	public Long getLastExecutionStartedAtLessThanOrEqual(){
 		return this.lastExecutionStartedAtLessThanOrEqual;
 	}
-	public void setLastExecutionStartedAtLessThanOrEqual(Integer lastExecutionStartedAtLessThanOrEqual){
+	public void setLastExecutionStartedAtLessThanOrEqual(Long lastExecutionStartedAtLessThanOrEqual){
 		this.lastExecutionStartedAtLessThanOrEqual = lastExecutionStartedAtLessThanOrEqual;
 	}
 
@@ -248,10 +248,10 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 	}
 
 	// lastExecutionStartedAtLessThanOrEqualOrNull:
-	public Integer getLastExecutionStartedAtLessThanOrEqualOrNull(){
+	public Long getLastExecutionStartedAtLessThanOrEqualOrNull(){
 		return this.lastExecutionStartedAtLessThanOrEqualOrNull;
 	}
-	public void setLastExecutionStartedAtLessThanOrEqualOrNull(Integer lastExecutionStartedAtLessThanOrEqualOrNull){
+	public void setLastExecutionStartedAtLessThanOrEqualOrNull(Long lastExecutionStartedAtLessThanOrEqualOrNull){
 		this.lastExecutionStartedAtLessThanOrEqualOrNull = lastExecutionStartedAtLessThanOrEqualOrNull;
 	}
 
@@ -278,13 +278,13 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
 		systemNameIn = GsonParser.parseString(jsonObject.get("systemNameIn"));
 		statusEqual = ScheduledTaskProfileStatus.get(GsonParser.parseInt(jsonObject.get("statusEqual")));
 		statusIn = GsonParser.parseString(jsonObject.get("statusIn"));
-		createdAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtGreaterThanOrEqual"));
-		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
-		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
-		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
-		lastExecutionStartedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("lastExecutionStartedAtGreaterThanOrEqual"));
-		lastExecutionStartedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("lastExecutionStartedAtLessThanOrEqual"));
-		lastExecutionStartedAtLessThanOrEqualOrNull = GsonParser.parseInt(jsonObject.get("lastExecutionStartedAtLessThanOrEqualOrNull"));
+		createdAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtGreaterThanOrEqual"));
+		createdAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtLessThanOrEqual"));
+		updatedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtGreaterThanOrEqual"));
+		updatedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtLessThanOrEqual"));
+		lastExecutionStartedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("lastExecutionStartedAtGreaterThanOrEqual"));
+		lastExecutionStartedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("lastExecutionStartedAtLessThanOrEqual"));
+		lastExecutionStartedAtLessThanOrEqualOrNull = GsonParser.parseLong(jsonObject.get("lastExecutionStartedAtLessThanOrEqualOrNull"));
 
 	}
 
@@ -341,13 +341,13 @@ public abstract class ScheduledTaskProfileBaseFilter extends Filter {
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : ScheduledTaskProfileStatus.values()[tmpStatusEqual];
         this.statusIn = in.readString();
-        this.createdAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.lastExecutionStartedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.lastExecutionStartedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.lastExecutionStartedAtLessThanOrEqualOrNull = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.createdAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.lastExecutionStartedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.lastExecutionStartedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.lastExecutionStartedAtLessThanOrEqualOrNull = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

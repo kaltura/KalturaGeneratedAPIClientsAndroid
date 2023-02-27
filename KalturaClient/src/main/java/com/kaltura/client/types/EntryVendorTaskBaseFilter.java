@@ -77,14 +77,14 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	private String idNotIn;
 	private Integer vendorPartnerIdEqual;
 	private String vendorPartnerIdIn;
-	private Integer createdAtGreaterThanOrEqual;
-	private Integer createdAtLessThanOrEqual;
-	private Integer updatedAtGreaterThanOrEqual;
-	private Integer updatedAtLessThanOrEqual;
-	private Integer queueTimeGreaterThanOrEqual;
-	private Integer queueTimeLessThanOrEqual;
-	private Integer finishTimeGreaterThanOrEqual;
-	private Integer finishTimeLessThanOrEqual;
+	private Long createdAtGreaterThanOrEqual;
+	private Long createdAtLessThanOrEqual;
+	private Long updatedAtGreaterThanOrEqual;
+	private Long updatedAtLessThanOrEqual;
+	private Long queueTimeGreaterThanOrEqual;
+	private Long queueTimeLessThanOrEqual;
+	private Long finishTimeGreaterThanOrEqual;
+	private Long finishTimeLessThanOrEqual;
 	private String entryIdEqual;
 	private EntryVendorTaskStatus statusEqual;
 	private String statusIn;
@@ -94,8 +94,8 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	private String catalogItemIdIn;
 	private String userIdEqual;
 	private String contextEqual;
-	private Integer expectedFinishTimeGreaterThanOrEqual;
-	private Integer expectedFinishTimeLessThanOrEqual;
+	private Long expectedFinishTimeGreaterThanOrEqual;
+	private Long expectedFinishTimeLessThanOrEqual;
 
 	// idEqual:
 	public Long getIdEqual(){
@@ -158,10 +158,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtGreaterThanOrEqual:
-	public Integer getCreatedAtGreaterThanOrEqual(){
+	public Long getCreatedAtGreaterThanOrEqual(){
 		return this.createdAtGreaterThanOrEqual;
 	}
-	public void setCreatedAtGreaterThanOrEqual(Integer createdAtGreaterThanOrEqual){
+	public void setCreatedAtGreaterThanOrEqual(Long createdAtGreaterThanOrEqual){
 		this.createdAtGreaterThanOrEqual = createdAtGreaterThanOrEqual;
 	}
 
@@ -170,10 +170,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtLessThanOrEqual:
-	public Integer getCreatedAtLessThanOrEqual(){
+	public Long getCreatedAtLessThanOrEqual(){
 		return this.createdAtLessThanOrEqual;
 	}
-	public void setCreatedAtLessThanOrEqual(Integer createdAtLessThanOrEqual){
+	public void setCreatedAtLessThanOrEqual(Long createdAtLessThanOrEqual){
 		this.createdAtLessThanOrEqual = createdAtLessThanOrEqual;
 	}
 
@@ -182,10 +182,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// updatedAtGreaterThanOrEqual:
-	public Integer getUpdatedAtGreaterThanOrEqual(){
+	public Long getUpdatedAtGreaterThanOrEqual(){
 		return this.updatedAtGreaterThanOrEqual;
 	}
-	public void setUpdatedAtGreaterThanOrEqual(Integer updatedAtGreaterThanOrEqual){
+	public void setUpdatedAtGreaterThanOrEqual(Long updatedAtGreaterThanOrEqual){
 		this.updatedAtGreaterThanOrEqual = updatedAtGreaterThanOrEqual;
 	}
 
@@ -194,10 +194,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// updatedAtLessThanOrEqual:
-	public Integer getUpdatedAtLessThanOrEqual(){
+	public Long getUpdatedAtLessThanOrEqual(){
 		return this.updatedAtLessThanOrEqual;
 	}
-	public void setUpdatedAtLessThanOrEqual(Integer updatedAtLessThanOrEqual){
+	public void setUpdatedAtLessThanOrEqual(Long updatedAtLessThanOrEqual){
 		this.updatedAtLessThanOrEqual = updatedAtLessThanOrEqual;
 	}
 
@@ -206,10 +206,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// queueTimeGreaterThanOrEqual:
-	public Integer getQueueTimeGreaterThanOrEqual(){
+	public Long getQueueTimeGreaterThanOrEqual(){
 		return this.queueTimeGreaterThanOrEqual;
 	}
-	public void setQueueTimeGreaterThanOrEqual(Integer queueTimeGreaterThanOrEqual){
+	public void setQueueTimeGreaterThanOrEqual(Long queueTimeGreaterThanOrEqual){
 		this.queueTimeGreaterThanOrEqual = queueTimeGreaterThanOrEqual;
 	}
 
@@ -218,10 +218,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// queueTimeLessThanOrEqual:
-	public Integer getQueueTimeLessThanOrEqual(){
+	public Long getQueueTimeLessThanOrEqual(){
 		return this.queueTimeLessThanOrEqual;
 	}
-	public void setQueueTimeLessThanOrEqual(Integer queueTimeLessThanOrEqual){
+	public void setQueueTimeLessThanOrEqual(Long queueTimeLessThanOrEqual){
 		this.queueTimeLessThanOrEqual = queueTimeLessThanOrEqual;
 	}
 
@@ -230,10 +230,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// finishTimeGreaterThanOrEqual:
-	public Integer getFinishTimeGreaterThanOrEqual(){
+	public Long getFinishTimeGreaterThanOrEqual(){
 		return this.finishTimeGreaterThanOrEqual;
 	}
-	public void setFinishTimeGreaterThanOrEqual(Integer finishTimeGreaterThanOrEqual){
+	public void setFinishTimeGreaterThanOrEqual(Long finishTimeGreaterThanOrEqual){
 		this.finishTimeGreaterThanOrEqual = finishTimeGreaterThanOrEqual;
 	}
 
@@ -242,10 +242,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// finishTimeLessThanOrEqual:
-	public Integer getFinishTimeLessThanOrEqual(){
+	public Long getFinishTimeLessThanOrEqual(){
 		return this.finishTimeLessThanOrEqual;
 	}
-	public void setFinishTimeLessThanOrEqual(Integer finishTimeLessThanOrEqual){
+	public void setFinishTimeLessThanOrEqual(Long finishTimeLessThanOrEqual){
 		this.finishTimeLessThanOrEqual = finishTimeLessThanOrEqual;
 	}
 
@@ -362,10 +362,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// expectedFinishTimeGreaterThanOrEqual:
-	public Integer getExpectedFinishTimeGreaterThanOrEqual(){
+	public Long getExpectedFinishTimeGreaterThanOrEqual(){
 		return this.expectedFinishTimeGreaterThanOrEqual;
 	}
-	public void setExpectedFinishTimeGreaterThanOrEqual(Integer expectedFinishTimeGreaterThanOrEqual){
+	public void setExpectedFinishTimeGreaterThanOrEqual(Long expectedFinishTimeGreaterThanOrEqual){
 		this.expectedFinishTimeGreaterThanOrEqual = expectedFinishTimeGreaterThanOrEqual;
 	}
 
@@ -374,10 +374,10 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 	}
 
 	// expectedFinishTimeLessThanOrEqual:
-	public Integer getExpectedFinishTimeLessThanOrEqual(){
+	public Long getExpectedFinishTimeLessThanOrEqual(){
 		return this.expectedFinishTimeLessThanOrEqual;
 	}
-	public void setExpectedFinishTimeLessThanOrEqual(Integer expectedFinishTimeLessThanOrEqual){
+	public void setExpectedFinishTimeLessThanOrEqual(Long expectedFinishTimeLessThanOrEqual){
 		this.expectedFinishTimeLessThanOrEqual = expectedFinishTimeLessThanOrEqual;
 	}
 
@@ -401,14 +401,14 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 		idNotIn = GsonParser.parseString(jsonObject.get("idNotIn"));
 		vendorPartnerIdEqual = GsonParser.parseInt(jsonObject.get("vendorPartnerIdEqual"));
 		vendorPartnerIdIn = GsonParser.parseString(jsonObject.get("vendorPartnerIdIn"));
-		createdAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtGreaterThanOrEqual"));
-		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
-		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
-		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
-		queueTimeGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("queueTimeGreaterThanOrEqual"));
-		queueTimeLessThanOrEqual = GsonParser.parseInt(jsonObject.get("queueTimeLessThanOrEqual"));
-		finishTimeGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("finishTimeGreaterThanOrEqual"));
-		finishTimeLessThanOrEqual = GsonParser.parseInt(jsonObject.get("finishTimeLessThanOrEqual"));
+		createdAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtGreaterThanOrEqual"));
+		createdAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtLessThanOrEqual"));
+		updatedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtGreaterThanOrEqual"));
+		updatedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtLessThanOrEqual"));
+		queueTimeGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("queueTimeGreaterThanOrEqual"));
+		queueTimeLessThanOrEqual = GsonParser.parseLong(jsonObject.get("queueTimeLessThanOrEqual"));
+		finishTimeGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("finishTimeGreaterThanOrEqual"));
+		finishTimeLessThanOrEqual = GsonParser.parseLong(jsonObject.get("finishTimeLessThanOrEqual"));
 		entryIdEqual = GsonParser.parseString(jsonObject.get("entryIdEqual"));
 		statusEqual = EntryVendorTaskStatus.get(GsonParser.parseInt(jsonObject.get("statusEqual")));
 		statusIn = GsonParser.parseString(jsonObject.get("statusIn"));
@@ -418,8 +418,8 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
 		catalogItemIdIn = GsonParser.parseString(jsonObject.get("catalogItemIdIn"));
 		userIdEqual = GsonParser.parseString(jsonObject.get("userIdEqual"));
 		contextEqual = GsonParser.parseString(jsonObject.get("contextEqual"));
-		expectedFinishTimeGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("expectedFinishTimeGreaterThanOrEqual"));
-		expectedFinishTimeLessThanOrEqual = GsonParser.parseInt(jsonObject.get("expectedFinishTimeLessThanOrEqual"));
+		expectedFinishTimeGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("expectedFinishTimeGreaterThanOrEqual"));
+		expectedFinishTimeLessThanOrEqual = GsonParser.parseLong(jsonObject.get("expectedFinishTimeLessThanOrEqual"));
 
 	}
 
@@ -490,14 +490,14 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
         this.idNotIn = in.readString();
         this.vendorPartnerIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.vendorPartnerIdIn = in.readString();
-        this.createdAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.queueTimeGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.queueTimeLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.finishTimeGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.finishTimeLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.createdAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.queueTimeGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.queueTimeLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.finishTimeGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.finishTimeLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
         this.entryIdEqual = in.readString();
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : EntryVendorTaskStatus.values()[tmpStatusEqual];
@@ -508,8 +508,8 @@ public abstract class EntryVendorTaskBaseFilter extends RelatedFilter {
         this.catalogItemIdIn = in.readString();
         this.userIdEqual = in.readString();
         this.contextEqual = in.readString();
-        this.expectedFinishTimeGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.expectedFinishTimeLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.expectedFinishTimeGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.expectedFinishTimeLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

@@ -86,10 +86,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	private String parentIdNotIn;
 	private ScheduleEventStatus statusEqual;
 	private String statusIn;
-	private Integer startDateGreaterThanOrEqual;
-	private Integer startDateLessThanOrEqual;
-	private Integer endDateGreaterThanOrEqual;
-	private Integer endDateLessThanOrEqual;
+	private Long startDateGreaterThanOrEqual;
+	private Long startDateLessThanOrEqual;
+	private Long endDateGreaterThanOrEqual;
+	private Long endDateLessThanOrEqual;
 	private String referenceIdEqual;
 	private String referenceIdIn;
 	private String ownerIdEqual;
@@ -103,10 +103,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	private String tagsLike;
 	private String tagsMultiLikeOr;
 	private String tagsMultiLikeAnd;
-	private Integer createdAtGreaterThanOrEqual;
-	private Integer createdAtLessThanOrEqual;
-	private Integer updatedAtGreaterThanOrEqual;
-	private Integer updatedAtLessThanOrEqual;
+	private Long createdAtGreaterThanOrEqual;
+	private Long createdAtLessThanOrEqual;
+	private Long updatedAtGreaterThanOrEqual;
+	private Long updatedAtLessThanOrEqual;
 
 	// idEqual:
 	public Integer getIdEqual(){
@@ -205,10 +205,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	}
 
 	// startDateGreaterThanOrEqual:
-	public Integer getStartDateGreaterThanOrEqual(){
+	public Long getStartDateGreaterThanOrEqual(){
 		return this.startDateGreaterThanOrEqual;
 	}
-	public void setStartDateGreaterThanOrEqual(Integer startDateGreaterThanOrEqual){
+	public void setStartDateGreaterThanOrEqual(Long startDateGreaterThanOrEqual){
 		this.startDateGreaterThanOrEqual = startDateGreaterThanOrEqual;
 	}
 
@@ -217,10 +217,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	}
 
 	// startDateLessThanOrEqual:
-	public Integer getStartDateLessThanOrEqual(){
+	public Long getStartDateLessThanOrEqual(){
 		return this.startDateLessThanOrEqual;
 	}
-	public void setStartDateLessThanOrEqual(Integer startDateLessThanOrEqual){
+	public void setStartDateLessThanOrEqual(Long startDateLessThanOrEqual){
 		this.startDateLessThanOrEqual = startDateLessThanOrEqual;
 	}
 
@@ -229,10 +229,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	}
 
 	// endDateGreaterThanOrEqual:
-	public Integer getEndDateGreaterThanOrEqual(){
+	public Long getEndDateGreaterThanOrEqual(){
 		return this.endDateGreaterThanOrEqual;
 	}
-	public void setEndDateGreaterThanOrEqual(Integer endDateGreaterThanOrEqual){
+	public void setEndDateGreaterThanOrEqual(Long endDateGreaterThanOrEqual){
 		this.endDateGreaterThanOrEqual = endDateGreaterThanOrEqual;
 	}
 
@@ -241,10 +241,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	}
 
 	// endDateLessThanOrEqual:
-	public Integer getEndDateLessThanOrEqual(){
+	public Long getEndDateLessThanOrEqual(){
 		return this.endDateLessThanOrEqual;
 	}
-	public void setEndDateLessThanOrEqual(Integer endDateLessThanOrEqual){
+	public void setEndDateLessThanOrEqual(Long endDateLessThanOrEqual){
 		this.endDateLessThanOrEqual = endDateLessThanOrEqual;
 	}
 
@@ -409,10 +409,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtGreaterThanOrEqual:
-	public Integer getCreatedAtGreaterThanOrEqual(){
+	public Long getCreatedAtGreaterThanOrEqual(){
 		return this.createdAtGreaterThanOrEqual;
 	}
-	public void setCreatedAtGreaterThanOrEqual(Integer createdAtGreaterThanOrEqual){
+	public void setCreatedAtGreaterThanOrEqual(Long createdAtGreaterThanOrEqual){
 		this.createdAtGreaterThanOrEqual = createdAtGreaterThanOrEqual;
 	}
 
@@ -421,10 +421,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtLessThanOrEqual:
-	public Integer getCreatedAtLessThanOrEqual(){
+	public Long getCreatedAtLessThanOrEqual(){
 		return this.createdAtLessThanOrEqual;
 	}
-	public void setCreatedAtLessThanOrEqual(Integer createdAtLessThanOrEqual){
+	public void setCreatedAtLessThanOrEqual(Long createdAtLessThanOrEqual){
 		this.createdAtLessThanOrEqual = createdAtLessThanOrEqual;
 	}
 
@@ -433,10 +433,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	}
 
 	// updatedAtGreaterThanOrEqual:
-	public Integer getUpdatedAtGreaterThanOrEqual(){
+	public Long getUpdatedAtGreaterThanOrEqual(){
 		return this.updatedAtGreaterThanOrEqual;
 	}
-	public void setUpdatedAtGreaterThanOrEqual(Integer updatedAtGreaterThanOrEqual){
+	public void setUpdatedAtGreaterThanOrEqual(Long updatedAtGreaterThanOrEqual){
 		this.updatedAtGreaterThanOrEqual = updatedAtGreaterThanOrEqual;
 	}
 
@@ -445,10 +445,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 	}
 
 	// updatedAtLessThanOrEqual:
-	public Integer getUpdatedAtLessThanOrEqual(){
+	public Long getUpdatedAtLessThanOrEqual(){
 		return this.updatedAtLessThanOrEqual;
 	}
-	public void setUpdatedAtLessThanOrEqual(Integer updatedAtLessThanOrEqual){
+	public void setUpdatedAtLessThanOrEqual(Long updatedAtLessThanOrEqual){
 		this.updatedAtLessThanOrEqual = updatedAtLessThanOrEqual;
 	}
 
@@ -475,10 +475,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 		parentIdNotIn = GsonParser.parseString(jsonObject.get("parentIdNotIn"));
 		statusEqual = ScheduleEventStatus.get(GsonParser.parseInt(jsonObject.get("statusEqual")));
 		statusIn = GsonParser.parseString(jsonObject.get("statusIn"));
-		startDateGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("startDateGreaterThanOrEqual"));
-		startDateLessThanOrEqual = GsonParser.parseInt(jsonObject.get("startDateLessThanOrEqual"));
-		endDateGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("endDateGreaterThanOrEqual"));
-		endDateLessThanOrEqual = GsonParser.parseInt(jsonObject.get("endDateLessThanOrEqual"));
+		startDateGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("startDateGreaterThanOrEqual"));
+		startDateLessThanOrEqual = GsonParser.parseLong(jsonObject.get("startDateLessThanOrEqual"));
+		endDateGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("endDateGreaterThanOrEqual"));
+		endDateLessThanOrEqual = GsonParser.parseLong(jsonObject.get("endDateLessThanOrEqual"));
 		referenceIdEqual = GsonParser.parseString(jsonObject.get("referenceIdEqual"));
 		referenceIdIn = GsonParser.parseString(jsonObject.get("referenceIdIn"));
 		ownerIdEqual = GsonParser.parseString(jsonObject.get("ownerIdEqual"));
@@ -492,10 +492,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
 		tagsLike = GsonParser.parseString(jsonObject.get("tagsLike"));
 		tagsMultiLikeOr = GsonParser.parseString(jsonObject.get("tagsMultiLikeOr"));
 		tagsMultiLikeAnd = GsonParser.parseString(jsonObject.get("tagsMultiLikeAnd"));
-		createdAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtGreaterThanOrEqual"));
-		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
-		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
-		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
+		createdAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtGreaterThanOrEqual"));
+		createdAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtLessThanOrEqual"));
+		updatedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtGreaterThanOrEqual"));
+		updatedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtLessThanOrEqual"));
 
 	}
 
@@ -580,10 +580,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : ScheduleEventStatus.values()[tmpStatusEqual];
         this.statusIn = in.readString();
-        this.startDateGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.startDateLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.endDateGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.endDateLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.startDateGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.startDateLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.endDateGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.endDateLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
         this.referenceIdEqual = in.readString();
         this.referenceIdIn = in.readString();
         this.ownerIdEqual = in.readString();
@@ -598,10 +598,10 @@ public abstract class ScheduleEventBaseFilter extends RelatedFilter {
         this.tagsLike = in.readString();
         this.tagsMultiLikeOr = in.readString();
         this.tagsMultiLikeAnd = in.readString();
-        this.createdAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.createdAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

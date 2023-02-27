@@ -75,7 +75,7 @@ public class ControlPanelCommand extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Creator name
 	 */
@@ -83,7 +83,7 @@ public class ControlPanelCommand extends ObjectBase {
 	/**
 	 * Update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	/**
 	 * Updater name
 	 */
@@ -142,7 +142,7 @@ public class ControlPanelCommand extends ObjectBase {
 		return this.id;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// createdBy:
@@ -158,7 +158,7 @@ public class ControlPanelCommand extends ObjectBase {
 	}
 
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// updatedBy:
@@ -329,9 +329,9 @@ public class ControlPanelCommand extends ObjectBase {
 
 		// set members values:
 		id = GsonParser.parseInt(jsonObject.get("id"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
 		createdBy = GsonParser.parseString(jsonObject.get("createdBy"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		updatedBy = GsonParser.parseString(jsonObject.get("updatedBy"));
 		createdById = GsonParser.parseInt(jsonObject.get("createdById"));
 		schedulerId = GsonParser.parseInt(jsonObject.get("schedulerId"));
@@ -406,9 +406,9 @@ public class ControlPanelCommand extends ObjectBase {
     public ControlPanelCommand(Parcel in) {
         super(in);
         this.id = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
         this.createdBy = in.readString();
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.updatedBy = in.readString();
         this.createdById = (Integer)in.readValue(Integer.class.getClassLoader());
         this.schedulerId = (Integer)in.readValue(Integer.class.getClassLoader());

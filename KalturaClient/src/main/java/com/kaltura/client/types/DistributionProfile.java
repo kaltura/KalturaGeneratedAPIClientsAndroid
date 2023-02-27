@@ -88,11 +88,11 @@ public abstract class DistributionProfile extends ObjectBase {
 	/**
 	 * Profile creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Profile last update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	private Integer partnerId;
 	private DistributionProviderType providerType;
 	private String name;
@@ -167,11 +167,11 @@ public abstract class DistributionProfile extends ObjectBase {
 		return this.id;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// partnerId:
@@ -430,8 +430,8 @@ public abstract class DistributionProfile extends ObjectBase {
 
 		// set members values:
 		id = GsonParser.parseInt(jsonObject.get("id"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		providerType = DistributionProviderType.get(GsonParser.parseString(jsonObject.get("providerType")));
 		name = GsonParser.parseString(jsonObject.get("name"));
@@ -540,8 +540,8 @@ public abstract class DistributionProfile extends ObjectBase {
     public DistributionProfile(Parcel in) {
         super(in);
         this.id = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpProviderType = in.readInt();
         this.providerType = tmpProviderType == -1 ? null : DistributionProviderType.values()[tmpProviderType];

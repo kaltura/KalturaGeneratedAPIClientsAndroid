@@ -92,7 +92,7 @@ public class Scheduler extends ObjectBase {
 	/**
 	 * creation time
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * last status time
 	 */
@@ -155,7 +155,7 @@ public class Scheduler extends ObjectBase {
 		return this.workers;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// lastStatus:
@@ -184,7 +184,7 @@ public class Scheduler extends ObjectBase {
 		statuses = GsonParser.parseArray(jsonObject.getAsJsonArray("statuses"), SchedulerStatus.class);
 		configs = GsonParser.parseArray(jsonObject.getAsJsonArray("configs"), SchedulerConfig.class);
 		workers = GsonParser.parseArray(jsonObject.getAsJsonArray("workers"), SchedulerWorker.class);
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
 		lastStatus = GsonParser.parseInt(jsonObject.get("lastStatus"));
 		lastStatusStr = GsonParser.parseString(jsonObject.get("lastStatusStr"));
 
@@ -263,7 +263,7 @@ public class Scheduler extends ObjectBase {
             this.workers = new ArrayList<>();
             in.readList(this.workers, SchedulerWorker.class.getClassLoader());
         }
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
         this.lastStatus = (Integer)in.readValue(Integer.class.getClassLoader());
         this.lastStatusStr = in.readString();
     }

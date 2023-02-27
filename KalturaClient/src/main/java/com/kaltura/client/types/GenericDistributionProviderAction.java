@@ -77,12 +77,12 @@ public class GenericDistributionProviderAction extends ObjectBase {
 	 * Generic distribution provider action creation date as Unix timestamp (In
 	  seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Generic distribution provider action last update date as Unix timestamp (In
 	  seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	private Integer genericDistributionProviderId;
 	private DistributionAction action;
 	private GenericDistributionProviderStatus status;
@@ -103,11 +103,11 @@ public class GenericDistributionProviderAction extends ObjectBase {
 		return this.id;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// genericDistributionProviderId:
@@ -258,8 +258,8 @@ public class GenericDistributionProviderAction extends ObjectBase {
 
 		// set members values:
 		id = GsonParser.parseInt(jsonObject.get("id"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		genericDistributionProviderId = GsonParser.parseInt(jsonObject.get("genericDistributionProviderId"));
 		action = DistributionAction.get(GsonParser.parseInt(jsonObject.get("action")));
 		status = GenericDistributionProviderStatus.get(GsonParser.parseInt(jsonObject.get("status")));
@@ -331,8 +331,8 @@ public class GenericDistributionProviderAction extends ObjectBase {
     public GenericDistributionProviderAction(Parcel in) {
         super(in);
         this.id = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.genericDistributionProviderId = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpAction = in.readInt();
         this.action = tmpAction == -1 ? null : DistributionAction.values()[tmpAction];

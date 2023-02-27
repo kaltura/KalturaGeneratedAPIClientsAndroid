@@ -92,8 +92,8 @@ public class ModerationFlag extends ObjectBase {
 	 */
 	private String comments;
 	private ModerationFlagType flagType;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 
 	// id:
 	public Integer getId(){
@@ -164,11 +164,11 @@ public class ModerationFlag extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 
@@ -191,8 +191,8 @@ public class ModerationFlag extends ObjectBase {
 		status = ModerationFlagStatus.get(GsonParser.parseString(jsonObject.get("status")));
 		comments = GsonParser.parseString(jsonObject.get("comments"));
 		flagType = ModerationFlagType.get(GsonParser.parseInt(jsonObject.get("flagType")));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 
 	}
 
@@ -249,8 +249,8 @@ public class ModerationFlag extends ObjectBase {
         this.comments = in.readString();
         int tmpFlagType = in.readInt();
         this.flagType = tmpFlagType == -1 ? null : ModerationFlagType.values()[tmpFlagType];
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

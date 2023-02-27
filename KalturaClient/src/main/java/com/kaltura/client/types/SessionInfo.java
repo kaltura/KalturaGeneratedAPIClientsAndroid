@@ -59,7 +59,7 @@ public class SessionInfo extends ObjectBase {
 	private SessionType sessionType;
 	private Integer partnerId;
 	private String userId;
-	private Integer expiry;
+	private Long expiry;
 	private String privileges;
 
 	// ks:
@@ -79,7 +79,7 @@ public class SessionInfo extends ObjectBase {
 		return this.userId;
 	}
 	// expiry:
-	public Integer getExpiry(){
+	public Long getExpiry(){
 		return this.expiry;
 	}
 	// privileges:
@@ -101,7 +101,7 @@ public class SessionInfo extends ObjectBase {
 		sessionType = SessionType.get(GsonParser.parseInt(jsonObject.get("sessionType")));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		userId = GsonParser.parseString(jsonObject.get("userId"));
-		expiry = GsonParser.parseInt(jsonObject.get("expiry"));
+		expiry = GsonParser.parseLong(jsonObject.get("expiry"));
 		privileges = GsonParser.parseString(jsonObject.get("privileges"));
 
 	}
@@ -143,7 +143,7 @@ public class SessionInfo extends ObjectBase {
         this.sessionType = tmpSessionType == -1 ? null : SessionType.values()[tmpSessionType];
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.userId = in.readString();
-        this.expiry = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.expiry = (Long)in.readValue(Long.class.getClassLoader());
         this.privileges = in.readString();
     }
 }

@@ -57,7 +57,7 @@ public class ScheduledTaskJobData extends JobData {
 	private Integer totalCount;
 	private DryRunFileType fileFormat;
 	private String resultsFilePath;
-	private Integer referenceTime;
+	private Long referenceTime;
 
 	// maxResults:
 	public Integer getMaxResults(){
@@ -108,10 +108,10 @@ public class ScheduledTaskJobData extends JobData {
 	}
 
 	// referenceTime:
-	public Integer getReferenceTime(){
+	public Long getReferenceTime(){
 		return this.referenceTime;
 	}
-	public void setReferenceTime(Integer referenceTime){
+	public void setReferenceTime(Long referenceTime){
 		this.referenceTime = referenceTime;
 	}
 
@@ -134,7 +134,7 @@ public class ScheduledTaskJobData extends JobData {
 		totalCount = GsonParser.parseInt(jsonObject.get("totalCount"));
 		fileFormat = DryRunFileType.get(GsonParser.parseInt(jsonObject.get("fileFormat")));
 		resultsFilePath = GsonParser.parseString(jsonObject.get("resultsFilePath"));
-		referenceTime = GsonParser.parseInt(jsonObject.get("referenceTime"));
+		referenceTime = GsonParser.parseLong(jsonObject.get("referenceTime"));
 
 	}
 
@@ -179,7 +179,7 @@ public class ScheduledTaskJobData extends JobData {
         int tmpFileFormat = in.readInt();
         this.fileFormat = tmpFileFormat == -1 ? null : DryRunFileType.values()[tmpFileFormat];
         this.resultsFilePath = in.readString();
-        this.referenceTime = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.referenceTime = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

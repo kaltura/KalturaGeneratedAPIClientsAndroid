@@ -55,8 +55,8 @@ public class LiveReportInputFilter extends ObjectBase {
 	}
 
 	private String entryIds;
-	private Integer fromTime;
-	private Integer toTime;
+	private Long fromTime;
+	private Long toTime;
 	private Boolean live;
 	private LiveReportOrderBy orderBy;
 
@@ -73,10 +73,10 @@ public class LiveReportInputFilter extends ObjectBase {
 	}
 
 	// fromTime:
-	public Integer getFromTime(){
+	public Long getFromTime(){
 		return this.fromTime;
 	}
-	public void setFromTime(Integer fromTime){
+	public void setFromTime(Long fromTime){
 		this.fromTime = fromTime;
 	}
 
@@ -85,10 +85,10 @@ public class LiveReportInputFilter extends ObjectBase {
 	}
 
 	// toTime:
-	public Integer getToTime(){
+	public Long getToTime(){
 		return this.toTime;
 	}
-	public void setToTime(Integer toTime){
+	public void setToTime(Long toTime){
 		this.toTime = toTime;
 	}
 
@@ -132,8 +132,8 @@ public class LiveReportInputFilter extends ObjectBase {
 
 		// set members values:
 		entryIds = GsonParser.parseString(jsonObject.get("entryIds"));
-		fromTime = GsonParser.parseInt(jsonObject.get("fromTime"));
-		toTime = GsonParser.parseInt(jsonObject.get("toTime"));
+		fromTime = GsonParser.parseLong(jsonObject.get("fromTime"));
+		toTime = GsonParser.parseLong(jsonObject.get("toTime"));
 		live = GsonParser.parseBoolean(jsonObject.get("live"));
 		orderBy = LiveReportOrderBy.get(GsonParser.parseString(jsonObject.get("orderBy")));
 
@@ -176,8 +176,8 @@ public class LiveReportInputFilter extends ObjectBase {
     public LiveReportInputFilter(Parcel in) {
         super(in);
         this.entryIds = in.readString();
-        this.fromTime = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.toTime = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.fromTime = (Long)in.readValue(Long.class.getClassLoader());
+        this.toTime = (Long)in.readValue(Long.class.getClassLoader());
         this.live = (Boolean)in.readValue(Boolean.class.getClassLoader());
         int tmpOrderBy = in.readInt();
         this.orderBy = tmpOrderBy == -1 ? null : LiveReportOrderBy.values()[tmpOrderBy];

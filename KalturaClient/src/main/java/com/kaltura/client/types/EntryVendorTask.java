@@ -87,10 +87,10 @@ public class EntryVendorTask extends ObjectBase {
 	private Long id;
 	private Integer partnerId;
 	private Integer vendorPartnerId;
-	private Integer createdAt;
-	private Integer updatedAt;
-	private Integer queueTime;
-	private Integer finishTime;
+	private Long createdAt;
+	private Long updatedAt;
+	private Long queueTime;
+	private Long finishTime;
 	private String entryId;
 	private EntryVendorTaskStatus status;
 	/**
@@ -155,7 +155,7 @@ public class EntryVendorTask extends ObjectBase {
 	 */
 	private EntryVendorTaskCreationMode creationMode;
 	private VendorTaskData taskJobData;
-	private Integer expectedFinishTime;
+	private Long expectedFinishTime;
 	private VendorServiceType serviceType;
 	private VendorServiceFeature serviceFeature;
 	private VendorServiceTurnAroundTime turnAroundTime;
@@ -177,19 +177,19 @@ public class EntryVendorTask extends ObjectBase {
 		return this.vendorPartnerId;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// queueTime:
-	public Integer getQueueTime(){
+	public Long getQueueTime(){
 		return this.queueTime;
 	}
 	// finishTime:
-	public Integer getFinishTime(){
+	public Long getFinishTime(){
 		return this.finishTime;
 	}
 	// entryId:
@@ -349,7 +349,7 @@ public class EntryVendorTask extends ObjectBase {
 	}
 
 	// expectedFinishTime:
-	public Integer getExpectedFinishTime(){
+	public Long getExpectedFinishTime(){
 		return this.expectedFinishTime;
 	}
 	// serviceType:
@@ -390,10 +390,10 @@ public class EntryVendorTask extends ObjectBase {
 		id = GsonParser.parseLong(jsonObject.get("id"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		vendorPartnerId = GsonParser.parseInt(jsonObject.get("vendorPartnerId"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
-		queueTime = GsonParser.parseInt(jsonObject.get("queueTime"));
-		finishTime = GsonParser.parseInt(jsonObject.get("finishTime"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
+		queueTime = GsonParser.parseLong(jsonObject.get("queueTime"));
+		finishTime = GsonParser.parseLong(jsonObject.get("finishTime"));
 		entryId = GsonParser.parseString(jsonObject.get("entryId"));
 		status = EntryVendorTaskStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		reachProfileId = GsonParser.parseInt(jsonObject.get("reachProfileId"));
@@ -412,7 +412,7 @@ public class EntryVendorTask extends ObjectBase {
 		partnerData = GsonParser.parseString(jsonObject.get("partnerData"));
 		creationMode = EntryVendorTaskCreationMode.get(GsonParser.parseInt(jsonObject.get("creationMode")));
 		taskJobData = GsonParser.parseObject(jsonObject.getAsJsonObject("taskJobData"), VendorTaskData.class);
-		expectedFinishTime = GsonParser.parseInt(jsonObject.get("expectedFinishTime"));
+		expectedFinishTime = GsonParser.parseLong(jsonObject.get("expectedFinishTime"));
 		serviceType = VendorServiceType.get(GsonParser.parseInt(jsonObject.get("serviceType")));
 		serviceFeature = VendorServiceFeature.get(GsonParser.parseInt(jsonObject.get("serviceFeature")));
 		turnAroundTime = VendorServiceTurnAroundTime.get(GsonParser.parseInt(jsonObject.get("turnAroundTime")));
@@ -491,10 +491,10 @@ public class EntryVendorTask extends ObjectBase {
         this.id = (Long)in.readValue(Long.class.getClassLoader());
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.vendorPartnerId = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.queueTime = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.finishTime = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.queueTime = (Long)in.readValue(Long.class.getClassLoader());
+        this.finishTime = (Long)in.readValue(Long.class.getClassLoader());
         this.entryId = in.readString();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : EntryVendorTaskStatus.values()[tmpStatus];
@@ -515,7 +515,7 @@ public class EntryVendorTask extends ObjectBase {
         int tmpCreationMode = in.readInt();
         this.creationMode = tmpCreationMode == -1 ? null : EntryVendorTaskCreationMode.values()[tmpCreationMode];
         this.taskJobData = in.readParcelable(VendorTaskData.class.getClassLoader());
-        this.expectedFinishTime = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.expectedFinishTime = (Long)in.readValue(Long.class.getClassLoader());
         int tmpServiceType = in.readInt();
         this.serviceType = tmpServiceType == -1 ? null : VendorServiceType.values()[tmpServiceType];
         int tmpServiceFeature = in.readInt();

@@ -58,7 +58,7 @@ public abstract class BaseInteractivity extends ObjectBase {
 	/**
 	 * Interactivity update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 
 	// data:
 	public String getData(){
@@ -81,7 +81,7 @@ public abstract class BaseInteractivity extends ObjectBase {
 		return this.entryId;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 
@@ -98,7 +98,7 @@ public abstract class BaseInteractivity extends ObjectBase {
 		data = GsonParser.parseString(jsonObject.get("data"));
 		version = GsonParser.parseInt(jsonObject.get("version"));
 		entryId = GsonParser.parseString(jsonObject.get("entryId"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 
 	}
 
@@ -124,7 +124,7 @@ public abstract class BaseInteractivity extends ObjectBase {
         this.data = in.readString();
         this.version = (Integer)in.readValue(Integer.class.getClassLoader());
         this.entryId = in.readString();
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

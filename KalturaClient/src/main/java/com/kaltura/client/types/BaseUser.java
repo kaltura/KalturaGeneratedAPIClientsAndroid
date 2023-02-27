@@ -98,11 +98,11 @@ public class BaseUser extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Last update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	/**
 	 * Can be used to store various partner related data as a string
 	 */
@@ -113,7 +113,7 @@ public class BaseUser extends ObjectBase {
 	private LanguageCode language;
 	private Integer lastLoginTime;
 	private Integer statusUpdatedAt;
-	private Integer deletedAt;
+	private Long deletedAt;
 	private String allowedPartnerIds;
 	private String allowedPartnerPackages;
 	private UserMode userMode;
@@ -279,11 +279,11 @@ public class BaseUser extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// partnerData:
@@ -347,7 +347,7 @@ public class BaseUser extends ObjectBase {
 		return this.statusUpdatedAt;
 	}
 	// deletedAt:
-	public Integer getDeletedAt(){
+	public Long getDeletedAt(){
 		return this.deletedAt;
 	}
 	// allowedPartnerIds:
@@ -411,8 +411,8 @@ public class BaseUser extends ObjectBase {
 		tags = GsonParser.parseString(jsonObject.get("tags"));
 		adminTags = GsonParser.parseString(jsonObject.get("adminTags"));
 		status = UserStatus.get(GsonParser.parseInt(jsonObject.get("status")));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		partnerData = GsonParser.parseString(jsonObject.get("partnerData"));
 		indexedPartnerDataInt = GsonParser.parseInt(jsonObject.get("indexedPartnerDataInt"));
 		indexedPartnerDataString = GsonParser.parseString(jsonObject.get("indexedPartnerDataString"));
@@ -420,7 +420,7 @@ public class BaseUser extends ObjectBase {
 		language = LanguageCode.get(GsonParser.parseString(jsonObject.get("language")));
 		lastLoginTime = GsonParser.parseInt(jsonObject.get("lastLoginTime"));
 		statusUpdatedAt = GsonParser.parseInt(jsonObject.get("statusUpdatedAt"));
-		deletedAt = GsonParser.parseInt(jsonObject.get("deletedAt"));
+		deletedAt = GsonParser.parseLong(jsonObject.get("deletedAt"));
 		allowedPartnerIds = GsonParser.parseString(jsonObject.get("allowedPartnerIds"));
 		allowedPartnerPackages = GsonParser.parseString(jsonObject.get("allowedPartnerPackages"));
 		userMode = UserMode.get(GsonParser.parseInt(jsonObject.get("userMode")));
@@ -515,8 +515,8 @@ public class BaseUser extends ObjectBase {
         this.adminTags = in.readString();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : UserStatus.values()[tmpStatus];
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.partnerData = in.readString();
         this.indexedPartnerDataInt = (Integer)in.readValue(Integer.class.getClassLoader());
         this.indexedPartnerDataString = in.readString();
@@ -525,7 +525,7 @@ public class BaseUser extends ObjectBase {
         this.language = tmpLanguage == -1 ? null : LanguageCode.values()[tmpLanguage];
         this.lastLoginTime = (Integer)in.readValue(Integer.class.getClassLoader());
         this.statusUpdatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.deletedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.deletedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.allowedPartnerIds = in.readString();
         this.allowedPartnerPackages = in.readString();
         int tmpUserMode = in.readInt();

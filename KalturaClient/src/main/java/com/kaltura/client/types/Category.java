@@ -119,11 +119,11 @@ public class Category extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	/**
 	 * Category description
 	 */
@@ -280,11 +280,11 @@ public class Category extends ObjectBase {
 		return this.entriesCount;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// description:
@@ -546,8 +546,8 @@ public class Category extends ObjectBase {
 		fullName = GsonParser.parseString(jsonObject.get("fullName"));
 		fullIds = GsonParser.parseString(jsonObject.get("fullIds"));
 		entriesCount = GsonParser.parseInt(jsonObject.get("entriesCount"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		description = GsonParser.parseString(jsonObject.get("description"));
 		tags = GsonParser.parseString(jsonObject.get("tags"));
 		appearInList = AppearInListType.get(GsonParser.parseInt(jsonObject.get("appearInList")));
@@ -666,8 +666,8 @@ public class Category extends ObjectBase {
         this.fullName = in.readString();
         this.fullIds = in.readString();
         this.entriesCount = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.description = in.readString();
         this.tags = in.readString();
         int tmpAppearInList = in.readInt();

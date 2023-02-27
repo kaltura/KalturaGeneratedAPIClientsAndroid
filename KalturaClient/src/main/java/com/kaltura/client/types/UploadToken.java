@@ -96,11 +96,11 @@ public class UploadToken extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Last update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	/**
 	 * Upload url - to explicitly determine to which domain to address the
 	  uploadToken-&gt;upload call
@@ -165,11 +165,11 @@ public class UploadToken extends ObjectBase {
 		return this.uploadedFileSize;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// uploadUrl:
@@ -214,8 +214,8 @@ public class UploadToken extends ObjectBase {
 		fileName = GsonParser.parseString(jsonObject.get("fileName"));
 		fileSize = GsonParser.parseDouble(jsonObject.get("fileSize"));
 		uploadedFileSize = GsonParser.parseDouble(jsonObject.get("uploadedFileSize"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		uploadUrl = GsonParser.parseString(jsonObject.get("uploadUrl"));
 		autoFinalize = GsonParser.parseBoolean(jsonObject.get("autoFinalize"));
 		attachedObjectType = GsonParser.parseString(jsonObject.get("attachedObjectType"));
@@ -273,8 +273,8 @@ public class UploadToken extends ObjectBase {
         this.fileName = in.readString();
         this.fileSize = (Double)in.readValue(Double.class.getClassLoader());
         this.uploadedFileSize = (Double)in.readValue(Double.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.uploadUrl = in.readString();
         this.autoFinalize = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.attachedObjectType = in.readString();

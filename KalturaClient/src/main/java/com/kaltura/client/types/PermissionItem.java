@@ -59,8 +59,8 @@ public abstract class PermissionItem extends ObjectBase {
 	private PermissionItemType type;
 	private Integer partnerId;
 	private String tags;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 
 	// id:
 	public Integer getId(){
@@ -87,11 +87,11 @@ public abstract class PermissionItem extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 
@@ -109,8 +109,8 @@ public abstract class PermissionItem extends ObjectBase {
 		type = PermissionItemType.get(GsonParser.parseString(jsonObject.get("type")));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		tags = GsonParser.parseString(jsonObject.get("tags"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 
 	}
 
@@ -140,8 +140,8 @@ public abstract class PermissionItem extends ObjectBase {
         this.type = tmpType == -1 ? null : PermissionItemType.values()[tmpType];
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.tags = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

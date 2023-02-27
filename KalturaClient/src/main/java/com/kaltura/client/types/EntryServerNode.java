@@ -65,8 +65,8 @@ public abstract class EntryServerNode extends ObjectBase {
 	private String entryId;
 	private Integer serverNodeId;
 	private Integer partnerId;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 	private EntryServerNodeStatus status;
 	private EntryServerNodeType serverType;
 
@@ -87,11 +87,11 @@ public abstract class EntryServerNode extends ObjectBase {
 		return this.partnerId;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// status:
@@ -117,8 +117,8 @@ public abstract class EntryServerNode extends ObjectBase {
 		entryId = GsonParser.parseString(jsonObject.get("entryId"));
 		serverNodeId = GsonParser.parseInt(jsonObject.get("serverNodeId"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		status = EntryServerNodeStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		serverType = EntryServerNodeType.get(GsonParser.parseString(jsonObject.get("serverType")));
 
@@ -150,8 +150,8 @@ public abstract class EntryServerNode extends ObjectBase {
         this.entryId = in.readString();
         this.serverNodeId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : EntryServerNodeStatus.values()[tmpStatus];
         int tmpServerType = in.readInt();

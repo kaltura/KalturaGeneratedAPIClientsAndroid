@@ -80,11 +80,11 @@ public class AccessControlProfile extends ObjectBase {
 	/**
 	 * Creation time as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Update time as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	/**
 	 * True if this access control profile is the partner default
 	 */
@@ -139,11 +139,11 @@ public class AccessControlProfile extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// isDefault:
@@ -182,8 +182,8 @@ public class AccessControlProfile extends ObjectBase {
 		name = GsonParser.parseString(jsonObject.get("name"));
 		systemName = GsonParser.parseString(jsonObject.get("systemName"));
 		description = GsonParser.parseString(jsonObject.get("description"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		isDefault = GsonParser.parseBoolean(jsonObject.get("isDefault"));
 		rules = GsonParser.parseArray(jsonObject.getAsJsonArray("rules"), Rule.class);
 
@@ -239,8 +239,8 @@ public class AccessControlProfile extends ObjectBase {
         this.name = in.readString();
         this.systemName = in.readString();
         this.description = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.isDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());
         int rulesSize = in.readInt();
         if( rulesSize > -1) {

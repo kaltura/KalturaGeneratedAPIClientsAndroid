@@ -79,11 +79,11 @@ public abstract class ScheduleResource extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Last update as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 
 	// id:
 	public Integer getId(){
@@ -158,11 +158,11 @@ public abstract class ScheduleResource extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 
@@ -184,8 +184,8 @@ public abstract class ScheduleResource extends ObjectBase {
 		description = GsonParser.parseString(jsonObject.get("description"));
 		status = ScheduleResourceStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		tags = GsonParser.parseString(jsonObject.get("tags"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 
 	}
 
@@ -227,8 +227,8 @@ public abstract class ScheduleResource extends ObjectBase {
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : ScheduleResourceStatus.values()[tmpStatus];
         this.tags = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

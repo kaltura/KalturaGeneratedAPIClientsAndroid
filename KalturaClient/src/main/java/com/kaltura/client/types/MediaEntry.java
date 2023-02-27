@@ -102,7 +102,7 @@ public class MediaEntry extends PlayableEntry {
 	 * The media date extracted from EXIF data (For images) as Unix timestamp (In
 	  seconds)
 	 */
-	private Integer mediaDate;
+	private Long mediaDate;
 	/**
 	 * The URL used for playback. This is not the download URL.
 	 */
@@ -217,7 +217,7 @@ public class MediaEntry extends PlayableEntry {
 	}
 
 	// mediaDate:
-	public Integer getMediaDate(){
+	public Long getMediaDate(){
 		return this.mediaDate;
 	}
 	// dataUrl:
@@ -259,7 +259,7 @@ public class MediaEntry extends PlayableEntry {
 		searchProviderId = GsonParser.parseString(jsonObject.get("searchProviderId"));
 		creditUserName = GsonParser.parseString(jsonObject.get("creditUserName"));
 		creditUrl = GsonParser.parseString(jsonObject.get("creditUrl"));
-		mediaDate = GsonParser.parseInt(jsonObject.get("mediaDate"));
+		mediaDate = GsonParser.parseLong(jsonObject.get("mediaDate"));
 		dataUrl = GsonParser.parseString(jsonObject.get("dataUrl"));
 		flavorParamsIds = GsonParser.parseString(jsonObject.get("flavorParamsIds"));
 		isTrimDisabled = GsonParser.parseBoolean(jsonObject.get("isTrimDisabled"));
@@ -331,7 +331,7 @@ public class MediaEntry extends PlayableEntry {
         this.searchProviderId = in.readString();
         this.creditUserName = in.readString();
         this.creditUrl = in.readString();
-        this.mediaDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.mediaDate = (Long)in.readValue(Long.class.getClassLoader());
         this.dataUrl = in.readString();
         this.flavorParamsIds = in.readString();
         this.isTrimDisabled = (Boolean)in.readValue(Boolean.class.getClassLoader());

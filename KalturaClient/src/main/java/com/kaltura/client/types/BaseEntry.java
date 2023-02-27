@@ -178,11 +178,11 @@ public class BaseEntry extends ObjectBase {
 	/**
 	 * Entry creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Entry update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	/**
 	 * The calculated average rank. rank = totalRank / votes
 	 */
@@ -228,11 +228,11 @@ public class BaseEntry extends ObjectBase {
 	/**
 	 * Entry scheduling start date (null when not set, send -1 to remove)
 	 */
-	private Integer startDate;
+	private Long startDate;
 	/**
 	 * Entry scheduling end date (null when not set, send -1 to remove)
 	 */
-	private Integer endDate;
+	private Long endDate;
 	/**
 	 * Entry external reference id
 	 */
@@ -473,11 +473,11 @@ public class BaseEntry extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// rank:
@@ -557,10 +557,10 @@ public class BaseEntry extends ObjectBase {
 	}
 
 	// startDate:
-	public Integer getStartDate(){
+	public Long getStartDate(){
 		return this.startDate;
 	}
-	public void setStartDate(Integer startDate){
+	public void setStartDate(Long startDate){
 		this.startDate = startDate;
 	}
 
@@ -569,10 +569,10 @@ public class BaseEntry extends ObjectBase {
 	}
 
 	// endDate:
-	public Integer getEndDate(){
+	public Long getEndDate(){
 		return this.endDate;
 	}
-	public void setEndDate(Integer endDate){
+	public void setEndDate(Long endDate){
 		this.endDate = endDate;
 	}
 
@@ -792,8 +792,8 @@ public class BaseEntry extends ObjectBase {
 		moderationStatus = EntryModerationStatus.get(GsonParser.parseInt(jsonObject.get("moderationStatus")));
 		moderationCount = GsonParser.parseInt(jsonObject.get("moderationCount"));
 		type = EntryType.get(GsonParser.parseString(jsonObject.get("type")));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		rank = GsonParser.parseDouble(jsonObject.get("rank"));
 		totalRank = GsonParser.parseInt(jsonObject.get("totalRank"));
 		votes = GsonParser.parseInt(jsonObject.get("votes"));
@@ -805,8 +805,8 @@ public class BaseEntry extends ObjectBase {
 		version = GsonParser.parseInt(jsonObject.get("version"));
 		thumbnailUrl = GsonParser.parseString(jsonObject.get("thumbnailUrl"));
 		accessControlId = GsonParser.parseInt(jsonObject.get("accessControlId"));
-		startDate = GsonParser.parseInt(jsonObject.get("startDate"));
-		endDate = GsonParser.parseInt(jsonObject.get("endDate"));
+		startDate = GsonParser.parseLong(jsonObject.get("startDate"));
+		endDate = GsonParser.parseLong(jsonObject.get("endDate"));
 		referenceId = GsonParser.parseString(jsonObject.get("referenceId"));
 		replacingEntryId = GsonParser.parseString(jsonObject.get("replacingEntryId"));
 		replacedEntryId = GsonParser.parseString(jsonObject.get("replacedEntryId"));
@@ -990,8 +990,8 @@ public class BaseEntry extends ObjectBase {
         this.moderationCount = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpType = in.readInt();
         this.type = tmpType == -1 ? null : EntryType.values()[tmpType];
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.rank = (Double)in.readValue(Double.class.getClassLoader());
         this.totalRank = (Integer)in.readValue(Integer.class.getClassLoader());
         this.votes = (Integer)in.readValue(Integer.class.getClassLoader());
@@ -1004,8 +1004,8 @@ public class BaseEntry extends ObjectBase {
         this.version = (Integer)in.readValue(Integer.class.getClassLoader());
         this.thumbnailUrl = in.readString();
         this.accessControlId = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.startDate = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.endDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.startDate = (Long)in.readValue(Long.class.getClassLoader());
+        this.endDate = (Long)in.readValue(Long.class.getClassLoader());
         this.referenceId = in.readString();
         this.replacingEntryId = in.readString();
         this.replacedEntryId = in.readString();

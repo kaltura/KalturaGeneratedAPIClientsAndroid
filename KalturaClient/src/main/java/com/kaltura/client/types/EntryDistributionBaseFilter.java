@@ -71,12 +71,12 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 
 	private Integer idEqual;
 	private String idIn;
-	private Integer createdAtGreaterThanOrEqual;
-	private Integer createdAtLessThanOrEqual;
-	private Integer updatedAtGreaterThanOrEqual;
-	private Integer updatedAtLessThanOrEqual;
-	private Integer submittedAtGreaterThanOrEqual;
-	private Integer submittedAtLessThanOrEqual;
+	private Long createdAtGreaterThanOrEqual;
+	private Long createdAtLessThanOrEqual;
+	private Long updatedAtGreaterThanOrEqual;
+	private Long updatedAtLessThanOrEqual;
+	private Long submittedAtGreaterThanOrEqual;
+	private Long submittedAtLessThanOrEqual;
 	private String entryIdEqual;
 	private String entryIdIn;
 	private Integer distributionProfileIdEqual;
@@ -85,10 +85,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	private String statusIn;
 	private EntryDistributionFlag dirtyStatusEqual;
 	private String dirtyStatusIn;
-	private Integer sunriseGreaterThanOrEqual;
-	private Integer sunriseLessThanOrEqual;
-	private Integer sunsetGreaterThanOrEqual;
-	private Integer sunsetLessThanOrEqual;
+	private Long sunriseGreaterThanOrEqual;
+	private Long sunriseLessThanOrEqual;
+	private Long sunsetGreaterThanOrEqual;
+	private Long sunsetLessThanOrEqual;
 
 	// idEqual:
 	public Integer getIdEqual(){
@@ -115,10 +115,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtGreaterThanOrEqual:
-	public Integer getCreatedAtGreaterThanOrEqual(){
+	public Long getCreatedAtGreaterThanOrEqual(){
 		return this.createdAtGreaterThanOrEqual;
 	}
-	public void setCreatedAtGreaterThanOrEqual(Integer createdAtGreaterThanOrEqual){
+	public void setCreatedAtGreaterThanOrEqual(Long createdAtGreaterThanOrEqual){
 		this.createdAtGreaterThanOrEqual = createdAtGreaterThanOrEqual;
 	}
 
@@ -127,10 +127,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtLessThanOrEqual:
-	public Integer getCreatedAtLessThanOrEqual(){
+	public Long getCreatedAtLessThanOrEqual(){
 		return this.createdAtLessThanOrEqual;
 	}
-	public void setCreatedAtLessThanOrEqual(Integer createdAtLessThanOrEqual){
+	public void setCreatedAtLessThanOrEqual(Long createdAtLessThanOrEqual){
 		this.createdAtLessThanOrEqual = createdAtLessThanOrEqual;
 	}
 
@@ -139,10 +139,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// updatedAtGreaterThanOrEqual:
-	public Integer getUpdatedAtGreaterThanOrEqual(){
+	public Long getUpdatedAtGreaterThanOrEqual(){
 		return this.updatedAtGreaterThanOrEqual;
 	}
-	public void setUpdatedAtGreaterThanOrEqual(Integer updatedAtGreaterThanOrEqual){
+	public void setUpdatedAtGreaterThanOrEqual(Long updatedAtGreaterThanOrEqual){
 		this.updatedAtGreaterThanOrEqual = updatedAtGreaterThanOrEqual;
 	}
 
@@ -151,10 +151,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// updatedAtLessThanOrEqual:
-	public Integer getUpdatedAtLessThanOrEqual(){
+	public Long getUpdatedAtLessThanOrEqual(){
 		return this.updatedAtLessThanOrEqual;
 	}
-	public void setUpdatedAtLessThanOrEqual(Integer updatedAtLessThanOrEqual){
+	public void setUpdatedAtLessThanOrEqual(Long updatedAtLessThanOrEqual){
 		this.updatedAtLessThanOrEqual = updatedAtLessThanOrEqual;
 	}
 
@@ -163,10 +163,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// submittedAtGreaterThanOrEqual:
-	public Integer getSubmittedAtGreaterThanOrEqual(){
+	public Long getSubmittedAtGreaterThanOrEqual(){
 		return this.submittedAtGreaterThanOrEqual;
 	}
-	public void setSubmittedAtGreaterThanOrEqual(Integer submittedAtGreaterThanOrEqual){
+	public void setSubmittedAtGreaterThanOrEqual(Long submittedAtGreaterThanOrEqual){
 		this.submittedAtGreaterThanOrEqual = submittedAtGreaterThanOrEqual;
 	}
 
@@ -175,10 +175,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// submittedAtLessThanOrEqual:
-	public Integer getSubmittedAtLessThanOrEqual(){
+	public Long getSubmittedAtLessThanOrEqual(){
 		return this.submittedAtLessThanOrEqual;
 	}
-	public void setSubmittedAtLessThanOrEqual(Integer submittedAtLessThanOrEqual){
+	public void setSubmittedAtLessThanOrEqual(Long submittedAtLessThanOrEqual){
 		this.submittedAtLessThanOrEqual = submittedAtLessThanOrEqual;
 	}
 
@@ -283,10 +283,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// sunriseGreaterThanOrEqual:
-	public Integer getSunriseGreaterThanOrEqual(){
+	public Long getSunriseGreaterThanOrEqual(){
 		return this.sunriseGreaterThanOrEqual;
 	}
-	public void setSunriseGreaterThanOrEqual(Integer sunriseGreaterThanOrEqual){
+	public void setSunriseGreaterThanOrEqual(Long sunriseGreaterThanOrEqual){
 		this.sunriseGreaterThanOrEqual = sunriseGreaterThanOrEqual;
 	}
 
@@ -295,10 +295,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// sunriseLessThanOrEqual:
-	public Integer getSunriseLessThanOrEqual(){
+	public Long getSunriseLessThanOrEqual(){
 		return this.sunriseLessThanOrEqual;
 	}
-	public void setSunriseLessThanOrEqual(Integer sunriseLessThanOrEqual){
+	public void setSunriseLessThanOrEqual(Long sunriseLessThanOrEqual){
 		this.sunriseLessThanOrEqual = sunriseLessThanOrEqual;
 	}
 
@@ -307,10 +307,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// sunsetGreaterThanOrEqual:
-	public Integer getSunsetGreaterThanOrEqual(){
+	public Long getSunsetGreaterThanOrEqual(){
 		return this.sunsetGreaterThanOrEqual;
 	}
-	public void setSunsetGreaterThanOrEqual(Integer sunsetGreaterThanOrEqual){
+	public void setSunsetGreaterThanOrEqual(Long sunsetGreaterThanOrEqual){
 		this.sunsetGreaterThanOrEqual = sunsetGreaterThanOrEqual;
 	}
 
@@ -319,10 +319,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 	}
 
 	// sunsetLessThanOrEqual:
-	public Integer getSunsetLessThanOrEqual(){
+	public Long getSunsetLessThanOrEqual(){
 		return this.sunsetLessThanOrEqual;
 	}
-	public void setSunsetLessThanOrEqual(Integer sunsetLessThanOrEqual){
+	public void setSunsetLessThanOrEqual(Long sunsetLessThanOrEqual){
 		this.sunsetLessThanOrEqual = sunsetLessThanOrEqual;
 	}
 
@@ -343,12 +343,12 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 		// set members values:
 		idEqual = GsonParser.parseInt(jsonObject.get("idEqual"));
 		idIn = GsonParser.parseString(jsonObject.get("idIn"));
-		createdAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtGreaterThanOrEqual"));
-		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
-		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
-		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
-		submittedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("submittedAtGreaterThanOrEqual"));
-		submittedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("submittedAtLessThanOrEqual"));
+		createdAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtGreaterThanOrEqual"));
+		createdAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtLessThanOrEqual"));
+		updatedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtGreaterThanOrEqual"));
+		updatedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtLessThanOrEqual"));
+		submittedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("submittedAtGreaterThanOrEqual"));
+		submittedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("submittedAtLessThanOrEqual"));
 		entryIdEqual = GsonParser.parseString(jsonObject.get("entryIdEqual"));
 		entryIdIn = GsonParser.parseString(jsonObject.get("entryIdIn"));
 		distributionProfileIdEqual = GsonParser.parseInt(jsonObject.get("distributionProfileIdEqual"));
@@ -357,10 +357,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
 		statusIn = GsonParser.parseString(jsonObject.get("statusIn"));
 		dirtyStatusEqual = EntryDistributionFlag.get(GsonParser.parseInt(jsonObject.get("dirtyStatusEqual")));
 		dirtyStatusIn = GsonParser.parseString(jsonObject.get("dirtyStatusIn"));
-		sunriseGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("sunriseGreaterThanOrEqual"));
-		sunriseLessThanOrEqual = GsonParser.parseInt(jsonObject.get("sunriseLessThanOrEqual"));
-		sunsetGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("sunsetGreaterThanOrEqual"));
-		sunsetLessThanOrEqual = GsonParser.parseInt(jsonObject.get("sunsetLessThanOrEqual"));
+		sunriseGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("sunriseGreaterThanOrEqual"));
+		sunriseLessThanOrEqual = GsonParser.parseLong(jsonObject.get("sunriseLessThanOrEqual"));
+		sunsetGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("sunsetGreaterThanOrEqual"));
+		sunsetLessThanOrEqual = GsonParser.parseLong(jsonObject.get("sunsetLessThanOrEqual"));
 
 	}
 
@@ -420,12 +420,12 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
         super(in);
         this.idEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.idIn = in.readString();
-        this.createdAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.submittedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.submittedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.createdAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.submittedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.submittedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
         this.entryIdEqual = in.readString();
         this.entryIdIn = in.readString();
         this.distributionProfileIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());
@@ -436,10 +436,10 @@ public abstract class EntryDistributionBaseFilter extends RelatedFilter {
         int tmpDirtyStatusEqual = in.readInt();
         this.dirtyStatusEqual = tmpDirtyStatusEqual == -1 ? null : EntryDistributionFlag.values()[tmpDirtyStatusEqual];
         this.dirtyStatusIn = in.readString();
-        this.sunriseGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.sunriseLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.sunsetGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.sunsetLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.sunriseGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.sunriseLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.sunsetGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.sunsetLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

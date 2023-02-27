@@ -63,7 +63,7 @@ public class LiveStats extends ObjectBase {
 	private Integer plays;
 	private Integer secondsViewed;
 	private Long startEvent;
-	private Integer timestamp;
+	private Long timestamp;
 
 	// audience:
 	public Integer getAudience(){
@@ -150,10 +150,10 @@ public class LiveStats extends ObjectBase {
 	}
 
 	// timestamp:
-	public Integer getTimestamp(){
+	public Long getTimestamp(){
 		return this.timestamp;
 	}
-	public void setTimestamp(Integer timestamp){
+	public void setTimestamp(Long timestamp){
 		this.timestamp = timestamp;
 	}
 
@@ -179,7 +179,7 @@ public class LiveStats extends ObjectBase {
 		plays = GsonParser.parseInt(jsonObject.get("plays"));
 		secondsViewed = GsonParser.parseInt(jsonObject.get("secondsViewed"));
 		startEvent = GsonParser.parseLong(jsonObject.get("startEvent"));
-		timestamp = GsonParser.parseInt(jsonObject.get("timestamp"));
+		timestamp = GsonParser.parseLong(jsonObject.get("timestamp"));
 
 	}
 
@@ -232,7 +232,7 @@ public class LiveStats extends ObjectBase {
         this.plays = (Integer)in.readValue(Integer.class.getClassLoader());
         this.secondsViewed = (Integer)in.readValue(Integer.class.getClassLoader());
         this.startEvent = (Long)in.readValue(Long.class.getClassLoader());
-        this.timestamp = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.timestamp = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

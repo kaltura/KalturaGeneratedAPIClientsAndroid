@@ -95,9 +95,9 @@ public class BatchJob extends ObjectBase {
 
 	private Long id;
 	private Integer partnerId;
-	private Integer createdAt;
-	private Integer updatedAt;
-	private Integer deletedAt;
+	private Long createdAt;
+	private Long updatedAt;
+	private Long deletedAt;
 	private Integer lockExpiration;
 	private Integer executionAttempts;
 	private Integer lockVersion;
@@ -157,15 +157,15 @@ public class BatchJob extends ObjectBase {
 		return this.partnerId;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// deletedAt:
-	public Integer getDeletedAt(){
+	public Long getDeletedAt(){
 		return this.deletedAt;
 	}
 	// lockExpiration:
@@ -537,9 +537,9 @@ public class BatchJob extends ObjectBase {
 		// set members values:
 		id = GsonParser.parseLong(jsonObject.get("id"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
-		deletedAt = GsonParser.parseInt(jsonObject.get("deletedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
+		deletedAt = GsonParser.parseLong(jsonObject.get("deletedAt"));
 		lockExpiration = GsonParser.parseInt(jsonObject.get("lockExpiration"));
 		executionAttempts = GsonParser.parseInt(jsonObject.get("executionAttempts"));
 		lockVersion = GsonParser.parseInt(jsonObject.get("lockVersion"));
@@ -676,9 +676,9 @@ public class BatchJob extends ObjectBase {
         super(in);
         this.id = (Long)in.readValue(Long.class.getClassLoader());
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.deletedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.deletedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.lockExpiration = (Integer)in.readValue(Integer.class.getClassLoader());
         this.executionAttempts = (Integer)in.readValue(Integer.class.getClassLoader());
         this.lockVersion = (Integer)in.readValue(Integer.class.getClassLoader());

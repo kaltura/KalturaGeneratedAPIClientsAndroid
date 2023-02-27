@@ -78,10 +78,10 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 	private String userIdIn;
 	private String userIdNotIn;
 	private UserEntryStatus statusEqual;
-	private Integer createdAtLessThanOrEqual;
-	private Integer createdAtGreaterThanOrEqual;
-	private Integer updatedAtLessThanOrEqual;
-	private Integer updatedAtGreaterThanOrEqual;
+	private Long createdAtLessThanOrEqual;
+	private Long createdAtGreaterThanOrEqual;
+	private Long updatedAtLessThanOrEqual;
+	private Long updatedAtGreaterThanOrEqual;
 	private UserEntryType typeEqual;
 	private UserEntryExtendedStatus extendedStatusEqual;
 	private String extendedStatusIn;
@@ -208,10 +208,10 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtLessThanOrEqual:
-	public Integer getCreatedAtLessThanOrEqual(){
+	public Long getCreatedAtLessThanOrEqual(){
 		return this.createdAtLessThanOrEqual;
 	}
-	public void setCreatedAtLessThanOrEqual(Integer createdAtLessThanOrEqual){
+	public void setCreatedAtLessThanOrEqual(Long createdAtLessThanOrEqual){
 		this.createdAtLessThanOrEqual = createdAtLessThanOrEqual;
 	}
 
@@ -220,10 +220,10 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtGreaterThanOrEqual:
-	public Integer getCreatedAtGreaterThanOrEqual(){
+	public Long getCreatedAtGreaterThanOrEqual(){
 		return this.createdAtGreaterThanOrEqual;
 	}
-	public void setCreatedAtGreaterThanOrEqual(Integer createdAtGreaterThanOrEqual){
+	public void setCreatedAtGreaterThanOrEqual(Long createdAtGreaterThanOrEqual){
 		this.createdAtGreaterThanOrEqual = createdAtGreaterThanOrEqual;
 	}
 
@@ -232,10 +232,10 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 	}
 
 	// updatedAtLessThanOrEqual:
-	public Integer getUpdatedAtLessThanOrEqual(){
+	public Long getUpdatedAtLessThanOrEqual(){
 		return this.updatedAtLessThanOrEqual;
 	}
-	public void setUpdatedAtLessThanOrEqual(Integer updatedAtLessThanOrEqual){
+	public void setUpdatedAtLessThanOrEqual(Long updatedAtLessThanOrEqual){
 		this.updatedAtLessThanOrEqual = updatedAtLessThanOrEqual;
 	}
 
@@ -244,10 +244,10 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 	}
 
 	// updatedAtGreaterThanOrEqual:
-	public Integer getUpdatedAtGreaterThanOrEqual(){
+	public Long getUpdatedAtGreaterThanOrEqual(){
 		return this.updatedAtGreaterThanOrEqual;
 	}
-	public void setUpdatedAtGreaterThanOrEqual(Integer updatedAtGreaterThanOrEqual){
+	public void setUpdatedAtGreaterThanOrEqual(Long updatedAtGreaterThanOrEqual){
 		this.updatedAtGreaterThanOrEqual = updatedAtGreaterThanOrEqual;
 	}
 
@@ -324,10 +324,10 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 		userIdIn = GsonParser.parseString(jsonObject.get("userIdIn"));
 		userIdNotIn = GsonParser.parseString(jsonObject.get("userIdNotIn"));
 		statusEqual = UserEntryStatus.get(GsonParser.parseString(jsonObject.get("statusEqual")));
-		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
-		createdAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtGreaterThanOrEqual"));
-		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
-		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
+		createdAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtLessThanOrEqual"));
+		createdAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtGreaterThanOrEqual"));
+		updatedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtLessThanOrEqual"));
+		updatedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtGreaterThanOrEqual"));
 		typeEqual = UserEntryType.get(GsonParser.parseString(jsonObject.get("typeEqual")));
 		extendedStatusEqual = UserEntryExtendedStatus.get(GsonParser.parseString(jsonObject.get("extendedStatusEqual")));
 		extendedStatusIn = GsonParser.parseString(jsonObject.get("extendedStatusIn"));
@@ -396,10 +396,10 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
         this.userIdNotIn = in.readString();
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : UserEntryStatus.values()[tmpStatusEqual];
-        this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.createdAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
         int tmpTypeEqual = in.readInt();
         this.typeEqual = tmpTypeEqual == -1 ? null : UserEntryType.values()[tmpTypeEqual];
         int tmpExtendedStatusEqual = in.readInt();

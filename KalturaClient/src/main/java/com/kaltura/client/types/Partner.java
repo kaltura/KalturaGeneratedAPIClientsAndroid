@@ -143,7 +143,7 @@ public class Partner extends ObjectBase {
 	private String website;
 	private String notificationUrl;
 	private Integer appearInSearch;
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * deprecated - lastName and firstName replaces this field
 	 */
@@ -217,7 +217,7 @@ public class Partner extends ObjectBase {
 	/**
 	 * Unix timestamp (In seconds)
 	 */
-	private Integer extendedFreeTrailExpiryDate;
+	private Long extendedFreeTrailExpiryDate;
 	private Integer extendedFreeTrail;
 	private Boolean extendedFreeTrailEndsWarning;
 	private Integer eightyPercentWarning;
@@ -291,7 +291,7 @@ public class Partner extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// adminName:
@@ -739,7 +739,7 @@ public class Partner extends ObjectBase {
 		return this.extendedFreeTrailExpiryReason;
 	}
 	// extendedFreeTrailExpiryDate:
-	public Integer getExtendedFreeTrailExpiryDate(){
+	public Long getExtendedFreeTrailExpiryDate(){
 		return this.extendedFreeTrailExpiryDate;
 	}
 	// extendedFreeTrail:
@@ -894,7 +894,7 @@ public class Partner extends ObjectBase {
 		website = GsonParser.parseString(jsonObject.get("website"));
 		notificationUrl = GsonParser.parseString(jsonObject.get("notificationUrl"));
 		appearInSearch = GsonParser.parseInt(jsonObject.get("appearInSearch"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
 		adminName = GsonParser.parseString(jsonObject.get("adminName"));
 		adminEmail = GsonParser.parseString(jsonObject.get("adminEmail"));
 		description = GsonParser.parseString(jsonObject.get("description"));
@@ -950,7 +950,7 @@ public class Partner extends ObjectBase {
 		eSearchLanguages = GsonParser.parseArray(jsonObject.getAsJsonArray("eSearchLanguages"), ESearchLanguageItem.class);
 		authenticationType = PartnerAuthenticationType.get(GsonParser.parseInt(jsonObject.get("authenticationType")));
 		extendedFreeTrailExpiryReason = GsonParser.parseString(jsonObject.get("extendedFreeTrailExpiryReason"));
-		extendedFreeTrailExpiryDate = GsonParser.parseInt(jsonObject.get("extendedFreeTrailExpiryDate"));
+		extendedFreeTrailExpiryDate = GsonParser.parseLong(jsonObject.get("extendedFreeTrailExpiryDate"));
 		extendedFreeTrail = GsonParser.parseInt(jsonObject.get("extendedFreeTrail"));
 		extendedFreeTrailEndsWarning = GsonParser.parseBoolean(jsonObject.get("extendedFreeTrailEndsWarning"));
 		eightyPercentWarning = GsonParser.parseInt(jsonObject.get("eightyPercentWarning"));
@@ -1151,7 +1151,7 @@ public class Partner extends ObjectBase {
         this.website = in.readString();
         this.notificationUrl = in.readString();
         this.appearInSearch = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
         this.adminName = in.readString();
         this.adminEmail = in.readString();
         this.description = in.readString();
@@ -1228,7 +1228,7 @@ public class Partner extends ObjectBase {
         int tmpAuthenticationType = in.readInt();
         this.authenticationType = tmpAuthenticationType == -1 ? null : PartnerAuthenticationType.values()[tmpAuthenticationType];
         this.extendedFreeTrailExpiryReason = in.readString();
-        this.extendedFreeTrailExpiryDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.extendedFreeTrailExpiryDate = (Long)in.readValue(Long.class.getClassLoader());
         this.extendedFreeTrail = (Integer)in.readValue(Integer.class.getClassLoader());
         this.extendedFreeTrailEndsWarning = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.eightyPercentWarning = (Integer)in.readValue(Integer.class.getClassLoader());

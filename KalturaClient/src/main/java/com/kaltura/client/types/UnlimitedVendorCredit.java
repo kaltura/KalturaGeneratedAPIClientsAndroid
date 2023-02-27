@@ -50,17 +50,17 @@ public class UnlimitedVendorCredit extends BaseVendorCredit {
 	}
 
 	private Integer credit;
-	private Integer fromDate;
+	private Long fromDate;
 
 	// credit:
 	public Integer getCredit(){
 		return this.credit;
 	}
 	// fromDate:
-	public Integer getFromDate(){
+	public Long getFromDate(){
 		return this.fromDate;
 	}
-	public void setFromDate(Integer fromDate){
+	public void setFromDate(Long fromDate){
 		this.fromDate = fromDate;
 	}
 
@@ -80,7 +80,7 @@ public class UnlimitedVendorCredit extends BaseVendorCredit {
 
 		// set members values:
 		credit = GsonParser.parseInt(jsonObject.get("credit"));
-		fromDate = GsonParser.parseInt(jsonObject.get("fromDate"));
+		fromDate = GsonParser.parseLong(jsonObject.get("fromDate"));
 
 	}
 
@@ -114,7 +114,7 @@ public class UnlimitedVendorCredit extends BaseVendorCredit {
     public UnlimitedVendorCredit(Parcel in) {
         super(in);
         this.credit = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.fromDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.fromDate = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

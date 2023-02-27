@@ -52,17 +52,17 @@ public class LiveReportExportJobData extends JobData {
 		String recipientEmail();
 	}
 
-	private Integer timeReference;
+	private Long timeReference;
 	private Integer timeZoneOffset;
 	private String entryIds;
 	private String outputPath;
 	private String recipientEmail;
 
 	// timeReference:
-	public Integer getTimeReference(){
+	public Long getTimeReference(){
 		return this.timeReference;
 	}
-	public void setTimeReference(Integer timeReference){
+	public void setTimeReference(Long timeReference){
 		this.timeReference = timeReference;
 	}
 
@@ -129,7 +129,7 @@ public class LiveReportExportJobData extends JobData {
 		if(jsonObject == null) return;
 
 		// set members values:
-		timeReference = GsonParser.parseInt(jsonObject.get("timeReference"));
+		timeReference = GsonParser.parseLong(jsonObject.get("timeReference"));
 		timeZoneOffset = GsonParser.parseInt(jsonObject.get("timeZoneOffset"));
 		entryIds = GsonParser.parseString(jsonObject.get("entryIds"));
 		outputPath = GsonParser.parseString(jsonObject.get("outputPath"));
@@ -173,7 +173,7 @@ public class LiveReportExportJobData extends JobData {
 
     public LiveReportExportJobData(Parcel in) {
         super(in);
-        this.timeReference = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.timeReference = (Long)in.readValue(Long.class.getClassLoader());
         this.timeZoneOffset = (Integer)in.readValue(Integer.class.getClassLoader());
         this.entryIds = in.readString();
         this.outputPath = in.readString();

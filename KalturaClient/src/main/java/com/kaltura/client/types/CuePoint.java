@@ -75,9 +75,9 @@ public abstract class CuePoint extends ObjectBase {
 	private CuePointStatus status;
 	private String entryId;
 	private Integer partnerId;
-	private Integer createdAt;
-	private Integer updatedAt;
-	private Integer triggeredAt;
+	private Long createdAt;
+	private Long updatedAt;
+	private Long triggeredAt;
 	private String tags;
 	/**
 	 * Start time in milliseconds
@@ -125,18 +125,18 @@ public abstract class CuePoint extends ObjectBase {
 		return this.partnerId;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// triggeredAt:
-	public Integer getTriggeredAt(){
+	public Long getTriggeredAt(){
 		return this.triggeredAt;
 	}
-	public void setTriggeredAt(Integer triggeredAt){
+	public void setTriggeredAt(Long triggeredAt){
 		this.triggeredAt = triggeredAt;
 	}
 
@@ -265,9 +265,9 @@ public abstract class CuePoint extends ObjectBase {
 		status = CuePointStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		entryId = GsonParser.parseString(jsonObject.get("entryId"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
-		triggeredAt = GsonParser.parseInt(jsonObject.get("triggeredAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
+		triggeredAt = GsonParser.parseLong(jsonObject.get("triggeredAt"));
 		tags = GsonParser.parseString(jsonObject.get("tags"));
 		startTime = GsonParser.parseInt(jsonObject.get("startTime"));
 		userId = GsonParser.parseString(jsonObject.get("userId"));
@@ -332,9 +332,9 @@ public abstract class CuePoint extends ObjectBase {
         this.status = tmpStatus == -1 ? null : CuePointStatus.values()[tmpStatus];
         this.entryId = in.readString();
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.triggeredAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.triggeredAt = (Long)in.readValue(Long.class.getClassLoader());
         this.tags = in.readString();
         this.startTime = (Integer)in.readValue(Integer.class.getClassLoader());
         this.userId = in.readString();

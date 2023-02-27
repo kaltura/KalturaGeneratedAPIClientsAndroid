@@ -55,11 +55,11 @@ public class ReportInputBaseFilter extends ObjectBase {
 	/**
 	 * Start date as Unix timestamp (In seconds)
 	 */
-	private Integer fromDate;
+	private Long fromDate;
 	/**
 	 * End date as Unix timestamp (In seconds)
 	 */
-	private Integer toDate;
+	private Long toDate;
 	/**
 	 * Start day as string (YYYYMMDD)
 	 */
@@ -70,10 +70,10 @@ public class ReportInputBaseFilter extends ObjectBase {
 	private String toDay;
 
 	// fromDate:
-	public Integer getFromDate(){
+	public Long getFromDate(){
 		return this.fromDate;
 	}
-	public void setFromDate(Integer fromDate){
+	public void setFromDate(Long fromDate){
 		this.fromDate = fromDate;
 	}
 
@@ -82,10 +82,10 @@ public class ReportInputBaseFilter extends ObjectBase {
 	}
 
 	// toDate:
-	public Integer getToDate(){
+	public Long getToDate(){
 		return this.toDate;
 	}
-	public void setToDate(Integer toDate){
+	public void setToDate(Long toDate){
 		this.toDate = toDate;
 	}
 
@@ -128,8 +128,8 @@ public class ReportInputBaseFilter extends ObjectBase {
 		if(jsonObject == null) return;
 
 		// set members values:
-		fromDate = GsonParser.parseInt(jsonObject.get("fromDate"));
-		toDate = GsonParser.parseInt(jsonObject.get("toDate"));
+		fromDate = GsonParser.parseLong(jsonObject.get("fromDate"));
+		toDate = GsonParser.parseLong(jsonObject.get("toDate"));
 		fromDay = GsonParser.parseString(jsonObject.get("fromDay"));
 		toDay = GsonParser.parseString(jsonObject.get("toDay"));
 
@@ -169,8 +169,8 @@ public class ReportInputBaseFilter extends ObjectBase {
 
     public ReportInputBaseFilter(Parcel in) {
         super(in);
-        this.fromDate = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.toDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.fromDate = (Long)in.readValue(Long.class.getClassLoader());
+        this.toDate = (Long)in.readValue(Long.class.getClassLoader());
         this.fromDay = in.readString();
         this.toDay = in.readString();
     }

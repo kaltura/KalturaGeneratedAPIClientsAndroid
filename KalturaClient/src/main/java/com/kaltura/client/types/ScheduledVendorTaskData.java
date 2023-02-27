@@ -50,15 +50,15 @@ public class ScheduledVendorTaskData extends VendorTaskData {
 		String scheduledEventId();
 	}
 
-	private Integer startDate;
-	private Integer endDate;
+	private Long startDate;
+	private Long endDate;
 	private Integer scheduledEventId;
 
 	// startDate:
-	public Integer getStartDate(){
+	public Long getStartDate(){
 		return this.startDate;
 	}
-	public void setStartDate(Integer startDate){
+	public void setStartDate(Long startDate){
 		this.startDate = startDate;
 	}
 
@@ -67,10 +67,10 @@ public class ScheduledVendorTaskData extends VendorTaskData {
 	}
 
 	// endDate:
-	public Integer getEndDate(){
+	public Long getEndDate(){
 		return this.endDate;
 	}
-	public void setEndDate(Integer endDate){
+	public void setEndDate(Long endDate){
 		this.endDate = endDate;
 	}
 
@@ -101,8 +101,8 @@ public class ScheduledVendorTaskData extends VendorTaskData {
 		if(jsonObject == null) return;
 
 		// set members values:
-		startDate = GsonParser.parseInt(jsonObject.get("startDate"));
-		endDate = GsonParser.parseInt(jsonObject.get("endDate"));
+		startDate = GsonParser.parseLong(jsonObject.get("startDate"));
+		endDate = GsonParser.parseLong(jsonObject.get("endDate"));
 		scheduledEventId = GsonParser.parseInt(jsonObject.get("scheduledEventId"));
 
 	}
@@ -139,8 +139,8 @@ public class ScheduledVendorTaskData extends VendorTaskData {
 
     public ScheduledVendorTaskData(Parcel in) {
         super(in);
-        this.startDate = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.endDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.startDate = (Long)in.readValue(Long.class.getClassLoader());
+        this.endDate = (Long)in.readValue(Long.class.getClassLoader());
         this.scheduledEventId = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }

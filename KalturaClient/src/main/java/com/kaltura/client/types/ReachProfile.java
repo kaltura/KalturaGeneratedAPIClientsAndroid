@@ -89,8 +89,8 @@ public class ReachProfile extends ObjectBase {
 	 */
 	private String name;
 	private Integer partnerId;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 	private ReachProfileStatus status;
 	private ReachProfileType profileType;
 	private VendorCatalogItemOutputFormat defaultOutputFormat;
@@ -141,11 +141,11 @@ public class ReachProfile extends ObjectBase {
 		return this.partnerId;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// status:
@@ -386,8 +386,8 @@ public class ReachProfile extends ObjectBase {
 		id = GsonParser.parseInt(jsonObject.get("id"));
 		name = GsonParser.parseString(jsonObject.get("name"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		status = ReachProfileStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		profileType = ReachProfileType.get(GsonParser.parseInt(jsonObject.get("profileType")));
 		defaultOutputFormat = VendorCatalogItemOutputFormat.get(GsonParser.parseInt(jsonObject.get("defaultOutputFormat")));
@@ -497,8 +497,8 @@ public class ReachProfile extends ObjectBase {
         this.id = (Integer)in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : ReachProfileStatus.values()[tmpStatus];
         int tmpProfileType = in.readInt();

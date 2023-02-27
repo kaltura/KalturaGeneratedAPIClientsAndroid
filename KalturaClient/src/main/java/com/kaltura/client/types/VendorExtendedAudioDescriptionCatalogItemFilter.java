@@ -30,7 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -41,71 +40,43 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(TimeRangeVendorCredit.Tokenizer.class)
-public class TimeRangeVendorCredit extends VendorCredit {
+@MultiRequestBuilder.Tokenizer(VendorExtendedAudioDescriptionCatalogItemFilter.Tokenizer.class)
+public class VendorExtendedAudioDescriptionCatalogItemFilter extends VendorCaptionsCatalogItemBaseFilter {
 	
-	public interface Tokenizer extends VendorCredit.Tokenizer {
-		String toDate();
-	}
-
-	private Long toDate;
-
-	// toDate:
-	public Long getToDate(){
-		return this.toDate;
-	}
-	public void setToDate(Long toDate){
-		this.toDate = toDate;
-	}
-
-	public void toDate(String multirequestToken){
-		setToken("toDate", multirequestToken);
+	public interface Tokenizer extends VendorCaptionsCatalogItemBaseFilter.Tokenizer {
 	}
 
 
-	public TimeRangeVendorCredit() {
+
+	public VendorExtendedAudioDescriptionCatalogItemFilter() {
 		super();
 	}
 
-	public TimeRangeVendorCredit(JsonObject jsonObject) throws APIException {
+	public VendorExtendedAudioDescriptionCatalogItemFilter(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
-
-		if(jsonObject == null) return;
-
-		// set members values:
-		toDate = GsonParser.parseLong(jsonObject.get("toDate"));
-
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaTimeRangeVendorCredit");
-		kparams.add("toDate", this.toDate);
+		kparams.add("objectType", "KalturaVendorExtendedAudioDescriptionCatalogItemFilter");
 		return kparams;
 	}
 
 
-    public static final Creator<TimeRangeVendorCredit> CREATOR = new Creator<TimeRangeVendorCredit>() {
+    public static final Creator<VendorExtendedAudioDescriptionCatalogItemFilter> CREATOR = new Creator<VendorExtendedAudioDescriptionCatalogItemFilter>() {
         @Override
-        public TimeRangeVendorCredit createFromParcel(Parcel source) {
-            return new TimeRangeVendorCredit(source);
+        public VendorExtendedAudioDescriptionCatalogItemFilter createFromParcel(Parcel source) {
+            return new VendorExtendedAudioDescriptionCatalogItemFilter(source);
         }
 
         @Override
-        public TimeRangeVendorCredit[] newArray(int size) {
-            return new TimeRangeVendorCredit[size];
+        public VendorExtendedAudioDescriptionCatalogItemFilter[] newArray(int size) {
+            return new VendorExtendedAudioDescriptionCatalogItemFilter[size];
         }
     };
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags);
-        dest.writeValue(this.toDate);
-    }
-
-    public TimeRangeVendorCredit(Parcel in) {
+    public VendorExtendedAudioDescriptionCatalogItemFilter(Parcel in) {
         super(in);
-        this.toDate = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

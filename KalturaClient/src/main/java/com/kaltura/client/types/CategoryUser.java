@@ -81,11 +81,11 @@ public class CategoryUser extends ObjectBase {
 	/**
 	 * CategoryUser creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * CategoryUser update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	/**
 	 * Update method can be either manual or automatic to distinguish between manual
 	  operations (for example in KMC) on automatic - using bulk upload
@@ -145,11 +145,11 @@ public class CategoryUser extends ObjectBase {
 		return this.status;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// updateMethod:
@@ -196,8 +196,8 @@ public class CategoryUser extends ObjectBase {
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		permissionLevel = CategoryUserPermissionLevel.get(GsonParser.parseInt(jsonObject.get("permissionLevel")));
 		status = CategoryUserStatus.get(GsonParser.parseInt(jsonObject.get("status")));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		updateMethod = UpdateMethodType.get(GsonParser.parseInt(jsonObject.get("updateMethod")));
 		categoryFullIds = GsonParser.parseString(jsonObject.get("categoryFullIds"));
 		permissionNames = GsonParser.parseString(jsonObject.get("permissionNames"));
@@ -252,8 +252,8 @@ public class CategoryUser extends ObjectBase {
         this.permissionLevel = tmpPermissionLevel == -1 ? null : CategoryUserPermissionLevel.values()[tmpPermissionLevel];
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : CategoryUserStatus.values()[tmpStatus];
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         int tmpUpdateMethod = in.readInt();
         this.updateMethod = tmpUpdateMethod == -1 ? null : UpdateMethodType.values()[tmpUpdateMethod];
         this.categoryFullIds = in.readString();

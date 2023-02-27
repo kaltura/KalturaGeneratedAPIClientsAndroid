@@ -110,7 +110,7 @@ public class ConversionProfile extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * List of included flavor ids (comma separated)
 	 */
@@ -268,7 +268,7 @@ public class ConversionProfile extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// flavorParamsIds:
@@ -467,7 +467,7 @@ public class ConversionProfile extends ObjectBase {
 		tags = GsonParser.parseString(jsonObject.get("tags"));
 		description = GsonParser.parseString(jsonObject.get("description"));
 		defaultEntryId = GsonParser.parseString(jsonObject.get("defaultEntryId"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
 		flavorParamsIds = GsonParser.parseString(jsonObject.get("flavorParamsIds"));
 		isDefault = GsonParser.parseBoolean(jsonObject.get("isDefault"));
 		isPartnerDefault = GsonParser.parseBoolean(jsonObject.get("isPartnerDefault"));
@@ -572,7 +572,7 @@ public class ConversionProfile extends ObjectBase {
         this.tags = in.readString();
         this.description = in.readString();
         this.defaultEntryId = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
         this.flavorParamsIds = in.readString();
         this.isDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.isPartnerDefault = (Boolean)in.readValue(Boolean.class.getClassLoader());

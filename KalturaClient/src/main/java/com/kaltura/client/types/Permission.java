@@ -73,8 +73,8 @@ public class Permission extends ObjectBase {
 	private String dependsOnPermissionNames;
 	private String tags;
 	private String permissionItemsIds;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 	private String partnerGroup;
 
 	// id:
@@ -174,11 +174,11 @@ public class Permission extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// partnerGroup:
@@ -214,8 +214,8 @@ public class Permission extends ObjectBase {
 		dependsOnPermissionNames = GsonParser.parseString(jsonObject.get("dependsOnPermissionNames"));
 		tags = GsonParser.parseString(jsonObject.get("tags"));
 		permissionItemsIds = GsonParser.parseString(jsonObject.get("permissionItemsIds"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		partnerGroup = GsonParser.parseString(jsonObject.get("partnerGroup"));
 
 	}
@@ -279,8 +279,8 @@ public class Permission extends ObjectBase {
         this.dependsOnPermissionNames = in.readString();
         this.tags = in.readString();
         this.permissionItemsIds = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.partnerGroup = in.readString();
     }
 }

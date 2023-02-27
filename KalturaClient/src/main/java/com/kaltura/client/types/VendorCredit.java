@@ -52,7 +52,7 @@ public class VendorCredit extends BaseVendorCredit {
 	}
 
 	private Integer credit;
-	private Integer fromDate;
+	private Long fromDate;
 	private Integer overageCredit;
 	private Integer addOn;
 
@@ -69,10 +69,10 @@ public class VendorCredit extends BaseVendorCredit {
 	}
 
 	// fromDate:
-	public Integer getFromDate(){
+	public Long getFromDate(){
 		return this.fromDate;
 	}
-	public void setFromDate(Integer fromDate){
+	public void setFromDate(Long fromDate){
 		this.fromDate = fromDate;
 	}
 
@@ -116,7 +116,7 @@ public class VendorCredit extends BaseVendorCredit {
 
 		// set members values:
 		credit = GsonParser.parseInt(jsonObject.get("credit"));
-		fromDate = GsonParser.parseInt(jsonObject.get("fromDate"));
+		fromDate = GsonParser.parseLong(jsonObject.get("fromDate"));
 		overageCredit = GsonParser.parseInt(jsonObject.get("overageCredit"));
 		addOn = GsonParser.parseInt(jsonObject.get("addOn"));
 
@@ -157,7 +157,7 @@ public class VendorCredit extends BaseVendorCredit {
     public VendorCredit(Parcel in) {
         super(in);
         this.credit = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.fromDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.fromDate = (Long)in.readValue(Long.class.getClassLoader());
         this.overageCredit = (Integer)in.readValue(Integer.class.getClassLoader());
         this.addOn = (Integer)in.readValue(Integer.class.getClassLoader());
     }

@@ -101,7 +101,7 @@ public abstract class BaseSyndicationFeed extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * allow_embed tells google OR yahoo weather to allow embedding the video on google
 	  OR yahoo video results   or just to provide a link to the landing page.   it is
@@ -131,7 +131,7 @@ public abstract class BaseSyndicationFeed extends ObjectBase {
 	/**
 	 * Update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	private Boolean useCategoryEntries;
 	/**
 	 * Feed content-type header value
@@ -203,7 +203,7 @@ public abstract class BaseSyndicationFeed extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// allowEmbed:
@@ -327,7 +327,7 @@ public abstract class BaseSyndicationFeed extends ObjectBase {
 	}
 
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// useCategoryEntries:
@@ -373,7 +373,7 @@ public abstract class BaseSyndicationFeed extends ObjectBase {
 		status = SyndicationFeedStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		type = SyndicationFeedType.get(GsonParser.parseInt(jsonObject.get("type")));
 		landingPage = GsonParser.parseString(jsonObject.get("landingPage"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
 		allowEmbed = GsonParser.parseBoolean(jsonObject.get("allowEmbed"));
 		playerUiconfId = GsonParser.parseInt(jsonObject.get("playerUiconfId"));
 		flavorParamId = GsonParser.parseInt(jsonObject.get("flavorParamId"));
@@ -384,7 +384,7 @@ public abstract class BaseSyndicationFeed extends ObjectBase {
 		entriesOrderBy = SyndicationFeedEntriesOrderBy.get(GsonParser.parseString(jsonObject.get("entriesOrderBy")));
 		enforceEntitlement = GsonParser.parseBoolean(jsonObject.get("enforceEntitlement"));
 		privacyContext = GsonParser.parseString(jsonObject.get("privacyContext"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		useCategoryEntries = GsonParser.parseBoolean(jsonObject.get("useCategoryEntries"));
 		feedContentTypeHeader = GsonParser.parseString(jsonObject.get("feedContentTypeHeader"));
 
@@ -452,7 +452,7 @@ public abstract class BaseSyndicationFeed extends ObjectBase {
         int tmpType = in.readInt();
         this.type = tmpType == -1 ? null : SyndicationFeedType.values()[tmpType];
         this.landingPage = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
         this.allowEmbed = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.playerUiconfId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.flavorParamId = (Integer)in.readValue(Integer.class.getClassLoader());
@@ -464,7 +464,7 @@ public abstract class BaseSyndicationFeed extends ObjectBase {
         this.entriesOrderBy = tmpEntriesOrderBy == -1 ? null : SyndicationFeedEntriesOrderBy.values()[tmpEntriesOrderBy];
         this.enforceEntitlement = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.privacyContext = in.readString();
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.useCategoryEntries = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.feedContentTypeHeader = in.readString();
     }

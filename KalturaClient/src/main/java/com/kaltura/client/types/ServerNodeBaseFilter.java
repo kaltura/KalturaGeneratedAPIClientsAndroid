@@ -80,12 +80,12 @@ public abstract class ServerNodeBaseFilter extends Filter {
 
 	private Integer idEqual;
 	private String idIn;
-	private Integer createdAtGreaterThanOrEqual;
-	private Integer createdAtLessThanOrEqual;
-	private Integer updatedAtGreaterThanOrEqual;
-	private Integer updatedAtLessThanOrEqual;
-	private Integer heartbeatTimeGreaterThanOrEqual;
-	private Integer heartbeatTimeLessThanOrEqual;
+	private Long createdAtGreaterThanOrEqual;
+	private Long createdAtLessThanOrEqual;
+	private Long updatedAtGreaterThanOrEqual;
+	private Long updatedAtLessThanOrEqual;
+	private Long heartbeatTimeGreaterThanOrEqual;
+	private Long heartbeatTimeLessThanOrEqual;
 	private String nameEqual;
 	private String nameIn;
 	private String systemNameEqual;
@@ -133,10 +133,10 @@ public abstract class ServerNodeBaseFilter extends Filter {
 	}
 
 	// createdAtGreaterThanOrEqual:
-	public Integer getCreatedAtGreaterThanOrEqual(){
+	public Long getCreatedAtGreaterThanOrEqual(){
 		return this.createdAtGreaterThanOrEqual;
 	}
-	public void setCreatedAtGreaterThanOrEqual(Integer createdAtGreaterThanOrEqual){
+	public void setCreatedAtGreaterThanOrEqual(Long createdAtGreaterThanOrEqual){
 		this.createdAtGreaterThanOrEqual = createdAtGreaterThanOrEqual;
 	}
 
@@ -145,10 +145,10 @@ public abstract class ServerNodeBaseFilter extends Filter {
 	}
 
 	// createdAtLessThanOrEqual:
-	public Integer getCreatedAtLessThanOrEqual(){
+	public Long getCreatedAtLessThanOrEqual(){
 		return this.createdAtLessThanOrEqual;
 	}
-	public void setCreatedAtLessThanOrEqual(Integer createdAtLessThanOrEqual){
+	public void setCreatedAtLessThanOrEqual(Long createdAtLessThanOrEqual){
 		this.createdAtLessThanOrEqual = createdAtLessThanOrEqual;
 	}
 
@@ -157,10 +157,10 @@ public abstract class ServerNodeBaseFilter extends Filter {
 	}
 
 	// updatedAtGreaterThanOrEqual:
-	public Integer getUpdatedAtGreaterThanOrEqual(){
+	public Long getUpdatedAtGreaterThanOrEqual(){
 		return this.updatedAtGreaterThanOrEqual;
 	}
-	public void setUpdatedAtGreaterThanOrEqual(Integer updatedAtGreaterThanOrEqual){
+	public void setUpdatedAtGreaterThanOrEqual(Long updatedAtGreaterThanOrEqual){
 		this.updatedAtGreaterThanOrEqual = updatedAtGreaterThanOrEqual;
 	}
 
@@ -169,10 +169,10 @@ public abstract class ServerNodeBaseFilter extends Filter {
 	}
 
 	// updatedAtLessThanOrEqual:
-	public Integer getUpdatedAtLessThanOrEqual(){
+	public Long getUpdatedAtLessThanOrEqual(){
 		return this.updatedAtLessThanOrEqual;
 	}
-	public void setUpdatedAtLessThanOrEqual(Integer updatedAtLessThanOrEqual){
+	public void setUpdatedAtLessThanOrEqual(Long updatedAtLessThanOrEqual){
 		this.updatedAtLessThanOrEqual = updatedAtLessThanOrEqual;
 	}
 
@@ -181,10 +181,10 @@ public abstract class ServerNodeBaseFilter extends Filter {
 	}
 
 	// heartbeatTimeGreaterThanOrEqual:
-	public Integer getHeartbeatTimeGreaterThanOrEqual(){
+	public Long getHeartbeatTimeGreaterThanOrEqual(){
 		return this.heartbeatTimeGreaterThanOrEqual;
 	}
-	public void setHeartbeatTimeGreaterThanOrEqual(Integer heartbeatTimeGreaterThanOrEqual){
+	public void setHeartbeatTimeGreaterThanOrEqual(Long heartbeatTimeGreaterThanOrEqual){
 		this.heartbeatTimeGreaterThanOrEqual = heartbeatTimeGreaterThanOrEqual;
 	}
 
@@ -193,10 +193,10 @@ public abstract class ServerNodeBaseFilter extends Filter {
 	}
 
 	// heartbeatTimeLessThanOrEqual:
-	public Integer getHeartbeatTimeLessThanOrEqual(){
+	public Long getHeartbeatTimeLessThanOrEqual(){
 		return this.heartbeatTimeLessThanOrEqual;
 	}
-	public void setHeartbeatTimeLessThanOrEqual(Integer heartbeatTimeLessThanOrEqual){
+	public void setHeartbeatTimeLessThanOrEqual(Long heartbeatTimeLessThanOrEqual){
 		this.heartbeatTimeLessThanOrEqual = heartbeatTimeLessThanOrEqual;
 	}
 
@@ -469,12 +469,12 @@ public abstract class ServerNodeBaseFilter extends Filter {
 		// set members values:
 		idEqual = GsonParser.parseInt(jsonObject.get("idEqual"));
 		idIn = GsonParser.parseString(jsonObject.get("idIn"));
-		createdAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtGreaterThanOrEqual"));
-		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
-		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
-		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
-		heartbeatTimeGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("heartbeatTimeGreaterThanOrEqual"));
-		heartbeatTimeLessThanOrEqual = GsonParser.parseInt(jsonObject.get("heartbeatTimeLessThanOrEqual"));
+		createdAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtGreaterThanOrEqual"));
+		createdAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtLessThanOrEqual"));
+		updatedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtGreaterThanOrEqual"));
+		updatedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtLessThanOrEqual"));
+		heartbeatTimeGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("heartbeatTimeGreaterThanOrEqual"));
+		heartbeatTimeLessThanOrEqual = GsonParser.parseLong(jsonObject.get("heartbeatTimeLessThanOrEqual"));
 		nameEqual = GsonParser.parseString(jsonObject.get("nameEqual"));
 		nameIn = GsonParser.parseString(jsonObject.get("nameIn"));
 		systemNameEqual = GsonParser.parseString(jsonObject.get("systemNameEqual"));
@@ -573,12 +573,12 @@ public abstract class ServerNodeBaseFilter extends Filter {
         super(in);
         this.idEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.idIn = in.readString();
-        this.createdAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.heartbeatTimeGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.heartbeatTimeLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.createdAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.heartbeatTimeGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.heartbeatTimeLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
         this.nameEqual = in.readString();
         this.nameIn = in.readString();
         this.systemNameEqual = in.readString();

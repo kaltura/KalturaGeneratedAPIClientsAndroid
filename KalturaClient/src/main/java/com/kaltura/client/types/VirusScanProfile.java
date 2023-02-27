@@ -62,8 +62,8 @@ public class VirusScanProfile extends ObjectBase {
 	}
 
 	private Integer id;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 	private Integer partnerId;
 	private String name;
 	private VirusScanProfileStatus status;
@@ -76,11 +76,11 @@ public class VirusScanProfile extends ObjectBase {
 		return this.id;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// partnerId:
@@ -155,8 +155,8 @@ public class VirusScanProfile extends ObjectBase {
 
 		// set members values:
 		id = GsonParser.parseInt(jsonObject.get("id"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		name = GsonParser.parseString(jsonObject.get("name"));
 		status = VirusScanProfileStatus.get(GsonParser.parseInt(jsonObject.get("status")));
@@ -207,8 +207,8 @@ public class VirusScanProfile extends ObjectBase {
     public VirusScanProfile(Parcel in) {
         super(in);
         this.id = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
         int tmpStatus = in.readInt();

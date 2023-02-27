@@ -73,8 +73,8 @@ public abstract class VendorCatalogItem extends ObjectBase {
 	private Integer vendorPartnerId;
 	private String name;
 	private String systemName;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 	private VendorCatalogItemStatus status;
 	private VendorServiceType serviceType;
 	private VendorServiceFeature serviceFeature;
@@ -129,11 +129,11 @@ public abstract class VendorCatalogItem extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// status:
@@ -227,8 +227,8 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		vendorPartnerId = GsonParser.parseInt(jsonObject.get("vendorPartnerId"));
 		name = GsonParser.parseString(jsonObject.get("name"));
 		systemName = GsonParser.parseString(jsonObject.get("systemName"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		status = VendorCatalogItemStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		serviceType = VendorServiceType.get(GsonParser.parseInt(jsonObject.get("serviceType")));
 		serviceFeature = VendorServiceFeature.get(GsonParser.parseInt(jsonObject.get("serviceFeature")));
@@ -281,8 +281,8 @@ public abstract class VendorCatalogItem extends ObjectBase {
         this.vendorPartnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.name = in.readString();
         this.systemName = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : VendorCatalogItemStatus.values()[tmpStatus];
         int tmpServiceType = in.readInt();

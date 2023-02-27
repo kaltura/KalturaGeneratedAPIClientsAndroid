@@ -92,8 +92,8 @@ public abstract class ScheduleEvent extends ObjectBase {
 	private String summary;
 	private String description;
 	private ScheduleEventStatus status;
-	private Integer startDate;
-	private Integer endDate;
+	private Long startDate;
+	private Long endDate;
 	private String referenceId;
 	/**
 	 * Contains the Id of the event that influences the timing of this event and the
@@ -147,11 +147,11 @@ public abstract class ScheduleEvent extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Last update as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	private ScheduleEventRecurrence recurrence;
 
 	// id:
@@ -195,10 +195,10 @@ public abstract class ScheduleEvent extends ObjectBase {
 		return this.status;
 	}
 	// startDate:
-	public Integer getStartDate(){
+	public Long getStartDate(){
 		return this.startDate;
 	}
-	public void setStartDate(Integer startDate){
+	public void setStartDate(Long startDate){
 		this.startDate = startDate;
 	}
 
@@ -207,10 +207,10 @@ public abstract class ScheduleEvent extends ObjectBase {
 	}
 
 	// endDate:
-	public Integer getEndDate(){
+	public Long getEndDate(){
 		return this.endDate;
 	}
-	public void setEndDate(Integer endDate){
+	public void setEndDate(Long endDate){
 		this.endDate = endDate;
 	}
 
@@ -407,11 +407,11 @@ public abstract class ScheduleEvent extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// recurrence:
@@ -439,8 +439,8 @@ public abstract class ScheduleEvent extends ObjectBase {
 		summary = GsonParser.parseString(jsonObject.get("summary"));
 		description = GsonParser.parseString(jsonObject.get("description"));
 		status = ScheduleEventStatus.get(GsonParser.parseInt(jsonObject.get("status")));
-		startDate = GsonParser.parseInt(jsonObject.get("startDate"));
-		endDate = GsonParser.parseInt(jsonObject.get("endDate"));
+		startDate = GsonParser.parseLong(jsonObject.get("startDate"));
+		endDate = GsonParser.parseLong(jsonObject.get("endDate"));
 		referenceId = GsonParser.parseString(jsonObject.get("referenceId"));
 		linkedTo = GsonParser.parseObject(jsonObject.getAsJsonObject("linkedTo"), LinkedScheduleEvent.class);
 		linkedBy = GsonParser.parseString(jsonObject.get("linkedBy"));
@@ -457,8 +457,8 @@ public abstract class ScheduleEvent extends ObjectBase {
 		contact = GsonParser.parseString(jsonObject.get("contact"));
 		comment = GsonParser.parseString(jsonObject.get("comment"));
 		tags = GsonParser.parseString(jsonObject.get("tags"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		recurrence = GsonParser.parseObject(jsonObject.getAsJsonObject("recurrence"), ScheduleEventRecurrence.class);
 
 	}
@@ -532,8 +532,8 @@ public abstract class ScheduleEvent extends ObjectBase {
         this.description = in.readString();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : ScheduleEventStatus.values()[tmpStatus];
-        this.startDate = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.endDate = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.startDate = (Long)in.readValue(Long.class.getClassLoader());
+        this.endDate = (Long)in.readValue(Long.class.getClassLoader());
         this.referenceId = in.readString();
         this.linkedTo = in.readParcelable(LinkedScheduleEvent.class.getClassLoader());
         this.linkedBy = in.readString();
@@ -552,8 +552,8 @@ public abstract class ScheduleEvent extends ObjectBase {
         this.contact = in.readString();
         this.comment = in.readString();
         this.tags = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.recurrence = in.readParcelable(ScheduleEventRecurrence.class.getClassLoader());
     }
 }

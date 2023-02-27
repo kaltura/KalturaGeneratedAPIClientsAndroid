@@ -68,8 +68,8 @@ public abstract class UserEntry extends ObjectBase {
 	private String userId;
 	private Integer partnerId;
 	private UserEntryStatus status;
-	private Integer createdAt;
-	private Integer updatedAt;
+	private Long createdAt;
+	private Long updatedAt;
 	private UserEntryType type;
 	private UserEntryExtendedStatus extendedStatus;
 
@@ -110,11 +110,11 @@ public abstract class UserEntry extends ObjectBase {
 		return this.status;
 	}
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// type:
@@ -149,8 +149,8 @@ public abstract class UserEntry extends ObjectBase {
 		userId = GsonParser.parseString(jsonObject.get("userId"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		status = UserEntryStatus.get(GsonParser.parseString(jsonObject.get("status")));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		type = UserEntryType.get(GsonParser.parseString(jsonObject.get("type")));
 		extendedStatus = UserEntryExtendedStatus.get(GsonParser.parseString(jsonObject.get("extendedStatus")));
 
@@ -188,8 +188,8 @@ public abstract class UserEntry extends ObjectBase {
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : UserEntryStatus.values()[tmpStatus];
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         int tmpType = in.readInt();
         this.type = tmpType == -1 ? null : UserEntryType.values()[tmpType];
         int tmpExtendedStatus = in.readInt();

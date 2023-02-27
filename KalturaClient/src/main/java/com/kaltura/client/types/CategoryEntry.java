@@ -63,7 +63,7 @@ public class CategoryEntry extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * The full ids of the Category
 	 */
@@ -102,7 +102,7 @@ public class CategoryEntry extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// categoryFullIds:
@@ -130,7 +130,7 @@ public class CategoryEntry extends ObjectBase {
 		// set members values:
 		categoryId = GsonParser.parseInt(jsonObject.get("categoryId"));
 		entryId = GsonParser.parseString(jsonObject.get("entryId"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
 		categoryFullIds = GsonParser.parseString(jsonObject.get("categoryFullIds"));
 		status = CategoryEntryStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 		creatorUserId = GsonParser.parseString(jsonObject.get("creatorUserId"));
@@ -173,7 +173,7 @@ public class CategoryEntry extends ObjectBase {
         super(in);
         this.categoryId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.entryId = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
         this.categoryFullIds = in.readString();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : CategoryEntryStatus.values()[tmpStatus];

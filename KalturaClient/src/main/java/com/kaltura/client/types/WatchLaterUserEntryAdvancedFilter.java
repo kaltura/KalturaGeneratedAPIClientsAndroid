@@ -60,8 +60,8 @@ public class WatchLaterUserEntryAdvancedFilter extends SearchItem {
 	private String idIn;
 	private String userIdEqual;
 	private String userIdIn;
-	private Integer updatedAtGreaterThanOrEqual;
-	private Integer updatedAtLessThanOrEqual;
+	private Long updatedAtGreaterThanOrEqual;
+	private Long updatedAtLessThanOrEqual;
 	private UserEntryExtendedStatus extendedStatusEqual;
 	private String extendedStatusIn;
 
@@ -114,10 +114,10 @@ public class WatchLaterUserEntryAdvancedFilter extends SearchItem {
 	}
 
 	// updatedAtGreaterThanOrEqual:
-	public Integer getUpdatedAtGreaterThanOrEqual(){
+	public Long getUpdatedAtGreaterThanOrEqual(){
 		return this.updatedAtGreaterThanOrEqual;
 	}
-	public void setUpdatedAtGreaterThanOrEqual(Integer updatedAtGreaterThanOrEqual){
+	public void setUpdatedAtGreaterThanOrEqual(Long updatedAtGreaterThanOrEqual){
 		this.updatedAtGreaterThanOrEqual = updatedAtGreaterThanOrEqual;
 	}
 
@@ -126,10 +126,10 @@ public class WatchLaterUserEntryAdvancedFilter extends SearchItem {
 	}
 
 	// updatedAtLessThanOrEqual:
-	public Integer getUpdatedAtLessThanOrEqual(){
+	public Long getUpdatedAtLessThanOrEqual(){
 		return this.updatedAtLessThanOrEqual;
 	}
-	public void setUpdatedAtLessThanOrEqual(Integer updatedAtLessThanOrEqual){
+	public void setUpdatedAtLessThanOrEqual(Long updatedAtLessThanOrEqual){
 		this.updatedAtLessThanOrEqual = updatedAtLessThanOrEqual;
 	}
 
@@ -176,8 +176,8 @@ public class WatchLaterUserEntryAdvancedFilter extends SearchItem {
 		idIn = GsonParser.parseString(jsonObject.get("idIn"));
 		userIdEqual = GsonParser.parseString(jsonObject.get("userIdEqual"));
 		userIdIn = GsonParser.parseString(jsonObject.get("userIdIn"));
-		updatedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtGreaterThanOrEqual"));
-		updatedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("updatedAtLessThanOrEqual"));
+		updatedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtGreaterThanOrEqual"));
+		updatedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtLessThanOrEqual"));
 		extendedStatusEqual = UserEntryExtendedStatus.get(GsonParser.parseString(jsonObject.get("extendedStatusEqual")));
 		extendedStatusIn = GsonParser.parseString(jsonObject.get("extendedStatusIn"));
 
@@ -229,8 +229,8 @@ public class WatchLaterUserEntryAdvancedFilter extends SearchItem {
         this.idIn = in.readString();
         this.userIdEqual = in.readString();
         this.userIdIn = in.readString();
-        this.updatedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.updatedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
         int tmpExtendedStatusEqual = in.readInt();
         this.extendedStatusEqual = tmpExtendedStatusEqual == -1 ? null : UserEntryExtendedStatus.values()[tmpExtendedStatusEqual];
         this.extendedStatusIn = in.readString();

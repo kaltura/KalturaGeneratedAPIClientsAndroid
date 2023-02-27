@@ -89,8 +89,8 @@ public abstract class AuditTrailBaseFilter extends RelatedFilter {
 	}
 
 	private Integer idEqual;
-	private Integer createdAtGreaterThanOrEqual;
-	private Integer createdAtLessThanOrEqual;
+	private Long createdAtGreaterThanOrEqual;
+	private Long createdAtLessThanOrEqual;
 	private Integer parsedAtGreaterThanOrEqual;
 	private Integer parsedAtLessThanOrEqual;
 	private AuditTrailStatus statusEqual;
@@ -139,10 +139,10 @@ public abstract class AuditTrailBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtGreaterThanOrEqual:
-	public Integer getCreatedAtGreaterThanOrEqual(){
+	public Long getCreatedAtGreaterThanOrEqual(){
 		return this.createdAtGreaterThanOrEqual;
 	}
-	public void setCreatedAtGreaterThanOrEqual(Integer createdAtGreaterThanOrEqual){
+	public void setCreatedAtGreaterThanOrEqual(Long createdAtGreaterThanOrEqual){
 		this.createdAtGreaterThanOrEqual = createdAtGreaterThanOrEqual;
 	}
 
@@ -151,10 +151,10 @@ public abstract class AuditTrailBaseFilter extends RelatedFilter {
 	}
 
 	// createdAtLessThanOrEqual:
-	public Integer getCreatedAtLessThanOrEqual(){
+	public Long getCreatedAtLessThanOrEqual(){
 		return this.createdAtLessThanOrEqual;
 	}
-	public void setCreatedAtLessThanOrEqual(Integer createdAtLessThanOrEqual){
+	public void setCreatedAtLessThanOrEqual(Long createdAtLessThanOrEqual){
 		this.createdAtLessThanOrEqual = createdAtLessThanOrEqual;
 	}
 
@@ -582,8 +582,8 @@ public abstract class AuditTrailBaseFilter extends RelatedFilter {
 
 		// set members values:
 		idEqual = GsonParser.parseInt(jsonObject.get("idEqual"));
-		createdAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtGreaterThanOrEqual"));
-		createdAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("createdAtLessThanOrEqual"));
+		createdAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtGreaterThanOrEqual"));
+		createdAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("createdAtLessThanOrEqual"));
 		parsedAtGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("parsedAtGreaterThanOrEqual"));
 		parsedAtLessThanOrEqual = GsonParser.parseInt(jsonObject.get("parsedAtLessThanOrEqual"));
 		statusEqual = AuditTrailStatus.get(GsonParser.parseInt(jsonObject.get("statusEqual")));
@@ -710,8 +710,8 @@ public abstract class AuditTrailBaseFilter extends RelatedFilter {
     public AuditTrailBaseFilter(Parcel in) {
         super(in);
         this.idEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.createdAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.createdAtLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
         this.parsedAtGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.parsedAtLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpStatusEqual = in.readInt();

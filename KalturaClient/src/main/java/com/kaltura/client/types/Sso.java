@@ -66,11 +66,11 @@ public class Sso extends ObjectBase {
 	/**
 	 * Creation date as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Last update date as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	/**
 	 * Redirect URL for a specific application type and (partner id or domain)
 	 */
@@ -130,11 +130,11 @@ public class Sso extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// redirectUrl:
@@ -177,8 +177,8 @@ public class Sso extends ObjectBase {
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		domain = GsonParser.parseString(jsonObject.get("domain"));
 		status = SsoStatus.get(GsonParser.parseInt(jsonObject.get("status")));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		redirectUrl = GsonParser.parseString(jsonObject.get("redirectUrl"));
 		data = GsonParser.parseString(jsonObject.get("data"));
 
@@ -231,8 +231,8 @@ public class Sso extends ObjectBase {
         this.domain = in.readString();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : SsoStatus.values()[tmpStatus];
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.redirectUrl = in.readString();
         this.data = in.readString();
     }

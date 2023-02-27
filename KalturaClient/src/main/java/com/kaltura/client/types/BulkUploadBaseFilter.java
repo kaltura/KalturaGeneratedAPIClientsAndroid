@@ -56,19 +56,19 @@ public abstract class BulkUploadBaseFilter extends Filter {
 		String bulkUploadObjectTypeIn();
 	}
 
-	private Integer uploadedOnGreaterThanOrEqual;
-	private Integer uploadedOnLessThanOrEqual;
-	private Integer uploadedOnEqual;
+	private Long uploadedOnGreaterThanOrEqual;
+	private Long uploadedOnLessThanOrEqual;
+	private Long uploadedOnEqual;
 	private String statusIn;
 	private BatchJobStatus statusEqual;
 	private BulkUploadObjectType bulkUploadObjectTypeEqual;
 	private String bulkUploadObjectTypeIn;
 
 	// uploadedOnGreaterThanOrEqual:
-	public Integer getUploadedOnGreaterThanOrEqual(){
+	public Long getUploadedOnGreaterThanOrEqual(){
 		return this.uploadedOnGreaterThanOrEqual;
 	}
-	public void setUploadedOnGreaterThanOrEqual(Integer uploadedOnGreaterThanOrEqual){
+	public void setUploadedOnGreaterThanOrEqual(Long uploadedOnGreaterThanOrEqual){
 		this.uploadedOnGreaterThanOrEqual = uploadedOnGreaterThanOrEqual;
 	}
 
@@ -77,10 +77,10 @@ public abstract class BulkUploadBaseFilter extends Filter {
 	}
 
 	// uploadedOnLessThanOrEqual:
-	public Integer getUploadedOnLessThanOrEqual(){
+	public Long getUploadedOnLessThanOrEqual(){
 		return this.uploadedOnLessThanOrEqual;
 	}
-	public void setUploadedOnLessThanOrEqual(Integer uploadedOnLessThanOrEqual){
+	public void setUploadedOnLessThanOrEqual(Long uploadedOnLessThanOrEqual){
 		this.uploadedOnLessThanOrEqual = uploadedOnLessThanOrEqual;
 	}
 
@@ -89,10 +89,10 @@ public abstract class BulkUploadBaseFilter extends Filter {
 	}
 
 	// uploadedOnEqual:
-	public Integer getUploadedOnEqual(){
+	public Long getUploadedOnEqual(){
 		return this.uploadedOnEqual;
 	}
-	public void setUploadedOnEqual(Integer uploadedOnEqual){
+	public void setUploadedOnEqual(Long uploadedOnEqual){
 		this.uploadedOnEqual = uploadedOnEqual;
 	}
 
@@ -159,9 +159,9 @@ public abstract class BulkUploadBaseFilter extends Filter {
 		if(jsonObject == null) return;
 
 		// set members values:
-		uploadedOnGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("uploadedOnGreaterThanOrEqual"));
-		uploadedOnLessThanOrEqual = GsonParser.parseInt(jsonObject.get("uploadedOnLessThanOrEqual"));
-		uploadedOnEqual = GsonParser.parseInt(jsonObject.get("uploadedOnEqual"));
+		uploadedOnGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("uploadedOnGreaterThanOrEqual"));
+		uploadedOnLessThanOrEqual = GsonParser.parseLong(jsonObject.get("uploadedOnLessThanOrEqual"));
+		uploadedOnEqual = GsonParser.parseLong(jsonObject.get("uploadedOnEqual"));
 		statusIn = GsonParser.parseString(jsonObject.get("statusIn"));
 		statusEqual = BatchJobStatus.get(GsonParser.parseInt(jsonObject.get("statusEqual")));
 		bulkUploadObjectTypeEqual = BulkUploadObjectType.get(GsonParser.parseString(jsonObject.get("bulkUploadObjectTypeEqual")));
@@ -197,9 +197,9 @@ public abstract class BulkUploadBaseFilter extends Filter {
 
     public BulkUploadBaseFilter(Parcel in) {
         super(in);
-        this.uploadedOnGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.uploadedOnLessThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.uploadedOnEqual = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.uploadedOnGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.uploadedOnLessThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
+        this.uploadedOnEqual = (Long)in.readValue(Long.class.getClassLoader());
         this.statusIn = in.readString();
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : BatchJobStatus.values()[tmpStatusEqual];

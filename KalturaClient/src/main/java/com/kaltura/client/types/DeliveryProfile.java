@@ -98,11 +98,11 @@ public class DeliveryProfile extends ObjectBase {
 	/**
 	 * Creation time as Unix timestamp (In seconds)
 	 */
-	private Integer createdAt;
+	private Long createdAt;
 	/**
 	 * Update time as Unix timestamp (In seconds)
 	 */
-	private Integer updatedAt;
+	private Long updatedAt;
 	private PlaybackProtocol streamerType;
 	private String url;
 	/**
@@ -195,11 +195,11 @@ public class DeliveryProfile extends ObjectBase {
 	}
 
 	// createdAt:
-	public Integer getCreatedAt(){
+	public Long getCreatedAt(){
 		return this.createdAt;
 	}
 	// updatedAt:
-	public Integer getUpdatedAt(){
+	public Long getUpdatedAt(){
 		return this.updatedAt;
 	}
 	// streamerType:
@@ -327,8 +327,8 @@ public class DeliveryProfile extends ObjectBase {
 		type = DeliveryProfileType.get(GsonParser.parseString(jsonObject.get("type")));
 		systemName = GsonParser.parseString(jsonObject.get("systemName"));
 		description = GsonParser.parseString(jsonObject.get("description"));
-		createdAt = GsonParser.parseInt(jsonObject.get("createdAt"));
-		updatedAt = GsonParser.parseInt(jsonObject.get("updatedAt"));
+		createdAt = GsonParser.parseLong(jsonObject.get("createdAt"));
+		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		streamerType = PlaybackProtocol.get(GsonParser.parseString(jsonObject.get("streamerType")));
 		url = GsonParser.parseString(jsonObject.get("url"));
 		hostName = GsonParser.parseString(jsonObject.get("hostName"));
@@ -410,8 +410,8 @@ public class DeliveryProfile extends ObjectBase {
         this.type = tmpType == -1 ? null : DeliveryProfileType.values()[tmpType];
         this.systemName = in.readString();
         this.description = in.readString();
-        this.createdAt = (Integer)in.readValue(Integer.class.getClassLoader());
-        this.updatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.createdAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         int tmpStreamerType = in.readInt();
         this.streamerType = tmpStreamerType == -1 ? null : PlaybackProtocol.values()[tmpStreamerType];
         this.url = in.readString();

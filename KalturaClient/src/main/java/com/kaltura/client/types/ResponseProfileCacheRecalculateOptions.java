@@ -66,7 +66,7 @@ public class ResponseProfileCacheRecalculateOptions extends ObjectBase {
 	private String objectId;
 	private String startObjectKey;
 	private String endObjectKey;
-	private Integer jobCreatedAt;
+	private Long jobCreatedAt;
 	private Boolean isFirstLoop;
 
 	// limit:
@@ -130,10 +130,10 @@ public class ResponseProfileCacheRecalculateOptions extends ObjectBase {
 	}
 
 	// jobCreatedAt:
-	public Integer getJobCreatedAt(){
+	public Long getJobCreatedAt(){
 		return this.jobCreatedAt;
 	}
-	public void setJobCreatedAt(Integer jobCreatedAt){
+	public void setJobCreatedAt(Long jobCreatedAt){
 		this.jobCreatedAt = jobCreatedAt;
 	}
 
@@ -169,7 +169,7 @@ public class ResponseProfileCacheRecalculateOptions extends ObjectBase {
 		objectId = GsonParser.parseString(jsonObject.get("objectId"));
 		startObjectKey = GsonParser.parseString(jsonObject.get("startObjectKey"));
 		endObjectKey = GsonParser.parseString(jsonObject.get("endObjectKey"));
-		jobCreatedAt = GsonParser.parseInt(jsonObject.get("jobCreatedAt"));
+		jobCreatedAt = GsonParser.parseLong(jsonObject.get("jobCreatedAt"));
 		isFirstLoop = GsonParser.parseBoolean(jsonObject.get("isFirstLoop"));
 
 	}
@@ -219,7 +219,7 @@ public class ResponseProfileCacheRecalculateOptions extends ObjectBase {
         this.objectId = in.readString();
         this.startObjectKey = in.readString();
         this.endObjectKey = in.readString();
-        this.jobCreatedAt = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.jobCreatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.isFirstLoop = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
