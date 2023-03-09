@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.EntryDisplayInSearchType;
 import com.kaltura.client.enums.EntryModerationStatus;
 import com.kaltura.client.enums.EntryReplacementStatus;
 import com.kaltura.client.enums.EntryStatus;
@@ -131,6 +132,7 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 		String tagsNameMultiLikeAnd();
 		String tagsAdminTagsMultiLikeAnd();
 		String tagsAdminTagsNameMultiLikeAnd();
+		String displayInSearchEqual();
 	}
 
 	/**
@@ -332,6 +334,7 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 	private String tagsNameMultiLikeAnd;
 	private String tagsAdminTagsMultiLikeAnd;
 	private String tagsAdminTagsNameMultiLikeAnd;
+	private EntryDisplayInSearchType displayInSearchEqual;
 
 	// idEqual:
 	public String getIdEqual(){
@@ -1317,6 +1320,18 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 		setToken("tagsAdminTagsNameMultiLikeAnd", multirequestToken);
 	}
 
+	// displayInSearchEqual:
+	public EntryDisplayInSearchType getDisplayInSearchEqual(){
+		return this.displayInSearchEqual;
+	}
+	public void setDisplayInSearchEqual(EntryDisplayInSearchType displayInSearchEqual){
+		this.displayInSearchEqual = displayInSearchEqual;
+	}
+
+	public void displayInSearchEqual(String multirequestToken){
+		setToken("displayInSearchEqual", multirequestToken);
+	}
+
 
 	public BaseEntryBaseFilter() {
 		super();
@@ -1410,6 +1425,7 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 		tagsNameMultiLikeAnd = GsonParser.parseString(jsonObject.get("tagsNameMultiLikeAnd"));
 		tagsAdminTagsMultiLikeAnd = GsonParser.parseString(jsonObject.get("tagsAdminTagsMultiLikeAnd"));
 		tagsAdminTagsNameMultiLikeAnd = GsonParser.parseString(jsonObject.get("tagsAdminTagsNameMultiLikeAnd"));
+		displayInSearchEqual = EntryDisplayInSearchType.get(GsonParser.parseInt(jsonObject.get("displayInSearchEqual")));
 
 	}
 
@@ -1498,6 +1514,7 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
 		kparams.add("tagsNameMultiLikeAnd", this.tagsNameMultiLikeAnd);
 		kparams.add("tagsAdminTagsMultiLikeAnd", this.tagsAdminTagsMultiLikeAnd);
 		kparams.add("tagsAdminTagsNameMultiLikeAnd", this.tagsAdminTagsNameMultiLikeAnd);
+		kparams.add("displayInSearchEqual", this.displayInSearchEqual);
 		return kparams;
 	}
 
@@ -1587,6 +1604,7 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
         dest.writeString(this.tagsNameMultiLikeAnd);
         dest.writeString(this.tagsAdminTagsMultiLikeAnd);
         dest.writeString(this.tagsAdminTagsNameMultiLikeAnd);
+        dest.writeInt(this.displayInSearchEqual == null ? -1 : this.displayInSearchEqual.ordinal());
     }
 
     public BaseEntryBaseFilter(Parcel in) {
@@ -1679,6 +1697,8 @@ public abstract class BaseEntryBaseFilter extends RelatedFilter {
         this.tagsNameMultiLikeAnd = in.readString();
         this.tagsAdminTagsMultiLikeAnd = in.readString();
         this.tagsAdminTagsNameMultiLikeAnd = in.readString();
+        int tmpDisplayInSearchEqual = in.readInt();
+        this.displayInSearchEqual = tmpDisplayInSearchEqual == -1 ? null : EntryDisplayInSearchType.values()[tmpDisplayInSearchEqual];
     }
 }
 
