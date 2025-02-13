@@ -32,6 +32,7 @@ import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.CatalogItemLanguage;
 import com.kaltura.client.enums.ReachVendorEngineType;
+import com.kaltura.client.enums.VendorCatalogItemStage;
 import com.kaltura.client.enums.VendorCatalogItemStatus;
 import com.kaltura.client.enums.VendorServiceFeature;
 import com.kaltura.client.enums.VendorServiceTurnAroundTime;
@@ -42,7 +43,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -67,6 +68,14 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		String engineType();
 		String sourceLanguage();
 		String allowResubmission();
+		String vendorData();
+		String stage();
+		String lastBulkUpdateId();
+		String contract();
+		String createdBy();
+		String notes();
+		String partnerId();
+		String adminTagsToExclude();
 	}
 
 	private Integer id;
@@ -87,6 +96,14 @@ public abstract class VendorCatalogItem extends ObjectBase {
 	private ReachVendorEngineType engineType;
 	private CatalogItemLanguage sourceLanguage;
 	private Boolean allowResubmission;
+	private String vendorData;
+	private VendorCatalogItemStage stage;
+	private Integer lastBulkUpdateId;
+	private String contract;
+	private String createdBy;
+	private String notes;
+	private Integer partnerId;
+	private String adminTagsToExclude;
 
 	// id:
 	public Integer getId(){
@@ -212,6 +229,102 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		setToken("allowResubmission", multirequestToken);
 	}
 
+	// vendorData:
+	public String getVendorData(){
+		return this.vendorData;
+	}
+	public void setVendorData(String vendorData){
+		this.vendorData = vendorData;
+	}
+
+	public void vendorData(String multirequestToken){
+		setToken("vendorData", multirequestToken);
+	}
+
+	// stage:
+	public VendorCatalogItemStage getStage(){
+		return this.stage;
+	}
+	public void setStage(VendorCatalogItemStage stage){
+		this.stage = stage;
+	}
+
+	public void stage(String multirequestToken){
+		setToken("stage", multirequestToken);
+	}
+
+	// lastBulkUpdateId:
+	public Integer getLastBulkUpdateId(){
+		return this.lastBulkUpdateId;
+	}
+	public void setLastBulkUpdateId(Integer lastBulkUpdateId){
+		this.lastBulkUpdateId = lastBulkUpdateId;
+	}
+
+	public void lastBulkUpdateId(String multirequestToken){
+		setToken("lastBulkUpdateId", multirequestToken);
+	}
+
+	// contract:
+	public String getContract(){
+		return this.contract;
+	}
+	public void setContract(String contract){
+		this.contract = contract;
+	}
+
+	public void contract(String multirequestToken){
+		setToken("contract", multirequestToken);
+	}
+
+	// createdBy:
+	public String getCreatedBy(){
+		return this.createdBy;
+	}
+	public void setCreatedBy(String createdBy){
+		this.createdBy = createdBy;
+	}
+
+	public void createdBy(String multirequestToken){
+		setToken("createdBy", multirequestToken);
+	}
+
+	// notes:
+	public String getNotes(){
+		return this.notes;
+	}
+	public void setNotes(String notes){
+		this.notes = notes;
+	}
+
+	public void notes(String multirequestToken){
+		setToken("notes", multirequestToken);
+	}
+
+	// partnerId:
+	public Integer getPartnerId(){
+		return this.partnerId;
+	}
+	public void setPartnerId(Integer partnerId){
+		this.partnerId = partnerId;
+	}
+
+	public void partnerId(String multirequestToken){
+		setToken("partnerId", multirequestToken);
+	}
+
+	// adminTagsToExclude:
+	public String getAdminTagsToExclude(){
+		return this.adminTagsToExclude;
+	}
+	public void setAdminTagsToExclude(String adminTagsToExclude){
+		this.adminTagsToExclude = adminTagsToExclude;
+	}
+
+	public void adminTagsToExclude(String multirequestToken){
+		setToken("adminTagsToExclude", multirequestToken);
+	}
+
 
 	public VendorCatalogItem() {
 		super();
@@ -237,6 +350,14 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		engineType = ReachVendorEngineType.get(GsonParser.parseString(jsonObject.get("engineType")));
 		sourceLanguage = CatalogItemLanguage.get(GsonParser.parseString(jsonObject.get("sourceLanguage")));
 		allowResubmission = GsonParser.parseBoolean(jsonObject.get("allowResubmission"));
+		vendorData = GsonParser.parseString(jsonObject.get("vendorData"));
+		stage = VendorCatalogItemStage.get(GsonParser.parseInt(jsonObject.get("stage")));
+		lastBulkUpdateId = GsonParser.parseInt(jsonObject.get("lastBulkUpdateId"));
+		contract = GsonParser.parseString(jsonObject.get("contract"));
+		createdBy = GsonParser.parseString(jsonObject.get("createdBy"));
+		notes = GsonParser.parseString(jsonObject.get("notes"));
+		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
+		adminTagsToExclude = GsonParser.parseString(jsonObject.get("adminTagsToExclude"));
 
 	}
 
@@ -252,6 +373,14 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		kparams.add("engineType", this.engineType);
 		kparams.add("sourceLanguage", this.sourceLanguage);
 		kparams.add("allowResubmission", this.allowResubmission);
+		kparams.add("vendorData", this.vendorData);
+		kparams.add("stage", this.stage);
+		kparams.add("lastBulkUpdateId", this.lastBulkUpdateId);
+		kparams.add("contract", this.contract);
+		kparams.add("createdBy", this.createdBy);
+		kparams.add("notes", this.notes);
+		kparams.add("partnerId", this.partnerId);
+		kparams.add("adminTagsToExclude", this.adminTagsToExclude);
 		return kparams;
 	}
 
@@ -273,6 +402,14 @@ public abstract class VendorCatalogItem extends ObjectBase {
         dest.writeInt(this.engineType == null ? -1 : this.engineType.ordinal());
         dest.writeInt(this.sourceLanguage == null ? -1 : this.sourceLanguage.ordinal());
         dest.writeValue(this.allowResubmission);
+        dest.writeString(this.vendorData);
+        dest.writeInt(this.stage == null ? -1 : this.stage.ordinal());
+        dest.writeValue(this.lastBulkUpdateId);
+        dest.writeString(this.contract);
+        dest.writeString(this.createdBy);
+        dest.writeString(this.notes);
+        dest.writeValue(this.partnerId);
+        dest.writeString(this.adminTagsToExclude);
     }
 
     public VendorCatalogItem(Parcel in) {
@@ -297,6 +434,15 @@ public abstract class VendorCatalogItem extends ObjectBase {
         int tmpSourceLanguage = in.readInt();
         this.sourceLanguage = tmpSourceLanguage == -1 ? null : CatalogItemLanguage.values()[tmpSourceLanguage];
         this.allowResubmission = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.vendorData = in.readString();
+        int tmpStage = in.readInt();
+        this.stage = tmpStage == -1 ? null : VendorCatalogItemStage.values()[tmpStage];
+        this.lastBulkUpdateId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.contract = in.readString();
+        this.createdBy = in.readString();
+        this.notes = in.readString();
+        this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.adminTagsToExclude = in.readString();
     }
 }
 

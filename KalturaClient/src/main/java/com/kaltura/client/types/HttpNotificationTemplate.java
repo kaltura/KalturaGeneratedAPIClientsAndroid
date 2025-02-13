@@ -35,6 +35,7 @@ import com.kaltura.client.enums.HttpNotificationCertificateType;
 import com.kaltura.client.enums.HttpNotificationMethod;
 import com.kaltura.client.enums.HttpNotificationSslKeyType;
 import com.kaltura.client.enums.HttpNotificationSslVersion;
+import com.kaltura.client.enums.SecureHashingAlgo;
 import com.kaltura.client.types.HttpNotificationData;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
@@ -43,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -72,6 +73,7 @@ public class HttpNotificationTemplate extends EventNotificationTemplate {
 		String sslKey();
 		String sslKeyPassword();
 		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> customHeaders();
+		String secureHashingAlgo();
 	}
 
 	/**
@@ -149,6 +151,10 @@ public class HttpNotificationTemplate extends EventNotificationTemplate {
 	 * Adds a e-mail custom header
 	 */
 	private List<KeyValue> customHeaders;
+	/**
+	 * The type of SHA to use.
+	 */
+	private SecureHashingAlgo secureHashingAlgo;
 
 	// url:
 	public String getUrl(){
@@ -358,6 +364,18 @@ public class HttpNotificationTemplate extends EventNotificationTemplate {
 		this.customHeaders = customHeaders;
 	}
 
+	// secureHashingAlgo:
+	public SecureHashingAlgo getSecureHashingAlgo(){
+		return this.secureHashingAlgo;
+	}
+	public void setSecureHashingAlgo(SecureHashingAlgo secureHashingAlgo){
+		this.secureHashingAlgo = secureHashingAlgo;
+	}
+
+	public void secureHashingAlgo(String multirequestToken){
+		setToken("secureHashingAlgo", multirequestToken);
+	}
+
 
 	public HttpNotificationTemplate() {
 		super();
@@ -387,6 +405,7 @@ public class HttpNotificationTemplate extends EventNotificationTemplate {
 		sslKey = GsonParser.parseString(jsonObject.get("sslKey"));
 		sslKeyPassword = GsonParser.parseString(jsonObject.get("sslKeyPassword"));
 		customHeaders = GsonParser.parseArray(jsonObject.getAsJsonArray("customHeaders"), KeyValue.class);
+		secureHashingAlgo = SecureHashingAlgo.get(GsonParser.parseInt(jsonObject.get("secureHashingAlgo")));
 
 	}
 
@@ -411,6 +430,7 @@ public class HttpNotificationTemplate extends EventNotificationTemplate {
 		kparams.add("sslKey", this.sslKey);
 		kparams.add("sslKeyPassword", this.sslKeyPassword);
 		kparams.add("customHeaders", this.customHeaders);
+		kparams.add("secureHashingAlgo", this.secureHashingAlgo);
 		return kparams;
 	}
 
@@ -453,6 +473,7 @@ public class HttpNotificationTemplate extends EventNotificationTemplate {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeInt(this.secureHashingAlgo == null ? -1 : this.secureHashingAlgo.ordinal());
     }
 
     public HttpNotificationTemplate(Parcel in) {
@@ -484,6 +505,8 @@ public class HttpNotificationTemplate extends EventNotificationTemplate {
             this.customHeaders = new ArrayList<>();
             in.readList(this.customHeaders, KeyValue.class.getClassLoader());
         }
+        int tmpSecureHashingAlgo = in.readInt();
+        this.secureHashingAlgo = tmpSecureHashingAlgo == -1 ? null : SecureHashingAlgo.values()[tmpSecureHashingAlgo];
     }
 }
 

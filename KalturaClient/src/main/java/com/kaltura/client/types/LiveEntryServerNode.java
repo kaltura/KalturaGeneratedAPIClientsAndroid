@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -54,6 +54,7 @@ public class LiveEntryServerNode extends EntryServerNode {
 		String isPlayableUser();
 		String viewMode();
 		String featuresUpdatedAt();
+		String viewModeUpdatedAt();
 	}
 
 	/**
@@ -64,6 +65,7 @@ public class LiveEntryServerNode extends EntryServerNode {
 	private Boolean isPlayableUser;
 	private ViewMode viewMode;
 	private Long featuresUpdatedAt;
+	private Long viewModeUpdatedAt;
 
 	// streams:
 	public List<LiveStreamParams> getStreams(){
@@ -117,6 +119,18 @@ public class LiveEntryServerNode extends EntryServerNode {
 		setToken("featuresUpdatedAt", multirequestToken);
 	}
 
+	// viewModeUpdatedAt:
+	public Long getViewModeUpdatedAt(){
+		return this.viewModeUpdatedAt;
+	}
+	public void setViewModeUpdatedAt(Long viewModeUpdatedAt){
+		this.viewModeUpdatedAt = viewModeUpdatedAt;
+	}
+
+	public void viewModeUpdatedAt(String multirequestToken){
+		setToken("viewModeUpdatedAt", multirequestToken);
+	}
+
 
 	public LiveEntryServerNode() {
 		super();
@@ -133,6 +147,7 @@ public class LiveEntryServerNode extends EntryServerNode {
 		isPlayableUser = GsonParser.parseBoolean(jsonObject.get("isPlayableUser"));
 		viewMode = ViewMode.get(GsonParser.parseInt(jsonObject.get("viewMode")));
 		featuresUpdatedAt = GsonParser.parseLong(jsonObject.get("featuresUpdatedAt"));
+		viewModeUpdatedAt = GsonParser.parseLong(jsonObject.get("viewModeUpdatedAt"));
 
 	}
 
@@ -144,6 +159,7 @@ public class LiveEntryServerNode extends EntryServerNode {
 		kparams.add("isPlayableUser", this.isPlayableUser);
 		kparams.add("viewMode", this.viewMode);
 		kparams.add("featuresUpdatedAt", this.featuresUpdatedAt);
+		kparams.add("viewModeUpdatedAt", this.viewModeUpdatedAt);
 		return kparams;
 	}
 
@@ -178,6 +194,7 @@ public class LiveEntryServerNode extends EntryServerNode {
         dest.writeValue(this.isPlayableUser);
         dest.writeInt(this.viewMode == null ? -1 : this.viewMode.ordinal());
         dest.writeValue(this.featuresUpdatedAt);
+        dest.writeValue(this.viewModeUpdatedAt);
     }
 
     public LiveEntryServerNode(Parcel in) {
@@ -196,6 +213,7 @@ public class LiveEntryServerNode extends EntryServerNode {
         int tmpViewMode = in.readInt();
         this.viewMode = tmpViewMode == -1 ? null : ViewMode.values()[tmpViewMode];
         this.featuresUpdatedAt = (Long)in.readValue(Long.class.getClassLoader());
+        this.viewModeUpdatedAt = (Long)in.readValue(Long.class.getClassLoader());
     }
 }
 

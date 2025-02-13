@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -56,6 +56,7 @@ public class UrlResource extends ContentResource {
 		String url();
 		String forceAsyncDownload();
 		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> urlHeaders();
+		String shouldRedirect();
 	}
 
 	/**
@@ -67,6 +68,7 @@ public class UrlResource extends ContentResource {
 	 */
 	private Boolean forceAsyncDownload;
 	private List<StringHolder> urlHeaders;
+	private Boolean shouldRedirect;
 
 	// url:
 	public String getUrl(){
@@ -100,6 +102,18 @@ public class UrlResource extends ContentResource {
 		this.urlHeaders = urlHeaders;
 	}
 
+	// shouldRedirect:
+	public Boolean getShouldRedirect(){
+		return this.shouldRedirect;
+	}
+	public void setShouldRedirect(Boolean shouldRedirect){
+		this.shouldRedirect = shouldRedirect;
+	}
+
+	public void shouldRedirect(String multirequestToken){
+		setToken("shouldRedirect", multirequestToken);
+	}
+
 
 	public UrlResource() {
 		super();
@@ -114,6 +128,7 @@ public class UrlResource extends ContentResource {
 		url = GsonParser.parseString(jsonObject.get("url"));
 		forceAsyncDownload = GsonParser.parseBoolean(jsonObject.get("forceAsyncDownload"));
 		urlHeaders = GsonParser.parseArray(jsonObject.getAsJsonArray("urlHeaders"), StringHolder.class);
+		shouldRedirect = GsonParser.parseBoolean(jsonObject.get("shouldRedirect"));
 
 	}
 
@@ -123,6 +138,7 @@ public class UrlResource extends ContentResource {
 		kparams.add("url", this.url);
 		kparams.add("forceAsyncDownload", this.forceAsyncDownload);
 		kparams.add("urlHeaders", this.urlHeaders);
+		kparams.add("shouldRedirect", this.shouldRedirect);
 		return kparams;
 	}
 
@@ -150,6 +166,7 @@ public class UrlResource extends ContentResource {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeValue(this.shouldRedirect);
     }
 
     public UrlResource(Parcel in) {
@@ -161,6 +178,7 @@ public class UrlResource extends ContentResource {
             this.urlHeaders = new ArrayList<>();
             in.readList(this.urlHeaders, StringHolder.class.getClassLoader());
         }
+        this.shouldRedirect = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

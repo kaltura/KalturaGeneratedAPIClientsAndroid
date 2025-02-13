@@ -34,7 +34,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -49,8 +49,6 @@ public class CrossKalturaDistributionJobProviderData extends ConfigurableDistrib
 		String distributedThumbAssets();
 		String distributedMetadata();
 		String distributedCaptionAssets();
-		String distributedFileAssets();
-		String distributedAttachmentAssets();
 		String distributedCuePoints();
 		String distributedThumbCuePoints();
 		String distributedTimedThumbAssets();
@@ -76,16 +74,6 @@ public class CrossKalturaDistributionJobProviderData extends ConfigurableDistrib
 	  source account and the values are the matching IDs in the target account
 	 */
 	private String distributedCaptionAssets;
-	/**
-	 * Key-value array where the keys are IDs of distributed fileassets in the source
-	  account and the values are the matching IDs in the target account
-	 */
-	private String distributedFileAssets;
-	/**
-	 * Key-value array where the keys are IDs of distributed caption assets in the
-	  source account and the values are the matching IDs in the target account
-	 */
-	private String distributedAttachmentAssets;
 	/**
 	 * Key-value array where the keys are IDs of distributed cue points in the source
 	  account and the values are the matching IDs in the target account
@@ -150,30 +138,6 @@ public class CrossKalturaDistributionJobProviderData extends ConfigurableDistrib
 		setToken("distributedCaptionAssets", multirequestToken);
 	}
 
-	// distributedFileAssets:
-	public String getDistributedFileAssets(){
-		return this.distributedFileAssets;
-	}
-	public void setDistributedFileAssets(String distributedFileAssets){
-		this.distributedFileAssets = distributedFileAssets;
-	}
-
-	public void distributedFileAssets(String multirequestToken){
-		setToken("distributedFileAssets", multirequestToken);
-	}
-
-	// distributedAttachmentAssets:
-	public String getDistributedAttachmentAssets(){
-		return this.distributedAttachmentAssets;
-	}
-	public void setDistributedAttachmentAssets(String distributedAttachmentAssets){
-		this.distributedAttachmentAssets = distributedAttachmentAssets;
-	}
-
-	public void distributedAttachmentAssets(String multirequestToken){
-		setToken("distributedAttachmentAssets", multirequestToken);
-	}
-
 	// distributedCuePoints:
 	public String getDistributedCuePoints(){
 		return this.distributedCuePoints;
@@ -225,8 +189,6 @@ public class CrossKalturaDistributionJobProviderData extends ConfigurableDistrib
 		distributedThumbAssets = GsonParser.parseString(jsonObject.get("distributedThumbAssets"));
 		distributedMetadata = GsonParser.parseString(jsonObject.get("distributedMetadata"));
 		distributedCaptionAssets = GsonParser.parseString(jsonObject.get("distributedCaptionAssets"));
-		distributedFileAssets = GsonParser.parseString(jsonObject.get("distributedFileAssets"));
-		distributedAttachmentAssets = GsonParser.parseString(jsonObject.get("distributedAttachmentAssets"));
 		distributedCuePoints = GsonParser.parseString(jsonObject.get("distributedCuePoints"));
 		distributedThumbCuePoints = GsonParser.parseString(jsonObject.get("distributedThumbCuePoints"));
 		distributedTimedThumbAssets = GsonParser.parseString(jsonObject.get("distributedTimedThumbAssets"));
@@ -240,8 +202,6 @@ public class CrossKalturaDistributionJobProviderData extends ConfigurableDistrib
 		kparams.add("distributedThumbAssets", this.distributedThumbAssets);
 		kparams.add("distributedMetadata", this.distributedMetadata);
 		kparams.add("distributedCaptionAssets", this.distributedCaptionAssets);
-		kparams.add("distributedFileAssets", this.distributedFileAssets);
-		kparams.add("distributedAttachmentAssets", this.distributedAttachmentAssets);
 		kparams.add("distributedCuePoints", this.distributedCuePoints);
 		kparams.add("distributedThumbCuePoints", this.distributedThumbCuePoints);
 		kparams.add("distributedTimedThumbAssets", this.distributedTimedThumbAssets);
@@ -268,8 +228,6 @@ public class CrossKalturaDistributionJobProviderData extends ConfigurableDistrib
         dest.writeString(this.distributedThumbAssets);
         dest.writeString(this.distributedMetadata);
         dest.writeString(this.distributedCaptionAssets);
-        dest.writeString(this.distributedFileAssets);
-        dest.writeString(this.distributedAttachmentAssets);
         dest.writeString(this.distributedCuePoints);
         dest.writeString(this.distributedThumbCuePoints);
         dest.writeString(this.distributedTimedThumbAssets);
@@ -281,8 +239,6 @@ public class CrossKalturaDistributionJobProviderData extends ConfigurableDistrib
         this.distributedThumbAssets = in.readString();
         this.distributedMetadata = in.readString();
         this.distributedCaptionAssets = in.readString();
-        this.distributedFileAssets = in.readString();
-        this.distributedAttachmentAssets = in.readString();
         this.distributedCuePoints = in.readString();
         this.distributedThumbCuePoints = in.readString();
         this.distributedTimedThumbAssets = in.readString();

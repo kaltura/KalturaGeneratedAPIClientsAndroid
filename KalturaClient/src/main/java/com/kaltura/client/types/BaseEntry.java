@@ -45,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -107,6 +107,8 @@ public class BaseEntry extends ObjectBase {
 		String application();
 		String applicationVersion();
 		String blockAutoTranscript();
+		String defaultLanguage();
+		String responseLanguage();
 	}
 
 	/**
@@ -319,6 +321,14 @@ public class BaseEntry extends ObjectBase {
 	 * Block auto transcript on Entry
 	 */
 	private Boolean blockAutoTranscript;
+	/**
+	 * Entry's default language if the entry is multi lingual
+	 */
+	private String defaultLanguage;
+	/**
+	 * The language in which the object is returned
+	 */
+	private String responseLanguage;
 
 	// id:
 	public String getId(){
@@ -764,6 +774,14 @@ public class BaseEntry extends ObjectBase {
 		setToken("blockAutoTranscript", multirequestToken);
 	}
 
+	// defaultLanguage:
+	public String getDefaultLanguage(){
+		return this.defaultLanguage;
+	}
+	// responseLanguage:
+	public String getResponseLanguage(){
+		return this.responseLanguage;
+	}
 
 	public BaseEntry() {
 		super();
@@ -776,15 +794,27 @@ public class BaseEntry extends ObjectBase {
 
 		// set members values:
 		id = GsonParser.parseString(jsonObject.get("id"));
-		name = GsonParser.parseString(jsonObject.get("name"));
-		multiLingual_name = GsonParser.parseArray(jsonObject.getAsJsonArray("multiLingual_name"), MultiLingualString.class);
-		description = GsonParser.parseString(jsonObject.get("description"));
-		multiLingual_description = GsonParser.parseArray(jsonObject.getAsJsonArray("multiLingual_description"), MultiLingualString.class);
+		name = jsonObject.has("name") && jsonObject.get("name").isJsonArray() ? 
+			GsonParser.parseString(jsonObject.getAsJsonArray("name").get(0).getAsJsonObject().get("value")) : 
+			GsonParser.parseString(jsonObject.get("name"));
+		multiLingual_name = jsonObject.has("name") && jsonObject.get("name").isJsonArray() ? 
+			GsonParser.parseArray(jsonObject.getAsJsonArray("name"), MultiLingualString.class) : 
+			new ArrayList<MultiLingualString>();
+		description = jsonObject.has("description") && jsonObject.get("description").isJsonArray() ? 
+			GsonParser.parseString(jsonObject.getAsJsonArray("description").get(0).getAsJsonObject().get("value")) : 
+			GsonParser.parseString(jsonObject.get("description"));
+		multiLingual_description = jsonObject.has("description") && jsonObject.get("description").isJsonArray() ? 
+			GsonParser.parseArray(jsonObject.getAsJsonArray("description"), MultiLingualString.class) : 
+			new ArrayList<MultiLingualString>();
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		userId = GsonParser.parseString(jsonObject.get("userId"));
 		creatorId = GsonParser.parseString(jsonObject.get("creatorId"));
-		tags = GsonParser.parseString(jsonObject.get("tags"));
-		multiLingual_tags = GsonParser.parseArray(jsonObject.getAsJsonArray("multiLingual_tags"), MultiLingualString.class);
+		tags = jsonObject.has("tags") && jsonObject.get("tags").isJsonArray() ? 
+			GsonParser.parseString(jsonObject.getAsJsonArray("tags").get(0).getAsJsonObject().get("value")) : 
+			GsonParser.parseString(jsonObject.get("tags"));
+		multiLingual_tags = jsonObject.has("tags") && jsonObject.get("tags").isJsonArray() ? 
+			GsonParser.parseArray(jsonObject.getAsJsonArray("tags"), MultiLingualString.class) : 
+			new ArrayList<MultiLingualString>();
 		adminTags = GsonParser.parseString(jsonObject.get("adminTags"));
 		categories = GsonParser.parseString(jsonObject.get("categories"));
 		categoriesIds = GsonParser.parseString(jsonObject.get("categoriesIds"));
@@ -826,6 +856,8 @@ public class BaseEntry extends ObjectBase {
 		application = EntryApplication.get(GsonParser.parseString(jsonObject.get("application")));
 		applicationVersion = GsonParser.parseString(jsonObject.get("applicationVersion"));
 		blockAutoTranscript = GsonParser.parseBoolean(jsonObject.get("blockAutoTranscript"));
+		defaultLanguage = GsonParser.parseString(jsonObject.get("defaultLanguage"));
+		responseLanguage = GsonParser.parseString(jsonObject.get("responseLanguage"));
 
 	}
 
@@ -954,6 +986,8 @@ public class BaseEntry extends ObjectBase {
         dest.writeInt(this.application == null ? -1 : this.application.ordinal());
         dest.writeString(this.applicationVersion);
         dest.writeValue(this.blockAutoTranscript);
+        dest.writeString(this.defaultLanguage);
+        dest.writeString(this.responseLanguage);
     }
 
     public BaseEntry(Parcel in) {
@@ -1032,6 +1066,8 @@ public class BaseEntry extends ObjectBase {
         this.application = tmpApplication == -1 ? null : EntryApplication.values()[tmpApplication];
         this.applicationVersion = in.readString();
         this.blockAutoTranscript = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.defaultLanguage = in.readString();
+        this.responseLanguage = in.readString();
     }
 }
 

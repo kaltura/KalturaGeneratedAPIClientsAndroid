@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -55,6 +55,8 @@ public class ConcatJobData extends JobData {
 		String duration();
 		String concatenatedDuration();
 		String shouldSort();
+		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> conversionCommands();
+		String multiSource();
 	}
 
 	/**
@@ -85,6 +87,11 @@ public class ConcatJobData extends JobData {
 	 * Should Sort the clip parts
 	 */
 	private Boolean shouldSort;
+	/**
+	 * conversion commands to be applied to source files
+	 */
+	private List<StringHolder> conversionCommands;
+	private Boolean multiSource;
 
 	// srcFiles:
 	public List<StringHolder> getSrcFiles(){
@@ -166,6 +173,26 @@ public class ConcatJobData extends JobData {
 		setToken("shouldSort", multirequestToken);
 	}
 
+	// conversionCommands:
+	public List<StringHolder> getConversionCommands(){
+		return this.conversionCommands;
+	}
+	public void setConversionCommands(List<StringHolder> conversionCommands){
+		this.conversionCommands = conversionCommands;
+	}
+
+	// multiSource:
+	public Boolean getMultiSource(){
+		return this.multiSource;
+	}
+	public void setMultiSource(Boolean multiSource){
+		this.multiSource = multiSource;
+	}
+
+	public void multiSource(String multirequestToken){
+		setToken("multiSource", multirequestToken);
+	}
+
 
 	public ConcatJobData() {
 		super();
@@ -184,6 +211,8 @@ public class ConcatJobData extends JobData {
 		duration = GsonParser.parseDouble(jsonObject.get("duration"));
 		concatenatedDuration = GsonParser.parseDouble(jsonObject.get("concatenatedDuration"));
 		shouldSort = GsonParser.parseBoolean(jsonObject.get("shouldSort"));
+		conversionCommands = GsonParser.parseArray(jsonObject.getAsJsonArray("conversionCommands"), StringHolder.class);
+		multiSource = GsonParser.parseBoolean(jsonObject.get("multiSource"));
 
 	}
 
@@ -197,6 +226,8 @@ public class ConcatJobData extends JobData {
 		kparams.add("duration", this.duration);
 		kparams.add("concatenatedDuration", this.concatenatedDuration);
 		kparams.add("shouldSort", this.shouldSort);
+		kparams.add("conversionCommands", this.conversionCommands);
+		kparams.add("multiSource", this.multiSource);
 		return kparams;
 	}
 
@@ -228,6 +259,13 @@ public class ConcatJobData extends JobData {
         dest.writeValue(this.duration);
         dest.writeValue(this.concatenatedDuration);
         dest.writeValue(this.shouldSort);
+        if(this.conversionCommands != null) {
+            dest.writeInt(this.conversionCommands.size());
+            dest.writeList(this.conversionCommands);
+        } else {
+            dest.writeInt(-1);
+        }
+        dest.writeValue(this.multiSource);
     }
 
     public ConcatJobData(Parcel in) {
@@ -243,6 +281,12 @@ public class ConcatJobData extends JobData {
         this.duration = (Double)in.readValue(Double.class.getClassLoader());
         this.concatenatedDuration = (Double)in.readValue(Double.class.getClassLoader());
         this.shouldSort = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        int conversionCommandsSize = in.readInt();
+        if( conversionCommandsSize > -1) {
+            this.conversionCommands = new ArrayList<>();
+            in.readList(this.conversionCommands, StringHolder.class.getClassLoader());
+        }
+        this.multiSource = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

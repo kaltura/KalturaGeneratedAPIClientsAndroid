@@ -34,7 +34,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -47,11 +47,13 @@ public class LiveRestreamFeature extends LiveFeature {
 	public interface Tokenizer extends LiveFeature.Tokenizer {
 		String primaryUrl();
 		String secondaryUrl();
+		String playbackUrl();
 		String streamKey();
 	}
 
 	private String primaryUrl;
 	private String secondaryUrl;
+	private String playbackUrl;
 	private String streamKey;
 
 	// primaryUrl:
@@ -76,6 +78,18 @@ public class LiveRestreamFeature extends LiveFeature {
 
 	public void secondaryUrl(String multirequestToken){
 		setToken("secondaryUrl", multirequestToken);
+	}
+
+	// playbackUrl:
+	public String getPlaybackUrl(){
+		return this.playbackUrl;
+	}
+	public void setPlaybackUrl(String playbackUrl){
+		this.playbackUrl = playbackUrl;
+	}
+
+	public void playbackUrl(String multirequestToken){
+		setToken("playbackUrl", multirequestToken);
 	}
 
 	// streamKey:
@@ -103,6 +117,7 @@ public class LiveRestreamFeature extends LiveFeature {
 		// set members values:
 		primaryUrl = GsonParser.parseString(jsonObject.get("primaryUrl"));
 		secondaryUrl = GsonParser.parseString(jsonObject.get("secondaryUrl"));
+		playbackUrl = GsonParser.parseString(jsonObject.get("playbackUrl"));
 		streamKey = GsonParser.parseString(jsonObject.get("streamKey"));
 
 	}
@@ -112,6 +127,7 @@ public class LiveRestreamFeature extends LiveFeature {
 		kparams.add("objectType", "KalturaLiveRestreamFeature");
 		kparams.add("primaryUrl", this.primaryUrl);
 		kparams.add("secondaryUrl", this.secondaryUrl);
+		kparams.add("playbackUrl", this.playbackUrl);
 		kparams.add("streamKey", this.streamKey);
 		return kparams;
 	}
@@ -134,6 +150,7 @@ public class LiveRestreamFeature extends LiveFeature {
         super.writeToParcel(dest, flags);
         dest.writeString(this.primaryUrl);
         dest.writeString(this.secondaryUrl);
+        dest.writeString(this.playbackUrl);
         dest.writeString(this.streamKey);
     }
 
@@ -141,6 +158,7 @@ public class LiveRestreamFeature extends LiveFeature {
         super(in);
         this.primaryUrl = in.readString();
         this.secondaryUrl = in.readString();
+        this.playbackUrl = in.readString();
         this.streamKey = in.readString();
     }
 }

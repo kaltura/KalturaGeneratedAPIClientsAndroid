@@ -35,7 +35,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -47,6 +47,7 @@ public class TagFilter extends Filter {
 	
 	public interface Tokenizer extends Filter.Tokenizer {
 		String objectTypeEqual();
+		String objectTypeIn();
 		String tagEqual();
 		String tagStartsWith();
 		String instanceCountEqual();
@@ -54,6 +55,7 @@ public class TagFilter extends Filter {
 	}
 
 	private TaggedObjectType objectTypeEqual;
+	private String objectTypeIn;
 	private String tagEqual;
 	private String tagStartsWith;
 	private Integer instanceCountEqual;
@@ -69,6 +71,18 @@ public class TagFilter extends Filter {
 
 	public void objectTypeEqual(String multirequestToken){
 		setToken("objectTypeEqual", multirequestToken);
+	}
+
+	// objectTypeIn:
+	public String getObjectTypeIn(){
+		return this.objectTypeIn;
+	}
+	public void setObjectTypeIn(String objectTypeIn){
+		this.objectTypeIn = objectTypeIn;
+	}
+
+	public void objectTypeIn(String multirequestToken){
+		setToken("objectTypeIn", multirequestToken);
 	}
 
 	// tagEqual:
@@ -131,6 +145,7 @@ public class TagFilter extends Filter {
 
 		// set members values:
 		objectTypeEqual = TaggedObjectType.get(GsonParser.parseString(jsonObject.get("objectTypeEqual")));
+		objectTypeIn = GsonParser.parseString(jsonObject.get("objectTypeIn"));
 		tagEqual = GsonParser.parseString(jsonObject.get("tagEqual"));
 		tagStartsWith = GsonParser.parseString(jsonObject.get("tagStartsWith"));
 		instanceCountEqual = GsonParser.parseInt(jsonObject.get("instanceCountEqual"));
@@ -142,6 +157,7 @@ public class TagFilter extends Filter {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaTagFilter");
 		kparams.add("objectTypeEqual", this.objectTypeEqual);
+		kparams.add("objectTypeIn", this.objectTypeIn);
 		kparams.add("tagEqual", this.tagEqual);
 		kparams.add("tagStartsWith", this.tagStartsWith);
 		kparams.add("instanceCountEqual", this.instanceCountEqual);
@@ -166,6 +182,7 @@ public class TagFilter extends Filter {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.objectTypeEqual == null ? -1 : this.objectTypeEqual.ordinal());
+        dest.writeString(this.objectTypeIn);
         dest.writeString(this.tagEqual);
         dest.writeString(this.tagStartsWith);
         dest.writeValue(this.instanceCountEqual);
@@ -176,6 +193,7 @@ public class TagFilter extends Filter {
         super(in);
         int tmpObjectTypeEqual = in.readInt();
         this.objectTypeEqual = tmpObjectTypeEqual == -1 ? null : TaggedObjectType.values()[tmpObjectTypeEqual];
+        this.objectTypeIn = in.readString();
         this.tagEqual = in.readString();
         this.tagStartsWith = in.readString();
         this.instanceCountEqual = (Integer)in.readValue(Integer.class.getClassLoader());

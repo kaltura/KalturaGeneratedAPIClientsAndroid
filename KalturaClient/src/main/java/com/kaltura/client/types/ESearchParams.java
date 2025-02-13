@@ -36,7 +36,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -50,11 +50,13 @@ public abstract class ESearchParams extends ObjectBase {
 		String objectStatuses();
 		String objectId();
 		ESearchOrderBy.Tokenizer orderBy();
+		String ignoreSynonym();
 	}
 
 	private String objectStatuses;
 	private String objectId;
 	private ESearchOrderBy orderBy;
+	private Boolean ignoreSynonym;
 
 	// objectStatuses:
 	public String getObjectStatuses(){
@@ -88,6 +90,18 @@ public abstract class ESearchParams extends ObjectBase {
 		this.orderBy = orderBy;
 	}
 
+	// ignoreSynonym:
+	public Boolean getIgnoreSynonym(){
+		return this.ignoreSynonym;
+	}
+	public void setIgnoreSynonym(Boolean ignoreSynonym){
+		this.ignoreSynonym = ignoreSynonym;
+	}
+
+	public void ignoreSynonym(String multirequestToken){
+		setToken("ignoreSynonym", multirequestToken);
+	}
+
 
 	public ESearchParams() {
 		super();
@@ -102,6 +116,7 @@ public abstract class ESearchParams extends ObjectBase {
 		objectStatuses = GsonParser.parseString(jsonObject.get("objectStatuses"));
 		objectId = GsonParser.parseString(jsonObject.get("objectId"));
 		orderBy = GsonParser.parseObject(jsonObject.getAsJsonObject("orderBy"), ESearchOrderBy.class);
+		ignoreSynonym = GsonParser.parseBoolean(jsonObject.get("ignoreSynonym"));
 
 	}
 
@@ -111,6 +126,7 @@ public abstract class ESearchParams extends ObjectBase {
 		kparams.add("objectStatuses", this.objectStatuses);
 		kparams.add("objectId", this.objectId);
 		kparams.add("orderBy", this.orderBy);
+		kparams.add("ignoreSynonym", this.ignoreSynonym);
 		return kparams;
 	}
 
@@ -121,6 +137,7 @@ public abstract class ESearchParams extends ObjectBase {
         dest.writeString(this.objectStatuses);
         dest.writeString(this.objectId);
         dest.writeParcelable(this.orderBy, flags);
+        dest.writeValue(this.ignoreSynonym);
     }
 
     public ESearchParams(Parcel in) {
@@ -128,6 +145,7 @@ public abstract class ESearchParams extends ObjectBase {
         this.objectStatuses = in.readString();
         this.objectId = in.readString();
         this.orderBy = in.readParcelable(ESearchOrderBy.class.getClassLoader());
+        this.ignoreSynonym = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

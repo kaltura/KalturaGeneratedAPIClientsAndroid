@@ -34,7 +34,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -65,6 +65,7 @@ public class BulkUploadResultEntry extends BulkUploadResult {
 		String creatorId();
 		String entitledUsersEdit();
 		String entitledUsersPublish();
+		String entitledUsersView();
 		String ownerId();
 		String referenceId();
 		String templateEntryId();
@@ -90,6 +91,7 @@ public class BulkUploadResultEntry extends BulkUploadResult {
 	private String creatorId;
 	private String entitledUsersEdit;
 	private String entitledUsersPublish;
+	private String entitledUsersView;
 	private String ownerId;
 	private String referenceId;
 	private String templateEntryId;
@@ -334,6 +336,18 @@ public class BulkUploadResultEntry extends BulkUploadResult {
 		setToken("entitledUsersPublish", multirequestToken);
 	}
 
+	// entitledUsersView:
+	public String getEntitledUsersView(){
+		return this.entitledUsersView;
+	}
+	public void setEntitledUsersView(String entitledUsersView){
+		this.entitledUsersView = entitledUsersView;
+	}
+
+	public void entitledUsersView(String multirequestToken){
+		setToken("entitledUsersView", multirequestToken);
+	}
+
 	// ownerId:
 	public String getOwnerId(){
 		return this.ownerId;
@@ -401,6 +415,7 @@ public class BulkUploadResultEntry extends BulkUploadResult {
 		creatorId = GsonParser.parseString(jsonObject.get("creatorId"));
 		entitledUsersEdit = GsonParser.parseString(jsonObject.get("entitledUsersEdit"));
 		entitledUsersPublish = GsonParser.parseString(jsonObject.get("entitledUsersPublish"));
+		entitledUsersView = GsonParser.parseString(jsonObject.get("entitledUsersView"));
 		ownerId = GsonParser.parseString(jsonObject.get("ownerId"));
 		referenceId = GsonParser.parseString(jsonObject.get("referenceId"));
 		templateEntryId = GsonParser.parseString(jsonObject.get("templateEntryId"));
@@ -430,6 +445,7 @@ public class BulkUploadResultEntry extends BulkUploadResult {
 		kparams.add("creatorId", this.creatorId);
 		kparams.add("entitledUsersEdit", this.entitledUsersEdit);
 		kparams.add("entitledUsersPublish", this.entitledUsersPublish);
+		kparams.add("entitledUsersView", this.entitledUsersView);
 		kparams.add("ownerId", this.ownerId);
 		kparams.add("referenceId", this.referenceId);
 		kparams.add("templateEntryId", this.templateEntryId);
@@ -472,6 +488,7 @@ public class BulkUploadResultEntry extends BulkUploadResult {
         dest.writeString(this.creatorId);
         dest.writeString(this.entitledUsersEdit);
         dest.writeString(this.entitledUsersPublish);
+        dest.writeString(this.entitledUsersView);
         dest.writeString(this.ownerId);
         dest.writeString(this.referenceId);
         dest.writeString(this.templateEntryId);
@@ -499,6 +516,7 @@ public class BulkUploadResultEntry extends BulkUploadResult {
         this.creatorId = in.readString();
         this.entitledUsersEdit = in.readString();
         this.entitledUsersPublish = in.readString();
+        this.entitledUsersView = in.readString();
         this.ownerId = in.readString();
         this.referenceId = in.readString();
         this.templateEntryId = in.readString();

@@ -30,11 +30,13 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.types.ESearchHistoryAggregationItem;
+import com.kaltura.client.types.ESearchRange;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -47,10 +49,14 @@ public class ESearchHistoryFilter extends ESearchBaseFilter {
 	public interface Tokenizer extends ESearchBaseFilter.Tokenizer {
 		String searchTermStartsWith();
 		String searchedObjectIn();
+		ESearchRange.Tokenizer timestampRange();
+		ESearchHistoryAggregationItem.Tokenizer aggregation();
 	}
 
 	private String searchTermStartsWith;
 	private String searchedObjectIn;
+	private ESearchRange timestampRange;
+	private ESearchHistoryAggregationItem aggregation;
 
 	// searchTermStartsWith:
 	public String getSearchTermStartsWith(){
@@ -76,6 +82,22 @@ public class ESearchHistoryFilter extends ESearchBaseFilter {
 		setToken("searchedObjectIn", multirequestToken);
 	}
 
+	// timestampRange:
+	public ESearchRange getTimestampRange(){
+		return this.timestampRange;
+	}
+	public void setTimestampRange(ESearchRange timestampRange){
+		this.timestampRange = timestampRange;
+	}
+
+	// aggregation:
+	public ESearchHistoryAggregationItem getAggregation(){
+		return this.aggregation;
+	}
+	public void setAggregation(ESearchHistoryAggregationItem aggregation){
+		this.aggregation = aggregation;
+	}
+
 
 	public ESearchHistoryFilter() {
 		super();
@@ -89,6 +111,8 @@ public class ESearchHistoryFilter extends ESearchBaseFilter {
 		// set members values:
 		searchTermStartsWith = GsonParser.parseString(jsonObject.get("searchTermStartsWith"));
 		searchedObjectIn = GsonParser.parseString(jsonObject.get("searchedObjectIn"));
+		timestampRange = GsonParser.parseObject(jsonObject.getAsJsonObject("timestampRange"), ESearchRange.class);
+		aggregation = GsonParser.parseObject(jsonObject.getAsJsonObject("aggregation"), ESearchHistoryAggregationItem.class);
 
 	}
 
@@ -97,6 +121,8 @@ public class ESearchHistoryFilter extends ESearchBaseFilter {
 		kparams.add("objectType", "KalturaESearchHistoryFilter");
 		kparams.add("searchTermStartsWith", this.searchTermStartsWith);
 		kparams.add("searchedObjectIn", this.searchedObjectIn);
+		kparams.add("timestampRange", this.timestampRange);
+		kparams.add("aggregation", this.aggregation);
 		return kparams;
 	}
 
@@ -118,12 +144,16 @@ public class ESearchHistoryFilter extends ESearchBaseFilter {
         super.writeToParcel(dest, flags);
         dest.writeString(this.searchTermStartsWith);
         dest.writeString(this.searchedObjectIn);
+        dest.writeParcelable(this.timestampRange, flags);
+        dest.writeParcelable(this.aggregation, flags);
     }
 
     public ESearchHistoryFilter(Parcel in) {
         super(in);
         this.searchTermStartsWith = in.readString();
         this.searchedObjectIn = in.readString();
+        this.timestampRange = in.readParcelable(ESearchRange.class.getClassLoader());
+        this.aggregation = in.readParcelable(ESearchHistoryAggregationItem.class.getClassLoader());
     }
 }
 

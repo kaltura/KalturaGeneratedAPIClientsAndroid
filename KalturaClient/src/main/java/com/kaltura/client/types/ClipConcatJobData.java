@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -48,23 +48,74 @@ import java.util.List;
 public class ClipConcatJobData extends JobData {
 	
 	public interface Tokenizer extends JobData.Tokenizer {
+		String destEntryId();
+		String tempEntryId();
+		String sourceEntryId();
+		String importUrl();
 		String partnerId();
 		String priority();
 		RequestBuilder.ListTokenizer<OperationAttributes.Tokenizer> operationAttributes();
+		String resourceOrder();
+		String conversionParams();
 	}
 
-	/**
-	 * $partnerId
-	 */
+	private String destEntryId;
+	private String tempEntryId;
+	private String sourceEntryId;
+	private String importUrl;
 	private Integer partnerId;
-	/**
-	 * $priority
-	 */
 	private Integer priority;
-	/**
-	 * clip operations
-	 */
 	private List<OperationAttributes> operationAttributes;
+	private Integer resourceOrder;
+	private String conversionParams;
+
+	// destEntryId:
+	public String getDestEntryId(){
+		return this.destEntryId;
+	}
+	public void setDestEntryId(String destEntryId){
+		this.destEntryId = destEntryId;
+	}
+
+	public void destEntryId(String multirequestToken){
+		setToken("destEntryId", multirequestToken);
+	}
+
+	// tempEntryId:
+	public String getTempEntryId(){
+		return this.tempEntryId;
+	}
+	public void setTempEntryId(String tempEntryId){
+		this.tempEntryId = tempEntryId;
+	}
+
+	public void tempEntryId(String multirequestToken){
+		setToken("tempEntryId", multirequestToken);
+	}
+
+	// sourceEntryId:
+	public String getSourceEntryId(){
+		return this.sourceEntryId;
+	}
+	public void setSourceEntryId(String sourceEntryId){
+		this.sourceEntryId = sourceEntryId;
+	}
+
+	public void sourceEntryId(String multirequestToken){
+		setToken("sourceEntryId", multirequestToken);
+	}
+
+	// importUrl:
+	public String getImportUrl(){
+		return this.importUrl;
+	}
+	public void setImportUrl(String importUrl){
+		this.importUrl = importUrl;
+	}
+
+	public void importUrl(String multirequestToken){
+		setToken("importUrl", multirequestToken);
+	}
 
 	// partnerId:
 	public Integer getPartnerId(){
@@ -98,6 +149,30 @@ public class ClipConcatJobData extends JobData {
 		this.operationAttributes = operationAttributes;
 	}
 
+	// resourceOrder:
+	public Integer getResourceOrder(){
+		return this.resourceOrder;
+	}
+	public void setResourceOrder(Integer resourceOrder){
+		this.resourceOrder = resourceOrder;
+	}
+
+	public void resourceOrder(String multirequestToken){
+		setToken("resourceOrder", multirequestToken);
+	}
+
+	// conversionParams:
+	public String getConversionParams(){
+		return this.conversionParams;
+	}
+	public void setConversionParams(String conversionParams){
+		this.conversionParams = conversionParams;
+	}
+
+	public void conversionParams(String multirequestToken){
+		setToken("conversionParams", multirequestToken);
+	}
+
 
 	public ClipConcatJobData() {
 		super();
@@ -109,18 +184,30 @@ public class ClipConcatJobData extends JobData {
 		if(jsonObject == null) return;
 
 		// set members values:
+		destEntryId = GsonParser.parseString(jsonObject.get("destEntryId"));
+		tempEntryId = GsonParser.parseString(jsonObject.get("tempEntryId"));
+		sourceEntryId = GsonParser.parseString(jsonObject.get("sourceEntryId"));
+		importUrl = GsonParser.parseString(jsonObject.get("importUrl"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
 		priority = GsonParser.parseInt(jsonObject.get("priority"));
 		operationAttributes = GsonParser.parseArray(jsonObject.getAsJsonArray("operationAttributes"), OperationAttributes.class);
+		resourceOrder = GsonParser.parseInt(jsonObject.get("resourceOrder"));
+		conversionParams = GsonParser.parseString(jsonObject.get("conversionParams"));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaClipConcatJobData");
+		kparams.add("destEntryId", this.destEntryId);
+		kparams.add("tempEntryId", this.tempEntryId);
+		kparams.add("sourceEntryId", this.sourceEntryId);
+		kparams.add("importUrl", this.importUrl);
 		kparams.add("partnerId", this.partnerId);
 		kparams.add("priority", this.priority);
 		kparams.add("operationAttributes", this.operationAttributes);
+		kparams.add("resourceOrder", this.resourceOrder);
+		kparams.add("conversionParams", this.conversionParams);
 		return kparams;
 	}
 
@@ -140,6 +227,10 @@ public class ClipConcatJobData extends JobData {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
+        dest.writeString(this.destEntryId);
+        dest.writeString(this.tempEntryId);
+        dest.writeString(this.sourceEntryId);
+        dest.writeString(this.importUrl);
         dest.writeValue(this.partnerId);
         dest.writeValue(this.priority);
         if(this.operationAttributes != null) {
@@ -148,10 +239,16 @@ public class ClipConcatJobData extends JobData {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeValue(this.resourceOrder);
+        dest.writeString(this.conversionParams);
     }
 
     public ClipConcatJobData(Parcel in) {
         super(in);
+        this.destEntryId = in.readString();
+        this.tempEntryId = in.readString();
+        this.sourceEntryId = in.readString();
+        this.importUrl = in.readString();
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.priority = (Integer)in.readValue(Integer.class.getClassLoader());
         int operationAttributesSize = in.readInt();
@@ -159,6 +256,8 @@ public class ClipConcatJobData extends JobData {
             this.operationAttributes = new ArrayList<>();
             in.readList(this.operationAttributes, OperationAttributes.class.getClassLoader());
         }
+        this.resourceOrder = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.conversionParams = in.readString();
     }
 }
 

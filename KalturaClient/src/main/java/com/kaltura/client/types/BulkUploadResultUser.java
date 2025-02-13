@@ -34,7 +34,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -60,6 +60,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
 		String lastName();
 		String group();
 		String externalId();
+		String capabilities();
 	}
 
 	private String userId;
@@ -77,6 +78,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
 	private String lastName;
 	private String group;
 	private String externalId;
+	private String capabilities;
 
 	// userId:
 	public String getUserId(){
@@ -258,6 +260,18 @@ public class BulkUploadResultUser extends BulkUploadResult {
 		setToken("externalId", multirequestToken);
 	}
 
+	// capabilities:
+	public String getCapabilities(){
+		return this.capabilities;
+	}
+	public void setCapabilities(String capabilities){
+		this.capabilities = capabilities;
+	}
+
+	public void capabilities(String multirequestToken){
+		setToken("capabilities", multirequestToken);
+	}
+
 
 	public BulkUploadResultUser() {
 		super();
@@ -284,6 +298,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
 		lastName = GsonParser.parseString(jsonObject.get("lastName"));
 		group = GsonParser.parseString(jsonObject.get("group"));
 		externalId = GsonParser.parseString(jsonObject.get("externalId"));
+		capabilities = GsonParser.parseString(jsonObject.get("capabilities"));
 
 	}
 
@@ -305,6 +320,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
 		kparams.add("lastName", this.lastName);
 		kparams.add("group", this.group);
 		kparams.add("externalId", this.externalId);
+		kparams.add("capabilities", this.capabilities);
 		return kparams;
 	}
 
@@ -339,6 +355,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
         dest.writeString(this.lastName);
         dest.writeString(this.group);
         dest.writeString(this.externalId);
+        dest.writeString(this.capabilities);
     }
 
     public BulkUploadResultUser(Parcel in) {
@@ -358,6 +375,7 @@ public class BulkUploadResultUser extends BulkUploadResult {
         this.lastName = in.readString();
         this.group = in.readString();
         this.externalId = in.readString();
+        this.capabilities = in.readString();
     }
 }
 

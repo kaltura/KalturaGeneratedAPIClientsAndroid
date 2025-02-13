@@ -36,9 +36,12 @@ import com.kaltura.client.enums.UserStatus;
 import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -76,6 +79,7 @@ public class BaseUser extends ObjectBase {
 		String allowedPartnerIds();
 		String allowedPartnerPackages();
 		String userMode();
+		RequestBuilder.ListTokenizer<UserCapability.Tokenizer> capabilities();
 	}
 
 	private String id;
@@ -117,6 +121,7 @@ public class BaseUser extends ObjectBase {
 	private String allowedPartnerIds;
 	private String allowedPartnerPackages;
 	private UserMode userMode;
+	private List<UserCapability> capabilities;
 
 	// id:
 	public String getId(){
@@ -386,6 +391,14 @@ public class BaseUser extends ObjectBase {
 		setToken("userMode", multirequestToken);
 	}
 
+	// capabilities:
+	public List<UserCapability> getCapabilities(){
+		return this.capabilities;
+	}
+	public void setCapabilities(List<UserCapability> capabilities){
+		this.capabilities = capabilities;
+	}
+
 
 	public BaseUser() {
 		super();
@@ -424,6 +437,7 @@ public class BaseUser extends ObjectBase {
 		allowedPartnerIds = GsonParser.parseString(jsonObject.get("allowedPartnerIds"));
 		allowedPartnerPackages = GsonParser.parseString(jsonObject.get("allowedPartnerPackages"));
 		userMode = UserMode.get(GsonParser.parseInt(jsonObject.get("userMode")));
+		capabilities = GsonParser.parseArray(jsonObject.getAsJsonArray("capabilities"), UserCapability.class);
 
 	}
 
@@ -450,6 +464,7 @@ public class BaseUser extends ObjectBase {
 		kparams.add("allowedPartnerIds", this.allowedPartnerIds);
 		kparams.add("allowedPartnerPackages", this.allowedPartnerPackages);
 		kparams.add("userMode", this.userMode);
+		kparams.add("capabilities", this.capabilities);
 		return kparams;
 	}
 
@@ -496,6 +511,12 @@ public class BaseUser extends ObjectBase {
         dest.writeString(this.allowedPartnerIds);
         dest.writeString(this.allowedPartnerPackages);
         dest.writeInt(this.userMode == null ? -1 : this.userMode.ordinal());
+        if(this.capabilities != null) {
+            dest.writeInt(this.capabilities.size());
+            dest.writeList(this.capabilities);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public BaseUser(Parcel in) {
@@ -530,6 +551,11 @@ public class BaseUser extends ObjectBase {
         this.allowedPartnerPackages = in.readString();
         int tmpUserMode = in.readInt();
         this.userMode = tmpUserMode == -1 ? null : UserMode.values()[tmpUserMode];
+        int capabilitiesSize = in.readInt();
+        if( capabilitiesSize > -1) {
+            this.capabilities = new ArrayList<>();
+            in.readList(this.capabilities, UserCapability.class.getClassLoader());
+        }
     }
 }
 

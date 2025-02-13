@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -55,6 +55,8 @@ public class ClipAttributes extends OperationAttributes {
 		String duration();
 		String globalOffsetInDestination();
 		RequestBuilder.ListTokenizer<Effect.Tokenizer> effectArray();
+		String cropAlignment();
+		RequestBuilder.ListTokenizer<CaptionAttributes.Tokenizer> captionAttributes();
 	}
 
 	/**
@@ -73,6 +75,8 @@ public class ClipAttributes extends OperationAttributes {
 	 * global Offset In Destination in milliseconds
 	 */
 	private List<Effect> effectArray;
+	private Integer cropAlignment;
+	private List<CaptionAttributes> captionAttributes;
 
 	// offset:
 	public Integer getOffset(){
@@ -118,6 +122,26 @@ public class ClipAttributes extends OperationAttributes {
 		this.effectArray = effectArray;
 	}
 
+	// cropAlignment:
+	public Integer getCropAlignment(){
+		return this.cropAlignment;
+	}
+	public void setCropAlignment(Integer cropAlignment){
+		this.cropAlignment = cropAlignment;
+	}
+
+	public void cropAlignment(String multirequestToken){
+		setToken("cropAlignment", multirequestToken);
+	}
+
+	// captionAttributes:
+	public List<CaptionAttributes> getCaptionAttributes(){
+		return this.captionAttributes;
+	}
+	public void setCaptionAttributes(List<CaptionAttributes> captionAttributes){
+		this.captionAttributes = captionAttributes;
+	}
+
 
 	public ClipAttributes() {
 		super();
@@ -133,6 +157,8 @@ public class ClipAttributes extends OperationAttributes {
 		duration = GsonParser.parseInt(jsonObject.get("duration"));
 		globalOffsetInDestination = GsonParser.parseInt(jsonObject.get("globalOffsetInDestination"));
 		effectArray = GsonParser.parseArray(jsonObject.getAsJsonArray("effectArray"), Effect.class);
+		cropAlignment = GsonParser.parseInt(jsonObject.get("cropAlignment"));
+		captionAttributes = GsonParser.parseArray(jsonObject.getAsJsonArray("captionAttributes"), CaptionAttributes.class);
 
 	}
 
@@ -143,6 +169,8 @@ public class ClipAttributes extends OperationAttributes {
 		kparams.add("duration", this.duration);
 		kparams.add("globalOffsetInDestination", this.globalOffsetInDestination);
 		kparams.add("effectArray", this.effectArray);
+		kparams.add("cropAlignment", this.cropAlignment);
+		kparams.add("captionAttributes", this.captionAttributes);
 		return kparams;
 	}
 
@@ -171,6 +199,13 @@ public class ClipAttributes extends OperationAttributes {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeValue(this.cropAlignment);
+        if(this.captionAttributes != null) {
+            dest.writeInt(this.captionAttributes.size());
+            dest.writeList(this.captionAttributes);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public ClipAttributes(Parcel in) {
@@ -182,6 +217,12 @@ public class ClipAttributes extends OperationAttributes {
         if( effectArraySize > -1) {
             this.effectArray = new ArrayList<>();
             in.readList(this.effectArray, Effect.class.getClassLoader());
+        }
+        this.cropAlignment = (Integer)in.readValue(Integer.class.getClassLoader());
+        int captionAttributesSize = in.readInt();
+        if( captionAttributesSize > -1) {
+            this.captionAttributes = new ArrayList<>();
+            in.readList(this.captionAttributes, CaptionAttributes.class.getClassLoader());
         }
     }
 }

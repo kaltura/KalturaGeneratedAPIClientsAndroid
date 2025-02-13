@@ -31,6 +31,7 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.CaptionAssetStatus;
+import com.kaltura.client.enums.CaptionAssetUsage;
 import com.kaltura.client.enums.CaptionSource;
 import com.kaltura.client.enums.CaptionType;
 import com.kaltura.client.enums.Language;
@@ -39,7 +40,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -62,6 +63,7 @@ public class CaptionAsset extends Asset {
 		String accuracy();
 		String displayOnPlayer();
 		String associatedTranscriptIds();
+		String usage();
 	}
 
 	/**
@@ -112,6 +114,10 @@ public class CaptionAsset extends Asset {
 	 * List of associated transcript asset id's, comma separated
 	 */
 	private String associatedTranscriptIds;
+	/**
+	 * The usage of the asset
+	 */
+	private CaptionAssetUsage usage;
 
 	// captionParamsId:
 	public Integer getCaptionParamsId(){
@@ -241,6 +247,18 @@ public class CaptionAsset extends Asset {
 		setToken("associatedTranscriptIds", multirequestToken);
 	}
 
+	// usage:
+	public CaptionAssetUsage getUsage(){
+		return this.usage;
+	}
+	public void setUsage(CaptionAssetUsage usage){
+		this.usage = usage;
+	}
+
+	public void usage(String multirequestToken){
+		setToken("usage", multirequestToken);
+	}
+
 
 	public CaptionAsset() {
 		super();
@@ -264,6 +282,7 @@ public class CaptionAsset extends Asset {
 		accuracy = GsonParser.parseInt(jsonObject.get("accuracy"));
 		displayOnPlayer = GsonParser.parseBoolean(jsonObject.get("displayOnPlayer"));
 		associatedTranscriptIds = GsonParser.parseString(jsonObject.get("associatedTranscriptIds"));
+		usage = CaptionAssetUsage.get(GsonParser.parseString(jsonObject.get("usage")));
 
 	}
 
@@ -280,6 +299,7 @@ public class CaptionAsset extends Asset {
 		kparams.add("accuracy", this.accuracy);
 		kparams.add("displayOnPlayer", this.displayOnPlayer);
 		kparams.add("associatedTranscriptIds", this.associatedTranscriptIds);
+		kparams.add("usage", this.usage);
 		return kparams;
 	}
 
@@ -311,6 +331,7 @@ public class CaptionAsset extends Asset {
         dest.writeValue(this.accuracy);
         dest.writeValue(this.displayOnPlayer);
         dest.writeString(this.associatedTranscriptIds);
+        dest.writeInt(this.usage == null ? -1 : this.usage.ordinal());
     }
 
     public CaptionAsset(Parcel in) {
@@ -332,6 +353,8 @@ public class CaptionAsset extends Asset {
         this.accuracy = (Integer)in.readValue(Integer.class.getClassLoader());
         this.displayOnPlayer = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.associatedTranscriptIds = in.readString();
+        int tmpUsage = in.readInt();
+        this.usage = tmpUsage == -1 ? null : CaptionAssetUsage.values()[tmpUsage];
     }
 }
 

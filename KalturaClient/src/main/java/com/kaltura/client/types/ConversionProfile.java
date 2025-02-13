@@ -41,7 +41,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -78,6 +78,7 @@ public class ConversionProfile extends ObjectBase {
 		String mediaInfoXslTransformation();
 		EntryReplacementOptions.Tokenizer defaultReplacementOptions();
 		String defaultAudioLang();
+		String deliveryTag();
 	}
 
 	/**
@@ -174,6 +175,7 @@ public class ConversionProfile extends ObjectBase {
 	 */
 	private EntryReplacementOptions defaultReplacementOptions;
 	private Language defaultAudioLang;
+	private String deliveryTag;
 
 	// id:
 	public Integer getId(){
@@ -447,6 +449,18 @@ public class ConversionProfile extends ObjectBase {
 		setToken("defaultAudioLang", multirequestToken);
 	}
 
+	// deliveryTag:
+	public String getDeliveryTag(){
+		return this.deliveryTag;
+	}
+	public void setDeliveryTag(String deliveryTag){
+		this.deliveryTag = deliveryTag;
+	}
+
+	public void deliveryTag(String multirequestToken){
+		setToken("deliveryTag", multirequestToken);
+	}
+
 
 	public ConversionProfile() {
 		super();
@@ -484,6 +498,7 @@ public class ConversionProfile extends ObjectBase {
 		mediaInfoXslTransformation = GsonParser.parseString(jsonObject.get("mediaInfoXslTransformation"));
 		defaultReplacementOptions = GsonParser.parseObject(jsonObject.getAsJsonObject("defaultReplacementOptions"), EntryReplacementOptions.class);
 		defaultAudioLang = Language.get(GsonParser.parseString(jsonObject.get("defaultAudioLang")));
+		deliveryTag = GsonParser.parseString(jsonObject.get("deliveryTag"));
 
 	}
 
@@ -512,6 +527,7 @@ public class ConversionProfile extends ObjectBase {
 		kparams.add("mediaInfoXslTransformation", this.mediaInfoXslTransformation);
 		kparams.add("defaultReplacementOptions", this.defaultReplacementOptions);
 		kparams.add("defaultAudioLang", this.defaultAudioLang);
+		kparams.add("deliveryTag", this.deliveryTag);
 		return kparams;
 	}
 
@@ -557,6 +573,7 @@ public class ConversionProfile extends ObjectBase {
         dest.writeString(this.mediaInfoXslTransformation);
         dest.writeParcelable(this.defaultReplacementOptions, flags);
         dest.writeInt(this.defaultAudioLang == null ? -1 : this.defaultAudioLang.ordinal());
+        dest.writeString(this.deliveryTag);
     }
 
     public ConversionProfile(Parcel in) {
@@ -591,6 +608,7 @@ public class ConversionProfile extends ObjectBase {
         this.defaultReplacementOptions = in.readParcelable(EntryReplacementOptions.class.getClassLoader());
         int tmpDefaultAudioLang = in.readInt();
         this.defaultAudioLang = tmpDefaultAudioLang == -1 ? null : Language.values()[tmpDefaultAudioLang];
+        this.deliveryTag = in.readString();
     }
 }
 

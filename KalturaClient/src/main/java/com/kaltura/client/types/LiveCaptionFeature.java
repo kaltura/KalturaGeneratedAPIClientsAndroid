@@ -34,7 +34,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -50,6 +50,8 @@ public class LiveCaptionFeature extends LiveFeature {
 		String captionUrl();
 		String captionToken();
 		String inputDelay();
+		String captionFormat();
+		String language();
 	}
 
 	private String mediaUrl;
@@ -57,6 +59,8 @@ public class LiveCaptionFeature extends LiveFeature {
 	private String captionUrl;
 	private String captionToken;
 	private Integer inputDelay;
+	private String captionFormat;
+	private String language;
 
 	// mediaUrl:
 	public String getMediaUrl(){
@@ -118,6 +122,30 @@ public class LiveCaptionFeature extends LiveFeature {
 		setToken("inputDelay", multirequestToken);
 	}
 
+	// captionFormat:
+	public String getCaptionFormat(){
+		return this.captionFormat;
+	}
+	public void setCaptionFormat(String captionFormat){
+		this.captionFormat = captionFormat;
+	}
+
+	public void captionFormat(String multirequestToken){
+		setToken("captionFormat", multirequestToken);
+	}
+
+	// language:
+	public String getLanguage(){
+		return this.language;
+	}
+	public void setLanguage(String language){
+		this.language = language;
+	}
+
+	public void language(String multirequestToken){
+		setToken("language", multirequestToken);
+	}
+
 
 	public LiveCaptionFeature() {
 		super();
@@ -134,6 +162,8 @@ public class LiveCaptionFeature extends LiveFeature {
 		captionUrl = GsonParser.parseString(jsonObject.get("captionUrl"));
 		captionToken = GsonParser.parseString(jsonObject.get("captionToken"));
 		inputDelay = GsonParser.parseInt(jsonObject.get("inputDelay"));
+		captionFormat = GsonParser.parseString(jsonObject.get("captionFormat"));
+		language = GsonParser.parseString(jsonObject.get("language"));
 
 	}
 
@@ -145,6 +175,8 @@ public class LiveCaptionFeature extends LiveFeature {
 		kparams.add("captionUrl", this.captionUrl);
 		kparams.add("captionToken", this.captionToken);
 		kparams.add("inputDelay", this.inputDelay);
+		kparams.add("captionFormat", this.captionFormat);
+		kparams.add("language", this.language);
 		return kparams;
 	}
 
@@ -169,6 +201,8 @@ public class LiveCaptionFeature extends LiveFeature {
         dest.writeString(this.captionUrl);
         dest.writeString(this.captionToken);
         dest.writeValue(this.inputDelay);
+        dest.writeString(this.captionFormat);
+        dest.writeString(this.language);
     }
 
     public LiveCaptionFeature(Parcel in) {
@@ -178,6 +212,8 @@ public class LiveCaptionFeature extends LiveFeature {
         this.captionUrl = in.readString();
         this.captionToken = in.readString();
         this.inputDelay = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.captionFormat = in.readString();
+        this.language = in.readString();
     }
 }
 

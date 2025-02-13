@@ -34,7 +34,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -54,6 +54,7 @@ public class FileSyncResource extends ContentResource {
 		String objectSubType();
 		String objectId();
 		String version();
+		String originEntryId();
 	}
 
 	/**
@@ -72,6 +73,10 @@ public class FileSyncResource extends ContentResource {
 	 * The version of the file sync object
 	 */
 	private String version;
+	/**
+	 * The original entry ID, if exists
+	 */
+	private String originEntryId;
 
 	// fileSyncObjectType:
 	public Integer getFileSyncObjectType(){
@@ -121,6 +126,18 @@ public class FileSyncResource extends ContentResource {
 		setToken("version", multirequestToken);
 	}
 
+	// originEntryId:
+	public String getOriginEntryId(){
+		return this.originEntryId;
+	}
+	public void setOriginEntryId(String originEntryId){
+		this.originEntryId = originEntryId;
+	}
+
+	public void originEntryId(String multirequestToken){
+		setToken("originEntryId", multirequestToken);
+	}
+
 
 	public FileSyncResource() {
 		super();
@@ -136,6 +153,7 @@ public class FileSyncResource extends ContentResource {
 		objectSubType = GsonParser.parseInt(jsonObject.get("objectSubType"));
 		objectId = GsonParser.parseString(jsonObject.get("objectId"));
 		version = GsonParser.parseString(jsonObject.get("version"));
+		originEntryId = GsonParser.parseString(jsonObject.get("originEntryId"));
 
 	}
 
@@ -146,6 +164,7 @@ public class FileSyncResource extends ContentResource {
 		kparams.add("objectSubType", this.objectSubType);
 		kparams.add("objectId", this.objectId);
 		kparams.add("version", this.version);
+		kparams.add("originEntryId", this.originEntryId);
 		return kparams;
 	}
 
@@ -169,6 +188,7 @@ public class FileSyncResource extends ContentResource {
         dest.writeValue(this.objectSubType);
         dest.writeString(this.objectId);
         dest.writeString(this.version);
+        dest.writeString(this.originEntryId);
     }
 
     public FileSyncResource(Parcel in) {
@@ -177,6 +197,7 @@ public class FileSyncResource extends ContentResource {
         this.objectSubType = (Integer)in.readValue(Integer.class.getClassLoader());
         this.objectId = in.readString();
         this.version = in.readString();
+        this.originEntryId = in.readString();
     }
 }
 

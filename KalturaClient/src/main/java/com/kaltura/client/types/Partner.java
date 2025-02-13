@@ -44,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -101,6 +101,8 @@ public class Partner extends ObjectBase {
 		RequestBuilder.ListTokenizer<PlayerEmbedCodeType.Tokenizer> embedCodeTypes();
 		String templatePartnerId();
 		String ignoreSeoLinks();
+		String useTwoFactorAuthentication();
+		String useSso();
 		String blockDirectLogin();
 		String host();
 		String cdnHost();
@@ -136,6 +138,9 @@ public class Partner extends ObjectBase {
 		String excludedAdminRoleName();
 		String eventPlatformAllowedTemplates();
 		String verticalClassificationId();
+		String recycleBinRetentionPeriod();
+		String customAnalyticsDomain();
+		String allowedEmailDomainsForAdmins();
 	}
 
 	private Integer id;
@@ -199,6 +204,8 @@ public class Partner extends ObjectBase {
 	private List<PlayerEmbedCodeType> embedCodeTypes;
 	private Integer templatePartnerId;
 	private Boolean ignoreSeoLinks;
+	private Boolean useTwoFactorAuthentication;
+	private Boolean useSso;
 	private Boolean blockDirectLogin;
 	private String host;
 	private String cdnHost;
@@ -237,6 +244,9 @@ public class Partner extends ObjectBase {
 	private String excludedAdminRoleName;
 	private String eventPlatformAllowedTemplates;
 	private Integer verticalClassificationId;
+	private Integer recycleBinRetentionPeriod;
+	private String customAnalyticsDomain;
+	private String allowedEmailDomainsForAdmins;
 
 	// id:
 	public Integer getId(){
@@ -658,10 +668,34 @@ public class Partner extends ObjectBase {
 	public Boolean getIgnoreSeoLinks(){
 		return this.ignoreSeoLinks;
 	}
+	// useTwoFactorAuthentication:
+	public Boolean getUseTwoFactorAuthentication(){
+		return this.useTwoFactorAuthentication;
+	}
+	// useSso:
+	public Boolean getUseSso(){
+		return this.useSso;
+	}
+	public void setUseSso(Boolean useSso){
+		this.useSso = useSso;
+	}
+
+	public void useSso(String multirequestToken){
+		setToken("useSso", multirequestToken);
+	}
+
 	// blockDirectLogin:
 	public Boolean getBlockDirectLogin(){
 		return this.blockDirectLogin;
 	}
+	public void setBlockDirectLogin(Boolean blockDirectLogin){
+		this.blockDirectLogin = blockDirectLogin;
+	}
+
+	public void blockDirectLogin(String multirequestToken){
+		setToken("blockDirectLogin", multirequestToken);
+	}
+
 	// host:
 	public String getHost(){
 		return this.host;
@@ -878,6 +912,34 @@ public class Partner extends ObjectBase {
 	public Integer getVerticalClassificationId(){
 		return this.verticalClassificationId;
 	}
+	// recycleBinRetentionPeriod:
+	public Integer getRecycleBinRetentionPeriod(){
+		return this.recycleBinRetentionPeriod;
+	}
+	// customAnalyticsDomain:
+	public String getCustomAnalyticsDomain(){
+		return this.customAnalyticsDomain;
+	}
+	public void setCustomAnalyticsDomain(String customAnalyticsDomain){
+		this.customAnalyticsDomain = customAnalyticsDomain;
+	}
+
+	public void customAnalyticsDomain(String multirequestToken){
+		setToken("customAnalyticsDomain", multirequestToken);
+	}
+
+	// allowedEmailDomainsForAdmins:
+	public String getAllowedEmailDomainsForAdmins(){
+		return this.allowedEmailDomainsForAdmins;
+	}
+	public void setAllowedEmailDomainsForAdmins(String allowedEmailDomainsForAdmins){
+		this.allowedEmailDomainsForAdmins = allowedEmailDomainsForAdmins;
+	}
+
+	public void allowedEmailDomainsForAdmins(String multirequestToken){
+		setToken("allowedEmailDomainsForAdmins", multirequestToken);
+	}
+
 
 	public Partner() {
 		super();
@@ -935,6 +997,8 @@ public class Partner extends ObjectBase {
 		embedCodeTypes = GsonParser.parseArray(jsonObject.getAsJsonArray("embedCodeTypes"), PlayerEmbedCodeType.class);
 		templatePartnerId = GsonParser.parseInt(jsonObject.get("templatePartnerId"));
 		ignoreSeoLinks = GsonParser.parseBoolean(jsonObject.get("ignoreSeoLinks"));
+		useTwoFactorAuthentication = GsonParser.parseBoolean(jsonObject.get("useTwoFactorAuthentication"));
+		useSso = GsonParser.parseBoolean(jsonObject.get("useSso"));
 		blockDirectLogin = GsonParser.parseBoolean(jsonObject.get("blockDirectLogin"));
 		host = GsonParser.parseString(jsonObject.get("host"));
 		cdnHost = GsonParser.parseString(jsonObject.get("cdnHost"));
@@ -970,6 +1034,9 @@ public class Partner extends ObjectBase {
 		excludedAdminRoleName = GsonParser.parseString(jsonObject.get("excludedAdminRoleName"));
 		eventPlatformAllowedTemplates = GsonParser.parseString(jsonObject.get("eventPlatformAllowedTemplates"));
 		verticalClassificationId = GsonParser.parseInt(jsonObject.get("verticalClassificationId"));
+		recycleBinRetentionPeriod = GsonParser.parseInt(jsonObject.get("recycleBinRetentionPeriod"));
+		customAnalyticsDomain = GsonParser.parseString(jsonObject.get("customAnalyticsDomain"));
+		allowedEmailDomainsForAdmins = GsonParser.parseString(jsonObject.get("allowedEmailDomainsForAdmins"));
 
 	}
 
@@ -1006,6 +1073,8 @@ public class Partner extends ObjectBase {
 		kparams.add("country", this.country);
 		kparams.add("state", this.state);
 		kparams.add("additionalParams", this.additionalParams);
+		kparams.add("useSso", this.useSso);
+		kparams.add("blockDirectLogin", this.blockDirectLogin);
 		kparams.add("partnerParentId", this.partnerParentId);
 		kparams.add("referenceId", this.referenceId);
 		kparams.add("eSearchLanguages", this.eSearchLanguages);
@@ -1017,6 +1086,8 @@ public class Partner extends ObjectBase {
 		kparams.add("numPrevPassToKeep", this.numPrevPassToKeep);
 		kparams.add("isSelfServe", this.isSelfServe);
 		kparams.add("eventPlatformAllowedTemplates", this.eventPlatformAllowedTemplates);
+		kparams.add("customAnalyticsDomain", this.customAnalyticsDomain);
+		kparams.add("allowedEmailDomainsForAdmins", this.allowedEmailDomainsForAdmins);
 		return kparams;
 	}
 
@@ -1097,6 +1168,8 @@ public class Partner extends ObjectBase {
         }
         dest.writeValue(this.templatePartnerId);
         dest.writeValue(this.ignoreSeoLinks);
+        dest.writeValue(this.useTwoFactorAuthentication);
+        dest.writeValue(this.useSso);
         dest.writeValue(this.blockDirectLogin);
         dest.writeString(this.host);
         dest.writeString(this.cdnHost);
@@ -1142,6 +1215,9 @@ public class Partner extends ObjectBase {
         dest.writeString(this.excludedAdminRoleName);
         dest.writeString(this.eventPlatformAllowedTemplates);
         dest.writeValue(this.verticalClassificationId);
+        dest.writeValue(this.recycleBinRetentionPeriod);
+        dest.writeString(this.customAnalyticsDomain);
+        dest.writeString(this.allowedEmailDomainsForAdmins);
     }
 
     public Partner(Parcel in) {
@@ -1208,6 +1284,8 @@ public class Partner extends ObjectBase {
         }
         this.templatePartnerId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.ignoreSeoLinks = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.useTwoFactorAuthentication = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.useSso = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.blockDirectLogin = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.host = in.readString();
         this.cdnHost = in.readString();
@@ -1253,6 +1331,9 @@ public class Partner extends ObjectBase {
         this.excludedAdminRoleName = in.readString();
         this.eventPlatformAllowedTemplates = in.readString();
         this.verticalClassificationId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.recycleBinRetentionPeriod = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.customAnalyticsDomain = in.readString();
+        this.allowedEmailDomainsForAdmins = in.readString();
     }
 }
 

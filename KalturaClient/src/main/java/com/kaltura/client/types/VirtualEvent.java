@@ -36,7 +36,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -62,6 +62,8 @@ public class VirtualEvent extends ObjectBase {
 		String updatedAt();
 		String deletionDueDate();
 		String registrationFormSchema();
+		String eventUrl();
+		String webhookRegistrationToken();
 	}
 
 	private Integer id;
@@ -82,6 +84,14 @@ public class VirtualEvent extends ObjectBase {
 	 * JSON-Schema of the Registration Form
 	 */
 	private String registrationFormSchema;
+	/**
+	 * The Virtual Event Url
+	 */
+	private String eventUrl;
+	/**
+	 * The Virtual Event WebHook registration token
+	 */
+	private String webhookRegistrationToken;
 
 	// id:
 	public Integer getId(){
@@ -223,6 +233,30 @@ public class VirtualEvent extends ObjectBase {
 		setToken("registrationFormSchema", multirequestToken);
 	}
 
+	// eventUrl:
+	public String getEventUrl(){
+		return this.eventUrl;
+	}
+	public void setEventUrl(String eventUrl){
+		this.eventUrl = eventUrl;
+	}
+
+	public void eventUrl(String multirequestToken){
+		setToken("eventUrl", multirequestToken);
+	}
+
+	// webhookRegistrationToken:
+	public String getWebhookRegistrationToken(){
+		return this.webhookRegistrationToken;
+	}
+	public void setWebhookRegistrationToken(String webhookRegistrationToken){
+		this.webhookRegistrationToken = webhookRegistrationToken;
+	}
+
+	public void webhookRegistrationToken(String multirequestToken){
+		setToken("webhookRegistrationToken", multirequestToken);
+	}
+
 
 	public VirtualEvent() {
 		super();
@@ -249,6 +283,8 @@ public class VirtualEvent extends ObjectBase {
 		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		deletionDueDate = GsonParser.parseLong(jsonObject.get("deletionDueDate"));
 		registrationFormSchema = GsonParser.parseString(jsonObject.get("registrationFormSchema"));
+		eventUrl = GsonParser.parseString(jsonObject.get("eventUrl"));
+		webhookRegistrationToken = GsonParser.parseString(jsonObject.get("webhookRegistrationToken"));
 
 	}
 
@@ -265,6 +301,8 @@ public class VirtualEvent extends ObjectBase {
 		kparams.add("mainEventScheduleEventId", this.mainEventScheduleEventId);
 		kparams.add("deletionDueDate", this.deletionDueDate);
 		kparams.add("registrationFormSchema", this.registrationFormSchema);
+		kparams.add("eventUrl", this.eventUrl);
+		kparams.add("webhookRegistrationToken", this.webhookRegistrationToken);
 		return kparams;
 	}
 
@@ -299,6 +337,8 @@ public class VirtualEvent extends ObjectBase {
         dest.writeValue(this.updatedAt);
         dest.writeValue(this.deletionDueDate);
         dest.writeString(this.registrationFormSchema);
+        dest.writeString(this.eventUrl);
+        dest.writeString(this.webhookRegistrationToken);
     }
 
     public VirtualEvent(Parcel in) {
@@ -319,6 +359,8 @@ public class VirtualEvent extends ObjectBase {
         this.updatedAt = (Long)in.readValue(Long.class.getClassLoader());
         this.deletionDueDate = (Long)in.readValue(Long.class.getClassLoader());
         this.registrationFormSchema = in.readString();
+        this.eventUrl = in.readString();
+        this.webhookRegistrationToken = in.readString();
     }
 }
 

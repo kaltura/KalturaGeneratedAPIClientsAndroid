@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -92,6 +92,7 @@ public class StorageProfile extends ObjectBase {
 		String excludedFlavorParamsIds();
 		String shouldExportCaptions();
 		String excludedEntryTypes();
+		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> additionalInfo();
 	}
 
 	private Integer id;
@@ -153,6 +154,7 @@ public class StorageProfile extends ObjectBase {
 	private String excludedFlavorParamsIds;
 	private Boolean shouldExportCaptions;
 	private String excludedEntryTypes;
+	private List<KeyValue> additionalInfo;
 
 	// id:
 	public Integer getId(){
@@ -578,6 +580,14 @@ public class StorageProfile extends ObjectBase {
 		setToken("excludedEntryTypes", multirequestToken);
 	}
 
+	// additionalInfo:
+	public List<KeyValue> getAdditionalInfo(){
+		return this.additionalInfo;
+	}
+	public void setAdditionalInfo(List<KeyValue> additionalInfo){
+		this.additionalInfo = additionalInfo;
+	}
+
 
 	public StorageProfile() {
 		super();
@@ -628,6 +638,7 @@ public class StorageProfile extends ObjectBase {
 		excludedFlavorParamsIds = GsonParser.parseString(jsonObject.get("excludedFlavorParamsIds"));
 		shouldExportCaptions = GsonParser.parseBoolean(jsonObject.get("shouldExportCaptions"));
 		excludedEntryTypes = GsonParser.parseString(jsonObject.get("excludedEntryTypes"));
+		additionalInfo = GsonParser.parseArray(jsonObject.getAsJsonArray("additionalInfo"), KeyValue.class);
 
 	}
 
@@ -669,6 +680,7 @@ public class StorageProfile extends ObjectBase {
 		kparams.add("excludedFlavorParamsIds", this.excludedFlavorParamsIds);
 		kparams.add("shouldExportCaptions", this.shouldExportCaptions);
 		kparams.add("excludedEntryTypes", this.excludedEntryTypes);
+		kparams.add("additionalInfo", this.additionalInfo);
 		return kparams;
 	}
 
@@ -742,6 +754,12 @@ public class StorageProfile extends ObjectBase {
         dest.writeString(this.excludedFlavorParamsIds);
         dest.writeValue(this.shouldExportCaptions);
         dest.writeString(this.excludedEntryTypes);
+        if(this.additionalInfo != null) {
+            dest.writeInt(this.additionalInfo.size());
+            dest.writeList(this.additionalInfo);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public StorageProfile(Parcel in) {
@@ -801,6 +819,11 @@ public class StorageProfile extends ObjectBase {
         this.excludedFlavorParamsIds = in.readString();
         this.shouldExportCaptions = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.excludedEntryTypes = in.readString();
+        int additionalInfoSize = in.readInt();
+        if( additionalInfoSize > -1) {
+            this.additionalInfo = new ArrayList<>();
+            in.readList(this.additionalInfo, KeyValue.class.getClassLoader());
+        }
     }
 }
 

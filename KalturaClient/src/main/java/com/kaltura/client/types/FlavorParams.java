@@ -37,7 +37,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -83,6 +83,7 @@ public class FlavorParams extends AssetParams {
 		String videoBitrateTolerance();
 		String watermarkData();
 		String subtitlesData();
+		String cropData();
 		String isEncrypted();
 		String contentAwareness();
 		String chunkedEncodeMode();
@@ -164,6 +165,7 @@ public class FlavorParams extends AssetParams {
 	private Integer videoBitrateTolerance;
 	private String watermarkData;
 	private String subtitlesData;
+	private String cropData;
 	private Integer isEncrypted;
 	private Double contentAwareness;
 	private Integer chunkedEncodeMode;
@@ -590,6 +592,18 @@ public class FlavorParams extends AssetParams {
 		setToken("subtitlesData", multirequestToken);
 	}
 
+	// cropData:
+	public String getCropData(){
+		return this.cropData;
+	}
+	public void setCropData(String cropData){
+		this.cropData = cropData;
+	}
+
+	public void cropData(String multirequestToken){
+		setToken("cropData", multirequestToken);
+	}
+
 	// isEncrypted:
 	public Integer getIsEncrypted(){
 		return this.isEncrypted;
@@ -696,6 +710,7 @@ public class FlavorParams extends AssetParams {
 		videoBitrateTolerance = GsonParser.parseInt(jsonObject.get("videoBitrateTolerance"));
 		watermarkData = GsonParser.parseString(jsonObject.get("watermarkData"));
 		subtitlesData = GsonParser.parseString(jsonObject.get("subtitlesData"));
+		cropData = GsonParser.parseString(jsonObject.get("cropData"));
 		isEncrypted = GsonParser.parseInt(jsonObject.get("isEncrypted"));
 		contentAwareness = GsonParser.parseDouble(jsonObject.get("contentAwareness"));
 		chunkedEncodeMode = GsonParser.parseInt(jsonObject.get("chunkedEncodeMode"));
@@ -742,6 +757,7 @@ public class FlavorParams extends AssetParams {
 		kparams.add("videoBitrateTolerance", this.videoBitrateTolerance);
 		kparams.add("watermarkData", this.watermarkData);
 		kparams.add("subtitlesData", this.subtitlesData);
+		kparams.add("cropData", this.cropData);
 		kparams.add("isEncrypted", this.isEncrypted);
 		kparams.add("contentAwareness", this.contentAwareness);
 		kparams.add("chunkedEncodeMode", this.chunkedEncodeMode);
@@ -801,6 +817,7 @@ public class FlavorParams extends AssetParams {
         dest.writeValue(this.videoBitrateTolerance);
         dest.writeString(this.watermarkData);
         dest.writeString(this.subtitlesData);
+        dest.writeString(this.cropData);
         dest.writeValue(this.isEncrypted);
         dest.writeValue(this.contentAwareness);
         dest.writeValue(this.chunkedEncodeMode);
@@ -848,6 +865,7 @@ public class FlavorParams extends AssetParams {
         this.videoBitrateTolerance = (Integer)in.readValue(Integer.class.getClassLoader());
         this.watermarkData = in.readString();
         this.subtitlesData = in.readString();
+        this.cropData = in.readString();
         this.isEncrypted = (Integer)in.readValue(Integer.class.getClassLoader());
         this.contentAwareness = (Double)in.readValue(Double.class.getClassLoader());
         this.chunkedEncodeMode = (Integer)in.readValue(Integer.class.getClassLoader());

@@ -36,7 +36,7 @@ import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
- * This class was generated using generate.php
+ * This class was generated using exec.php
  * against an XML schema provided by Kaltura.
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
@@ -89,6 +89,13 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String virtualEventIdIn();
 		String originIn();
 		String uiConfIdIn();
+		String cuePointIdIn();
+		String contextIdIn();
+		String roleIn();
+		String industryIn();
+		String playbackModeIn();
+		String companyIn();
+		String eventSessionContextIdIn();
 	}
 
 	/**
@@ -250,6 +257,34 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * filter by ui conf id
 	 */
 	private String uiConfIdIn;
+	/**
+	 * filter by cue point id
+	 */
+	private String cuePointIdIn;
+	/**
+	 * filter by context ids
+	 */
+	private String contextIdIn;
+	/**
+	 * filter by user role
+	 */
+	private String roleIn;
+	/**
+	 * filter by industry
+	 */
+	private String industryIn;
+	/**
+	 * filter by playback mode
+	 */
+	private String playbackModeIn;
+	/**
+	 * filter by company
+	 */
+	private String companyIn;
+	/**
+	 * filter by event session context id
+	 */
+	private String eventSessionContextIdIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -751,6 +786,90 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("uiConfIdIn", multirequestToken);
 	}
 
+	// cuePointIdIn:
+	public String getCuePointIdIn(){
+		return this.cuePointIdIn;
+	}
+	public void setCuePointIdIn(String cuePointIdIn){
+		this.cuePointIdIn = cuePointIdIn;
+	}
+
+	public void cuePointIdIn(String multirequestToken){
+		setToken("cuePointIdIn", multirequestToken);
+	}
+
+	// contextIdIn:
+	public String getContextIdIn(){
+		return this.contextIdIn;
+	}
+	public void setContextIdIn(String contextIdIn){
+		this.contextIdIn = contextIdIn;
+	}
+
+	public void contextIdIn(String multirequestToken){
+		setToken("contextIdIn", multirequestToken);
+	}
+
+	// roleIn:
+	public String getRoleIn(){
+		return this.roleIn;
+	}
+	public void setRoleIn(String roleIn){
+		this.roleIn = roleIn;
+	}
+
+	public void roleIn(String multirequestToken){
+		setToken("roleIn", multirequestToken);
+	}
+
+	// industryIn:
+	public String getIndustryIn(){
+		return this.industryIn;
+	}
+	public void setIndustryIn(String industryIn){
+		this.industryIn = industryIn;
+	}
+
+	public void industryIn(String multirequestToken){
+		setToken("industryIn", multirequestToken);
+	}
+
+	// playbackModeIn:
+	public String getPlaybackModeIn(){
+		return this.playbackModeIn;
+	}
+	public void setPlaybackModeIn(String playbackModeIn){
+		this.playbackModeIn = playbackModeIn;
+	}
+
+	public void playbackModeIn(String multirequestToken){
+		setToken("playbackModeIn", multirequestToken);
+	}
+
+	// companyIn:
+	public String getCompanyIn(){
+		return this.companyIn;
+	}
+	public void setCompanyIn(String companyIn){
+		this.companyIn = companyIn;
+	}
+
+	public void companyIn(String multirequestToken){
+		setToken("companyIn", multirequestToken);
+	}
+
+	// eventSessionContextIdIn:
+	public String getEventSessionContextIdIn(){
+		return this.eventSessionContextIdIn;
+	}
+	public void setEventSessionContextIdIn(String eventSessionContextIdIn){
+		this.eventSessionContextIdIn = eventSessionContextIdIn;
+	}
+
+	public void eventSessionContextIdIn(String multirequestToken){
+		setToken("eventSessionContextIdIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -804,6 +923,13 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		virtualEventIdIn = GsonParser.parseString(jsonObject.get("virtualEventIdIn"));
 		originIn = GsonParser.parseString(jsonObject.get("originIn"));
 		uiConfIdIn = GsonParser.parseString(jsonObject.get("uiConfIdIn"));
+		cuePointIdIn = GsonParser.parseString(jsonObject.get("cuePointIdIn"));
+		contextIdIn = GsonParser.parseString(jsonObject.get("contextIdIn"));
+		roleIn = GsonParser.parseString(jsonObject.get("roleIn"));
+		industryIn = GsonParser.parseString(jsonObject.get("industryIn"));
+		playbackModeIn = GsonParser.parseString(jsonObject.get("playbackModeIn"));
+		companyIn = GsonParser.parseString(jsonObject.get("companyIn"));
+		eventSessionContextIdIn = GsonParser.parseString(jsonObject.get("eventSessionContextIdIn"));
 
 	}
 
@@ -852,6 +978,13 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("virtualEventIdIn", this.virtualEventIdIn);
 		kparams.add("originIn", this.originIn);
 		kparams.add("uiConfIdIn", this.uiConfIdIn);
+		kparams.add("cuePointIdIn", this.cuePointIdIn);
+		kparams.add("contextIdIn", this.contextIdIn);
+		kparams.add("roleIn", this.roleIn);
+		kparams.add("industryIn", this.industryIn);
+		kparams.add("playbackModeIn", this.playbackModeIn);
+		kparams.add("companyIn", this.companyIn);
+		kparams.add("eventSessionContextIdIn", this.eventSessionContextIdIn);
 		return kparams;
 	}
 
@@ -913,6 +1046,13 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.virtualEventIdIn);
         dest.writeString(this.originIn);
         dest.writeString(this.uiConfIdIn);
+        dest.writeString(this.cuePointIdIn);
+        dest.writeString(this.contextIdIn);
+        dest.writeString(this.roleIn);
+        dest.writeString(this.industryIn);
+        dest.writeString(this.playbackModeIn);
+        dest.writeString(this.companyIn);
+        dest.writeString(this.eventSessionContextIdIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -960,6 +1100,13 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.virtualEventIdIn = in.readString();
         this.originIn = in.readString();
         this.uiConfIdIn = in.readString();
+        this.cuePointIdIn = in.readString();
+        this.contextIdIn = in.readString();
+        this.roleIn = in.readString();
+        this.industryIn = in.readString();
+        this.playbackModeIn = in.readString();
+        this.companyIn = in.readString();
+        this.eventSessionContextIdIn = in.readString();
     }
 }
 
