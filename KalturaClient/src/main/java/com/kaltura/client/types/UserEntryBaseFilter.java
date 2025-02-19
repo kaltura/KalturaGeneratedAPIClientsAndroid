@@ -30,7 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.enums.UserEntryExtendedStatus;
 import com.kaltura.client.enums.UserEntryStatus;
 import com.kaltura.client.enums.UserEntryType;
 import com.kaltura.client.utils.GsonParser;
@@ -63,9 +62,6 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 		String updatedAtLessThanOrEqual();
 		String updatedAtGreaterThanOrEqual();
 		String typeEqual();
-		String extendedStatusEqual();
-		String extendedStatusIn();
-		String extendedStatusNotIn();
 	}
 
 	private Integer idEqual;
@@ -83,9 +79,6 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 	private Long updatedAtLessThanOrEqual;
 	private Long updatedAtGreaterThanOrEqual;
 	private UserEntryType typeEqual;
-	private UserEntryExtendedStatus extendedStatusEqual;
-	private String extendedStatusIn;
-	private String extendedStatusNotIn;
 
 	// idEqual:
 	public Integer getIdEqual(){
@@ -267,42 +260,6 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 		setToken("typeEqual", multirequestToken);
 	}
 
-	// extendedStatusEqual:
-	public UserEntryExtendedStatus getExtendedStatusEqual(){
-		return this.extendedStatusEqual;
-	}
-	public void setExtendedStatusEqual(UserEntryExtendedStatus extendedStatusEqual){
-		this.extendedStatusEqual = extendedStatusEqual;
-	}
-
-	public void extendedStatusEqual(String multirequestToken){
-		setToken("extendedStatusEqual", multirequestToken);
-	}
-
-	// extendedStatusIn:
-	public String getExtendedStatusIn(){
-		return this.extendedStatusIn;
-	}
-	public void setExtendedStatusIn(String extendedStatusIn){
-		this.extendedStatusIn = extendedStatusIn;
-	}
-
-	public void extendedStatusIn(String multirequestToken){
-		setToken("extendedStatusIn", multirequestToken);
-	}
-
-	// extendedStatusNotIn:
-	public String getExtendedStatusNotIn(){
-		return this.extendedStatusNotIn;
-	}
-	public void setExtendedStatusNotIn(String extendedStatusNotIn){
-		this.extendedStatusNotIn = extendedStatusNotIn;
-	}
-
-	public void extendedStatusNotIn(String multirequestToken){
-		setToken("extendedStatusNotIn", multirequestToken);
-	}
-
 
 	public UserEntryBaseFilter() {
 		super();
@@ -329,9 +286,6 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 		updatedAtLessThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtLessThanOrEqual"));
 		updatedAtGreaterThanOrEqual = GsonParser.parseLong(jsonObject.get("updatedAtGreaterThanOrEqual"));
 		typeEqual = UserEntryType.get(GsonParser.parseString(jsonObject.get("typeEqual")));
-		extendedStatusEqual = UserEntryExtendedStatus.get(GsonParser.parseString(jsonObject.get("extendedStatusEqual")));
-		extendedStatusIn = GsonParser.parseString(jsonObject.get("extendedStatusIn"));
-		extendedStatusNotIn = GsonParser.parseString(jsonObject.get("extendedStatusNotIn"));
 
 	}
 
@@ -353,9 +307,6 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
 		kparams.add("updatedAtLessThanOrEqual", this.updatedAtLessThanOrEqual);
 		kparams.add("updatedAtGreaterThanOrEqual", this.updatedAtGreaterThanOrEqual);
 		kparams.add("typeEqual", this.typeEqual);
-		kparams.add("extendedStatusEqual", this.extendedStatusEqual);
-		kparams.add("extendedStatusIn", this.extendedStatusIn);
-		kparams.add("extendedStatusNotIn", this.extendedStatusNotIn);
 		return kparams;
 	}
 
@@ -378,9 +329,6 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
         dest.writeValue(this.updatedAtLessThanOrEqual);
         dest.writeValue(this.updatedAtGreaterThanOrEqual);
         dest.writeInt(this.typeEqual == null ? -1 : this.typeEqual.ordinal());
-        dest.writeInt(this.extendedStatusEqual == null ? -1 : this.extendedStatusEqual.ordinal());
-        dest.writeString(this.extendedStatusIn);
-        dest.writeString(this.extendedStatusNotIn);
     }
 
     public UserEntryBaseFilter(Parcel in) {
@@ -402,10 +350,6 @@ public abstract class UserEntryBaseFilter extends RelatedFilter {
         this.updatedAtGreaterThanOrEqual = (Long)in.readValue(Long.class.getClassLoader());
         int tmpTypeEqual = in.readInt();
         this.typeEqual = tmpTypeEqual == -1 ? null : UserEntryType.values()[tmpTypeEqual];
-        int tmpExtendedStatusEqual = in.readInt();
-        this.extendedStatusEqual = tmpExtendedStatusEqual == -1 ? null : UserEntryExtendedStatus.values()[tmpExtendedStatusEqual];
-        this.extendedStatusIn = in.readString();
-        this.extendedStatusNotIn = in.readString();
     }
 }
 

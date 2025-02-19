@@ -46,9 +46,11 @@ public class DeliveryProfileVodPackagerHls extends DeliveryProfileVodPackagerPla
 	
 	public interface Tokenizer extends DeliveryProfileVodPackagerPlayServer.Tokenizer {
 		String allowFairplayOffline();
+		String supportFmp4();
 	}
 
 	private Boolean allowFairplayOffline;
+	private Boolean supportFmp4;
 
 	// allowFairplayOffline:
 	public Boolean getAllowFairplayOffline(){
@@ -60,6 +62,18 @@ public class DeliveryProfileVodPackagerHls extends DeliveryProfileVodPackagerPla
 
 	public void allowFairplayOffline(String multirequestToken){
 		setToken("allowFairplayOffline", multirequestToken);
+	}
+
+	// supportFmp4:
+	public Boolean getSupportFmp4(){
+		return this.supportFmp4;
+	}
+	public void setSupportFmp4(Boolean supportFmp4){
+		this.supportFmp4 = supportFmp4;
+	}
+
+	public void supportFmp4(String multirequestToken){
+		setToken("supportFmp4", multirequestToken);
 	}
 
 
@@ -74,6 +88,7 @@ public class DeliveryProfileVodPackagerHls extends DeliveryProfileVodPackagerPla
 
 		// set members values:
 		allowFairplayOffline = GsonParser.parseBoolean(jsonObject.get("allowFairplayOffline"));
+		supportFmp4 = GsonParser.parseBoolean(jsonObject.get("supportFmp4"));
 
 	}
 
@@ -81,6 +96,7 @@ public class DeliveryProfileVodPackagerHls extends DeliveryProfileVodPackagerPla
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaDeliveryProfileVodPackagerHls");
 		kparams.add("allowFairplayOffline", this.allowFairplayOffline);
+		kparams.add("supportFmp4", this.supportFmp4);
 		return kparams;
 	}
 
@@ -101,11 +117,13 @@ public class DeliveryProfileVodPackagerHls extends DeliveryProfileVodPackagerPla
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.allowFairplayOffline);
+        dest.writeValue(this.supportFmp4);
     }
 
     public DeliveryProfileVodPackagerHls(Parcel in) {
         super(in);
         this.allowFairplayOffline = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.supportFmp4 = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
