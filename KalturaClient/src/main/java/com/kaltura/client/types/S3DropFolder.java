@@ -49,12 +49,16 @@ public class S3DropFolder extends DropFolder {
 		String s3Region();
 		String s3UserId();
 		String s3Password();
+		String useS3Arn();
+		String s3Arn();
 	}
 
 	private String s3Host;
 	private String s3Region;
 	private String s3UserId;
 	private String s3Password;
+	private Boolean useS3Arn;
+	private String s3Arn;
 
 	// s3Host:
 	public String getS3Host(){
@@ -104,6 +108,22 @@ public class S3DropFolder extends DropFolder {
 		setToken("s3Password", multirequestToken);
 	}
 
+	// useS3Arn:
+	public Boolean getUseS3Arn(){
+		return this.useS3Arn;
+	}
+	public void setUseS3Arn(Boolean useS3Arn){
+		this.useS3Arn = useS3Arn;
+	}
+
+	public void useS3Arn(String multirequestToken){
+		setToken("useS3Arn", multirequestToken);
+	}
+
+	// s3Arn:
+	public String getS3Arn(){
+		return this.s3Arn;
+	}
 
 	public S3DropFolder() {
 		super();
@@ -119,6 +139,8 @@ public class S3DropFolder extends DropFolder {
 		s3Region = GsonParser.parseString(jsonObject.get("s3Region"));
 		s3UserId = GsonParser.parseString(jsonObject.get("s3UserId"));
 		s3Password = GsonParser.parseString(jsonObject.get("s3Password"));
+		useS3Arn = GsonParser.parseBoolean(jsonObject.get("useS3Arn"));
+		s3Arn = GsonParser.parseString(jsonObject.get("s3Arn"));
 
 	}
 
@@ -129,6 +151,7 @@ public class S3DropFolder extends DropFolder {
 		kparams.add("s3Region", this.s3Region);
 		kparams.add("s3UserId", this.s3UserId);
 		kparams.add("s3Password", this.s3Password);
+		kparams.add("useS3Arn", this.useS3Arn);
 		return kparams;
 	}
 
@@ -152,6 +175,8 @@ public class S3DropFolder extends DropFolder {
         dest.writeString(this.s3Region);
         dest.writeString(this.s3UserId);
         dest.writeString(this.s3Password);
+        dest.writeValue(this.useS3Arn);
+        dest.writeString(this.s3Arn);
     }
 
     public S3DropFolder(Parcel in) {
@@ -160,6 +185,8 @@ public class S3DropFolder extends DropFolder {
         this.s3Region = in.readString();
         this.s3UserId = in.readString();
         this.s3Password = in.readString();
+        this.useS3Arn = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.s3Arn = in.readString();
     }
 }
 

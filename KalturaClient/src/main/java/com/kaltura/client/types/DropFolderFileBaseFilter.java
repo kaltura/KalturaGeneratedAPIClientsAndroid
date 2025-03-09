@@ -49,6 +49,7 @@ public abstract class DropFolderFileBaseFilter extends Filter {
 	public interface Tokenizer extends Filter.Tokenizer {
 		String idEqual();
 		String idIn();
+		String idGreaterThanOrEqual();
 		String partnerIdEqual();
 		String partnerIdIn();
 		String dropFolderIdEqual();
@@ -78,6 +79,7 @@ public abstract class DropFolderFileBaseFilter extends Filter {
 
 	private Integer idEqual;
 	private String idIn;
+	private Integer idGreaterThanOrEqual;
 	private Integer partnerIdEqual;
 	private String partnerIdIn;
 	private Integer dropFolderIdEqual;
@@ -126,6 +128,18 @@ public abstract class DropFolderFileBaseFilter extends Filter {
 
 	public void idIn(String multirequestToken){
 		setToken("idIn", multirequestToken);
+	}
+
+	// idGreaterThanOrEqual:
+	public Integer getIdGreaterThanOrEqual(){
+		return this.idGreaterThanOrEqual;
+	}
+	public void setIdGreaterThanOrEqual(Integer idGreaterThanOrEqual){
+		this.idGreaterThanOrEqual = idGreaterThanOrEqual;
+	}
+
+	public void idGreaterThanOrEqual(String multirequestToken){
+		setToken("idGreaterThanOrEqual", multirequestToken);
 	}
 
 	// partnerIdEqual:
@@ -441,6 +455,7 @@ public abstract class DropFolderFileBaseFilter extends Filter {
 		// set members values:
 		idEqual = GsonParser.parseInt(jsonObject.get("idEqual"));
 		idIn = GsonParser.parseString(jsonObject.get("idIn"));
+		idGreaterThanOrEqual = GsonParser.parseInt(jsonObject.get("idGreaterThanOrEqual"));
 		partnerIdEqual = GsonParser.parseInt(jsonObject.get("partnerIdEqual"));
 		partnerIdIn = GsonParser.parseString(jsonObject.get("partnerIdIn"));
 		dropFolderIdEqual = GsonParser.parseInt(jsonObject.get("dropFolderIdEqual"));
@@ -474,6 +489,7 @@ public abstract class DropFolderFileBaseFilter extends Filter {
 		kparams.add("objectType", "KalturaDropFolderFileBaseFilter");
 		kparams.add("idEqual", this.idEqual);
 		kparams.add("idIn", this.idIn);
+		kparams.add("idGreaterThanOrEqual", this.idGreaterThanOrEqual);
 		kparams.add("partnerIdEqual", this.partnerIdEqual);
 		kparams.add("partnerIdIn", this.partnerIdIn);
 		kparams.add("dropFolderIdEqual", this.dropFolderIdEqual);
@@ -508,6 +524,7 @@ public abstract class DropFolderFileBaseFilter extends Filter {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.idEqual);
         dest.writeString(this.idIn);
+        dest.writeValue(this.idGreaterThanOrEqual);
         dest.writeValue(this.partnerIdEqual);
         dest.writeString(this.partnerIdIn);
         dest.writeValue(this.dropFolderIdEqual);
@@ -539,6 +556,7 @@ public abstract class DropFolderFileBaseFilter extends Filter {
         super(in);
         this.idEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.idIn = in.readString();
+        this.idGreaterThanOrEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.partnerIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());
         this.partnerIdIn = in.readString();
         this.dropFolderIdEqual = (Integer)in.readValue(Integer.class.getClassLoader());

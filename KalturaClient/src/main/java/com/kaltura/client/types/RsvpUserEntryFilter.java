@@ -25,7 +25,12 @@
 //
 // @ignore
 // ===================================================================================================
-package com.kaltura.client.enums;
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
  * This class was generated using exec.php
@@ -33,42 +38,45 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum UserEntryType implements EnumAsString {
-	PERMISSION_LEVEL("entryPermissionLevel.PERMISSION_LEVEL"),
-	QUIZ("quiz.QUIZ"),
-	REGISTRATION("registration.REGISTRATION"),
-	RSVP("rsvp.RSVP"),
-	VIEW_HISTORY("viewHistory.VIEW_HISTORY"),
-	WATCH_LATER("watchLater.WATCH_LATER");
 
-	private String value;
-
-	UserEntryType(String value) {
-		this.value = value;
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(RsvpUserEntryFilter.Tokenizer.class)
+public class RsvpUserEntryFilter extends RsvpUserEntryBaseFilter {
+	
+	public interface Tokenizer extends RsvpUserEntryBaseFilter.Tokenizer {
 	}
 
-	@Override
-	public String getValue() {
-		return this.value;
+
+
+	public RsvpUserEntryFilter() {
+		super();
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public RsvpUserEntryFilter(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
 	}
 
-	public static UserEntryType get(String value) {
-		if(value == null)
-		{
-			return null;
-		}
-		
-		// goes over UserEntryType defined values and compare the inner value with the given one:
-		for(UserEntryType item: values()) {
-			if(item.getValue().equals(value)) {
-				return item;
-			}
-		}
-		// in case the requested value was not found in the enum values, we return the first item as default.
-		return UserEntryType.values().length > 0 ? UserEntryType.values()[0]: null;
-   }
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaRsvpUserEntryFilter");
+		return kparams;
+	}
+
+
+    public static final Creator<RsvpUserEntryFilter> CREATOR = new Creator<RsvpUserEntryFilter>() {
+        @Override
+        public RsvpUserEntryFilter createFromParcel(Parcel source) {
+            return new RsvpUserEntryFilter(source);
+        }
+
+        @Override
+        public RsvpUserEntryFilter[] newArray(int size) {
+            return new RsvpUserEntryFilter[size];
+        }
+    };
+
+    public RsvpUserEntryFilter(Parcel in) {
+        super(in);
+    }
 }
+
