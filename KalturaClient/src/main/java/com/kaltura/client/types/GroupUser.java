@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.GroupType;
 import com.kaltura.client.enums.GroupUserCreationMode;
 import com.kaltura.client.enums.GroupUserRole;
 import com.kaltura.client.enums.GroupUserStatus;
@@ -58,6 +59,7 @@ public class GroupUser extends ObjectBase {
 		String updatedAt();
 		String creationMode();
 		String userRole();
+		String groupType();
 	}
 
 	private String id;
@@ -75,6 +77,7 @@ public class GroupUser extends ObjectBase {
 	private Long updatedAt;
 	private GroupUserCreationMode creationMode;
 	private GroupUserRole userRole;
+	private GroupType groupType;
 
 	// id:
 	public String getId(){
@@ -144,6 +147,10 @@ public class GroupUser extends ObjectBase {
 		setToken("userRole", multirequestToken);
 	}
 
+	// groupType:
+	public GroupType getGroupType(){
+		return this.groupType;
+	}
 
 	public GroupUser() {
 		super();
@@ -164,6 +171,7 @@ public class GroupUser extends ObjectBase {
 		updatedAt = GsonParser.parseLong(jsonObject.get("updatedAt"));
 		creationMode = GroupUserCreationMode.get(GsonParser.parseInt(jsonObject.get("creationMode")));
 		userRole = GroupUserRole.get(GsonParser.parseInt(jsonObject.get("userRole")));
+		groupType = GroupType.get(GsonParser.parseInt(jsonObject.get("groupType")));
 
 	}
 
@@ -202,6 +210,7 @@ public class GroupUser extends ObjectBase {
         dest.writeValue(this.updatedAt);
         dest.writeInt(this.creationMode == null ? -1 : this.creationMode.ordinal());
         dest.writeInt(this.userRole == null ? -1 : this.userRole.ordinal());
+        dest.writeInt(this.groupType == null ? -1 : this.groupType.ordinal());
     }
 
     public GroupUser(Parcel in) {
@@ -218,6 +227,8 @@ public class GroupUser extends ObjectBase {
         this.creationMode = tmpCreationMode == -1 ? null : GroupUserCreationMode.values()[tmpCreationMode];
         int tmpUserRole = in.readInt();
         this.userRole = tmpUserRole == -1 ? null : GroupUserRole.values()[tmpUserRole];
+        int tmpGroupType = in.readInt();
+        this.groupType = tmpGroupType == -1 ? null : GroupType.values()[tmpGroupType];
     }
 }
 

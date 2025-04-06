@@ -33,14 +33,13 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum UserType implements EnumAsInt {
-	USER(0),
+public enum GroupType implements EnumAsInt {
 	GROUP(1),
 	APPLICATIVE_GROUP(2);
 
 	private int value;
 
-	UserType(int value) {
+	GroupType(int value) {
 		this.value = value;
 	}
 
@@ -53,19 +52,19 @@ public enum UserType implements EnumAsInt {
 		this.value = value;
 	}
 
-	public static UserType get(Integer value) {
+	public static GroupType get(Integer value) {
 		if(value == null)
 		{
 			return null;
 		}
 		
-		// goes over UserType defined values and compare the inner value with the given one:
-		for(UserType item: values()) {
+		// goes over GroupType defined values and compare the inner value with the given one:
+		for(GroupType item: values()) {
 			if(item.getValue() == value) {
 				return item;
 			}
 		}
 		// in case the requested value was not found in the enum values, we return the first item as default.
-		return UserType.values().length > 0 ? UserType.values()[0]: null;
+		return GroupType.values().length > 0 ? GroupType.values()[0]: null;
    }
 }

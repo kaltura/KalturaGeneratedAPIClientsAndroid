@@ -30,6 +30,8 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.GroupType;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -44,8 +46,22 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class GroupUserFilter extends GroupUserBaseFilter {
 	
 	public interface Tokenizer extends GroupUserBaseFilter.Tokenizer {
+		String groupType();
 	}
 
+	private GroupType groupType;
+
+	// groupType:
+	public GroupType getGroupType(){
+		return this.groupType;
+	}
+	public void setGroupType(GroupType groupType){
+		this.groupType = groupType;
+	}
+
+	public void groupType(String multirequestToken){
+		setToken("groupType", multirequestToken);
+	}
 
 
 	public GroupUserFilter() {
@@ -54,11 +70,18 @@ public class GroupUserFilter extends GroupUserBaseFilter {
 
 	public GroupUserFilter(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		groupType = GroupType.get(GsonParser.parseInt(jsonObject.get("groupType")));
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaGroupUserFilter");
+		kparams.add("groupType", this.groupType);
 		return kparams;
 	}
 
@@ -75,8 +98,16 @@ public class GroupUserFilter extends GroupUserBaseFilter {
         }
     };
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeInt(this.groupType == null ? -1 : this.groupType.ordinal());
+    }
+
     public GroupUserFilter(Parcel in) {
         super(in);
+        int tmpGroupType = in.readInt();
+        this.groupType = tmpGroupType == -1 ? null : GroupType.values()[tmpGroupType];
     }
 }
 
