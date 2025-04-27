@@ -75,6 +75,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		String createdBy();
 		String notes();
 		String partnerId();
+		String defaultReachProfileId();
 		String adminTagsToExclude();
 	}
 
@@ -103,6 +104,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
 	private String createdBy;
 	private String notes;
 	private Integer partnerId;
+	private Integer defaultReachProfileId;
 	private String adminTagsToExclude;
 
 	// id:
@@ -313,6 +315,18 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		setToken("partnerId", multirequestToken);
 	}
 
+	// defaultReachProfileId:
+	public Integer getDefaultReachProfileId(){
+		return this.defaultReachProfileId;
+	}
+	public void setDefaultReachProfileId(Integer defaultReachProfileId){
+		this.defaultReachProfileId = defaultReachProfileId;
+	}
+
+	public void defaultReachProfileId(String multirequestToken){
+		setToken("defaultReachProfileId", multirequestToken);
+	}
+
 	// adminTagsToExclude:
 	public String getAdminTagsToExclude(){
 		return this.adminTagsToExclude;
@@ -357,6 +371,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		createdBy = GsonParser.parseString(jsonObject.get("createdBy"));
 		notes = GsonParser.parseString(jsonObject.get("notes"));
 		partnerId = GsonParser.parseInt(jsonObject.get("partnerId"));
+		defaultReachProfileId = GsonParser.parseInt(jsonObject.get("defaultReachProfileId"));
 		adminTagsToExclude = GsonParser.parseString(jsonObject.get("adminTagsToExclude"));
 
 	}
@@ -380,6 +395,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		kparams.add("createdBy", this.createdBy);
 		kparams.add("notes", this.notes);
 		kparams.add("partnerId", this.partnerId);
+		kparams.add("defaultReachProfileId", this.defaultReachProfileId);
 		kparams.add("adminTagsToExclude", this.adminTagsToExclude);
 		return kparams;
 	}
@@ -409,6 +425,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
         dest.writeString(this.createdBy);
         dest.writeString(this.notes);
         dest.writeValue(this.partnerId);
+        dest.writeValue(this.defaultReachProfileId);
         dest.writeString(this.adminTagsToExclude);
     }
 
@@ -442,6 +459,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
         this.createdBy = in.readString();
         this.notes = in.readString();
         this.partnerId = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.defaultReachProfileId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.adminTagsToExclude = in.readString();
     }
 }

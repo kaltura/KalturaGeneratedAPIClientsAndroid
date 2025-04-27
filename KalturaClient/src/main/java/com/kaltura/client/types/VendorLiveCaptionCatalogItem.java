@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -44,8 +45,42 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public class VendorLiveCaptionCatalogItem extends VendorLiveCatalogItem {
 	
 	public interface Tokenizer extends VendorLiveCatalogItem.Tokenizer {
+		String startTimeBuffer();
+		String endTimeBuffer();
 	}
 
+	/**
+	 * How long before the live stream start should service activate? (in secs)
+	 */
+	private Integer startTimeBuffer;
+	/**
+	 * How long after the live stream end should service de-activate? (in secs)
+	 */
+	private Integer endTimeBuffer;
+
+	// startTimeBuffer:
+	public Integer getStartTimeBuffer(){
+		return this.startTimeBuffer;
+	}
+	public void setStartTimeBuffer(Integer startTimeBuffer){
+		this.startTimeBuffer = startTimeBuffer;
+	}
+
+	public void startTimeBuffer(String multirequestToken){
+		setToken("startTimeBuffer", multirequestToken);
+	}
+
+	// endTimeBuffer:
+	public Integer getEndTimeBuffer(){
+		return this.endTimeBuffer;
+	}
+	public void setEndTimeBuffer(Integer endTimeBuffer){
+		this.endTimeBuffer = endTimeBuffer;
+	}
+
+	public void endTimeBuffer(String multirequestToken){
+		setToken("endTimeBuffer", multirequestToken);
+	}
 
 
 	public VendorLiveCaptionCatalogItem() {
@@ -54,11 +89,20 @@ public class VendorLiveCaptionCatalogItem extends VendorLiveCatalogItem {
 
 	public VendorLiveCaptionCatalogItem(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		startTimeBuffer = GsonParser.parseInt(jsonObject.get("startTimeBuffer"));
+		endTimeBuffer = GsonParser.parseInt(jsonObject.get("endTimeBuffer"));
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaVendorLiveCaptionCatalogItem");
+		kparams.add("startTimeBuffer", this.startTimeBuffer);
+		kparams.add("endTimeBuffer", this.endTimeBuffer);
 		return kparams;
 	}
 
@@ -75,8 +119,17 @@ public class VendorLiveCaptionCatalogItem extends VendorLiveCatalogItem {
         }
     };
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeValue(this.startTimeBuffer);
+        dest.writeValue(this.endTimeBuffer);
+    }
+
     public VendorLiveCaptionCatalogItem(Parcel in) {
         super(in);
+        this.startTimeBuffer = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.endTimeBuffer = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 

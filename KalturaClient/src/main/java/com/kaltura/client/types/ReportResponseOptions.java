@@ -48,10 +48,12 @@ public class ReportResponseOptions extends ObjectBase {
 	public interface Tokenizer extends ObjectBase.Tokenizer {
 		String delimiter();
 		String skipEmptyDates();
+		String useFriendlyHeadersNames();
 	}
 
 	private String delimiter;
 	private Boolean skipEmptyDates;
+	private Boolean useFriendlyHeadersNames;
 
 	// delimiter:
 	public String getDelimiter(){
@@ -77,6 +79,18 @@ public class ReportResponseOptions extends ObjectBase {
 		setToken("skipEmptyDates", multirequestToken);
 	}
 
+	// useFriendlyHeadersNames:
+	public Boolean getUseFriendlyHeadersNames(){
+		return this.useFriendlyHeadersNames;
+	}
+	public void setUseFriendlyHeadersNames(Boolean useFriendlyHeadersNames){
+		this.useFriendlyHeadersNames = useFriendlyHeadersNames;
+	}
+
+	public void useFriendlyHeadersNames(String multirequestToken){
+		setToken("useFriendlyHeadersNames", multirequestToken);
+	}
+
 
 	public ReportResponseOptions() {
 		super();
@@ -90,6 +104,7 @@ public class ReportResponseOptions extends ObjectBase {
 		// set members values:
 		delimiter = GsonParser.parseString(jsonObject.get("delimiter"));
 		skipEmptyDates = GsonParser.parseBoolean(jsonObject.get("skipEmptyDates"));
+		useFriendlyHeadersNames = GsonParser.parseBoolean(jsonObject.get("useFriendlyHeadersNames"));
 
 	}
 
@@ -98,6 +113,7 @@ public class ReportResponseOptions extends ObjectBase {
 		kparams.add("objectType", "KalturaReportResponseOptions");
 		kparams.add("delimiter", this.delimiter);
 		kparams.add("skipEmptyDates", this.skipEmptyDates);
+		kparams.add("useFriendlyHeadersNames", this.useFriendlyHeadersNames);
 		return kparams;
 	}
 
@@ -119,12 +135,14 @@ public class ReportResponseOptions extends ObjectBase {
         super.writeToParcel(dest, flags);
         dest.writeString(this.delimiter);
         dest.writeValue(this.skipEmptyDates);
+        dest.writeValue(this.useFriendlyHeadersNames);
     }
 
     public ReportResponseOptions(Parcel in) {
         super(in);
         this.delimiter = in.readString();
         this.skipEmptyDates = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.useFriendlyHeadersNames = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
