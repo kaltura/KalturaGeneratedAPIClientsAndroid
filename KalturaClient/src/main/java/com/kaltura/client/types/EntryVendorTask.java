@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.EntryObjectType;
 import com.kaltura.client.enums.EntryVendorTaskCreationMode;
 import com.kaltura.client.enums.EntryVendorTaskStatus;
 import com.kaltura.client.enums.VendorServiceFeature;
@@ -65,6 +66,7 @@ public class EntryVendorTask extends ObjectBase {
 		String catalogItemId();
 		String price();
 		String userId();
+		String entryObjectType();
 		String moderatingUser();
 		String errDescription();
 		String accessKey();
@@ -109,6 +111,7 @@ public class EntryVendorTask extends ObjectBase {
 	 * The ID of the user who created this task
 	 */
 	private String userId;
+	private EntryObjectType entryObjectType;
 	/**
 	 * The user ID that approved this task for execution (in case moderation is
 	  requested)
@@ -248,6 +251,18 @@ public class EntryVendorTask extends ObjectBase {
 	public String getUserId(){
 		return this.userId;
 	}
+	// entryObjectType:
+	public EntryObjectType getEntryObjectType(){
+		return this.entryObjectType;
+	}
+	public void setEntryObjectType(EntryObjectType entryObjectType){
+		this.entryObjectType = entryObjectType;
+	}
+
+	public void entryObjectType(String multirequestToken){
+		setToken("entryObjectType", multirequestToken);
+	}
+
 	// moderatingUser:
 	public String getModeratingUser(){
 		return this.moderatingUser;
@@ -400,6 +415,7 @@ public class EntryVendorTask extends ObjectBase {
 		catalogItemId = GsonParser.parseInt(jsonObject.get("catalogItemId"));
 		price = GsonParser.parseDouble(jsonObject.get("price"));
 		userId = GsonParser.parseString(jsonObject.get("userId"));
+		entryObjectType = EntryObjectType.get(GsonParser.parseInt(jsonObject.get("entryObjectType")));
 		moderatingUser = GsonParser.parseString(jsonObject.get("moderatingUser"));
 		errDescription = GsonParser.parseString(jsonObject.get("errDescription"));
 		accessKey = GsonParser.parseString(jsonObject.get("accessKey"));
@@ -427,6 +443,7 @@ public class EntryVendorTask extends ObjectBase {
 		kparams.add("status", this.status);
 		kparams.add("reachProfileId", this.reachProfileId);
 		kparams.add("catalogItemId", this.catalogItemId);
+		kparams.add("entryObjectType", this.entryObjectType);
 		kparams.add("errDescription", this.errDescription);
 		kparams.add("notes", this.notes);
 		kparams.add("context", this.context);
@@ -467,6 +484,7 @@ public class EntryVendorTask extends ObjectBase {
         dest.writeValue(this.catalogItemId);
         dest.writeValue(this.price);
         dest.writeString(this.userId);
+        dest.writeInt(this.entryObjectType == null ? -1 : this.entryObjectType.ordinal());
         dest.writeString(this.moderatingUser);
         dest.writeString(this.errDescription);
         dest.writeString(this.accessKey);
@@ -502,6 +520,8 @@ public class EntryVendorTask extends ObjectBase {
         this.catalogItemId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.price = (Double)in.readValue(Double.class.getClassLoader());
         this.userId = in.readString();
+        int tmpEntryObjectType = in.readInt();
+        this.entryObjectType = tmpEntryObjectType == -1 ? null : EntryObjectType.values()[tmpEntryObjectType];
         this.moderatingUser = in.readString();
         this.errDescription = in.readString();
         this.accessKey = in.readString();
