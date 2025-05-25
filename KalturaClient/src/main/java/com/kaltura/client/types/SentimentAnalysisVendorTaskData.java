@@ -30,7 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.types.ObjectBase;
+import com.kaltura.client.enums.LanguageCode;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -42,95 +42,75 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(ReportFilter.Tokenizer.class)
-public class ReportFilter extends ObjectBase {
+@MultiRequestBuilder.Tokenizer(SentimentAnalysisVendorTaskData.Tokenizer.class)
+public class SentimentAnalysisVendorTaskData extends VendorTaskData {
 	
-	public interface Tokenizer extends ObjectBase.Tokenizer {
-		String dimension();
-		String values();
+	public interface Tokenizer extends VendorTaskData.Tokenizer {
+		String language();
 	}
 
 	/**
-	 * The dimension whose values should be filtered
+	 * Language code
 	 */
-	private String dimension;
-	/**
-	 * The (comma separated) values to include in the filter
-	 */
-	private String values;
+	private LanguageCode language;
 
-	// dimension:
-	public String getDimension(){
-		return this.dimension;
+	// language:
+	public LanguageCode getLanguage(){
+		return this.language;
 	}
-	public void setDimension(String dimension){
-		this.dimension = dimension;
+	public void setLanguage(LanguageCode language){
+		this.language = language;
 	}
 
-	public void dimension(String multirequestToken){
-		setToken("dimension", multirequestToken);
-	}
-
-	// values:
-	public String getValues(){
-		return this.values;
-	}
-	public void setValues(String values){
-		this.values = values;
-	}
-
-	public void values(String multirequestToken){
-		setToken("values", multirequestToken);
+	public void language(String multirequestToken){
+		setToken("language", multirequestToken);
 	}
 
 
-	public ReportFilter() {
+	public SentimentAnalysisVendorTaskData() {
 		super();
 	}
 
-	public ReportFilter(JsonObject jsonObject) throws APIException {
+	public SentimentAnalysisVendorTaskData(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		dimension = GsonParser.parseString(jsonObject.get("dimension"));
-		values = GsonParser.parseString(jsonObject.get("values"));
+		language = LanguageCode.get(GsonParser.parseString(jsonObject.get("language")));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaReportFilter");
-		kparams.add("dimension", this.dimension);
-		kparams.add("values", this.values);
+		kparams.add("objectType", "KalturaSentimentAnalysisVendorTaskData");
+		kparams.add("language", this.language);
 		return kparams;
 	}
 
 
-    public static final Creator<ReportFilter> CREATOR = new Creator<ReportFilter>() {
+    public static final Creator<SentimentAnalysisVendorTaskData> CREATOR = new Creator<SentimentAnalysisVendorTaskData>() {
         @Override
-        public ReportFilter createFromParcel(Parcel source) {
-            return new ReportFilter(source);
+        public SentimentAnalysisVendorTaskData createFromParcel(Parcel source) {
+            return new SentimentAnalysisVendorTaskData(source);
         }
 
         @Override
-        public ReportFilter[] newArray(int size) {
-            return new ReportFilter[size];
+        public SentimentAnalysisVendorTaskData[] newArray(int size) {
+            return new SentimentAnalysisVendorTaskData[size];
         }
     };
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
-        dest.writeString(this.dimension);
-        dest.writeString(this.values);
+        dest.writeInt(this.language == null ? -1 : this.language.ordinal());
     }
 
-    public ReportFilter(Parcel in) {
+    public SentimentAnalysisVendorTaskData(Parcel in) {
         super(in);
-        this.dimension = in.readString();
-        this.values = in.readString();
+        int tmpLanguage = in.readInt();
+        this.language = tmpLanguage == -1 ? null : LanguageCode.values()[tmpLanguage];
     }
 }
 

@@ -51,12 +51,16 @@ public abstract class ESearchParams extends ObjectBase {
 		String objectId();
 		ESearchOrderBy.Tokenizer orderBy();
 		String ignoreSynonym();
+		String objectIds();
+		String objectIdsNotIn();
 	}
 
 	private String objectStatuses;
 	private String objectId;
 	private ESearchOrderBy orderBy;
 	private Boolean ignoreSynonym;
+	private String objectIds;
+	private Boolean objectIdsNotIn;
 
 	// objectStatuses:
 	public String getObjectStatuses(){
@@ -102,6 +106,30 @@ public abstract class ESearchParams extends ObjectBase {
 		setToken("ignoreSynonym", multirequestToken);
 	}
 
+	// objectIds:
+	public String getObjectIds(){
+		return this.objectIds;
+	}
+	public void setObjectIds(String objectIds){
+		this.objectIds = objectIds;
+	}
+
+	public void objectIds(String multirequestToken){
+		setToken("objectIds", multirequestToken);
+	}
+
+	// objectIdsNotIn:
+	public Boolean getObjectIdsNotIn(){
+		return this.objectIdsNotIn;
+	}
+	public void setObjectIdsNotIn(Boolean objectIdsNotIn){
+		this.objectIdsNotIn = objectIdsNotIn;
+	}
+
+	public void objectIdsNotIn(String multirequestToken){
+		setToken("objectIdsNotIn", multirequestToken);
+	}
+
 
 	public ESearchParams() {
 		super();
@@ -117,6 +145,8 @@ public abstract class ESearchParams extends ObjectBase {
 		objectId = GsonParser.parseString(jsonObject.get("objectId"));
 		orderBy = GsonParser.parseObject(jsonObject.getAsJsonObject("orderBy"), ESearchOrderBy.class);
 		ignoreSynonym = GsonParser.parseBoolean(jsonObject.get("ignoreSynonym"));
+		objectIds = GsonParser.parseString(jsonObject.get("objectIds"));
+		objectIdsNotIn = GsonParser.parseBoolean(jsonObject.get("objectIdsNotIn"));
 
 	}
 
@@ -127,6 +157,8 @@ public abstract class ESearchParams extends ObjectBase {
 		kparams.add("objectId", this.objectId);
 		kparams.add("orderBy", this.orderBy);
 		kparams.add("ignoreSynonym", this.ignoreSynonym);
+		kparams.add("objectIds", this.objectIds);
+		kparams.add("objectIdsNotIn", this.objectIdsNotIn);
 		return kparams;
 	}
 
@@ -138,6 +170,8 @@ public abstract class ESearchParams extends ObjectBase {
         dest.writeString(this.objectId);
         dest.writeParcelable(this.orderBy, flags);
         dest.writeValue(this.ignoreSynonym);
+        dest.writeString(this.objectIds);
+        dest.writeValue(this.objectIdsNotIn);
     }
 
     public ESearchParams(Parcel in) {
@@ -146,6 +180,8 @@ public abstract class ESearchParams extends ObjectBase {
         this.objectId = in.readString();
         this.orderBy = in.readParcelable(ESearchOrderBy.class.getClassLoader());
         this.ignoreSynonym = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.objectIds = in.readString();
+        this.objectIdsNotIn = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

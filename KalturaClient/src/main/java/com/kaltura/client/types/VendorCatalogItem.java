@@ -68,7 +68,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		String engineType();
 		String sourceLanguage();
 		String allowResubmission();
-		String requiresOverages();
+		String payPerUse();
 		String vendorData();
 		String stage();
 		String lastBulkUpdateId();
@@ -98,7 +98,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
 	private ReachVendorEngineType engineType;
 	private CatalogItemLanguage sourceLanguage;
 	private Boolean allowResubmission;
-	private Boolean requiresOverages;
+	private Boolean payPerUse;
 	private String vendorData;
 	private VendorCatalogItemStage stage;
 	private Integer lastBulkUpdateId;
@@ -233,16 +233,16 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		setToken("allowResubmission", multirequestToken);
 	}
 
-	// requiresOverages:
-	public Boolean getRequiresOverages(){
-		return this.requiresOverages;
+	// payPerUse:
+	public Boolean getPayPerUse(){
+		return this.payPerUse;
 	}
-	public void setRequiresOverages(Boolean requiresOverages){
-		this.requiresOverages = requiresOverages;
+	public void setPayPerUse(Boolean payPerUse){
+		this.payPerUse = payPerUse;
 	}
 
-	public void requiresOverages(String multirequestToken){
-		setToken("requiresOverages", multirequestToken);
+	public void payPerUse(String multirequestToken){
+		setToken("payPerUse", multirequestToken);
 	}
 
 	// vendorData:
@@ -378,7 +378,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		engineType = ReachVendorEngineType.get(GsonParser.parseString(jsonObject.get("engineType")));
 		sourceLanguage = CatalogItemLanguage.get(GsonParser.parseString(jsonObject.get("sourceLanguage")));
 		allowResubmission = GsonParser.parseBoolean(jsonObject.get("allowResubmission"));
-		requiresOverages = GsonParser.parseBoolean(jsonObject.get("requiresOverages"));
+		payPerUse = GsonParser.parseBoolean(jsonObject.get("payPerUse"));
 		vendorData = GsonParser.parseString(jsonObject.get("vendorData"));
 		stage = VendorCatalogItemStage.get(GsonParser.parseInt(jsonObject.get("stage")));
 		lastBulkUpdateId = GsonParser.parseInt(jsonObject.get("lastBulkUpdateId"));
@@ -403,7 +403,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
 		kparams.add("engineType", this.engineType);
 		kparams.add("sourceLanguage", this.sourceLanguage);
 		kparams.add("allowResubmission", this.allowResubmission);
-		kparams.add("requiresOverages", this.requiresOverages);
+		kparams.add("payPerUse", this.payPerUse);
 		kparams.add("vendorData", this.vendorData);
 		kparams.add("stage", this.stage);
 		kparams.add("lastBulkUpdateId", this.lastBulkUpdateId);
@@ -434,7 +434,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
         dest.writeInt(this.engineType == null ? -1 : this.engineType.ordinal());
         dest.writeInt(this.sourceLanguage == null ? -1 : this.sourceLanguage.ordinal());
         dest.writeValue(this.allowResubmission);
-        dest.writeValue(this.requiresOverages);
+        dest.writeValue(this.payPerUse);
         dest.writeString(this.vendorData);
         dest.writeInt(this.stage == null ? -1 : this.stage.ordinal());
         dest.writeValue(this.lastBulkUpdateId);
@@ -468,7 +468,7 @@ public abstract class VendorCatalogItem extends ObjectBase {
         int tmpSourceLanguage = in.readInt();
         this.sourceLanguage = tmpSourceLanguage == -1 ? null : CatalogItemLanguage.values()[tmpSourceLanguage];
         this.allowResubmission = (Boolean)in.readValue(Boolean.class.getClassLoader());
-        this.requiresOverages = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.payPerUse = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.vendorData = in.readString();
         int tmpStage = in.readInt();
         this.stage = tmpStage == -1 ? null : VendorCatalogItemStage.values()[tmpStage];
