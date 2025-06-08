@@ -25,7 +25,12 @@
 //
 // @ignore
 // ===================================================================================================
-package com.kaltura.client.enums;
+package com.kaltura.client.types;
+
+import android.os.Parcel;
+import com.google.gson.JsonObject;
+import com.kaltura.client.Params;
+import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
  * This class was generated using exec.php
@@ -33,41 +38,45 @@ package com.kaltura.client.enums;
  * 
  * MANUAL CHANGES TO THIS CLASS WILL BE OVERWRITTEN.
  */
-public enum AttachmentType implements EnumAsString {
-	TEXT("1"),
-	MEDIA("2"),
-	DOCUMENT("3"),
-	JSON("4"),
-	MARKDOWN("5");
 
-	private String value;
-
-	AttachmentType(String value) {
-		this.value = value;
+@SuppressWarnings("serial")
+@MultiRequestBuilder.Tokenizer(VendorDocumentEnrichmentCatalogItemFilter.Tokenizer.class)
+public class VendorDocumentEnrichmentCatalogItemFilter extends VendorCatalogItemFilter {
+	
+	public interface Tokenizer extends VendorCatalogItemFilter.Tokenizer {
 	}
 
-	@Override
-	public String getValue() {
-		return this.value;
+
+
+	public VendorDocumentEnrichmentCatalogItemFilter() {
+		super();
 	}
 
-	public void setValue(String value) {
-		this.value = value;
+	public VendorDocumentEnrichmentCatalogItemFilter(JsonObject jsonObject) throws APIException {
+		super(jsonObject);
 	}
 
-	public static AttachmentType get(String value) {
-		if(value == null)
-		{
-			return null;
-		}
-		
-		// goes over AttachmentType defined values and compare the inner value with the given one:
-		for(AttachmentType item: values()) {
-			if(item.getValue().equals(value)) {
-				return item;
-			}
-		}
-		// in case the requested value was not found in the enum values, we return the first item as default.
-		return AttachmentType.values().length > 0 ? AttachmentType.values()[0]: null;
-   }
+	public Params toParams() {
+		Params kparams = super.toParams();
+		kparams.add("objectType", "KalturaVendorDocumentEnrichmentCatalogItemFilter");
+		return kparams;
+	}
+
+
+    public static final Creator<VendorDocumentEnrichmentCatalogItemFilter> CREATOR = new Creator<VendorDocumentEnrichmentCatalogItemFilter>() {
+        @Override
+        public VendorDocumentEnrichmentCatalogItemFilter createFromParcel(Parcel source) {
+            return new VendorDocumentEnrichmentCatalogItemFilter(source);
+        }
+
+        @Override
+        public VendorDocumentEnrichmentCatalogItemFilter[] newArray(int size) {
+            return new VendorDocumentEnrichmentCatalogItemFilter[size];
+        }
+    };
+
+    public VendorDocumentEnrichmentCatalogItemFilter(Parcel in) {
+        super(in);
+    }
 }
+

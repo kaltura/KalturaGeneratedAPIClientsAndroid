@@ -30,7 +30,6 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.enums.LanguageCode;
 import com.kaltura.client.enums.SummaryWritingStyleTaskData;
 import com.kaltura.client.enums.TypeOfSummaryTaskData;
 import com.kaltura.client.utils.GsonParser;
@@ -45,12 +44,11 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 @SuppressWarnings("serial")
 @MultiRequestBuilder.Tokenizer(SummaryVendorTaskData.Tokenizer.class)
-public class SummaryVendorTaskData extends VendorTaskData {
+public class SummaryVendorTaskData extends LocalizedVendorTaskData {
 	
-	public interface Tokenizer extends VendorTaskData.Tokenizer {
+	public interface Tokenizer extends LocalizedVendorTaskData.Tokenizer {
 		String typeOfSummary();
 		String writingStyle();
-		String language();
 		String summaryOutputJson();
 	}
 
@@ -62,10 +60,6 @@ public class SummaryVendorTaskData extends VendorTaskData {
 	 * Writing style of the summary.
 	 */
 	private SummaryWritingStyleTaskData writingStyle;
-	/**
-	 * Language code
-	 */
-	private LanguageCode language;
 	/**
 	 * JSON string containing the summary output.
 	 */
@@ -95,18 +89,6 @@ public class SummaryVendorTaskData extends VendorTaskData {
 		setToken("writingStyle", multirequestToken);
 	}
 
-	// language:
-	public LanguageCode getLanguage(){
-		return this.language;
-	}
-	public void setLanguage(LanguageCode language){
-		this.language = language;
-	}
-
-	public void language(String multirequestToken){
-		setToken("language", multirequestToken);
-	}
-
 	// summaryOutputJson:
 	public String getSummaryOutputJson(){
 		return this.summaryOutputJson;
@@ -132,7 +114,6 @@ public class SummaryVendorTaskData extends VendorTaskData {
 		// set members values:
 		typeOfSummary = TypeOfSummaryTaskData.get(GsonParser.parseString(jsonObject.get("typeOfSummary")));
 		writingStyle = SummaryWritingStyleTaskData.get(GsonParser.parseString(jsonObject.get("writingStyle")));
-		language = LanguageCode.get(GsonParser.parseString(jsonObject.get("language")));
 		summaryOutputJson = GsonParser.parseString(jsonObject.get("summaryOutputJson"));
 
 	}
@@ -142,7 +123,6 @@ public class SummaryVendorTaskData extends VendorTaskData {
 		kparams.add("objectType", "KalturaSummaryVendorTaskData");
 		kparams.add("typeOfSummary", this.typeOfSummary);
 		kparams.add("writingStyle", this.writingStyle);
-		kparams.add("language", this.language);
 		kparams.add("summaryOutputJson", this.summaryOutputJson);
 		return kparams;
 	}
@@ -165,7 +145,6 @@ public class SummaryVendorTaskData extends VendorTaskData {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.typeOfSummary == null ? -1 : this.typeOfSummary.ordinal());
         dest.writeInt(this.writingStyle == null ? -1 : this.writingStyle.ordinal());
-        dest.writeInt(this.language == null ? -1 : this.language.ordinal());
         dest.writeString(this.summaryOutputJson);
     }
 
@@ -175,8 +154,6 @@ public class SummaryVendorTaskData extends VendorTaskData {
         this.typeOfSummary = tmpTypeOfSummary == -1 ? null : TypeOfSummaryTaskData.values()[tmpTypeOfSummary];
         int tmpWritingStyle = in.readInt();
         this.writingStyle = tmpWritingStyle == -1 ? null : SummaryWritingStyleTaskData.values()[tmpWritingStyle];
-        int tmpLanguage = in.readInt();
-        this.language = tmpLanguage == -1 ? null : LanguageCode.values()[tmpLanguage];
         this.summaryOutputJson = in.readString();
     }
 }
