@@ -33,6 +33,7 @@ import com.kaltura.client.Params;
 import com.kaltura.client.enums.HandleParticipantsMode;
 import com.kaltura.client.enums.ZoomGroupParticipationType;
 import com.kaltura.client.enums.ZoomUsersMatching;
+import com.kaltura.client.enums.ZoomUsersSearchMethod;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -61,6 +62,7 @@ public class ZoomIntegrationSetting extends IntegrationSetting {
 		String groupParticipationType();
 		String handleCohostsMode();
 		String handleAlternativeHostsMode();
+		String userSearchMethod();
 	}
 
 	private String zoomCategory;
@@ -76,6 +78,7 @@ public class ZoomIntegrationSetting extends IntegrationSetting {
 	private ZoomGroupParticipationType groupParticipationType;
 	private HandleParticipantsMode handleCohostsMode;
 	private HandleParticipantsMode handleAlternativeHostsMode;
+	private ZoomUsersSearchMethod userSearchMethod;
 
 	// zoomCategory:
 	public String getZoomCategory(){
@@ -233,6 +236,18 @@ public class ZoomIntegrationSetting extends IntegrationSetting {
 		setToken("handleAlternativeHostsMode", multirequestToken);
 	}
 
+	// userSearchMethod:
+	public ZoomUsersSearchMethod getUserSearchMethod(){
+		return this.userSearchMethod;
+	}
+	public void setUserSearchMethod(ZoomUsersSearchMethod userSearchMethod){
+		this.userSearchMethod = userSearchMethod;
+	}
+
+	public void userSearchMethod(String multirequestToken){
+		setToken("userSearchMethod", multirequestToken);
+	}
+
 
 	public ZoomIntegrationSetting() {
 		super();
@@ -257,6 +272,7 @@ public class ZoomIntegrationSetting extends IntegrationSetting {
 		groupParticipationType = ZoomGroupParticipationType.get(GsonParser.parseInt(jsonObject.get("groupParticipationType")));
 		handleCohostsMode = HandleParticipantsMode.get(GsonParser.parseInt(jsonObject.get("handleCohostsMode")));
 		handleAlternativeHostsMode = HandleParticipantsMode.get(GsonParser.parseInt(jsonObject.get("handleAlternativeHostsMode")));
+		userSearchMethod = ZoomUsersSearchMethod.get(GsonParser.parseInt(jsonObject.get("userSearchMethod")));
 
 	}
 
@@ -276,6 +292,7 @@ public class ZoomIntegrationSetting extends IntegrationSetting {
 		kparams.add("groupParticipationType", this.groupParticipationType);
 		kparams.add("handleCohostsMode", this.handleCohostsMode);
 		kparams.add("handleAlternativeHostsMode", this.handleAlternativeHostsMode);
+		kparams.add("userSearchMethod", this.userSearchMethod);
 		return kparams;
 	}
 
@@ -308,6 +325,7 @@ public class ZoomIntegrationSetting extends IntegrationSetting {
         dest.writeInt(this.groupParticipationType == null ? -1 : this.groupParticipationType.ordinal());
         dest.writeInt(this.handleCohostsMode == null ? -1 : this.handleCohostsMode.ordinal());
         dest.writeInt(this.handleAlternativeHostsMode == null ? -1 : this.handleAlternativeHostsMode.ordinal());
+        dest.writeInt(this.userSearchMethod == null ? -1 : this.userSearchMethod.ordinal());
     }
 
     public ZoomIntegrationSetting(Parcel in) {
@@ -329,6 +347,8 @@ public class ZoomIntegrationSetting extends IntegrationSetting {
         this.handleCohostsMode = tmpHandleCohostsMode == -1 ? null : HandleParticipantsMode.values()[tmpHandleCohostsMode];
         int tmpHandleAlternativeHostsMode = in.readInt();
         this.handleAlternativeHostsMode = tmpHandleAlternativeHostsMode == -1 ? null : HandleParticipantsMode.values()[tmpHandleAlternativeHostsMode];
+        int tmpUserSearchMethod = in.readInt();
+        this.userSearchMethod = tmpUserSearchMethod == -1 ? null : ZoomUsersSearchMethod.values()[tmpUserSearchMethod];
     }
 }
 
