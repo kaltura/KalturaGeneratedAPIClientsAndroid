@@ -30,7 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
-import com.kaltura.client.enums.TranscriptProviderType;
+import com.kaltura.client.enums.MarkdownProviderType;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -42,28 +42,28 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
  */
 
 @SuppressWarnings("serial")
-@MultiRequestBuilder.Tokenizer(TranscriptAsset.Tokenizer.class)
-public class TranscriptAsset extends TextualAttachmentAsset {
+@MultiRequestBuilder.Tokenizer(MarkdownAsset.Tokenizer.class)
+public class MarkdownAsset extends AttachmentAsset {
 	
-	public interface Tokenizer extends TextualAttachmentAsset.Tokenizer {
+	public interface Tokenizer extends AttachmentAsset.Tokenizer {
 		String accuracy();
 		String providerType();
 	}
 
 	/**
-	 * The accuracy of the transcript - values between 0 and 1
+	 * The percentage accuracy of the markdown - values between 0 and 100
 	 */
-	private Double accuracy;
+	private Integer accuracy;
 	/**
-	 * The provider of the transcript
+	 * The provider of the markdown
 	 */
-	private TranscriptProviderType providerType;
+	private MarkdownProviderType providerType;
 
 	// accuracy:
-	public Double getAccuracy(){
+	public Integer getAccuracy(){
 		return this.accuracy;
 	}
-	public void setAccuracy(Double accuracy){
+	public void setAccuracy(Integer accuracy){
 		this.accuracy = accuracy;
 	}
 
@@ -72,10 +72,10 @@ public class TranscriptAsset extends TextualAttachmentAsset {
 	}
 
 	// providerType:
-	public TranscriptProviderType getProviderType(){
+	public MarkdownProviderType getProviderType(){
 		return this.providerType;
 	}
-	public void setProviderType(TranscriptProviderType providerType){
+	public void setProviderType(MarkdownProviderType providerType){
 		this.providerType = providerType;
 	}
 
@@ -84,39 +84,39 @@ public class TranscriptAsset extends TextualAttachmentAsset {
 	}
 
 
-	public TranscriptAsset() {
+	public MarkdownAsset() {
 		super();
 	}
 
-	public TranscriptAsset(JsonObject jsonObject) throws APIException {
+	public MarkdownAsset(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
 
 		if(jsonObject == null) return;
 
 		// set members values:
-		accuracy = GsonParser.parseDouble(jsonObject.get("accuracy"));
-		providerType = TranscriptProviderType.get(GsonParser.parseString(jsonObject.get("providerType")));
+		accuracy = GsonParser.parseInt(jsonObject.get("accuracy"));
+		providerType = MarkdownProviderType.get(GsonParser.parseString(jsonObject.get("providerType")));
 
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
-		kparams.add("objectType", "KalturaTranscriptAsset");
+		kparams.add("objectType", "KalturaMarkdownAsset");
 		kparams.add("accuracy", this.accuracy);
 		kparams.add("providerType", this.providerType);
 		return kparams;
 	}
 
 
-    public static final Creator<TranscriptAsset> CREATOR = new Creator<TranscriptAsset>() {
+    public static final Creator<MarkdownAsset> CREATOR = new Creator<MarkdownAsset>() {
         @Override
-        public TranscriptAsset createFromParcel(Parcel source) {
-            return new TranscriptAsset(source);
+        public MarkdownAsset createFromParcel(Parcel source) {
+            return new MarkdownAsset(source);
         }
 
         @Override
-        public TranscriptAsset[] newArray(int size) {
-            return new TranscriptAsset[size];
+        public MarkdownAsset[] newArray(int size) {
+            return new MarkdownAsset[size];
         }
     };
 
@@ -127,11 +127,11 @@ public class TranscriptAsset extends TextualAttachmentAsset {
         dest.writeInt(this.providerType == null ? -1 : this.providerType.ordinal());
     }
 
-    public TranscriptAsset(Parcel in) {
+    public MarkdownAsset(Parcel in) {
         super(in);
-        this.accuracy = (Double)in.readValue(Double.class.getClassLoader());
+        this.accuracy = (Integer)in.readValue(Integer.class.getClassLoader());
         int tmpProviderType = in.readInt();
-        this.providerType = tmpProviderType == -1 ? null : TranscriptProviderType.values()[tmpProviderType];
+        this.providerType = tmpProviderType == -1 ? null : MarkdownProviderType.values()[tmpProviderType];
     }
 }
 
