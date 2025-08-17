@@ -96,6 +96,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String playbackModeIn();
 		String companyIn();
 		String eventSessionContextIdIn();
+		String videoCodecIn();
 	}
 
 	/**
@@ -285,6 +286,10 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * filter by event session context id
 	 */
 	private String eventSessionContextIdIn;
+	/**
+	 * filter by event video codec
+	 */
+	private String videoCodecIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -870,6 +875,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("eventSessionContextIdIn", multirequestToken);
 	}
 
+	// videoCodecIn:
+	public String getVideoCodecIn(){
+		return this.videoCodecIn;
+	}
+	public void setVideoCodecIn(String videoCodecIn){
+		this.videoCodecIn = videoCodecIn;
+	}
+
+	public void videoCodecIn(String multirequestToken){
+		setToken("videoCodecIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -930,6 +947,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		playbackModeIn = GsonParser.parseString(jsonObject.get("playbackModeIn"));
 		companyIn = GsonParser.parseString(jsonObject.get("companyIn"));
 		eventSessionContextIdIn = GsonParser.parseString(jsonObject.get("eventSessionContextIdIn"));
+		videoCodecIn = GsonParser.parseString(jsonObject.get("videoCodecIn"));
 
 	}
 
@@ -985,6 +1003,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("playbackModeIn", this.playbackModeIn);
 		kparams.add("companyIn", this.companyIn);
 		kparams.add("eventSessionContextIdIn", this.eventSessionContextIdIn);
+		kparams.add("videoCodecIn", this.videoCodecIn);
 		return kparams;
 	}
 
@@ -1053,6 +1072,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.playbackModeIn);
         dest.writeString(this.companyIn);
         dest.writeString(this.eventSessionContextIdIn);
+        dest.writeString(this.videoCodecIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -1107,6 +1127,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.playbackModeIn = in.readString();
         this.companyIn = in.readString();
         this.eventSessionContextIdIn = in.readString();
+        this.videoCodecIn = in.readString();
     }
 }
 
