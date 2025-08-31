@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.EntryObjectType;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -46,12 +47,17 @@ public class AddEntryVendorTaskAction extends RuleAction {
 	
 	public interface Tokenizer extends RuleAction.Tokenizer {
 		String catalogItemIds();
+		String entryObjectType();
 	}
 
 	/**
 	 * Catalog Item Id
 	 */
 	private String catalogItemIds;
+	/**
+	 * Entry Object Type
+	 */
+	private EntryObjectType entryObjectType;
 
 	// catalogItemIds:
 	public String getCatalogItemIds(){
@@ -63,6 +69,18 @@ public class AddEntryVendorTaskAction extends RuleAction {
 
 	public void catalogItemIds(String multirequestToken){
 		setToken("catalogItemIds", multirequestToken);
+	}
+
+	// entryObjectType:
+	public EntryObjectType getEntryObjectType(){
+		return this.entryObjectType;
+	}
+	public void setEntryObjectType(EntryObjectType entryObjectType){
+		this.entryObjectType = entryObjectType;
+	}
+
+	public void entryObjectType(String multirequestToken){
+		setToken("entryObjectType", multirequestToken);
 	}
 
 
@@ -77,6 +95,7 @@ public class AddEntryVendorTaskAction extends RuleAction {
 
 		// set members values:
 		catalogItemIds = GsonParser.parseString(jsonObject.get("catalogItemIds"));
+		entryObjectType = EntryObjectType.get(GsonParser.parseInt(jsonObject.get("entryObjectType")));
 
 	}
 
@@ -84,6 +103,7 @@ public class AddEntryVendorTaskAction extends RuleAction {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaAddEntryVendorTaskAction");
 		kparams.add("catalogItemIds", this.catalogItemIds);
+		kparams.add("entryObjectType", this.entryObjectType);
 		return kparams;
 	}
 
@@ -104,11 +124,14 @@ public class AddEntryVendorTaskAction extends RuleAction {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeString(this.catalogItemIds);
+        dest.writeInt(this.entryObjectType == null ? -1 : this.entryObjectType.ordinal());
     }
 
     public AddEntryVendorTaskAction(Parcel in) {
         super(in);
         this.catalogItemIds = in.readString();
+        int tmpEntryObjectType = in.readInt();
+        this.entryObjectType = tmpEntryObjectType == -1 ? null : EntryObjectType.values()[tmpEntryObjectType];
     }
 }
 
