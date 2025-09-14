@@ -47,9 +47,11 @@ public class HttpNotificationDataText extends HttpNotificationData {
 	
 	public interface Tokenizer extends HttpNotificationData.Tokenizer {
 		StringValue.Tokenizer content();
+		String contentType();
 	}
 
 	private StringValue content;
+	private String contentType;
 
 	// content:
 	public StringValue getContent(){
@@ -57,6 +59,18 @@ public class HttpNotificationDataText extends HttpNotificationData {
 	}
 	public void setContent(StringValue content){
 		this.content = content;
+	}
+
+	// contentType:
+	public String getContentType(){
+		return this.contentType;
+	}
+	public void setContentType(String contentType){
+		this.contentType = contentType;
+	}
+
+	public void contentType(String multirequestToken){
+		setToken("contentType", multirequestToken);
 	}
 
 
@@ -71,6 +85,7 @@ public class HttpNotificationDataText extends HttpNotificationData {
 
 		// set members values:
 		content = GsonParser.parseObject(jsonObject.getAsJsonObject("content"), StringValue.class);
+		contentType = GsonParser.parseString(jsonObject.get("contentType"));
 
 	}
 
@@ -78,6 +93,7 @@ public class HttpNotificationDataText extends HttpNotificationData {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaHttpNotificationDataText");
 		kparams.add("content", this.content);
+		kparams.add("contentType", this.contentType);
 		return kparams;
 	}
 
@@ -98,11 +114,13 @@ public class HttpNotificationDataText extends HttpNotificationData {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(this.content, flags);
+        dest.writeString(this.contentType);
     }
 
     public HttpNotificationDataText(Parcel in) {
         super(in);
         this.content = in.readParcelable(StringValue.class.getClassLoader());
+        this.contentType = in.readString();
     }
 }
 
