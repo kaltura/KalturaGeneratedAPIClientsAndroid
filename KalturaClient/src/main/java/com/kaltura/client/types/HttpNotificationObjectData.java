@@ -57,6 +57,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 		String ignoreNull();
 		String code();
 		RequestBuilder.ListTokenizer<KeyValue.Tokenizer> dataStringReplacements();
+		String responseProfileId();
 	}
 
 	/**
@@ -79,6 +80,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 	 * An array of pattern-replacement pairs used for data string regex replacements
 	 */
 	private List<KeyValue> dataStringReplacements;
+	private Integer responseProfileId;
 
 	// apiObjectType:
 	public String getApiObjectType(){
@@ -136,6 +138,18 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 		this.dataStringReplacements = dataStringReplacements;
 	}
 
+	// responseProfileId:
+	public Integer getResponseProfileId(){
+		return this.responseProfileId;
+	}
+	public void setResponseProfileId(Integer responseProfileId){
+		this.responseProfileId = responseProfileId;
+	}
+
+	public void responseProfileId(String multirequestToken){
+		setToken("responseProfileId", multirequestToken);
+	}
+
 
 	public HttpNotificationObjectData() {
 		super();
@@ -152,6 +166,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 		ignoreNull = GsonParser.parseBoolean(jsonObject.get("ignoreNull"));
 		code = GsonParser.parseString(jsonObject.get("code"));
 		dataStringReplacements = GsonParser.parseArray(jsonObject.getAsJsonArray("dataStringReplacements"), KeyValue.class);
+		responseProfileId = GsonParser.parseInt(jsonObject.get("responseProfileId"));
 
 	}
 
@@ -163,6 +178,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
 		kparams.add("ignoreNull", this.ignoreNull);
 		kparams.add("code", this.code);
 		kparams.add("dataStringReplacements", this.dataStringReplacements);
+		kparams.add("responseProfileId", this.responseProfileId);
 		return kparams;
 	}
 
@@ -192,6 +208,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
         } else {
             dest.writeInt(-1);
         }
+        dest.writeValue(this.responseProfileId);
     }
 
     public HttpNotificationObjectData(Parcel in) {
@@ -206,6 +223,7 @@ public class HttpNotificationObjectData extends HttpNotificationData {
             this.dataStringReplacements = new ArrayList<>();
             in.readList(this.dataStringReplacements, KeyValue.class.getClassLoader());
         }
+        this.responseProfileId = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
