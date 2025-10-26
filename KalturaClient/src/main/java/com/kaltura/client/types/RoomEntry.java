@@ -49,6 +49,7 @@ public class RoomEntry extends BaseEntry {
 		String roomType();
 		String broadcastEntryId();
 		String templateRoomEntryId();
+		String recordedEntryId();
 	}
 
 	private RoomType roomType;
@@ -60,6 +61,10 @@ public class RoomEntry extends BaseEntry {
 	 * The entryId of the room where settings will be taken from
 	 */
 	private String templateRoomEntryId;
+	/**
+	 * The entryId of the recording
+	 */
+	private String recordedEntryId;
 
 	// roomType:
 	public RoomType getRoomType(){
@@ -97,6 +102,18 @@ public class RoomEntry extends BaseEntry {
 		setToken("templateRoomEntryId", multirequestToken);
 	}
 
+	// recordedEntryId:
+	public String getRecordedEntryId(){
+		return this.recordedEntryId;
+	}
+	public void setRecordedEntryId(String recordedEntryId){
+		this.recordedEntryId = recordedEntryId;
+	}
+
+	public void recordedEntryId(String multirequestToken){
+		setToken("recordedEntryId", multirequestToken);
+	}
+
 
 	public RoomEntry() {
 		super();
@@ -111,6 +128,7 @@ public class RoomEntry extends BaseEntry {
 		roomType = RoomType.get(GsonParser.parseInt(jsonObject.get("roomType")));
 		broadcastEntryId = GsonParser.parseString(jsonObject.get("broadcastEntryId"));
 		templateRoomEntryId = GsonParser.parseString(jsonObject.get("templateRoomEntryId"));
+		recordedEntryId = GsonParser.parseString(jsonObject.get("recordedEntryId"));
 
 	}
 
@@ -120,6 +138,7 @@ public class RoomEntry extends BaseEntry {
 		kparams.add("roomType", this.roomType);
 		kparams.add("broadcastEntryId", this.broadcastEntryId);
 		kparams.add("templateRoomEntryId", this.templateRoomEntryId);
+		kparams.add("recordedEntryId", this.recordedEntryId);
 		return kparams;
 	}
 
@@ -142,6 +161,7 @@ public class RoomEntry extends BaseEntry {
         dest.writeInt(this.roomType == null ? -1 : this.roomType.ordinal());
         dest.writeString(this.broadcastEntryId);
         dest.writeString(this.templateRoomEntryId);
+        dest.writeString(this.recordedEntryId);
     }
 
     public RoomEntry(Parcel in) {
@@ -150,6 +170,7 @@ public class RoomEntry extends BaseEntry {
         this.roomType = tmpRoomType == -1 ? null : RoomType.values()[tmpRoomType];
         this.broadcastEntryId = in.readString();
         this.templateRoomEntryId = in.readString();
+        this.recordedEntryId = in.readString();
     }
 }
 
