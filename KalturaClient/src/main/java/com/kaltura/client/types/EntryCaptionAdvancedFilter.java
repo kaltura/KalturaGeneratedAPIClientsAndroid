@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.enums.Language;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -46,9 +47,11 @@ public class EntryCaptionAdvancedFilter extends SearchItem {
 	
 	public interface Tokenizer extends SearchItem.Tokenizer {
 		String hasCaption();
+		String language();
 	}
 
 	private Boolean hasCaption;
+	private Language language;
 
 	// hasCaption:
 	public Boolean getHasCaption(){
@@ -60,6 +63,18 @@ public class EntryCaptionAdvancedFilter extends SearchItem {
 
 	public void hasCaption(String multirequestToken){
 		setToken("hasCaption", multirequestToken);
+	}
+
+	// language:
+	public Language getLanguage(){
+		return this.language;
+	}
+	public void setLanguage(Language language){
+		this.language = language;
+	}
+
+	public void language(String multirequestToken){
+		setToken("language", multirequestToken);
 	}
 
 
@@ -74,6 +89,7 @@ public class EntryCaptionAdvancedFilter extends SearchItem {
 
 		// set members values:
 		hasCaption = GsonParser.parseBoolean(jsonObject.get("hasCaption"));
+		language = Language.get(GsonParser.parseString(jsonObject.get("language")));
 
 	}
 
@@ -81,6 +97,7 @@ public class EntryCaptionAdvancedFilter extends SearchItem {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaEntryCaptionAdvancedFilter");
 		kparams.add("hasCaption", this.hasCaption);
+		kparams.add("language", this.language);
 		return kparams;
 	}
 
@@ -101,11 +118,14 @@ public class EntryCaptionAdvancedFilter extends SearchItem {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeValue(this.hasCaption);
+        dest.writeInt(this.language == null ? -1 : this.language.ordinal());
     }
 
     public EntryCaptionAdvancedFilter(Parcel in) {
         super(in);
         this.hasCaption = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        int tmpLanguage = in.readInt();
+        this.language = tmpLanguage == -1 ? null : Language.values()[tmpLanguage];
     }
 }
 

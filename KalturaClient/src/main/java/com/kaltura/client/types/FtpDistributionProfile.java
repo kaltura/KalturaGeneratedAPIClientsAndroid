@@ -61,6 +61,7 @@ public class FtpDistributionProfile extends ConfigurableDistributionProfile {
 		String flavorAssetFilenameXslt();
 		String thumbnailAssetFilenameXslt();
 		String assetFilenameXslt();
+		String dataContentFilenameXslt();
 		String asperaPublicKey();
 		String asperaPrivateKey();
 		String sendMetadataAfterAssets();
@@ -81,6 +82,7 @@ public class FtpDistributionProfile extends ConfigurableDistributionProfile {
 	private String flavorAssetFilenameXslt;
 	private String thumbnailAssetFilenameXslt;
 	private String assetFilenameXslt;
+	private String dataContentFilenameXslt;
 	private String asperaPublicKey;
 	private String asperaPrivateKey;
 	private Boolean sendMetadataAfterAssets;
@@ -265,6 +267,18 @@ public class FtpDistributionProfile extends ConfigurableDistributionProfile {
 		setToken("assetFilenameXslt", multirequestToken);
 	}
 
+	// dataContentFilenameXslt:
+	public String getDataContentFilenameXslt(){
+		return this.dataContentFilenameXslt;
+	}
+	public void setDataContentFilenameXslt(String dataContentFilenameXslt){
+		this.dataContentFilenameXslt = dataContentFilenameXslt;
+	}
+
+	public void dataContentFilenameXslt(String multirequestToken){
+		setToken("dataContentFilenameXslt", multirequestToken);
+	}
+
 	// asperaPublicKey:
 	public String getAsperaPublicKey(){
 		return this.asperaPublicKey;
@@ -327,6 +341,7 @@ public class FtpDistributionProfile extends ConfigurableDistributionProfile {
 		flavorAssetFilenameXslt = GsonParser.parseString(jsonObject.get("flavorAssetFilenameXslt"));
 		thumbnailAssetFilenameXslt = GsonParser.parseString(jsonObject.get("thumbnailAssetFilenameXslt"));
 		assetFilenameXslt = GsonParser.parseString(jsonObject.get("assetFilenameXslt"));
+		dataContentFilenameXslt = GsonParser.parseString(jsonObject.get("dataContentFilenameXslt"));
 		asperaPublicKey = GsonParser.parseString(jsonObject.get("asperaPublicKey"));
 		asperaPrivateKey = GsonParser.parseString(jsonObject.get("asperaPrivateKey"));
 		sendMetadataAfterAssets = GsonParser.parseBoolean(jsonObject.get("sendMetadataAfterAssets"));
@@ -351,6 +366,7 @@ public class FtpDistributionProfile extends ConfigurableDistributionProfile {
 		kparams.add("flavorAssetFilenameXslt", this.flavorAssetFilenameXslt);
 		kparams.add("thumbnailAssetFilenameXslt", this.thumbnailAssetFilenameXslt);
 		kparams.add("assetFilenameXslt", this.assetFilenameXslt);
+		kparams.add("dataContentFilenameXslt", this.dataContentFilenameXslt);
 		kparams.add("asperaPublicKey", this.asperaPublicKey);
 		kparams.add("asperaPrivateKey", this.asperaPrivateKey);
 		kparams.add("sendMetadataAfterAssets", this.sendMetadataAfterAssets);
@@ -388,6 +404,7 @@ public class FtpDistributionProfile extends ConfigurableDistributionProfile {
         dest.writeString(this.flavorAssetFilenameXslt);
         dest.writeString(this.thumbnailAssetFilenameXslt);
         dest.writeString(this.assetFilenameXslt);
+        dest.writeString(this.dataContentFilenameXslt);
         dest.writeString(this.asperaPublicKey);
         dest.writeString(this.asperaPrivateKey);
         dest.writeValue(this.sendMetadataAfterAssets);
@@ -411,6 +428,7 @@ public class FtpDistributionProfile extends ConfigurableDistributionProfile {
         this.flavorAssetFilenameXslt = in.readString();
         this.thumbnailAssetFilenameXslt = in.readString();
         this.assetFilenameXslt = in.readString();
+        this.dataContentFilenameXslt = in.readString();
         this.asperaPublicKey = in.readString();
         this.asperaPrivateKey = in.readString();
         this.sendMetadataAfterAssets = (Boolean)in.readValue(Boolean.class.getClassLoader());
