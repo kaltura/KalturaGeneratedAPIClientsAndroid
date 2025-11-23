@@ -51,6 +51,8 @@ public class ESearchCaptionItemData extends ESearchItemData {
 		String language();
 		String captionAssetId();
 		String label();
+		String accuracy();
+		String usage();
 	}
 
 	private String line;
@@ -59,6 +61,8 @@ public class ESearchCaptionItemData extends ESearchItemData {
 	private String language;
 	private String captionAssetId;
 	private String label;
+	private Integer accuracy;
+	private Integer usage;
 
 	// line:
 	public String getLine(){
@@ -132,6 +136,30 @@ public class ESearchCaptionItemData extends ESearchItemData {
 		setToken("label", multirequestToken);
 	}
 
+	// accuracy:
+	public Integer getAccuracy(){
+		return this.accuracy;
+	}
+	public void setAccuracy(Integer accuracy){
+		this.accuracy = accuracy;
+	}
+
+	public void accuracy(String multirequestToken){
+		setToken("accuracy", multirequestToken);
+	}
+
+	// usage:
+	public Integer getUsage(){
+		return this.usage;
+	}
+	public void setUsage(Integer usage){
+		this.usage = usage;
+	}
+
+	public void usage(String multirequestToken){
+		setToken("usage", multirequestToken);
+	}
+
 
 	public ESearchCaptionItemData() {
 		super();
@@ -149,6 +177,8 @@ public class ESearchCaptionItemData extends ESearchItemData {
 		language = GsonParser.parseString(jsonObject.get("language"));
 		captionAssetId = GsonParser.parseString(jsonObject.get("captionAssetId"));
 		label = GsonParser.parseString(jsonObject.get("label"));
+		accuracy = GsonParser.parseInt(jsonObject.get("accuracy"));
+		usage = GsonParser.parseInt(jsonObject.get("usage"));
 
 	}
 
@@ -161,6 +191,8 @@ public class ESearchCaptionItemData extends ESearchItemData {
 		kparams.add("language", this.language);
 		kparams.add("captionAssetId", this.captionAssetId);
 		kparams.add("label", this.label);
+		kparams.add("accuracy", this.accuracy);
+		kparams.add("usage", this.usage);
 		return kparams;
 	}
 
@@ -186,6 +218,8 @@ public class ESearchCaptionItemData extends ESearchItemData {
         dest.writeString(this.language);
         dest.writeString(this.captionAssetId);
         dest.writeString(this.label);
+        dest.writeValue(this.accuracy);
+        dest.writeValue(this.usage);
     }
 
     public ESearchCaptionItemData(Parcel in) {
@@ -196,6 +230,8 @@ public class ESearchCaptionItemData extends ESearchItemData {
         this.language = in.readString();
         this.captionAssetId = in.readString();
         this.label = in.readString();
+        this.accuracy = (Integer)in.readValue(Integer.class.getClassLoader());
+        this.usage = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
