@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
 /**
@@ -44,8 +45,36 @@ import com.kaltura.client.utils.request.MultiRequestBuilder;
 public abstract class BaseSyndicationFeedBaseFilter extends Filter {
 	
 	public interface Tokenizer extends Filter.Tokenizer {
+		String idEqual();
+		String idIn();
 	}
 
+	private String idEqual;
+	private String idIn;
+
+	// idEqual:
+	public String getIdEqual(){
+		return this.idEqual;
+	}
+	public void setIdEqual(String idEqual){
+		this.idEqual = idEqual;
+	}
+
+	public void idEqual(String multirequestToken){
+		setToken("idEqual", multirequestToken);
+	}
+
+	// idIn:
+	public String getIdIn(){
+		return this.idIn;
+	}
+	public void setIdIn(String idIn){
+		this.idIn = idIn;
+	}
+
+	public void idIn(String multirequestToken){
+		setToken("idIn", multirequestToken);
+	}
 
 
 	public BaseSyndicationFeedBaseFilter() {
@@ -54,17 +83,35 @@ public abstract class BaseSyndicationFeedBaseFilter extends Filter {
 
 	public BaseSyndicationFeedBaseFilter(JsonObject jsonObject) throws APIException {
 		super(jsonObject);
+
+		if(jsonObject == null) return;
+
+		// set members values:
+		idEqual = GsonParser.parseString(jsonObject.get("idEqual"));
+		idIn = GsonParser.parseString(jsonObject.get("idIn"));
+
 	}
 
 	public Params toParams() {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaBaseSyndicationFeedBaseFilter");
+		kparams.add("idEqual", this.idEqual);
+		kparams.add("idIn", this.idIn);
 		return kparams;
 	}
 
 
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        super.writeToParcel(dest, flags);
+        dest.writeString(this.idEqual);
+        dest.writeString(this.idIn);
+    }
+
     public BaseSyndicationFeedBaseFilter(Parcel in) {
         super(in);
+        this.idEqual = in.readString();
+        this.idIn = in.readString();
     }
 }
 
