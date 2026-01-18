@@ -106,6 +106,14 @@ public abstract class UserEntry extends ObjectBase {
 	public UserEntryStatus getStatus(){
 		return this.status;
 	}
+	public void setStatus(UserEntryStatus status){
+		this.status = status;
+	}
+
+	public void status(String multirequestToken){
+		setToken("status", multirequestToken);
+	}
+
 	// createdAt:
 	public Long getCreatedAt(){
 		return this.createdAt;
@@ -145,6 +153,7 @@ public abstract class UserEntry extends ObjectBase {
 		kparams.add("objectType", "KalturaUserEntry");
 		kparams.add("entryId", this.entryId);
 		kparams.add("userId", this.userId);
+		kparams.add("status", this.status);
 		return kparams;
 	}
 
