@@ -56,6 +56,7 @@ public class ShortLink extends ObjectBase {
 		String name();
 		String systemName();
 		String fullUrl();
+		String uniqueId();
 		String status();
 	}
 
@@ -68,6 +69,7 @@ public class ShortLink extends ObjectBase {
 	private String name;
 	private String systemName;
 	private String fullUrl;
+	private String uniqueId;
 	private ShortLinkStatus status;
 
 	// id:
@@ -146,6 +148,18 @@ public class ShortLink extends ObjectBase {
 		setToken("fullUrl", multirequestToken);
 	}
 
+	// uniqueId:
+	public String getUniqueId(){
+		return this.uniqueId;
+	}
+	public void setUniqueId(String uniqueId){
+		this.uniqueId = uniqueId;
+	}
+
+	public void uniqueId(String multirequestToken){
+		setToken("uniqueId", multirequestToken);
+	}
+
 	// status:
 	public ShortLinkStatus getStatus(){
 		return this.status;
@@ -178,6 +192,7 @@ public class ShortLink extends ObjectBase {
 		name = GsonParser.parseString(jsonObject.get("name"));
 		systemName = GsonParser.parseString(jsonObject.get("systemName"));
 		fullUrl = GsonParser.parseString(jsonObject.get("fullUrl"));
+		uniqueId = GsonParser.parseString(jsonObject.get("uniqueId"));
 		status = ShortLinkStatus.get(GsonParser.parseInt(jsonObject.get("status")));
 
 	}
@@ -190,6 +205,7 @@ public class ShortLink extends ObjectBase {
 		kparams.add("name", this.name);
 		kparams.add("systemName", this.systemName);
 		kparams.add("fullUrl", this.fullUrl);
+		kparams.add("uniqueId", this.uniqueId);
 		kparams.add("status", this.status);
 		return kparams;
 	}
@@ -219,6 +235,7 @@ public class ShortLink extends ObjectBase {
         dest.writeString(this.name);
         dest.writeString(this.systemName);
         dest.writeString(this.fullUrl);
+        dest.writeString(this.uniqueId);
         dest.writeInt(this.status == null ? -1 : this.status.ordinal());
     }
 
@@ -233,6 +250,7 @@ public class ShortLink extends ObjectBase {
         this.name = in.readString();
         this.systemName = in.readString();
         this.fullUrl = in.readString();
+        this.uniqueId = in.readString();
         int tmpStatus = in.readInt();
         this.status = tmpStatus == -1 ? null : ShortLinkStatus.values()[tmpStatus];
     }

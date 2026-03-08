@@ -57,6 +57,7 @@ public class ClipAttributes extends OperationAttributes {
 		RequestBuilder.ListTokenizer<Effect.Tokenizer> effectArray();
 		String cropAlignment();
 		RequestBuilder.ListTokenizer<CaptionAttributes.Tokenizer> captionAttributes();
+		RequestBuilder.ListTokenizer<MediaCompositionAttributes.Tokenizer> mediaCompositionAttributesArray();
 	}
 
 	/**
@@ -77,6 +78,7 @@ public class ClipAttributes extends OperationAttributes {
 	private List<Effect> effectArray;
 	private Integer cropAlignment;
 	private List<CaptionAttributes> captionAttributes;
+	private List<MediaCompositionAttributes> mediaCompositionAttributesArray;
 
 	// offset:
 	public Integer getOffset(){
@@ -142,6 +144,14 @@ public class ClipAttributes extends OperationAttributes {
 		this.captionAttributes = captionAttributes;
 	}
 
+	// mediaCompositionAttributesArray:
+	public List<MediaCompositionAttributes> getMediaCompositionAttributesArray(){
+		return this.mediaCompositionAttributesArray;
+	}
+	public void setMediaCompositionAttributesArray(List<MediaCompositionAttributes> mediaCompositionAttributesArray){
+		this.mediaCompositionAttributesArray = mediaCompositionAttributesArray;
+	}
+
 
 	public ClipAttributes() {
 		super();
@@ -159,6 +169,7 @@ public class ClipAttributes extends OperationAttributes {
 		effectArray = GsonParser.parseArray(jsonObject.getAsJsonArray("effectArray"), Effect.class);
 		cropAlignment = GsonParser.parseInt(jsonObject.get("cropAlignment"));
 		captionAttributes = GsonParser.parseArray(jsonObject.getAsJsonArray("captionAttributes"), CaptionAttributes.class);
+		mediaCompositionAttributesArray = GsonParser.parseArray(jsonObject.getAsJsonArray("mediaCompositionAttributesArray"), MediaCompositionAttributes.class);
 
 	}
 
@@ -171,6 +182,7 @@ public class ClipAttributes extends OperationAttributes {
 		kparams.add("effectArray", this.effectArray);
 		kparams.add("cropAlignment", this.cropAlignment);
 		kparams.add("captionAttributes", this.captionAttributes);
+		kparams.add("mediaCompositionAttributesArray", this.mediaCompositionAttributesArray);
 		return kparams;
 	}
 
@@ -206,6 +218,12 @@ public class ClipAttributes extends OperationAttributes {
         } else {
             dest.writeInt(-1);
         }
+        if(this.mediaCompositionAttributesArray != null) {
+            dest.writeInt(this.mediaCompositionAttributesArray.size());
+            dest.writeList(this.mediaCompositionAttributesArray);
+        } else {
+            dest.writeInt(-1);
+        }
     }
 
     public ClipAttributes(Parcel in) {
@@ -223,6 +241,11 @@ public class ClipAttributes extends OperationAttributes {
         if( captionAttributesSize > -1) {
             this.captionAttributes = new ArrayList<>();
             in.readList(this.captionAttributes, CaptionAttributes.class.getClassLoader());
+        }
+        int mediaCompositionAttributesArraySize = in.readInt();
+        if( mediaCompositionAttributesArraySize > -1) {
+            this.mediaCompositionAttributesArray = new ArrayList<>();
+            in.readList(this.mediaCompositionAttributesArray, MediaCompositionAttributes.class.getClassLoader());
         }
     }
 }

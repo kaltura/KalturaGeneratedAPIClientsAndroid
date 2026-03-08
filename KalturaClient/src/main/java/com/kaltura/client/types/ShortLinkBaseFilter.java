@@ -62,6 +62,7 @@ public abstract class ShortLinkBaseFilter extends Filter {
 		String systemNameIn();
 		String statusEqual();
 		String statusIn();
+		String uniqueIdEqual();
 	}
 
 	private String idEqual;
@@ -80,6 +81,7 @@ public abstract class ShortLinkBaseFilter extends Filter {
 	private String systemNameIn;
 	private ShortLinkStatus statusEqual;
 	private String statusIn;
+	private String uniqueIdEqual;
 
 	// idEqual:
 	public String getIdEqual(){
@@ -273,6 +275,18 @@ public abstract class ShortLinkBaseFilter extends Filter {
 		setToken("statusIn", multirequestToken);
 	}
 
+	// uniqueIdEqual:
+	public String getUniqueIdEqual(){
+		return this.uniqueIdEqual;
+	}
+	public void setUniqueIdEqual(String uniqueIdEqual){
+		this.uniqueIdEqual = uniqueIdEqual;
+	}
+
+	public void uniqueIdEqual(String multirequestToken){
+		setToken("uniqueIdEqual", multirequestToken);
+	}
+
 
 	public ShortLinkBaseFilter() {
 		super();
@@ -300,6 +314,7 @@ public abstract class ShortLinkBaseFilter extends Filter {
 		systemNameIn = GsonParser.parseString(jsonObject.get("systemNameIn"));
 		statusEqual = ShortLinkStatus.get(GsonParser.parseInt(jsonObject.get("statusEqual")));
 		statusIn = GsonParser.parseString(jsonObject.get("statusIn"));
+		uniqueIdEqual = GsonParser.parseString(jsonObject.get("uniqueIdEqual"));
 
 	}
 
@@ -322,6 +337,7 @@ public abstract class ShortLinkBaseFilter extends Filter {
 		kparams.add("systemNameIn", this.systemNameIn);
 		kparams.add("statusEqual", this.statusEqual);
 		kparams.add("statusIn", this.statusIn);
+		kparams.add("uniqueIdEqual", this.uniqueIdEqual);
 		return kparams;
 	}
 
@@ -345,6 +361,7 @@ public abstract class ShortLinkBaseFilter extends Filter {
         dest.writeString(this.systemNameIn);
         dest.writeInt(this.statusEqual == null ? -1 : this.statusEqual.ordinal());
         dest.writeString(this.statusIn);
+        dest.writeString(this.uniqueIdEqual);
     }
 
     public ShortLinkBaseFilter(Parcel in) {
@@ -366,6 +383,7 @@ public abstract class ShortLinkBaseFilter extends Filter {
         int tmpStatusEqual = in.readInt();
         this.statusEqual = tmpStatusEqual == -1 ? null : ShortLinkStatus.values()[tmpStatusEqual];
         this.statusIn = in.readString();
+        this.uniqueIdEqual = in.readString();
     }
 }
 

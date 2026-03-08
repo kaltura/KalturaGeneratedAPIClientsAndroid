@@ -85,7 +85,6 @@ public class EntryVendorTask extends ObjectBase {
 		String serviceFeature();
 		String turnAroundTime();
 		String externalTaskId();
-		String isPayPerUse();
 	}
 
 	private Long id;
@@ -169,10 +168,6 @@ public class EntryVendorTask extends ObjectBase {
 	 * The vendor's task internal Id
 	 */
 	private String externalTaskId;
-	/**
-	 * Indicates if the task is pay-per-use based on the catalog item
-	 */
-	private Boolean isPayPerUse;
 
 	// id:
 	public Long getId(){
@@ -410,10 +405,6 @@ public class EntryVendorTask extends ObjectBase {
 		setToken("externalTaskId", multirequestToken);
 	}
 
-	// isPayPerUse:
-	public Boolean getIsPayPerUse(){
-		return this.isPayPerUse;
-	}
 
 	public EntryVendorTask() {
 		super();
@@ -457,7 +448,6 @@ public class EntryVendorTask extends ObjectBase {
 		serviceFeature = VendorServiceFeature.get(GsonParser.parseInt(jsonObject.get("serviceFeature")));
 		turnAroundTime = VendorServiceTurnAroundTime.get(GsonParser.parseInt(jsonObject.get("turnAroundTime")));
 		externalTaskId = GsonParser.parseString(jsonObject.get("externalTaskId"));
-		isPayPerUse = GsonParser.parseBoolean(jsonObject.get("isPayPerUse"));
 
 	}
 
@@ -529,7 +519,6 @@ public class EntryVendorTask extends ObjectBase {
         dest.writeInt(this.serviceFeature == null ? -1 : this.serviceFeature.ordinal());
         dest.writeInt(this.turnAroundTime == null ? -1 : this.turnAroundTime.ordinal());
         dest.writeString(this.externalTaskId);
-        dest.writeValue(this.isPayPerUse);
     }
 
     public EntryVendorTask(Parcel in) {
@@ -572,7 +561,6 @@ public class EntryVendorTask extends ObjectBase {
         int tmpTurnAroundTime = in.readInt();
         this.turnAroundTime = tmpTurnAroundTime == -1 ? null : VendorServiceTurnAroundTime.values()[tmpTurnAroundTime];
         this.externalTaskId = in.readString();
-        this.isPayPerUse = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 

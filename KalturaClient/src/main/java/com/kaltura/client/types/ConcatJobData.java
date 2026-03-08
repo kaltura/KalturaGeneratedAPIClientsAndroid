@@ -49,6 +49,7 @@ public class ConcatJobData extends JobData {
 	
 	public interface Tokenizer extends JobData.Tokenizer {
 		RequestBuilder.ListTokenizer<StringHolder.Tokenizer> srcFiles();
+		RequestBuilder.ListTokenizer<StringArrayObject.Tokenizer> inputFiles();
 		String destFilePath();
 		String flavorAssetId();
 		String offset();
@@ -63,6 +64,10 @@ public class ConcatJobData extends JobData {
 	 * Source files to be concatenated
 	 */
 	private List<StringHolder> srcFiles;
+	/**
+	 * Additional input files to be used in conversion pre concatenation
+	 */
+	private List<StringArrayObject> inputFiles;
 	/**
 	 * Output file
 	 */
@@ -99,6 +104,14 @@ public class ConcatJobData extends JobData {
 	}
 	public void setSrcFiles(List<StringHolder> srcFiles){
 		this.srcFiles = srcFiles;
+	}
+
+	// inputFiles:
+	public List<StringArrayObject> getInputFiles(){
+		return this.inputFiles;
+	}
+	public void setInputFiles(List<StringArrayObject> inputFiles){
+		this.inputFiles = inputFiles;
 	}
 
 	// destFilePath:
@@ -205,6 +218,7 @@ public class ConcatJobData extends JobData {
 
 		// set members values:
 		srcFiles = GsonParser.parseArray(jsonObject.getAsJsonArray("srcFiles"), StringHolder.class);
+		inputFiles = GsonParser.parseArray(jsonObject.getAsJsonArray("inputFiles"), StringArrayObject.class);
 		destFilePath = GsonParser.parseString(jsonObject.get("destFilePath"));
 		flavorAssetId = GsonParser.parseString(jsonObject.get("flavorAssetId"));
 		offset = GsonParser.parseDouble(jsonObject.get("offset"));
@@ -220,6 +234,7 @@ public class ConcatJobData extends JobData {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaConcatJobData");
 		kparams.add("srcFiles", this.srcFiles);
+		kparams.add("inputFiles", this.inputFiles);
 		kparams.add("destFilePath", this.destFilePath);
 		kparams.add("flavorAssetId", this.flavorAssetId);
 		kparams.add("offset", this.offset);
@@ -253,6 +268,12 @@ public class ConcatJobData extends JobData {
         } else {
             dest.writeInt(-1);
         }
+        if(this.inputFiles != null) {
+            dest.writeInt(this.inputFiles.size());
+            dest.writeList(this.inputFiles);
+        } else {
+            dest.writeInt(-1);
+        }
         dest.writeString(this.destFilePath);
         dest.writeString(this.flavorAssetId);
         dest.writeValue(this.offset);
@@ -274,6 +295,11 @@ public class ConcatJobData extends JobData {
         if( srcFilesSize > -1) {
             this.srcFiles = new ArrayList<>();
             in.readList(this.srcFiles, StringHolder.class.getClassLoader());
+        }
+        int inputFilesSize = in.readInt();
+        if( inputFilesSize > -1) {
+            this.inputFiles = new ArrayList<>();
+            in.readList(this.inputFiles, StringArrayObject.class.getClassLoader());
         }
         this.destFilePath = in.readString();
         this.flavorAssetId = in.readString();
