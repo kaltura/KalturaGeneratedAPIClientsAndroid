@@ -31,6 +31,7 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.types.ContentResource;
+import com.kaltura.client.types.Position;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
 
@@ -47,12 +48,18 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 	
 	public interface Tokenizer extends MediaCompositionAttributes.Tokenizer {
 		ContentResource.Tokenizer resource();
+		String backgroundColorCode();
+		String foregroundScalePercentage();
+		Position.Tokenizer foregroundPositionPercentage();
 	}
 
 	/**
 	 * Only KalturaEntryResource and KalturaAssetResource are supported
 	 */
 	private ContentResource resource;
+	private String backgroundColorCode;
+	private Double foregroundScalePercentage;
+	private Position foregroundPositionPercentage;
 
 	// resource:
 	public ContentResource getResource(){
@@ -60,6 +67,38 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 	}
 	public void setResource(ContentResource resource){
 		this.resource = resource;
+	}
+
+	// backgroundColorCode:
+	public String getBackgroundColorCode(){
+		return this.backgroundColorCode;
+	}
+	public void setBackgroundColorCode(String backgroundColorCode){
+		this.backgroundColorCode = backgroundColorCode;
+	}
+
+	public void backgroundColorCode(String multirequestToken){
+		setToken("backgroundColorCode", multirequestToken);
+	}
+
+	// foregroundScalePercentage:
+	public Double getForegroundScalePercentage(){
+		return this.foregroundScalePercentage;
+	}
+	public void setForegroundScalePercentage(Double foregroundScalePercentage){
+		this.foregroundScalePercentage = foregroundScalePercentage;
+	}
+
+	public void foregroundScalePercentage(String multirequestToken){
+		setToken("foregroundScalePercentage", multirequestToken);
+	}
+
+	// foregroundPositionPercentage:
+	public Position getForegroundPositionPercentage(){
+		return this.foregroundPositionPercentage;
+	}
+	public void setForegroundPositionPercentage(Position foregroundPositionPercentage){
+		this.foregroundPositionPercentage = foregroundPositionPercentage;
 	}
 
 
@@ -74,6 +113,9 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 
 		// set members values:
 		resource = GsonParser.parseObject(jsonObject.getAsJsonObject("resource"), ContentResource.class);
+		backgroundColorCode = GsonParser.parseString(jsonObject.get("backgroundColorCode"));
+		foregroundScalePercentage = GsonParser.parseDouble(jsonObject.get("foregroundScalePercentage"));
+		foregroundPositionPercentage = GsonParser.parseObject(jsonObject.getAsJsonObject("foregroundPositionPercentage"), Position.class);
 
 	}
 
@@ -81,6 +123,9 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaReplaceBackgroundAttributes");
 		kparams.add("resource", this.resource);
+		kparams.add("backgroundColorCode", this.backgroundColorCode);
+		kparams.add("foregroundScalePercentage", this.foregroundScalePercentage);
+		kparams.add("foregroundPositionPercentage", this.foregroundPositionPercentage);
 		return kparams;
 	}
 
@@ -101,11 +146,17 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
     public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeParcelable(this.resource, flags);
+        dest.writeString(this.backgroundColorCode);
+        dest.writeValue(this.foregroundScalePercentage);
+        dest.writeParcelable(this.foregroundPositionPercentage, flags);
     }
 
     public ReplaceBackgroundAttributes(Parcel in) {
         super(in);
         this.resource = in.readParcelable(ContentResource.class.getClassLoader());
+        this.backgroundColorCode = in.readString();
+        this.foregroundScalePercentage = (Double)in.readValue(Double.class.getClassLoader());
+        this.foregroundPositionPercentage = in.readParcelable(Position.class.getClassLoader());
     }
 }
 

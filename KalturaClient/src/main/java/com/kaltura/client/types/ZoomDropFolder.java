@@ -49,11 +49,16 @@ public class ZoomDropFolder extends DropFolder {
 		String zoomVendorIntegrationId();
 		ZoomIntegrationSetting.Tokenizer zoomVendorIntegration();
 		String lastHandledMeetingTime();
+		String fileProcessingGracePeriod();
 	}
 
 	private Integer zoomVendorIntegrationId;
 	private ZoomIntegrationSetting zoomVendorIntegration;
 	private Long lastHandledMeetingTime;
+	/**
+	 * The amount of time, in seconds, to wait before processing a drop folder file
+	 */
+	private Integer fileProcessingGracePeriod;
 
 	// zoomVendorIntegrationId:
 	public Integer getZoomVendorIntegrationId(){
@@ -75,6 +80,18 @@ public class ZoomDropFolder extends DropFolder {
 		setToken("lastHandledMeetingTime", multirequestToken);
 	}
 
+	// fileProcessingGracePeriod:
+	public Integer getFileProcessingGracePeriod(){
+		return this.fileProcessingGracePeriod;
+	}
+	public void setFileProcessingGracePeriod(Integer fileProcessingGracePeriod){
+		this.fileProcessingGracePeriod = fileProcessingGracePeriod;
+	}
+
+	public void fileProcessingGracePeriod(String multirequestToken){
+		setToken("fileProcessingGracePeriod", multirequestToken);
+	}
+
 
 	public ZoomDropFolder() {
 		super();
@@ -89,6 +106,7 @@ public class ZoomDropFolder extends DropFolder {
 		zoomVendorIntegrationId = GsonParser.parseInt(jsonObject.get("zoomVendorIntegrationId"));
 		zoomVendorIntegration = GsonParser.parseObject(jsonObject.getAsJsonObject("zoomVendorIntegration"), ZoomIntegrationSetting.class);
 		lastHandledMeetingTime = GsonParser.parseLong(jsonObject.get("lastHandledMeetingTime"));
+		fileProcessingGracePeriod = GsonParser.parseInt(jsonObject.get("fileProcessingGracePeriod"));
 
 	}
 
@@ -96,6 +114,7 @@ public class ZoomDropFolder extends DropFolder {
 		Params kparams = super.toParams();
 		kparams.add("objectType", "KalturaZoomDropFolder");
 		kparams.add("lastHandledMeetingTime", this.lastHandledMeetingTime);
+		kparams.add("fileProcessingGracePeriod", this.fileProcessingGracePeriod);
 		return kparams;
 	}
 
@@ -118,6 +137,7 @@ public class ZoomDropFolder extends DropFolder {
         dest.writeValue(this.zoomVendorIntegrationId);
         dest.writeParcelable(this.zoomVendorIntegration, flags);
         dest.writeValue(this.lastHandledMeetingTime);
+        dest.writeValue(this.fileProcessingGracePeriod);
     }
 
     public ZoomDropFolder(Parcel in) {
@@ -125,6 +145,7 @@ public class ZoomDropFolder extends DropFolder {
         this.zoomVendorIntegrationId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.zoomVendorIntegration = in.readParcelable(ZoomIntegrationSetting.class.getClassLoader());
         this.lastHandledMeetingTime = (Long)in.readValue(Long.class.getClassLoader());
+        this.fileProcessingGracePeriod = (Integer)in.readValue(Integer.class.getClassLoader());
     }
 }
 
