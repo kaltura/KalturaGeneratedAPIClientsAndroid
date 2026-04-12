@@ -85,6 +85,7 @@ public class EntryVendorTask extends ObjectBase {
 		String serviceFeature();
 		String turnAroundTime();
 		String externalTaskId();
+		String externalObjectId();
 	}
 
 	private Long id;
@@ -168,6 +169,10 @@ public class EntryVendorTask extends ObjectBase {
 	 * The vendor's task internal Id
 	 */
 	private String externalTaskId;
+	/**
+	 * The identifier of the external object for EXTERNAL_OBJECT type tasks
+	 */
+	private String externalObjectId;
 
 	// id:
 	public Long getId(){
@@ -405,6 +410,18 @@ public class EntryVendorTask extends ObjectBase {
 		setToken("externalTaskId", multirequestToken);
 	}
 
+	// externalObjectId:
+	public String getExternalObjectId(){
+		return this.externalObjectId;
+	}
+	public void setExternalObjectId(String externalObjectId){
+		this.externalObjectId = externalObjectId;
+	}
+
+	public void externalObjectId(String multirequestToken){
+		setToken("externalObjectId", multirequestToken);
+	}
+
 
 	public EntryVendorTask() {
 		super();
@@ -448,6 +465,7 @@ public class EntryVendorTask extends ObjectBase {
 		serviceFeature = VendorServiceFeature.get(GsonParser.parseInt(jsonObject.get("serviceFeature")));
 		turnAroundTime = VendorServiceTurnAroundTime.get(GsonParser.parseInt(jsonObject.get("turnAroundTime")));
 		externalTaskId = GsonParser.parseString(jsonObject.get("externalTaskId"));
+		externalObjectId = GsonParser.parseString(jsonObject.get("externalObjectId"));
 
 	}
 
@@ -468,6 +486,7 @@ public class EntryVendorTask extends ObjectBase {
 		kparams.add("partnerData", this.partnerData);
 		kparams.add("taskJobData", this.taskJobData);
 		kparams.add("externalTaskId", this.externalTaskId);
+		kparams.add("externalObjectId", this.externalObjectId);
 		return kparams;
 	}
 
@@ -519,6 +538,7 @@ public class EntryVendorTask extends ObjectBase {
         dest.writeInt(this.serviceFeature == null ? -1 : this.serviceFeature.ordinal());
         dest.writeInt(this.turnAroundTime == null ? -1 : this.turnAroundTime.ordinal());
         dest.writeString(this.externalTaskId);
+        dest.writeString(this.externalObjectId);
     }
 
     public EntryVendorTask(Parcel in) {
@@ -561,6 +581,7 @@ public class EntryVendorTask extends ObjectBase {
         int tmpTurnAroundTime = in.readInt();
         this.turnAroundTime = tmpTurnAroundTime == -1 ? null : VendorServiceTurnAroundTime.values()[tmpTurnAroundTime];
         this.externalTaskId = in.readString();
+        this.externalObjectId = in.readString();
     }
 }
 

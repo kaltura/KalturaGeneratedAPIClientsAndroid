@@ -30,6 +30,7 @@ package com.kaltura.client.types;
 import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
+import com.kaltura.client.types.AudioAttributes;
 import com.kaltura.client.types.ContentResource;
 import com.kaltura.client.types.Position;
 import com.kaltura.client.utils.GsonParser;
@@ -51,6 +52,7 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 		String backgroundColorCode();
 		String foregroundScalePercentage();
 		Position.Tokenizer foregroundPositionPercentage();
+		AudioAttributes.Tokenizer audioAttributes();
 	}
 
 	/**
@@ -60,6 +62,7 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 	private String backgroundColorCode;
 	private Double foregroundScalePercentage;
 	private Position foregroundPositionPercentage;
+	private AudioAttributes audioAttributes;
 
 	// resource:
 	public ContentResource getResource(){
@@ -101,6 +104,14 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 		this.foregroundPositionPercentage = foregroundPositionPercentage;
 	}
 
+	// audioAttributes:
+	public AudioAttributes getAudioAttributes(){
+		return this.audioAttributes;
+	}
+	public void setAudioAttributes(AudioAttributes audioAttributes){
+		this.audioAttributes = audioAttributes;
+	}
+
 
 	public ReplaceBackgroundAttributes() {
 		super();
@@ -116,6 +127,7 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 		backgroundColorCode = GsonParser.parseString(jsonObject.get("backgroundColorCode"));
 		foregroundScalePercentage = GsonParser.parseDouble(jsonObject.get("foregroundScalePercentage"));
 		foregroundPositionPercentage = GsonParser.parseObject(jsonObject.getAsJsonObject("foregroundPositionPercentage"), Position.class);
+		audioAttributes = GsonParser.parseObject(jsonObject.getAsJsonObject("audioAttributes"), AudioAttributes.class);
 
 	}
 
@@ -126,6 +138,7 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 		kparams.add("backgroundColorCode", this.backgroundColorCode);
 		kparams.add("foregroundScalePercentage", this.foregroundScalePercentage);
 		kparams.add("foregroundPositionPercentage", this.foregroundPositionPercentage);
+		kparams.add("audioAttributes", this.audioAttributes);
 		return kparams;
 	}
 
@@ -149,6 +162,7 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
         dest.writeString(this.backgroundColorCode);
         dest.writeValue(this.foregroundScalePercentage);
         dest.writeParcelable(this.foregroundPositionPercentage, flags);
+        dest.writeParcelable(this.audioAttributes, flags);
     }
 
     public ReplaceBackgroundAttributes(Parcel in) {
@@ -157,6 +171,7 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
         this.backgroundColorCode = in.readString();
         this.foregroundScalePercentage = (Double)in.readValue(Double.class.getClassLoader());
         this.foregroundPositionPercentage = in.readParcelable(Position.class.getClassLoader());
+        this.audioAttributes = in.readParcelable(AudioAttributes.class.getClassLoader());
     }
 }
 
