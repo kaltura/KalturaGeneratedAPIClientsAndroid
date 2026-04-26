@@ -141,6 +141,7 @@ public class Partner extends ObjectBase {
 		String recycleBinRetentionPeriod();
 		String customAnalyticsDomain();
 		String allowedEmailDomainsForAdmins();
+		String externalIdentifier();
 	}
 
 	private Integer id;
@@ -247,6 +248,7 @@ public class Partner extends ObjectBase {
 	private Integer recycleBinRetentionPeriod;
 	private String customAnalyticsDomain;
 	private String allowedEmailDomainsForAdmins;
+	private String externalIdentifier;
 
 	// id:
 	public Integer getId(){
@@ -940,6 +942,18 @@ public class Partner extends ObjectBase {
 		setToken("allowedEmailDomainsForAdmins", multirequestToken);
 	}
 
+	// externalIdentifier:
+	public String getExternalIdentifier(){
+		return this.externalIdentifier;
+	}
+	public void setExternalIdentifier(String externalIdentifier){
+		this.externalIdentifier = externalIdentifier;
+	}
+
+	public void externalIdentifier(String multirequestToken){
+		setToken("externalIdentifier", multirequestToken);
+	}
+
 
 	public Partner() {
 		super();
@@ -1037,6 +1051,7 @@ public class Partner extends ObjectBase {
 		recycleBinRetentionPeriod = GsonParser.parseInt(jsonObject.get("recycleBinRetentionPeriod"));
 		customAnalyticsDomain = GsonParser.parseString(jsonObject.get("customAnalyticsDomain"));
 		allowedEmailDomainsForAdmins = GsonParser.parseString(jsonObject.get("allowedEmailDomainsForAdmins"));
+		externalIdentifier = GsonParser.parseString(jsonObject.get("externalIdentifier"));
 
 	}
 
@@ -1088,6 +1103,7 @@ public class Partner extends ObjectBase {
 		kparams.add("eventPlatformAllowedTemplates", this.eventPlatformAllowedTemplates);
 		kparams.add("customAnalyticsDomain", this.customAnalyticsDomain);
 		kparams.add("allowedEmailDomainsForAdmins", this.allowedEmailDomainsForAdmins);
+		kparams.add("externalIdentifier", this.externalIdentifier);
 		return kparams;
 	}
 
@@ -1218,6 +1234,7 @@ public class Partner extends ObjectBase {
         dest.writeValue(this.recycleBinRetentionPeriod);
         dest.writeString(this.customAnalyticsDomain);
         dest.writeString(this.allowedEmailDomainsForAdmins);
+        dest.writeString(this.externalIdentifier);
     }
 
     public Partner(Parcel in) {
@@ -1334,6 +1351,7 @@ public class Partner extends ObjectBase {
         this.recycleBinRetentionPeriod = (Integer)in.readValue(Integer.class.getClassLoader());
         this.customAnalyticsDomain = in.readString();
         this.allowedEmailDomainsForAdmins = in.readString();
+        this.externalIdentifier = in.readString();
     }
 }
 
