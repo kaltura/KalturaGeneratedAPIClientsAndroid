@@ -40,6 +40,9 @@ import com.kaltura.client.types.ObjectBase;
 import com.kaltura.client.types.VendorTaskData;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using exec.php
@@ -68,6 +71,7 @@ public class EntryVendorTask extends ObjectBase {
 		String userId();
 		String entryObjectType();
 		String unitsUsed();
+		RequestBuilder.ListTokenizer<EntryVendorTaskUnit.Tokenizer> unitsUsedArray();
 		String moderatingUser();
 		String errDescription();
 		String accessKey();
@@ -115,6 +119,7 @@ public class EntryVendorTask extends ObjectBase {
 	private String userId;
 	private EntryObjectType entryObjectType;
 	private Integer unitsUsed;
+	private List<EntryVendorTaskUnit> unitsUsedArray;
 	/**
 	 * The user ID that approved this task for execution (in case moderation is
 	  requested)
@@ -280,6 +285,14 @@ public class EntryVendorTask extends ObjectBase {
 
 	public void unitsUsed(String multirequestToken){
 		setToken("unitsUsed", multirequestToken);
+	}
+
+	// unitsUsedArray:
+	public List<EntryVendorTaskUnit> getUnitsUsedArray(){
+		return this.unitsUsedArray;
+	}
+	public void setUnitsUsedArray(List<EntryVendorTaskUnit> unitsUsedArray){
+		this.unitsUsedArray = unitsUsedArray;
 	}
 
 	// moderatingUser:
@@ -448,6 +461,7 @@ public class EntryVendorTask extends ObjectBase {
 		userId = GsonParser.parseString(jsonObject.get("userId"));
 		entryObjectType = EntryObjectType.get(GsonParser.parseInt(jsonObject.get("entryObjectType")));
 		unitsUsed = GsonParser.parseInt(jsonObject.get("unitsUsed"));
+		unitsUsedArray = GsonParser.parseArray(jsonObject.getAsJsonArray("unitsUsedArray"), EntryVendorTaskUnit.class);
 		moderatingUser = GsonParser.parseString(jsonObject.get("moderatingUser"));
 		errDescription = GsonParser.parseString(jsonObject.get("errDescription"));
 		accessKey = GsonParser.parseString(jsonObject.get("accessKey"));
@@ -478,6 +492,7 @@ public class EntryVendorTask extends ObjectBase {
 		kparams.add("catalogItemId", this.catalogItemId);
 		kparams.add("entryObjectType", this.entryObjectType);
 		kparams.add("unitsUsed", this.unitsUsed);
+		kparams.add("unitsUsedArray", this.unitsUsedArray);
 		kparams.add("errDescription", this.errDescription);
 		kparams.add("notes", this.notes);
 		kparams.add("context", this.context);
@@ -521,6 +536,12 @@ public class EntryVendorTask extends ObjectBase {
         dest.writeString(this.userId);
         dest.writeInt(this.entryObjectType == null ? -1 : this.entryObjectType.ordinal());
         dest.writeValue(this.unitsUsed);
+        if(this.unitsUsedArray != null) {
+            dest.writeInt(this.unitsUsedArray.size());
+            dest.writeList(this.unitsUsedArray);
+        } else {
+            dest.writeInt(-1);
+        }
         dest.writeString(this.moderatingUser);
         dest.writeString(this.errDescription);
         dest.writeString(this.accessKey);
@@ -560,6 +581,11 @@ public class EntryVendorTask extends ObjectBase {
         int tmpEntryObjectType = in.readInt();
         this.entryObjectType = tmpEntryObjectType == -1 ? null : EntryObjectType.values()[tmpEntryObjectType];
         this.unitsUsed = (Integer)in.readValue(Integer.class.getClassLoader());
+        int unitsUsedArraySize = in.readInt();
+        if( unitsUsedArraySize > -1) {
+            this.unitsUsedArray = new ArrayList<>();
+            in.readList(this.unitsUsedArray, EntryVendorTaskUnit.class.getClassLoader());
+        }
         this.moderatingUser = in.readString();
         this.errDescription = in.readString();
         this.accessKey = in.readString();

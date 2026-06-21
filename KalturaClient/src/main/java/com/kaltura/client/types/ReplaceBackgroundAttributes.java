@@ -56,7 +56,8 @@ public class ReplaceBackgroundAttributes extends MediaCompositionAttributes {
 	}
 
 	/**
-	 * Only KalturaEntryResource and KalturaAssetResource are supported
+	 * Only KalturaEntryResource, KalturaAssetResource and
+	  KalturaDocumentImagesResource are supported
 	 */
 	private ContentResource resource;
 	private String backgroundColorCode;
