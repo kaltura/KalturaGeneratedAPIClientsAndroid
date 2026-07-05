@@ -81,6 +81,7 @@ public class ReachProfile extends ObjectBase {
 		RequestBuilder.ListTokenizer<Dictionary.Tokenizer> dictionaries();
 		String flavorParamsIds();
 		String vendorTaskProcessingRegion();
+		String allowedCatalogItemIds();
 	}
 
 	private Integer id;
@@ -119,6 +120,11 @@ public class ReachProfile extends ObjectBase {
 	 * Indicates in which region the task processing should task place
 	 */
 	private VendorTaskProcessingRegion vendorTaskProcessingRegion;
+	/**
+	 * Comma separated catalogItemIds that are allowed for ordering using this reach
+	  profile
+	 */
+	private String allowedCatalogItemIds;
 
 	// id:
 	public Integer getId(){
@@ -380,6 +386,18 @@ public class ReachProfile extends ObjectBase {
 		setToken("vendorTaskProcessingRegion", multirequestToken);
 	}
 
+	// allowedCatalogItemIds:
+	public String getAllowedCatalogItemIds(){
+		return this.allowedCatalogItemIds;
+	}
+	public void setAllowedCatalogItemIds(String allowedCatalogItemIds){
+		this.allowedCatalogItemIds = allowedCatalogItemIds;
+	}
+
+	public void allowedCatalogItemIds(String multirequestToken){
+		setToken("allowedCatalogItemIds", multirequestToken);
+	}
+
 
 	public ReachProfile() {
 		super();
@@ -417,6 +435,7 @@ public class ReachProfile extends ObjectBase {
 		dictionaries = GsonParser.parseArray(jsonObject.getAsJsonArray("dictionaries"), Dictionary.class);
 		flavorParamsIds = GsonParser.parseString(jsonObject.get("flavorParamsIds"));
 		vendorTaskProcessingRegion = VendorTaskProcessingRegion.get(GsonParser.parseInt(jsonObject.get("vendorTaskProcessingRegion")));
+		allowedCatalogItemIds = GsonParser.parseString(jsonObject.get("allowedCatalogItemIds"));
 
 	}
 
@@ -444,6 +463,7 @@ public class ReachProfile extends ObjectBase {
 		kparams.add("dictionaries", this.dictionaries);
 		kparams.add("flavorParamsIds", this.flavorParamsIds);
 		kparams.add("vendorTaskProcessingRegion", this.vendorTaskProcessingRegion);
+		kparams.add("allowedCatalogItemIds", this.allowedCatalogItemIds);
 		return kparams;
 	}
 
@@ -499,6 +519,7 @@ public class ReachProfile extends ObjectBase {
         }
         dest.writeString(this.flavorParamsIds);
         dest.writeInt(this.vendorTaskProcessingRegion == null ? -1 : this.vendorTaskProcessingRegion.ordinal());
+        dest.writeString(this.allowedCatalogItemIds);
     }
 
     public ReachProfile(Parcel in) {
@@ -542,6 +563,7 @@ public class ReachProfile extends ObjectBase {
         this.flavorParamsIds = in.readString();
         int tmpVendorTaskProcessingRegion = in.readInt();
         this.vendorTaskProcessingRegion = tmpVendorTaskProcessingRegion == -1 ? null : VendorTaskProcessingRegion.values()[tmpVendorTaskProcessingRegion];
+        this.allowedCatalogItemIds = in.readString();
     }
 }
 
