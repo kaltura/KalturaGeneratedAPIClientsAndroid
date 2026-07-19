@@ -38,6 +38,9 @@ import com.kaltura.client.enums.VendorServiceType;
 import com.kaltura.client.types.VendorCatalogItemPricing;
 import com.kaltura.client.utils.GsonParser;
 import com.kaltura.client.utils.request.MultiRequestBuilder;
+import com.kaltura.client.utils.request.RequestBuilder;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class was generated using exec.php
@@ -64,6 +67,7 @@ public class BulkUploadResultVendorCatalogItem extends BulkUploadResult {
 		String enableSpeakerId();
 		String fixedPriceAddons();
 		VendorCatalogItemPricing.Tokenizer pricing();
+		RequestBuilder.ListTokenizer<VendorCatalogItemUnitPricing.Tokenizer> pricingArray();
 		String flavorParamsId();
 		String clearAudioFlavorParamsId();
 	}
@@ -81,6 +85,7 @@ public class BulkUploadResultVendorCatalogItem extends BulkUploadResult {
 	private Boolean enableSpeakerId;
 	private Integer fixedPriceAddons;
 	private VendorCatalogItemPricing pricing;
+	private List<VendorCatalogItemUnitPricing> pricingArray;
 	private Integer flavorParamsId;
 	private Integer clearAudioFlavorParamsId;
 
@@ -236,6 +241,14 @@ public class BulkUploadResultVendorCatalogItem extends BulkUploadResult {
 		this.pricing = pricing;
 	}
 
+	// pricingArray:
+	public List<VendorCatalogItemUnitPricing> getPricingArray(){
+		return this.pricingArray;
+	}
+	public void setPricingArray(List<VendorCatalogItemUnitPricing> pricingArray){
+		this.pricingArray = pricingArray;
+	}
+
 	// flavorParamsId:
 	public Integer getFlavorParamsId(){
 		return this.flavorParamsId;
@@ -284,6 +297,7 @@ public class BulkUploadResultVendorCatalogItem extends BulkUploadResult {
 		enableSpeakerId = GsonParser.parseBoolean(jsonObject.get("enableSpeakerId"));
 		fixedPriceAddons = GsonParser.parseInt(jsonObject.get("fixedPriceAddons"));
 		pricing = GsonParser.parseObject(jsonObject.getAsJsonObject("pricing"), VendorCatalogItemPricing.class);
+		pricingArray = GsonParser.parseArray(jsonObject.getAsJsonArray("pricingArray"), VendorCatalogItemUnitPricing.class);
 		flavorParamsId = GsonParser.parseInt(jsonObject.get("flavorParamsId"));
 		clearAudioFlavorParamsId = GsonParser.parseInt(jsonObject.get("clearAudioFlavorParamsId"));
 
@@ -305,6 +319,7 @@ public class BulkUploadResultVendorCatalogItem extends BulkUploadResult {
 		kparams.add("enableSpeakerId", this.enableSpeakerId);
 		kparams.add("fixedPriceAddons", this.fixedPriceAddons);
 		kparams.add("pricing", this.pricing);
+		kparams.add("pricingArray", this.pricingArray);
 		kparams.add("flavorParamsId", this.flavorParamsId);
 		kparams.add("clearAudioFlavorParamsId", this.clearAudioFlavorParamsId);
 		return kparams;
@@ -339,6 +354,12 @@ public class BulkUploadResultVendorCatalogItem extends BulkUploadResult {
         dest.writeValue(this.enableSpeakerId);
         dest.writeValue(this.fixedPriceAddons);
         dest.writeParcelable(this.pricing, flags);
+        if(this.pricingArray != null) {
+            dest.writeInt(this.pricingArray.size());
+            dest.writeList(this.pricingArray);
+        } else {
+            dest.writeInt(-1);
+        }
         dest.writeValue(this.flavorParamsId);
         dest.writeValue(this.clearAudioFlavorParamsId);
     }
@@ -364,6 +385,11 @@ public class BulkUploadResultVendorCatalogItem extends BulkUploadResult {
         this.enableSpeakerId = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.fixedPriceAddons = (Integer)in.readValue(Integer.class.getClassLoader());
         this.pricing = in.readParcelable(VendorCatalogItemPricing.class.getClassLoader());
+        int pricingArraySize = in.readInt();
+        if( pricingArraySize > -1) {
+            this.pricingArray = new ArrayList<>();
+            in.readList(this.pricingArray, VendorCatalogItemUnitPricing.class.getClassLoader());
+        }
         this.flavorParamsId = (Integer)in.readValue(Integer.class.getClassLoader());
         this.clearAudioFlavorParamsId = (Integer)in.readValue(Integer.class.getClassLoader());
     }

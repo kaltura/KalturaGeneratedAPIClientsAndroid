@@ -31,6 +31,7 @@ import android.os.Parcel;
 import com.google.gson.JsonObject;
 import com.kaltura.client.Params;
 import com.kaltura.client.enums.CommercialUseType;
+import com.kaltura.client.enums.HTMLPurifierBehaviourType;
 import com.kaltura.client.enums.PartnerAuthenticationType;
 import com.kaltura.client.enums.PartnerGroupType;
 import com.kaltura.client.enums.PartnerStatus;
@@ -142,6 +143,10 @@ public class Partner extends ObjectBase {
 		String customAnalyticsDomain();
 		String allowedEmailDomainsForAdmins();
 		String externalIdentifier();
+		String htmlPurifierBehaviour();
+		String htmlPurifierBaseListUsage();
+		String purifyImageContent();
+		String fileTypeRestrictionEnabled();
 	}
 
 	private Integer id;
@@ -249,6 +254,10 @@ public class Partner extends ObjectBase {
 	private String customAnalyticsDomain;
 	private String allowedEmailDomainsForAdmins;
 	private String externalIdentifier;
+	private HTMLPurifierBehaviourType htmlPurifierBehaviour;
+	private Boolean htmlPurifierBaseListUsage;
+	private Boolean purifyImageContent;
+	private Boolean fileTypeRestrictionEnabled;
 
 	// id:
 	public Integer getId(){
@@ -954,6 +963,54 @@ public class Partner extends ObjectBase {
 		setToken("externalIdentifier", multirequestToken);
 	}
 
+	// htmlPurifierBehaviour:
+	public HTMLPurifierBehaviourType getHtmlPurifierBehaviour(){
+		return this.htmlPurifierBehaviour;
+	}
+	public void setHtmlPurifierBehaviour(HTMLPurifierBehaviourType htmlPurifierBehaviour){
+		this.htmlPurifierBehaviour = htmlPurifierBehaviour;
+	}
+
+	public void htmlPurifierBehaviour(String multirequestToken){
+		setToken("htmlPurifierBehaviour", multirequestToken);
+	}
+
+	// htmlPurifierBaseListUsage:
+	public Boolean getHtmlPurifierBaseListUsage(){
+		return this.htmlPurifierBaseListUsage;
+	}
+	public void setHtmlPurifierBaseListUsage(Boolean htmlPurifierBaseListUsage){
+		this.htmlPurifierBaseListUsage = htmlPurifierBaseListUsage;
+	}
+
+	public void htmlPurifierBaseListUsage(String multirequestToken){
+		setToken("htmlPurifierBaseListUsage", multirequestToken);
+	}
+
+	// purifyImageContent:
+	public Boolean getPurifyImageContent(){
+		return this.purifyImageContent;
+	}
+	public void setPurifyImageContent(Boolean purifyImageContent){
+		this.purifyImageContent = purifyImageContent;
+	}
+
+	public void purifyImageContent(String multirequestToken){
+		setToken("purifyImageContent", multirequestToken);
+	}
+
+	// fileTypeRestrictionEnabled:
+	public Boolean getFileTypeRestrictionEnabled(){
+		return this.fileTypeRestrictionEnabled;
+	}
+	public void setFileTypeRestrictionEnabled(Boolean fileTypeRestrictionEnabled){
+		this.fileTypeRestrictionEnabled = fileTypeRestrictionEnabled;
+	}
+
+	public void fileTypeRestrictionEnabled(String multirequestToken){
+		setToken("fileTypeRestrictionEnabled", multirequestToken);
+	}
+
 
 	public Partner() {
 		super();
@@ -1052,6 +1109,10 @@ public class Partner extends ObjectBase {
 		customAnalyticsDomain = GsonParser.parseString(jsonObject.get("customAnalyticsDomain"));
 		allowedEmailDomainsForAdmins = GsonParser.parseString(jsonObject.get("allowedEmailDomainsForAdmins"));
 		externalIdentifier = GsonParser.parseString(jsonObject.get("externalIdentifier"));
+		htmlPurifierBehaviour = HTMLPurifierBehaviourType.get(GsonParser.parseString(jsonObject.get("htmlPurifierBehaviour")));
+		htmlPurifierBaseListUsage = GsonParser.parseBoolean(jsonObject.get("htmlPurifierBaseListUsage"));
+		purifyImageContent = GsonParser.parseBoolean(jsonObject.get("purifyImageContent"));
+		fileTypeRestrictionEnabled = GsonParser.parseBoolean(jsonObject.get("fileTypeRestrictionEnabled"));
 
 	}
 
@@ -1104,6 +1165,10 @@ public class Partner extends ObjectBase {
 		kparams.add("customAnalyticsDomain", this.customAnalyticsDomain);
 		kparams.add("allowedEmailDomainsForAdmins", this.allowedEmailDomainsForAdmins);
 		kparams.add("externalIdentifier", this.externalIdentifier);
+		kparams.add("htmlPurifierBehaviour", this.htmlPurifierBehaviour);
+		kparams.add("htmlPurifierBaseListUsage", this.htmlPurifierBaseListUsage);
+		kparams.add("purifyImageContent", this.purifyImageContent);
+		kparams.add("fileTypeRestrictionEnabled", this.fileTypeRestrictionEnabled);
 		return kparams;
 	}
 
@@ -1235,6 +1300,10 @@ public class Partner extends ObjectBase {
         dest.writeString(this.customAnalyticsDomain);
         dest.writeString(this.allowedEmailDomainsForAdmins);
         dest.writeString(this.externalIdentifier);
+        dest.writeInt(this.htmlPurifierBehaviour == null ? -1 : this.htmlPurifierBehaviour.ordinal());
+        dest.writeValue(this.htmlPurifierBaseListUsage);
+        dest.writeValue(this.purifyImageContent);
+        dest.writeValue(this.fileTypeRestrictionEnabled);
     }
 
     public Partner(Parcel in) {
@@ -1352,6 +1421,11 @@ public class Partner extends ObjectBase {
         this.customAnalyticsDomain = in.readString();
         this.allowedEmailDomainsForAdmins = in.readString();
         this.externalIdentifier = in.readString();
+        int tmpHtmlPurifierBehaviour = in.readInt();
+        this.htmlPurifierBehaviour = tmpHtmlPurifierBehaviour == -1 ? null : HTMLPurifierBehaviourType.values()[tmpHtmlPurifierBehaviour];
+        this.htmlPurifierBaseListUsage = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.purifyImageContent = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.fileTypeRestrictionEnabled = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
 
