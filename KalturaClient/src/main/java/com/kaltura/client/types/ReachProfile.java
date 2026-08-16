@@ -65,8 +65,10 @@ public class ReachProfile extends ObjectBase {
 		String defaultOutputFormat();
 		String enableMachineModeration();
 		String enableHumanModeration();
+		String enableHybridModeration();
 		String autoDisplayMachineCaptionsOnPlayer();
 		String autoDisplayHumanCaptionsOnPlayer();
+		String autoDisplayHybridCaptionsOnPlayer();
 		String enableMetadataExtraction();
 		String enableSpeakerChangeIndication();
 		String enableAudioTags();
@@ -74,6 +76,7 @@ public class ReachProfile extends ObjectBase {
 		String maxCharactersPerCaptionLine();
 		String labelAdditionForMachineServiceType();
 		String labelAdditionForHumanServiceType();
+		String labelAdditionForHybridServiceType();
 		String contentDeletionPolicy();
 		RequestBuilder.ListTokenizer<Rule.Tokenizer> rules();
 		BaseVendorCredit.Tokenizer credit();
@@ -97,8 +100,10 @@ public class ReachProfile extends ObjectBase {
 	private VendorCatalogItemOutputFormat defaultOutputFormat;
 	private Boolean enableMachineModeration;
 	private Boolean enableHumanModeration;
+	private Boolean enableHybridModeration;
 	private Boolean autoDisplayMachineCaptionsOnPlayer;
 	private Boolean autoDisplayHumanCaptionsOnPlayer;
+	private Boolean autoDisplayHybridCaptionsOnPlayer;
 	private Boolean enableMetadataExtraction;
 	private Boolean enableSpeakerChangeIndication;
 	private Boolean enableAudioTags;
@@ -106,6 +111,7 @@ public class ReachProfile extends ObjectBase {
 	private Integer maxCharactersPerCaptionLine;
 	private String labelAdditionForMachineServiceType;
 	private String labelAdditionForHumanServiceType;
+	private String labelAdditionForHybridServiceType;
 	private ReachProfileContentDeletionPolicy contentDeletionPolicy;
 	private List<Rule> rules;
 	private BaseVendorCredit credit;
@@ -206,6 +212,18 @@ public class ReachProfile extends ObjectBase {
 		setToken("enableHumanModeration", multirequestToken);
 	}
 
+	// enableHybridModeration:
+	public Boolean getEnableHybridModeration(){
+		return this.enableHybridModeration;
+	}
+	public void setEnableHybridModeration(Boolean enableHybridModeration){
+		this.enableHybridModeration = enableHybridModeration;
+	}
+
+	public void enableHybridModeration(String multirequestToken){
+		setToken("enableHybridModeration", multirequestToken);
+	}
+
 	// autoDisplayMachineCaptionsOnPlayer:
 	public Boolean getAutoDisplayMachineCaptionsOnPlayer(){
 		return this.autoDisplayMachineCaptionsOnPlayer;
@@ -228,6 +246,18 @@ public class ReachProfile extends ObjectBase {
 
 	public void autoDisplayHumanCaptionsOnPlayer(String multirequestToken){
 		setToken("autoDisplayHumanCaptionsOnPlayer", multirequestToken);
+	}
+
+	// autoDisplayHybridCaptionsOnPlayer:
+	public Boolean getAutoDisplayHybridCaptionsOnPlayer(){
+		return this.autoDisplayHybridCaptionsOnPlayer;
+	}
+	public void setAutoDisplayHybridCaptionsOnPlayer(Boolean autoDisplayHybridCaptionsOnPlayer){
+		this.autoDisplayHybridCaptionsOnPlayer = autoDisplayHybridCaptionsOnPlayer;
+	}
+
+	public void autoDisplayHybridCaptionsOnPlayer(String multirequestToken){
+		setToken("autoDisplayHybridCaptionsOnPlayer", multirequestToken);
 	}
 
 	// enableMetadataExtraction:
@@ -312,6 +342,18 @@ public class ReachProfile extends ObjectBase {
 
 	public void labelAdditionForHumanServiceType(String multirequestToken){
 		setToken("labelAdditionForHumanServiceType", multirequestToken);
+	}
+
+	// labelAdditionForHybridServiceType:
+	public String getLabelAdditionForHybridServiceType(){
+		return this.labelAdditionForHybridServiceType;
+	}
+	public void setLabelAdditionForHybridServiceType(String labelAdditionForHybridServiceType){
+		this.labelAdditionForHybridServiceType = labelAdditionForHybridServiceType;
+	}
+
+	public void labelAdditionForHybridServiceType(String multirequestToken){
+		setToken("labelAdditionForHybridServiceType", multirequestToken);
 	}
 
 	// contentDeletionPolicy:
@@ -419,8 +461,10 @@ public class ReachProfile extends ObjectBase {
 		defaultOutputFormat = VendorCatalogItemOutputFormat.get(GsonParser.parseInt(jsonObject.get("defaultOutputFormat")));
 		enableMachineModeration = GsonParser.parseBoolean(jsonObject.get("enableMachineModeration"));
 		enableHumanModeration = GsonParser.parseBoolean(jsonObject.get("enableHumanModeration"));
+		enableHybridModeration = GsonParser.parseBoolean(jsonObject.get("enableHybridModeration"));
 		autoDisplayMachineCaptionsOnPlayer = GsonParser.parseBoolean(jsonObject.get("autoDisplayMachineCaptionsOnPlayer"));
 		autoDisplayHumanCaptionsOnPlayer = GsonParser.parseBoolean(jsonObject.get("autoDisplayHumanCaptionsOnPlayer"));
+		autoDisplayHybridCaptionsOnPlayer = GsonParser.parseBoolean(jsonObject.get("autoDisplayHybridCaptionsOnPlayer"));
 		enableMetadataExtraction = GsonParser.parseBoolean(jsonObject.get("enableMetadataExtraction"));
 		enableSpeakerChangeIndication = GsonParser.parseBoolean(jsonObject.get("enableSpeakerChangeIndication"));
 		enableAudioTags = GsonParser.parseBoolean(jsonObject.get("enableAudioTags"));
@@ -428,6 +472,7 @@ public class ReachProfile extends ObjectBase {
 		maxCharactersPerCaptionLine = GsonParser.parseInt(jsonObject.get("maxCharactersPerCaptionLine"));
 		labelAdditionForMachineServiceType = GsonParser.parseString(jsonObject.get("labelAdditionForMachineServiceType"));
 		labelAdditionForHumanServiceType = GsonParser.parseString(jsonObject.get("labelAdditionForHumanServiceType"));
+		labelAdditionForHybridServiceType = GsonParser.parseString(jsonObject.get("labelAdditionForHybridServiceType"));
 		contentDeletionPolicy = ReachProfileContentDeletionPolicy.get(GsonParser.parseInt(jsonObject.get("contentDeletionPolicy")));
 		rules = GsonParser.parseArray(jsonObject.getAsJsonArray("rules"), Rule.class);
 		credit = GsonParser.parseObject(jsonObject.getAsJsonObject("credit"), BaseVendorCredit.class);
@@ -447,8 +492,10 @@ public class ReachProfile extends ObjectBase {
 		kparams.add("defaultOutputFormat", this.defaultOutputFormat);
 		kparams.add("enableMachineModeration", this.enableMachineModeration);
 		kparams.add("enableHumanModeration", this.enableHumanModeration);
+		kparams.add("enableHybridModeration", this.enableHybridModeration);
 		kparams.add("autoDisplayMachineCaptionsOnPlayer", this.autoDisplayMachineCaptionsOnPlayer);
 		kparams.add("autoDisplayHumanCaptionsOnPlayer", this.autoDisplayHumanCaptionsOnPlayer);
+		kparams.add("autoDisplayHybridCaptionsOnPlayer", this.autoDisplayHybridCaptionsOnPlayer);
 		kparams.add("enableMetadataExtraction", this.enableMetadataExtraction);
 		kparams.add("enableSpeakerChangeIndication", this.enableSpeakerChangeIndication);
 		kparams.add("enableAudioTags", this.enableAudioTags);
@@ -456,6 +503,7 @@ public class ReachProfile extends ObjectBase {
 		kparams.add("maxCharactersPerCaptionLine", this.maxCharactersPerCaptionLine);
 		kparams.add("labelAdditionForMachineServiceType", this.labelAdditionForMachineServiceType);
 		kparams.add("labelAdditionForHumanServiceType", this.labelAdditionForHumanServiceType);
+		kparams.add("labelAdditionForHybridServiceType", this.labelAdditionForHybridServiceType);
 		kparams.add("contentDeletionPolicy", this.contentDeletionPolicy);
 		kparams.add("rules", this.rules);
 		kparams.add("credit", this.credit);
@@ -493,8 +541,10 @@ public class ReachProfile extends ObjectBase {
         dest.writeInt(this.defaultOutputFormat == null ? -1 : this.defaultOutputFormat.ordinal());
         dest.writeValue(this.enableMachineModeration);
         dest.writeValue(this.enableHumanModeration);
+        dest.writeValue(this.enableHybridModeration);
         dest.writeValue(this.autoDisplayMachineCaptionsOnPlayer);
         dest.writeValue(this.autoDisplayHumanCaptionsOnPlayer);
+        dest.writeValue(this.autoDisplayHybridCaptionsOnPlayer);
         dest.writeValue(this.enableMetadataExtraction);
         dest.writeValue(this.enableSpeakerChangeIndication);
         dest.writeValue(this.enableAudioTags);
@@ -502,6 +552,7 @@ public class ReachProfile extends ObjectBase {
         dest.writeValue(this.maxCharactersPerCaptionLine);
         dest.writeString(this.labelAdditionForMachineServiceType);
         dest.writeString(this.labelAdditionForHumanServiceType);
+        dest.writeString(this.labelAdditionForHybridServiceType);
         dest.writeInt(this.contentDeletionPolicy == null ? -1 : this.contentDeletionPolicy.ordinal());
         if(this.rules != null) {
             dest.writeInt(this.rules.size());
@@ -537,8 +588,10 @@ public class ReachProfile extends ObjectBase {
         this.defaultOutputFormat = tmpDefaultOutputFormat == -1 ? null : VendorCatalogItemOutputFormat.values()[tmpDefaultOutputFormat];
         this.enableMachineModeration = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.enableHumanModeration = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.enableHybridModeration = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.autoDisplayMachineCaptionsOnPlayer = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.autoDisplayHumanCaptionsOnPlayer = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.autoDisplayHybridCaptionsOnPlayer = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.enableMetadataExtraction = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.enableSpeakerChangeIndication = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.enableAudioTags = (Boolean)in.readValue(Boolean.class.getClassLoader());
@@ -546,6 +599,7 @@ public class ReachProfile extends ObjectBase {
         this.maxCharactersPerCaptionLine = (Integer)in.readValue(Integer.class.getClassLoader());
         this.labelAdditionForMachineServiceType = in.readString();
         this.labelAdditionForHumanServiceType = in.readString();
+        this.labelAdditionForHybridServiceType = in.readString();
         int tmpContentDeletionPolicy = in.readInt();
         this.contentDeletionPolicy = tmpContentDeletionPolicy == -1 ? null : ReachProfileContentDeletionPolicy.values()[tmpContentDeletionPolicy];
         int rulesSize = in.readInt();

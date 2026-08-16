@@ -101,6 +101,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		String genieIdIn();
 		String reachProfileIdIn();
 		String isPreview();
+		String streamTypeIn();
 	}
 
 	/**
@@ -310,6 +311,10 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 	 * filter by preview mode
 	 */
 	private Boolean isPreview;
+	/**
+	 * filter by stream type
+	 */
+	private String streamTypeIn;
 
 	// keywords:
 	public String getKeywords(){
@@ -955,6 +960,18 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		setToken("isPreview", multirequestToken);
 	}
 
+	// streamTypeIn:
+	public String getStreamTypeIn(){
+		return this.streamTypeIn;
+	}
+	public void setStreamTypeIn(String streamTypeIn){
+		this.streamTypeIn = streamTypeIn;
+	}
+
+	public void streamTypeIn(String multirequestToken){
+		setToken("streamTypeIn", multirequestToken);
+	}
+
 
 	public ReportInputFilter() {
 		super();
@@ -1020,6 +1037,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		genieIdIn = GsonParser.parseString(jsonObject.get("genieIdIn"));
 		reachProfileIdIn = GsonParser.parseString(jsonObject.get("reachProfileIdIn"));
 		isPreview = GsonParser.parseBoolean(jsonObject.get("isPreview"));
+		streamTypeIn = GsonParser.parseString(jsonObject.get("streamTypeIn"));
 
 	}
 
@@ -1080,6 +1098,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
 		kparams.add("genieIdIn", this.genieIdIn);
 		kparams.add("reachProfileIdIn", this.reachProfileIdIn);
 		kparams.add("isPreview", this.isPreview);
+		kparams.add("streamTypeIn", this.streamTypeIn);
 		return kparams;
 	}
 
@@ -1153,6 +1172,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         dest.writeString(this.genieIdIn);
         dest.writeString(this.reachProfileIdIn);
         dest.writeValue(this.isPreview);
+        dest.writeString(this.streamTypeIn);
     }
 
     public ReportInputFilter(Parcel in) {
@@ -1212,6 +1232,7 @@ public class ReportInputFilter extends ReportInputBaseFilter {
         this.genieIdIn = in.readString();
         this.reachProfileIdIn = in.readString();
         this.isPreview = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.streamTypeIn = in.readString();
     }
 }
 
