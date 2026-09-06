@@ -56,7 +56,10 @@ public enum VendorServiceFeature implements EnumAsInt {
 	SPEECH_TO_VIDEO(20),
 	IMMERSIVE_AGENT_CALL(21),
 	IMMERSIVE_AGENT_CHAT(22),
-	AVATAR_VOD(23);
+	AVATAR_VOD(23),
+	LLM_MODELS(24),
+	IMMERSIVE_AGENT_EVAL(25),
+	IMMERSIVE_AGENT_PREVIEW(26);
 
 	private int value;
 
