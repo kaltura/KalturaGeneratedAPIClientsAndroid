@@ -146,6 +146,7 @@ public class Partner extends ObjectBase {
 		String htmlPurifierBehaviour();
 		String htmlPurifierBaseListUsage();
 		String purifyImageContent();
+		String htmlPurifierAllowedTags();
 		String fileTypeRestrictionEnabled();
 	}
 
@@ -257,6 +258,7 @@ public class Partner extends ObjectBase {
 	private HTMLPurifierBehaviourType htmlPurifierBehaviour;
 	private Boolean htmlPurifierBaseListUsage;
 	private Boolean purifyImageContent;
+	private String htmlPurifierAllowedTags;
 	private Boolean fileTypeRestrictionEnabled;
 
 	// id:
@@ -999,6 +1001,18 @@ public class Partner extends ObjectBase {
 		setToken("purifyImageContent", multirequestToken);
 	}
 
+	// htmlPurifierAllowedTags:
+	public String getHtmlPurifierAllowedTags(){
+		return this.htmlPurifierAllowedTags;
+	}
+	public void setHtmlPurifierAllowedTags(String htmlPurifierAllowedTags){
+		this.htmlPurifierAllowedTags = htmlPurifierAllowedTags;
+	}
+
+	public void htmlPurifierAllowedTags(String multirequestToken){
+		setToken("htmlPurifierAllowedTags", multirequestToken);
+	}
+
 	// fileTypeRestrictionEnabled:
 	public Boolean getFileTypeRestrictionEnabled(){
 		return this.fileTypeRestrictionEnabled;
@@ -1112,6 +1126,7 @@ public class Partner extends ObjectBase {
 		htmlPurifierBehaviour = HTMLPurifierBehaviourType.get(GsonParser.parseString(jsonObject.get("htmlPurifierBehaviour")));
 		htmlPurifierBaseListUsage = GsonParser.parseBoolean(jsonObject.get("htmlPurifierBaseListUsage"));
 		purifyImageContent = GsonParser.parseBoolean(jsonObject.get("purifyImageContent"));
+		htmlPurifierAllowedTags = GsonParser.parseString(jsonObject.get("htmlPurifierAllowedTags"));
 		fileTypeRestrictionEnabled = GsonParser.parseBoolean(jsonObject.get("fileTypeRestrictionEnabled"));
 
 	}
@@ -1168,6 +1183,7 @@ public class Partner extends ObjectBase {
 		kparams.add("htmlPurifierBehaviour", this.htmlPurifierBehaviour);
 		kparams.add("htmlPurifierBaseListUsage", this.htmlPurifierBaseListUsage);
 		kparams.add("purifyImageContent", this.purifyImageContent);
+		kparams.add("htmlPurifierAllowedTags", this.htmlPurifierAllowedTags);
 		kparams.add("fileTypeRestrictionEnabled", this.fileTypeRestrictionEnabled);
 		return kparams;
 	}
@@ -1303,6 +1319,7 @@ public class Partner extends ObjectBase {
         dest.writeInt(this.htmlPurifierBehaviour == null ? -1 : this.htmlPurifierBehaviour.ordinal());
         dest.writeValue(this.htmlPurifierBaseListUsage);
         dest.writeValue(this.purifyImageContent);
+        dest.writeString(this.htmlPurifierAllowedTags);
         dest.writeValue(this.fileTypeRestrictionEnabled);
     }
 
@@ -1425,6 +1442,7 @@ public class Partner extends ObjectBase {
         this.htmlPurifierBehaviour = tmpHtmlPurifierBehaviour == -1 ? null : HTMLPurifierBehaviourType.values()[tmpHtmlPurifierBehaviour];
         this.htmlPurifierBaseListUsage = (Boolean)in.readValue(Boolean.class.getClassLoader());
         this.purifyImageContent = (Boolean)in.readValue(Boolean.class.getClassLoader());
+        this.htmlPurifierAllowedTags = in.readString();
         this.fileTypeRestrictionEnabled = (Boolean)in.readValue(Boolean.class.getClassLoader());
     }
 }
